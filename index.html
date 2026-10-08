@@ -12,15 +12,15 @@
 
 /* ===================== KLEUREN ===================== */
 :root{
-  --ink:#2B3D57;            /* tekst (donker leisteenblauw) */
-  --blue:#4E6E99;           /* script, lijnen, accenten */
-  --blue-soft:#8EA8C7;
-  --blue-light:#DCE5EE;
-  --line:rgba(78,110,153,.30);
-  --line-soft:rgba(78,110,153,.16);
+  --ink:#254769;            /* tekst (donker leisteenblauw) */
+  --blue:#2864A0;           /* script, lijnen, accenten */
+  --blue-soft:#91B3D3;
+  --blue-light:#E6EFF7;
+  --line:rgba(40,100,160,.30);
+  --line-soft:rgba(40,100,160,.16);
   --accent:#7D0F1A;         /* Cherry Red: alleen het datumcijfer */
   --paper:#FFFFFF;
-  --bg:#EEF2F7;
+  --bg:#F3F6F9;
   --serif:'Cormorant Garamond','Noto Serif Thai',Georgia,serif;
   --script:'Herr Von Muellerhoff','Pinyon Script','Snell Roundhand',cursive;
 }
@@ -281,6 +281,62 @@ html[lang="th"] .info-panel .location-name{font-family:var(--script)}
 }
 
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important}}
+
+/* ===============================================================
+   NIEUWE STIJL — blauw botanisch lijnwerk uit ACHTERGROND.png
+   Alleen presentatie; oorspronkelijke typografie/teksten/JS blijven intact.
+   =============================================================== */
+
+/* De oude aquarelhoekjes horen niet bij de nieuwe gravure-stijl. */
+.card .leaf, .sheet .leaf { display:none; }
+/* Ook de losse aquareltakjes vervangen we visueel door de nieuwe rand. */
+.sprig { visibility:hidden; }
+
+/* Gedetailleerde lijntekening als achtergrond, niet als img bovenop tekst. */
+.card {
+  background-color:#fff;
+  background-image:url('images/ACHTERGROND-portret.png');
+  background-position:center center;
+  background-repeat:no-repeat;
+  background-size:100% 100%;
+  box-shadow:0 20px 55px rgba(31,78,123,.10),0 0 0 1px rgba(40,100,160,.16);
+}
+.sheet {
+  background-color:#fff;
+  background-image:url('images/ACHTERGROND.png');
+  background-position:center center;
+  background-repeat:no-repeat;
+  background-size:100% 100%;
+  box-shadow:0 20px 55px rgba(31,78,123,.10),0 0 0 1px rgba(40,100,160,.16);
+}
+
+/* Houd tekst en interactieve elementen leesbaar boven de decoratie. */
+.card .frame, .sheet > :not(.leaf) { position:relative; z-index:1; }
+.card-body { isolation:isolate; }
+.sheet .details-grid, .sheet .about-photos { position:relative; z-index:1; }
+
+/* De inhoud raakt de gegraveerde bloemen niet: geen wijzigingen aan
+   originele tekstafmetingen of grid, alleen veilige visuele witruimte. */
+.details-title {
+  padding-inline:clamp(.25rem,2vw,1.5rem);
+  background:radial-gradient(ellipse 65% 95% at 50% 42%, #fff 2%, rgba(255,255,255,.94) 44%, rgba(255,255,255,0) 100%);
+}
+.card-photo {
+  background:radial-gradient(ellipse 54% 70% at 50% 50%, rgba(255,255,255,.96) 0%, rgba(255,255,255,.84) 48%, rgba(255,255,255,0) 100%);
+}
+
+/* Vervangt harde aquarelblauwe details door dezelfde koele lijnkleur. */
+.mark { border-color:rgba(40,100,160,.55); }
+.timeline-icon { background:rgba(255,255,255,.94); }
+.rsvp { background:rgba(255,255,255,.93); }
+.lang, .music { box-shadow:0 2px 13px rgba(38,79,120,.07); }
+
+/* Extra lange bladen op mobiel behouden het originele lijnwerk:
+   geen repeterend patroon, wel een omlijsting op volledige bladhoogte. */
+@media (max-width:600px) {
+  .sheet { background-image:url('images/ACHTERGROND-portret.png'); }
+}
+
 </style>
 </head>
 
