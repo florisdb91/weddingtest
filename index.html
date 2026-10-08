@@ -68,6 +68,18 @@ body{background:linear-gradient(180deg,#F8F4EF,#F1EBE4);color:var(--ink);font-fa
   text-wrap:balance;
   padding:.04em .12em .09em;
 }
+/* v21: make the ampersand readable without changing the calligraphy of the names. */
+.hero-meta h1 .couple-ampersand{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-style:italic;
+  font-weight:500;
+  font-size:.78em;
+  line-height:1;
+  vertical-align:.055em;
+  color:var(--accent-deep);
+  display:inline-block;
+  margin-inline:.08em;
+}
 /* Thai characters require a native Thai font instead of Latin calligraphy. */
 html[lang="th"] .hero-meta h1{
   font-family:'Noto Serif Thai',Georgia,serif;
@@ -247,7 +259,7 @@ html[lang="th"] .rsvp-field label,html[lang="th"] .rsvp-attendance-label,html[la
           <span class="family-name" data-t="parentJannigje">Jannigje in 't Veld</span>
         </div>
       </div>
-      <h1 data-t="coupleNames">Siriya &amp; Floris</h1>
+      <h1 data-t="coupleNames">Siriya <span class="couple-ampersand">&amp;</span> Floris</h1>
       <div class="sub" data-t="invite1">Request the honor of your presence at the marriage</div>
     </div>
     <div class="hero-actions">
@@ -563,7 +575,18 @@ function setLang(lang){
   document.documentElement.lang = lang;
   document.querySelectorAll("[data-t]").forEach(el=>{
     const key = el.dataset.t;
-    if(L[lang] && L[lang][key] !== undefined) el.textContent = L[lang][key];
+    if(L[lang] && L[lang][key] !== undefined){
+      if(key === "coupleNames" && lang !== "th"){
+        // Preserve a clearly readable ampersand when switching English / Dutch.
+        const [first,last]=L[lang][key].split(" & ");
+        const amp=document.createElement("span");
+        amp.className="couple-ampersand";
+        amp.textContent="&";
+        el.replaceChildren(document.createTextNode(first+" "),amp,document.createTextNode(" "+last));
+      }else{
+        el.textContent=L[lang][key];
+      }
+    }
   });
   document.querySelectorAll("[data-ph]").forEach(el=>{
     const key=el.dataset.ph;
@@ -721,7 +744,7 @@ document.addEventListener('keydown',event=>{
 // Public URL only. NEVER place your Apps Script token or e-mail password here.
 const RSVP_CONFIG = {
   endpoint: "https://siriya-floris-rsvp.siriyafloris.workers.dev/rsvp", // Public Worker URL (working endpoint)
-  turnstileSiteKey: "0x4AAAAAAFRmZqb1j6uG7O01" // Fill in your Cloudflare Turnstile public site key after deployment.
+  turnstileSiteKey: "" // Fill in your Cloudflare Turnstile public site key after deployment.
 };
 const rsvpForm = document.getElementById('rsvpForm');
 const rsvpFeedback = document.getElementById('rsvpFeedback');
