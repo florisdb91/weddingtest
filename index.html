@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Siriya &amp; Floris — 27 March 2027</title>
+<meta name="description" content="Siriya & Floris — 27 March 2027 — Baiboon Grand, Loei">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Herr+Von+Muellerhoff&family=Noto+Serif+Thai:wght@300;400&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+
+/* ===================== KLEUREN ===================== */
+:root{
+  --ink:#2B3D57;            /* tekst (donker leisteenblauw) */
+  --blue:#4E6E99;           /* script, lijnen, accenten */
+  --blue-soft:#8EA8C7;
+  --blue-light:#DCE5EE;
+  --line:rgba(78,110,153,.30);
+  --line-soft:rgba(78,110,153,.16);
+  --accent:#7D0F1A;         /* Cherry Red: alleen het datumcijfer */
+  --paper:#FFFFFF;
+  --bg:#EEF2F7;
+  --serif:'Cormorant Garamond','Noto Serif Thai',Georgia,serif;
+  --script:'Herr Von Muellerhoff','Pinyon Script','Snell Roundhand',cursive;
+}
+
+/* ===================== RESET ===================== */
+*{box-sizing:border-box;margin:0}
+img{max-width:100%}
+html{-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);font-weight:400;line-height:1.6;font-size:1.05rem}
+
+/* ===================== MUZIEK ===================== */
+.music{position:fixed;top:1rem;left:1rem;z-index:100;width:2.4rem;height:2.4rem;border-radius:50%;border:1px solid var(--line-soft);background:rgba(255,255,255,.93);backdrop-filter:blur(8px);color:var(--blue);display:grid;place-items:center;cursor:pointer;padding:0}
+.music[hidden]{display:none}
+.music svg{width:1.1rem;height:1.1rem;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.music .i-pause{display:none}
+.music.on .i-note{display:none}
+.music.on .i-pause{display:block}
+.music.on{box-shadow:0 0 0 0 rgba(78,110,153,.4);animation:pulse 2.4s ease-out infinite}
+@keyframes pulse{to{box-shadow:0 0 0 .7rem rgba(78,110,153,0)}}
+
+/* ===================== TAALKEUZE ===================== */
+.lang{position:fixed;top:1rem;right:1rem;z-index:100;display:flex;gap:.1rem;padding:.2rem .35rem;background:rgba(255,255,255,.93);border:1px solid var(--line-soft);border-radius:2rem;backdrop-filter:blur(8px)}
+.lang button{appearance:none;border:0;background:none;color:var(--ink);opacity:.45;font-family:inherit;font-size:.85rem;padding:.25rem .5rem;cursor:pointer}
+.lang button[aria-pressed="true"]{opacity:1;border-bottom:1px solid var(--blue)}
+
+.page{min-height:100svh;position:relative}
+
+/* ===================== BLADEREN (aquarel) ===================== */
+.leaf{position:absolute;height:auto;max-width:none;pointer-events:none;user-select:none;z-index:0}
+
+/* ===================== PAGINA 1 — KAART ===================== */
+#p1{
+  --m:clamp(1.2rem,4.6vw,2.4rem);         /* rand rond de kaart */
+  min-height:100svh;
+  padding:var(--m);
+  display:flex;justify-content:center;align-items:stretch;
+  background:var(--bg);
+  color:var(--ink);
+}
+
+.card{
+  position:relative;
+  width:100%;max-width:42rem;
+  min-height:calc(100svh - var(--m)*2);
+  background:var(--paper);
+  container-type:inline-size;
+  display:flex;
+  overflow:hidden;
+  box-shadow:0 22px 50px rgba(43,61,87,.14),0 0 0 1px rgba(78,110,153,.12);
+}
+.card .leaf-tr{top:0;right:0;width:clamp(12rem,58%,23rem)}
+.card .leaf-bl{bottom:0;left:0;width:clamp(9rem,44%,19rem)}
+
+.frame{
+  position:relative;z-index:1;flex:1;min-width:0;
+  padding:clamp(.6rem,2.4vw,1.1rem);
+  display:flex;flex-direction:column;align-items:center;
+}
+
+/* onze tekening bovenaan (images/tekening.webp / tekening.png) */
+.card-photo{
+  position:relative;width:100%;
+  height:clamp(11rem,34svh,21rem);
+  overflow:hidden;flex:none;
+  display:flex;align-items:flex-end;justify-content:center;
+  padding:clamp(.7rem,3cqw,1.2rem) 0 calc(clamp(3.2rem,12cqw,4.8rem)/2 + .55rem);   /* ruimte zodat het logo de tekening niet raakt */
+}
+.card-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.card-photo picture{display:contents}
+.card-photo .card-art{position:relative;inset:auto;width:auto;height:100%;max-width:80%;object-fit:contain;filter:drop-shadow(0 8px 12px rgba(43,61,87,.2))}
+
+/* monogram / logo over de onderrand van de tekening */
+.mark{
+  position:relative;z-index:2;flex:none;
+  width:clamp(3.2rem,12cqw,4.8rem);aspect-ratio:1;
+  margin-top:calc(clamp(3.2rem,12cqw,4.8rem)/-2);
+  border-radius:50%;background:var(--paper);border:1px solid var(--blue);
+  display:grid;place-items:center;overflow:hidden;
+}
+.mark .mono{font-size:clamp(1rem,4cqw,1.5rem);font-style:italic;color:var(--blue)}
+/* logo1.png vult de cirkel; pas --logo-zoom aan als er in het bestand zelf veel witruimte rond het logo zit */
+.mark{--logo-zoom:1.55}
+.mark img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:0;transform:scale(var(--logo-zoom))}
+.mark.has .mono{display:none}
+
+.card-body{
+  position:relative;
+  flex:1;width:100%;
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;
+  padding:clamp(1.2rem,5cqw,2.2rem) clamp(1rem,8cqw,3.5rem) clamp(6.5rem,32cqw,11rem);
+}
+
+.cover-pre{min-height:calc(clamp(.8rem,2.8cqw,1rem)*1.6);display:flex;align-items:center;justify-content:center;font-size:clamp(.62rem,2.2cqw,.9rem);letter-spacing:.26em;text-transform:uppercase;font-weight:500;line-height:1.7;margin-bottom:clamp(.2rem,1.2cqw,.6rem)}
+
+/* namen: dun handschrift, op één regel */
+.cover-names{font-family:var(--script);font-weight:400;color:var(--blue);text-transform:none;letter-spacing:0;font-size:clamp(3rem,15.2cqw,5.6rem);line-height:1.1;margin-bottom:clamp(.1rem,1cqw,.5rem);white-space:nowrap}
+.cover-names span{display:inline}
+.cover-names .amp{padding:0 .16em}
+
+.cover-invite{font-size:clamp(.92rem,3cqw,1.25rem);font-style:italic;line-height:1.5;margin-bottom:clamp(.7rem,3cqw,1.3rem);max-width:30rem;min-height:3em;display:flex;align-items:center;justify-content:center;text-wrap:balance}
+
+/* datum: ZA | 27 | MRT */
+.cover-datebox{display:flex;align-items:center;justify-content:center;gap:clamp(.7rem,3.6cqw,1.4rem);height:clamp(2.4rem,9cqw,3.8rem)}
+.cover-datebox .dow,.cover-datebox .mon{font-size:clamp(.78rem,3cqw,1.15rem);letter-spacing:.2em;text-transform:uppercase;font-weight:500;min-width:3.2ch;white-space:nowrap}
+.cover-datebox .bar{width:1px;height:78%;background:var(--blue);opacity:.65}
+.cover-datebox .dnum{font-size:clamp(2.2rem,10.5cqw,4rem);line-height:1;font-weight:400;color:var(--accent);letter-spacing:.02em;font-variant-numeric:lining-nums}
+.cover-year{height:calc(clamp(.6rem,2.2cqw,.85rem)*1.8);display:flex;align-items:center;justify-content:center;font-size:clamp(.6rem,2.2cqw,.85rem);letter-spacing:.22em;text-transform:uppercase;margin-bottom:clamp(.7rem,3cqw,1.3rem);white-space:nowrap}
+
+.cover-time{height:calc(clamp(.95rem,3.2cqw,1.3rem)*1.5);display:flex;align-items:center;justify-content:center;font-style:italic;font-size:clamp(.95rem,3.2cqw,1.3rem);margin-bottom:clamp(.35rem,1.4cqw,.6rem)}
+.cover-venue{height:calc(clamp(.75rem,2.8cqw,1.05rem)*1.7);display:flex;align-items:center;justify-content:center;font-size:clamp(.75rem,2.8cqw,1.05rem);letter-spacing:.22em;text-transform:uppercase;font-weight:500}
+.cover-city{height:calc(clamp(.66rem,2.3cqw,.9rem)*1.7);display:flex;align-items:center;justify-content:center;font-size:clamp(.66rem,2.3cqw,.9rem);letter-spacing:.14em;text-transform:uppercase;opacity:.8;margin-bottom:clamp(.5rem,2.4cqw,1rem)}
+
+.cover-line{width:clamp(2.5rem,12cqw,4.5rem);height:1px;background:var(--blue);opacity:.5;margin:0 auto clamp(.4rem,1.6cqw,.8rem)}
+.cover-side-text{font-family:var(--script);color:var(--blue);font-size:clamp(1.5rem,6.2cqw,2.6rem);line-height:1.05;max-width:30rem;min-height:calc(clamp(1.5rem,6.2cqw,2.6rem)*2.3);display:flex;align-items:center;justify-content:center;text-wrap:balance}
+
+/* countdown */
+.countdown{display:flex;justify-content:center;gap:clamp(.9rem,5cqw,2rem);margin-top:clamp(.6rem,2.4cqw,1.2rem)}
+.countdown div{display:flex;flex-direction:column;align-items:center;min-width:3.2ch}
+.countdown b{font-weight:300;font-size:clamp(1.3rem,6.2cqw,2.3rem);line-height:1.1;font-variant-numeric:tabular-nums lining-nums;letter-spacing:.02em;color:var(--ink)}
+.countdown span{font-size:clamp(.5rem,1.8cqw,.7rem);letter-spacing:.2em;text-transform:uppercase;font-weight:500;color:var(--blue);margin-top:.25rem}
+html[lang="th"] .countdown span{letter-spacing:.03em;font-size:clamp(.65rem,2.3cqw,.85rem);text-transform:none}
+.countdown-done{font-family:var(--script);color:var(--blue);font-size:clamp(2rem,8cqw,3.2rem);margin-top:clamp(.6rem,2.4cqw,1.2rem)}
+html[lang="th"] .countdown-done{font-family:var(--serif);font-size:clamp(1.2rem,5cqw,2rem)}
+.next{position:absolute;z-index:2;bottom:clamp(.5rem,2.4cqw,1rem);left:50%;transform:translateX(-50%);color:var(--blue);text-decoration:none;font-size:1.5rem;line-height:1;opacity:.75;animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateX(-50%) translateY(5px)}}
+
+/* lage schermen (liggende telefoon): laat de kaart gewoon meegroeien */
+@media(max-height:560px){.card-photo{height:clamp(8rem,46svh,12rem)}}
+
+/* ===================== PAGINA 2 EN 3 — WITTE BLADEN ===================== */
+#p2,#p3{background:var(--bg);color:var(--ink);padding:clamp(1rem,4vw,3rem);display:flex;justify-content:center;align-items:center}
+.sheet{
+  position:relative;isolation:isolate;overflow:hidden;
+  width:100%;max-width:64rem;
+  background:var(--paper);
+  box-shadow:0 22px 50px rgba(43,61,87,.14),0 0 0 1px rgba(78,110,153,.12);
+  padding:clamp(3.4rem,8vw,5.5rem) clamp(1.4rem,5vw,4rem) clamp(8rem,18vw,12rem);
+  display:flex;flex-direction:column;align-items:center;
+}
+.sheet .leaf{z-index:-1}
+.sheet .leaf-tr{top:0;right:0;width:clamp(9rem,36%,22rem)}
+.sheet .leaf-bl{bottom:0;left:0;width:clamp(9rem,34%,21rem)}
+.sheet .leaf-tl{top:0;left:0;width:clamp(9rem,36%,22rem);transform:scaleX(-1)}
+.sheet .leaf-br{bottom:0;right:0;width:clamp(9rem,34%,21rem);transform:scaleX(-1)}
+
+.details-title{width:100%;max-width:75rem;text-align:center;margin-bottom:3.4rem}
+.details-title h2{font-family:var(--script);color:var(--blue);font-size:clamp(4.6rem,12vw,8rem);font-weight:400;line-height:.95;margin-bottom:.2rem}
+.details-title p{font-size:.9rem;letter-spacing:.2em;text-transform:uppercase;opacity:.7}
+.sprig{display:block;width:clamp(9rem,26vw,15rem);height:auto;margin:1.2rem auto 0;opacity:.95}
+
+.details-grid{width:100%;max-width:75rem;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(20rem,.9fr);gap:5rem;align-items:start}
+
+/* tijdlijn */
+.timeline{position:relative;padding-left:5.5rem}
+.timeline::before{content:"";position:absolute;left:1.45rem;top:1rem;bottom:1rem;width:1px;background:var(--line)}
+.timeline-item{position:relative;display:grid;grid-template-columns:5rem 1fr;gap:1.5rem;min-height:8rem;padding-bottom:3rem}
+.timeline-icon{position:absolute;left:-5.5rem;top:0;width:3rem;height:3rem;border-radius:50%;background:var(--paper);border:1px solid var(--blue);display:flex;align-items:center;justify-content:center;z-index:2}
+.timeline-icon svg{width:1.25rem;height:1.25rem;stroke:var(--blue);fill:none;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
+.timeline-time{font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;padding-top:.25rem;color:var(--blue);white-space:nowrap}
+.timeline-content h3{font-size:1.7rem;font-weight:400;line-height:1.1;margin-bottom:.3rem}
+.timeline-content p{font-size:1rem;line-height:1.55;opacity:.75}
+
+/* dresscode */
+.dresscode{position:relative;margin-top:1rem;padding-left:5.5rem}
+.dresscode .timeline-icon{left:0}
+.dresscode h3{font-size:1.7rem;font-weight:400;line-height:1.1;margin:.2rem 0 .4rem}
+.dresscode p{font-size:1rem;line-height:1.6;opacity:.75}
+.dresscode::before{content:"";position:absolute;left:0;right:0;top:-2rem;height:1px;background:var(--line-soft)}
+
+/* rechterkant */
+.info-panel{border-left:1px solid var(--line-soft);padding-left:3rem}
+.info-panel h3{font-size:2rem;font-weight:400;margin-bottom:1rem}
+.info-panel .location-name{font-family:var(--script);color:var(--blue);font-size:clamp(3rem,5.4vw,3.8rem);line-height:1;margin-bottom:1rem}
+.info-panel p{font-size:1rem;line-height:1.7;opacity:.78;margin-bottom:1.5rem}
+
+.location-meta{display:flex;flex-direction:column;gap:.6rem;margin:2rem 0 3rem}
+.location-row{display:flex;align-items:center;gap:.8rem;font-size:.95rem}
+.location-row.address{align-items:flex-start}
+.location-row.address svg{margin-top:.2rem}
+address{font-style:normal;line-height:1.55}
+.map-link{display:inline-block;margin:.5rem 0 0;color:var(--blue);text-decoration:none;border-bottom:1px solid var(--blue);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;padding-bottom:.15rem}
+html[lang="th"] .map-link{letter-spacing:.02em;font-size:.95rem}
+.location-row svg{width:1.2rem;height:1.2rem;stroke:var(--blue);fill:none;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+/* RSVP */
+.rsvp{margin-top:2rem;padding:2rem;border:1px solid var(--line);text-align:center;background:rgba(255,255,255,.7)}
+.rsvp h3{font-size:1.8rem;font-weight:400;margin-bottom:.5rem}
+.rsvp p{font-size:.95rem;margin-bottom:1.5rem}
+.qr-placeholder{width:8rem;height:8rem;margin:0 auto 1rem;border:1px dashed var(--blue-soft);display:flex;align-items:center;justify-content:center;text-align:center;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--blue)}
+.rsvp-link{display:inline-block;color:var(--blue);text-decoration:none;border-bottom:1px solid var(--blue);font-size:.9rem;letter-spacing:.12em;text-transform:uppercase;padding-bottom:.2rem}
+
+/* kleurenpalet (dresscode) */
+.palette{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.1rem}
+.palette .dot{width:2.2rem;height:2.2rem;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(43,61,87,.22),0 2px 5px rgba(43,61,87,.14)}
+
+/* Google Maps: klein kaartje rechts naast het adres */
+.addr-col{flex:1;min-width:0}
+.map-box{position:relative;flex:none;width:clamp(8rem,34%,10.5rem);aspect-ratio:4/3;border:1px solid var(--line);background:var(--blue-light);overflow:hidden}
+.map-box iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.map-cover{position:absolute;inset:0;z-index:2;display:flex;align-items:flex-end;justify-content:center;padding:.4rem;background:transparent;border:0;cursor:pointer;font:inherit;color:var(--ink)}
+.map-cover span{background:rgba(255,255,255,.94);border:1px solid var(--line);padding:.2rem .5rem;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;line-height:1.3}
+html[lang="th"] .map-cover span{letter-spacing:.01em;font-size:.78rem;text-transform:none}
+.map-box.live .map-cover{display:none}
+
+/* agenda-knop: klein, onder het RSVP-vlak */
+.cal{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.5rem 1rem;margin-top:1rem}
+.cal-btn{appearance:none;border:1px solid var(--blue);background:transparent;color:var(--blue);font:inherit;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:.45rem .9rem;cursor:pointer;display:inline-flex;align-items:center;gap:.45rem;transition:background .2s,color .2s}
+.cal-btn svg{width:.95rem;height:.95rem;stroke:currentColor;fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.cal-btn:hover{background:var(--blue);color:#fff}
+.cal-alt{color:var(--blue);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:.05rem}
+html[lang="th"] .cal-btn,html[lang="th"] .cal-alt{letter-spacing:.01em;text-transform:none;font-size:.9rem}
+
+/* ===================== PAGINA 3 — ABOUT US ===================== */
+.about-photos{width:100%;max-width:62rem;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(.8rem,2.4vw,1.8rem);align-items:end}
+.about-photo{padding:clamp(.35rem,1vw,.6rem);background:var(--paper);border:1px solid var(--line);box-shadow:0 14px 30px rgba(43,61,87,.1)}
+.about-photo .ph{position:relative;aspect-ratio:3/4;overflow:hidden;background:linear-gradient(160deg,var(--blue-light),#BFD0E4)}
+.about-photo:nth-child(2) .ph{aspect-ratio:3/3.6}
+.about-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.about-text{max-width:34rem;text-align:center;font-style:italic;font-size:clamp(1.05rem,2.4vw,1.3rem);line-height:1.7;opacity:.85;text-wrap:balance}
+html[lang="th"] .about-text{font-style:normal;line-height:1.9}
+.about-sprig{margin:clamp(1.6rem,4vw,2.6rem) auto 1.2rem}
+@media(max-width:600px){
+  .about-photos{grid-template-columns:1fr 1fr}
+  .about-photo:first-child{grid-column:1 / -1}
+  .about-photo:first-child .ph{aspect-ratio:4/3}
+  .about-photo:nth-child(2) .ph{aspect-ratio:3/4}
+}
+
+/* ===================== THAI ===================== */
+html[lang="th"] .cover-pre,html[lang="th"] .cover-datebox .dow,html[lang="th"] .cover-datebox .mon,html[lang="th"] .cover-year,html[lang="th"] .cover-venue,html[lang="th"] .cover-city{letter-spacing:.04em}
+html[lang="th"] .cover-pre{font-size:clamp(.8rem,2.8cqw,1rem);line-height:1.6}
+html[lang="th"] .cover-invite{font-style:normal;line-height:1.5}
+html[lang="th"] .cover-time{font-style:normal}
+html[lang="th"] .cover-side-text{font-family:var(--serif);font-size:clamp(.88rem,2.8cqw,1.08rem);line-height:1.55;color:var(--blue)}
+html[lang="th"] .details-title h2{font-family:var(--serif);font-style:normal;font-weight:300;line-height:1.3;font-size:clamp(2.6rem,6vw,4.5rem)}
+html[lang="th"] .info-panel .location-name{font-family:var(--script)}
+
+:focus-visible{outline:2px solid var(--blue);outline-offset:4px}
+
+/* ===================== TABLET ===================== */
+@media(max-width:900px){
+  .details-grid{grid-template-columns:1fr;gap:4rem;max-width:45rem}
+  .info-panel{border-left:0;border-top:1px solid var(--line-soft);padding-left:0;padding-top:3rem}
+}
+
+/* ===================== MOBIEL ===================== */
+@media(max-width:600px){
+  .sheet{padding:4.6rem 1.3rem 9rem}
+  .details-title{margin-bottom:2.6rem}
+  .timeline,.dresscode{padding-left:4.5rem}
+  .timeline-item{grid-template-columns:4.9rem 1fr;gap:.5rem}
+  .timeline-time{letter-spacing:.05em}
+  .timeline-icon{left:-4.5rem}
+  .dresscode .timeline-icon{left:0}
+  .timeline-content h3,.dresscode h3{font-size:1.45rem}
+  .info-panel{padding-top:2.5rem}
+}
+
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important}}
+</style>
+</head>
+
+<body>
+
+<nav class="lang" aria-label="Language">
+  <button data-l="en" aria-pressed="true">EN</button>
+  <button data-l="th" aria-pressed="false" lang="th">ไทย</button>
+  <button data-l="nl" aria-pressed="false">NL</button>
+</nav>
+
+<!-- MUZIEK: zet je mp3 in de map "music" en noem hem song.mp3 -->
+<audio id="bgm" src="music/song.mp3" loop preload="none"></audio>
+<button class="music" id="musicBtn" type="button" aria-label="Play music" hidden>
+  <svg class="i-note" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg>
+  <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5v14M15 5v14"/></svg>
+</button>
+
+<main>
+
+<!-- ===================== PAGINA 1 — KAART ===================== -->
+<section class="page" id="p1">
+
+  <article class="card">
+
+    <!-- aquarelbladeren (images/blad-rechtsboven.webp en images/blad-linksonder.webp) -->
+    <img class="leaf leaf-tr" src="images/blad-rechtsboven.webp" alt="" aria-hidden="true" onerror="this.remove()">
+    <img class="leaf leaf-bl" src="images/blad-linksonder.webp" alt="" aria-hidden="true" onerror="this.remove()">
+
+    <div class="frame">
+
+      <!-- onze tekening: images/tekening.webp (met tekening.png als reserve) -->
+      <div class="card-photo">
+        <picture>
+          <source srcset="images/tekening.webp" type="image/webp">
+          <img class="card-art" src="images/tekening.png" alt="Siriya, Floris and their dog" onerror="this.remove()">
+        </picture>
+      </div>
+
+      <!-- logo: images/logo1.png (anders S&F) -->
+      <div class="mark" aria-hidden="true">
+        <span class="mono">S&amp;F</span>
+        <img src="images/logo1.png" alt="" onload="this.parentNode.classList.add('has')" onerror="this.remove()">
+      </div>
+
+      <div class="card-body">
+
+        <p class="cover-pre" data-t="pre">Together with our families</p>
+
+        <h1 class="cover-names" aria-label="Siriya &amp; Floris"><span>Siriya</span> <span class="amp">&amp;</span> <span>Floris</span></h1>
+
+        <p class="cover-invite" data-t="invite1">Request the honor of your presence at the marriage</p>
+
+        <!-- datum: ZA | 27 | MRT -->
+        <div class="cover-datebox">
+          <span class="dow" data-t="dow">Sat</span>
+          <span class="bar"></span>
+          <span class="dnum" data-t="dnum">27</span>
+          <span class="bar"></span>
+          <span class="mon" data-t="mon">Mar</span>
+        </div>
+        <p class="cover-year" data-t="yearLine">Two thousand twenty seven</p>
+
+        <p class="cover-time" data-t="time">Two o'clock in the Afternoon</p>
+        <p class="cover-venue">Baiboon Grand</p>
+        <p class="cover-city" data-t="cityLine">Loei, Thailand</p>
+
+        <div class="cover-line"></div>
+
+        <p class="cover-side-text" data-t="sideText">A day of love, family, celebration and togetherness.</p>
+
+        <!-- countdown naar 27 maart 2027, 14:00 (Thaise tijd) -->
+        <div class="countdown" id="countdown" role="timer" aria-live="off">
+          <div><b id="nD">--</b><span data-t="cdD">Days</span></div>
+          <div><b id="nH">--</b><span data-t="cdH">Hours</span></div>
+          <div><b id="nM">--</b><span data-t="cdM">Minutes</span></div>
+          <div><b id="nS">--</b><span data-t="cdS">Seconds</span></div>
+        </div>
+        <p class="countdown-done" id="cdDone" data-t="cdDone" hidden></p>
+
+      </div>
+
+
+      <a class="next" href="#p2" aria-label="Next">↓</a>
+
+    </div>
+  </article>
+
+</section>
+
+
+<!-- ===================== PAGINA 2 — DETAILS ===================== -->
+<section class="page" id="p2">
+<div class="sheet">
+
+  <img class="leaf leaf-tr" src="images/blad-rechtsboven.webp" alt="" aria-hidden="true" onerror="this.remove()">
+  <img class="leaf leaf-bl" src="images/blad-linksonder.webp" alt="" aria-hidden="true" onerror="this.remove()">
+
+
+  <header class="details-title">
+    <h2 data-t="detailsTitle">The Day</h2>
+    <p data-t="detailsSub">Our wedding celebration</p>
+    <img class="sprig" src="images/blad-tak.webp" alt="" aria-hidden="true" onerror="this.remove()">
+  </header>
+
+  <div class="details-grid">
+
+    <!-- LINKS: tijdlijn + dresscode -->
+    <div>
+      <div class="timeline">
+
+        <article class="timeline-item">
+          <div class="timeline-icon"><svg viewBox="0 0 24 24"><path d="M6 3h7l-1 8H7L6 3z"/><path d="M9 11v6"/><path d="M6 20h7"/><path d="M15 5h4l-.7 6h-2.6L15 5z"/><path d="M17 11v6"/><path d="M14.5 20h5"/></svg></div>
+          <div class="timeline-time" data-t="tmWelcome">02:00 PM</div>
+          <div class="timeline-content">
+            <h3 data-t="welcomeTitle">Welcome Drinks</h3>
+            <p data-t="welcomeText">Welcome, mingle and enjoy a refreshing drink with family and friends.</p>
+          </div>
+        </article>
+
+        <article class="timeline-item">
+          <div class="timeline-icon"><svg viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M6 20V10"/><path d="M18 20V10"/><path d="M4 10h16"/><path d="M5 10l7-6 7 6"/><path d="M9 20v-5h6v5"/></svg></div>
+          <div class="timeline-time" data-t="tmCeremony">03:00 PM</div>
+          <div class="timeline-content">
+            <h3 data-t="ceremonyTitle">Ceremony</h3>
+            <p data-t="ceremonyText">Join us as we celebrate the beginning of our married life.</p>
+          </div>
+        </article>
+
+        <article class="timeline-item">
+          <div class="timeline-icon"><svg viewBox="0 0 24 24"><path d="M4 9h12v6a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V9z"/><path d="M16 11h2a2.5 2.5 0 0 1 0 5h-2"/><path d="M7 5v2"/><path d="M11 4v3"/><path d="M15 5v2"/><path d="M4 21h14"/></svg></div>
+          <div class="timeline-time" data-t="tmCoffee">05:00 PM</div>
+          <div class="timeline-content">
+            <h3 data-t="coffeeTitle">Coffee &amp; Snacks</h3>
+            <p data-t="coffeeText">Take a little break, enjoy coffee and something sweet.</p>
+          </div>
+        </article>
+
+        <article class="timeline-item">
+          <div class="timeline-icon"><svg viewBox="0 0 24 24"><path d="M5 4v7"/><path d="M8 4v7"/><path d="M5 8h3"/><path d="M6.5 11v9"/><path d="M15 4v16"/><path d="M15 4c3 1 4 3 4 6v1h-4"/></svg></div>
+          <div class="timeline-time" data-t="tmDinner">06:00 PM</div>
+          <div class="timeline-content">
+            <h3 data-t="dinnerTitle">Wedding Dinner</h3>
+            <p data-t="dinnerText">A relaxed dinner with our loved ones to continue the celebration.</p>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- DRESSCODE -->
+      <div class="dresscode">
+        <div class="timeline-icon"><svg viewBox="0 0 24 24"><path d="M12 6.5a2 2 0 1 0-2-2"/><path d="M12 6.5v2l8 5.5a1.2 1.2 0 0 1-.7 2.2H4.7A1.2 1.2 0 0 1 4 14l8-5.5"/></svg></div>
+        <h3 data-t="dressTitle">Dress Code</h3>
+        <p data-t="dressText">Any outfit that makes you shine and feel comfortable.</p>
+
+        <!-- kleurenpalet: alleen bolletjes -->
+        <div class="palette" role="img" aria-label="Colour palette: Milk Ivory, Icy Blue, Powder Blue, Cherry Red, Dark Cherry Wine">
+          <span class="dot" style="--c:#F7F1E8" title="Milk Ivory"></span>
+          <span class="dot" style="--c:#DCE5EE" title="Icy Blue"></span>
+          <span class="dot" style="--c:#BAC7D3" title="Powder Blue"></span>
+          <span class="dot" style="--c:#7D0F1A" title="Cherry Red"></span>
+          <span class="dot" style="--c:#3E0A0F" title="Dark Cherry Wine"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RECHTS: locatie + RSVP -->
+    <aside class="info-panel">
+
+      <h3 data-t="locationTitle">The Location</h3>
+      <div class="location-name">Baiboon Grand</div>
+      <p data-t="locationText">We are delighted to celebrate our special day at Baiboon Grand in Loei, Thailand.</p>
+
+      <div class="location-meta">
+        <div class="location-row address">
+          <svg viewBox="0 0 24 24"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg>
+
+          <div class="addr-col">
+            <address>Baiboon Grand<br>111 Na An, อ.เมืองเลย,<br>Loei 42000, Thailand</address>
+            <a class="map-link" href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x312147a75364f8b3:0xcbe444a94fc6d62e?sa=X&amp;ved=1t:8290&amp;ictx=111" target="_blank" rel="noopener" data-t="mapLink">Open in Google Maps</a>
+          </div>
+
+          <!-- klein interactief Google Maps-kaartje rechts van het adres (eerst tikken, dan pas bewegen) -->
+          <div class="map-box" id="mapBox">
+            <iframe title="Map: Baiboon Grand, Loei" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen
+              src="https://maps.google.com/maps?q=Baiboon%20Grand%2C%20111%20Na%20An%2C%20Loei%2042000%2C%20Thailand&amp;z=15&amp;hl=en&amp;output=embed"></iframe>
+            <button class="map-cover" id="mapCover" type="button"><span data-t="mapTap">Tap to explore</span></button>
+          </div>
+        </div>
+
+        <div class="location-row">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.2 2"/></svg>
+          <span data-t="dateTimeLine">27 March 2027 · 02:00 PM</span>
+        </div>
+      </div>
+
+      <div class="rsvp">
+        <h3 data-t="rsvpTitle">RSVP</h3>
+        <p data-t="rsvpText">Please let us know if you will be joining us on our special day.</p>
+
+        <!-- LATER HIER DE ECHTE QR CODE:  <img src="images/rsvp-qr.png" alt="RSVP QR code" class="rsvp-qr"> -->
+        <div class="qr-placeholder">QR CODE<br>RSVP</div>
+
+        <!-- LATER DE ECHTE RSVP LINK:  <a href="https://jouw-rsvp-link.nl" class="rsvp-link">RSVP online</a> -->
+        <a href="#" class="rsvp-link" data-t="rsvpLink" onclick="return false;">RSVP online</a>
+      </div>
+
+      <!-- toevoegen aan agenda (klein, onder het RSVP-vlak) -->
+      <div class="cal">
+        <button class="cal-btn" id="calBtn" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4M12 13v4M10 15h4"/></svg>
+          <span data-t="calBtn">Add to calendar</span>
+        </button>
+        <a class="cal-alt" id="calGoogle" href="#" target="_blank" rel="noopener" data-t="calGoogle">Google Calendar</a>
+      </div>
+
+    </aside>
+
+  </div>
+
+</div>
+</section>
+
+<!-- ===================== PAGINA 3 — ABOUT US ===================== -->
+<section class="page" id="p3">
+<div class="sheet">
+
+  <img class="leaf leaf-tl" src="images/blad-rechtsboven.webp" alt="" aria-hidden="true" onerror="this.remove()">
+  <img class="leaf leaf-br" src="images/blad-linksonder.webp" alt="" aria-hidden="true" onerror="this.remove()">
+
+  <header class="details-title">
+    <h2 data-t="aboutTitle">About us</h2>
+  </header>
+
+  <!-- 3 foto's van jullie: images/over-ons-1.jpg, over-ons-2.jpg, over-ons-3.jpg -->
+  <div class="about-photos">
+    <figure class="about-photo"><div class="ph"><img src="images/over-ons-1.jpg" alt="" loading="lazy" onerror="this.remove()"></div></figure>
+    <figure class="about-photo"><div class="ph"><img src="images/over-ons-2.jpg" alt="" loading="lazy" onerror="this.remove()"></div></figure>
+    <figure class="about-photo"><div class="ph"><img src="images/over-ons-3.jpg" alt="" loading="lazy" onerror="this.remove()"></div></figure>
+  </div>
+
+  <img class="sprig about-sprig" src="images/blad-tak.webp" alt="" aria-hidden="true" onerror="this.remove()">
+  <p class="about-text" data-t="aboutText">We hope to see you at our wedding and apologize if we are not able to deliver this invitation personally.</p>
+
+</div>
+</section>
+
+</main>
+
+<script>
+const L = {
+
+  en:{
+    pre:"Together with our families",
+    invite1:"Request the honor of your presence at the marriage",
+    date:"27 March 2027",
+    dow:"Sat", dnum:"27", mon:"Mar", yearLine:"Two thousand twenty seven", cityLine:"Loei, Thailand",
+    time:"Two o'clock in the Afternoon",
+    dateTimeLine:"27 March 2027 · 02:00 PM",
+    tmWelcome:"02:00 PM", tmCeremony:"03:00 PM", tmCoffee:"05:00 PM", tmDinner:"06:00 PM",
+    sideText:"A day of love, family, celebration and togetherness.",
+    detailsTitle:"The Day",
+    detailsSub:"Our wedding celebration",
+    welcomeTitle:"Welcome Drinks",
+    welcomeText:"Welcome, mingle and enjoy a refreshing drink with family and friends.",
+    ceremonyTitle:"Ceremony",
+    ceremonyText:"Join us as we celebrate the beginning of our married life.",
+    coffeeTitle:"Coffee & Snacks",
+    coffeeText:"Take a little break, enjoy coffee and something sweet.",
+    dinnerTitle:"Wedding Dinner",
+    dinnerText:"A relaxed dinner with our loved ones to continue the celebration.",
+    dressTitle:"Dress Code",
+    dressText:"Any outfit that makes you shine and feel comfortable.",
+    locationTitle:"The Location",
+    locationText:"We are delighted to celebrate our special day at Baiboon Grand in Loei, Thailand.",
+    rsvpTitle:"RSVP",
+    rsvpText:"Please let us know if you will be joining us on our special day.",
+    rsvpLink:"RSVP online",
+    mapLink:"Open in Google Maps",
+    cdD:"Days", cdH:"Hours", cdM:"Minutes", cdS:"Seconds", cdDone:"The day is here",
+    mapTap:"Tap to explore",
+    aboutTitle:"About us",
+    aboutText:"We hope to see you at our wedding and apologize if we are not able to deliver this invitation personally.",
+    calBtn:"Add to calendar", calGoogle:"Google Calendar",
+    calTitle:"Wedding of Siriya & Floris",
+    calDesc:"We would love to celebrate with you! Welcome drinks at 2 PM, ceremony at 3 PM, wedding dinner at 6 PM."
+  },
+
+  nl:{
+    pre:"Samen met onze families",
+    invite1:"Wij verzoeken u de eer van uw aanwezigheid bij ons huwelijk",
+    date:"27 maart 2027",
+    dow:"Za", dnum:"27", mon:"Mrt", yearLine:"Tweeduizend zevenentwintig", cityLine:"Loei, Thailand",
+    time:"Twee uur 's middags",
+    dateTimeLine:"27 maart 2027 · 14:00 uur",
+    tmWelcome:"14:00", tmCeremony:"15:00", tmCoffee:"17:00", tmDinner:"18:00",
+    sideText:"Een dag vol liefde, familie, geluk en samenzijn.",
+    detailsTitle:"De dag",
+    detailsSub:"Onze huwelijksviering",
+    welcomeTitle:"Ontvangst & drankjes",
+    welcomeText:"Welkom, ontmoet elkaar en geniet samen met familie en vrienden van een drankje.",
+    ceremonyTitle:"Ceremonie",
+    ceremonyText:"Vier samen met ons het begin van ons huwelijk.",
+    coffeeTitle:"Koffie & lekkernijen",
+    coffeeText:"Een klein moment om te genieten van koffie en iets lekkers.",
+    dinnerTitle:"Huwelijksdiner",
+    dinnerText:"Een ontspannen diner met onze dierbaren om de dag samen voort te zetten.",
+    dressTitle:"Dresscode",
+    dressText:"Elke outfit waarin je straalt en je comfortabel voelt.",
+    locationTitle:"De locatie",
+    locationText:"Met veel plezier vieren wij onze bijzondere dag bij Baiboon Grand in Loei, Thailand.",
+    rsvpTitle:"RSVP",
+    rsvpText:"Laat ons weten of je erbij kunt zijn op onze bijzondere dag.",
+    rsvpLink:"RSVP online",
+    mapLink:"Open in Google Maps",
+    cdD:"Dagen", cdH:"Uren", cdM:"Minuten", cdS:"Seconden", cdDone:"De dag is aangebroken",
+    mapTap:"Tik om te bekijken",
+    aboutTitle:"Over ons",
+    aboutText:"We hopen jullie te zien op onze bruiloft en bieden onze excuses aan als we deze uitnodiging niet persoonlijk kunnen overhandigen.",
+    calBtn:"Toevoegen aan agenda", calGoogle:"Google Agenda",
+    calTitle:"Bruiloft van Siriya & Floris",
+    calDesc:"We vieren het graag met jullie! Ontvangst om 14:00, ceremonie om 15:00, diner om 18:00."
+  },
+
+  th:{
+    pre:"พร้อมด้วยครอบครัวของเรา",
+    invite1:"ขอเชิญร่วมเป็นเกียรติในพิธีมงคลสมรสของเรา",
+    date:"27 มีนาคม 2570",
+    dow:"เสาร์", dnum:"27", mon:"มี.ค.", yearLine:"พ.ศ. 2570 · ค.ศ. 2027", cityLine:"จังหวัดเลย ประเทศไทย",
+    time:"บ่ายสองโมง",
+    dateTimeLine:"27 มีนาคม 2570 · 14.00 น.",
+    tmWelcome:"14.00 น.", tmCeremony:"15.00 น.", tmCoffee:"17.00 น.", tmDinner:"18.00 น.",
+    sideText:"วันแห่งความรัก ครอบครัว ความสุข และการเฉลิมฉลองร่วมกัน",
+    detailsTitle:"กำหนดการ",
+    detailsSub:"รายละเอียดงานฉลองมงคลสมรส",
+    welcomeTitle:"ต้อนรับและเครื่องดื่ม",
+    welcomeText:"ขอต้อนรับทุกท่าน พบปะพูดคุย และเพลิดเพลินกับเครื่องดื่มร่วมกับครอบครัวและเพื่อน ๆ",
+    ceremonyTitle:"พิธีมงคลสมรส",
+    ceremonyText:"ร่วมเป็นสักขีพยานและเฉลิมฉลองการเริ่มต้นชีวิตคู่ของเรา",
+    coffeeTitle:"กาแฟและของว่าง",
+    coffeeText:"พักผ่อนและเพลิดเพลินกับกาแฟและของว่าง",
+    dinnerTitle:"เลี้ยงฉลองมงคลสมรส",
+    dinnerText:"ร่วมรับประทานอาหารค่ำและเฉลิมฉลองวันสำคัญกับครอบครัวและคนที่เรารัก",
+    dressTitle:"การแต่งกาย",
+    dressText:"ชุดอะไรก็ได้ที่ทำให้คุณเปล่งประกายและรู้สึกสบายตัว",
+    locationTitle:"สถานที่",
+    locationText:"เรามีความยินดีเป็นอย่างยิ่งที่จะจัดงานฉลองมงคลสมรส ณ Baiboon Grand จังหวัดเลย ประเทศไทย",
+    rsvpTitle:"ตอบรับการเข้าร่วมงาน",
+    rsvpText:"กรุณาแจ้งให้เราทราบว่าท่านจะสามารถมาร่วมงานกับเราได้หรือไม่",
+    rsvpLink:"ตอบรับออนไลน์",
+    mapLink:"เปิดใน Google Maps",
+    cdD:"วัน", cdH:"ชั่วโมง", cdM:"นาที", cdS:"วินาที", cdDone:"วันสำคัญมาถึงแล้ว",
+    mapTap:"แตะเพื่อดู",
+    aboutTitle:"เกี่ยวกับเรา",
+    aboutText:"เราหวังเป็นอย่างยิ่งว่าจะได้พบทุกท่านในงานแต่งงานของเรา และขออภัยหากไม่สามารถนำบัตรเชิญมามอบให้ด้วยตนเองได้",
+    calBtn:"เพิ่มลงในปฏิทิน", calGoogle:"Google ปฏิทิน",
+    calTitle:"งานแต่งงานของ Siriya & Floris",
+    calDesc:"ขอเชิญร่วมเป็นเกียรติ ต้อนรับแขก 14.00 น. พิธี 15.00 น. งานเลี้ยง 18.00 น."
+  }
+};
+
+function setLang(lang){
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-t]").forEach(el=>{
+    const key = el.dataset.t;
+    if(L[lang] && L[lang][key] !== undefined) el.textContent = L[lang][key];
+  });
+  document.querySelectorAll(".lang button").forEach(b=>{
+    b.setAttribute("aria-pressed", b.dataset.l === lang);
+  });
+}
+
+document.querySelectorAll(".lang button").forEach(b=>{
+  b.addEventListener("click", ()=> setLang(b.dataset.l));
+});
+
+/* ===== countdown (27 maart 2027, 14:00 Thaise tijd = UTC+7) ===== */
+const TARGET = new Date("2027-03-27T14:00:00+07:00").getTime();
+const cd = {d:document.getElementById("nD"),h:document.getElementById("nH"),m:document.getElementById("nM"),s:document.getElementById("nS")};
+const pad = n => String(n).padStart(2,"0");
+function tick(){
+  const diff = TARGET - Date.now();
+  if(diff <= 0){
+    document.getElementById("countdown").hidden = true;
+    document.getElementById("cdDone").hidden = false;
+    clearInterval(timer);
+    return;
+  }
+  const t = Math.floor(diff/1000);
+  cd.d.textContent = Math.floor(t/86400);
+  cd.h.textContent = pad(Math.floor(t%86400/3600));
+  cd.m.textContent = pad(Math.floor(t%3600/60));
+  cd.s.textContent = pad(t%60);
+}
+const timer = setInterval(tick,1000);
+tick();
+
+/* ===== Google Maps: tik om te activeren ===== */
+const mapBox = document.getElementById("mapBox");
+document.getElementById("mapCover").addEventListener("click", ()=> mapBox.classList.add("live"));
+
+/* ===== toevoegen aan agenda =====
+   Start: 27 maart 2027, 14:00 Thaise tijd (= 07:00 UTC). Einde: 21:00 Thaise tijd (= 14:00 UTC) — pas aan indien nodig. */
+const EVENT = {
+  start:"20270327T070000Z",
+  end:"20270327T140000Z",
+  location:"Baiboon Grand, 111 Na An, อ.เมืองเลย, Loei 42000, Thailand"
+};
+const icsEsc = t => String(t).replace(/\\/g,"\\\\").replace(/;/g,"\\;").replace(/,/g,"\\,").replace(/\n/g,"\\n");
+function calText(){
+  const lang = document.documentElement.lang;
+  const t = L[lang] || L.en;
+  return {title:t.calTitle, desc:t.calDesc + "\n" + location.href.split("#")[0]};
+}
+function updateGoogleLink(){
+  const c = calText();
+  const url = "https://calendar.google.com/calendar/render?action=TEMPLATE"
+    + "&text=" + encodeURIComponent(c.title)
+    + "&dates=" + EVENT.start + "/" + EVENT.end
+    + "&details=" + encodeURIComponent(c.desc)
+    + "&location=" + encodeURIComponent(EVENT.location)
+    + "&ctz=Asia/Bangkok";
+  document.getElementById("calGoogle").href = url;
+}
+const icsFold = line => line.length <= 60 ? line : (line.match(/.{1,60}/gu) || [line]).join("\r\n ");
+function downloadICS(){
+  const c = calText();
+  const stamp = new Date().toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,"");
+  const ics = [
+    "BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Siriya & Floris//Wedding//EN","CALSCALE:GREGORIAN","METHOD:PUBLISH",
+    "BEGIN:VEVENT",
+    "UID:siriya-floris-20270327@wedding",
+    "DTSTAMP:" + stamp,
+    "DTSTART:" + EVENT.start,
+    "DTEND:" + EVENT.end,
+    "SUMMARY:" + icsEsc(c.title),
+    "LOCATION:" + icsEsc(EVENT.location),
+    "DESCRIPTION:" + icsEsc(c.desc),
+    "BEGIN:VALARM","TRIGGER:-P1D","ACTION:DISPLAY","DESCRIPTION:" + icsEsc(c.title),"END:VALARM",
+    "END:VEVENT","END:VCALENDAR"
+  ].map(icsFold).join("\r\n");
+  const blob = new Blob([ics],{type:"text/calendar;charset=utf-8"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "siriya-floris-wedding.ics";
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+document.getElementById("calBtn").addEventListener("click", downloadICS);
+document.querySelectorAll(".lang button").forEach(b=>b.addEventListener("click", updateGoogleLink));
+updateGoogleLink();
+
+/* ===== muziek ===== */
+const audio = document.getElementById("bgm");
+const musicBtn = document.getElementById("musicBtn");
+const MUSIC_LABEL = {
+  en:["Play music","Pause music"],
+  nl:["Muziek afspelen","Muziek pauzeren"],
+  th:["เล่นเพลง","หยุดเพลง"]
+};
+function musicLabel(){
+  const l = MUSIC_LABEL[document.documentElement.lang] || MUSIC_LABEL.en;
+  musicBtn.setAttribute("aria-label", audio.paused ? l[0] : l[1]);
+}
+/* knop alleen tonen als het bestand echt bestaat */
+fetch("music/song.mp3",{method:"HEAD"})
+  .then(r=>{ if(r.ok){ musicBtn.hidden=false; musicLabel(); } })
+  .catch(()=>{});
+musicBtn.addEventListener("click", ()=>{
+  if(audio.paused){ audio.volume = .6; audio.play().catch(()=>{}); }
+  else audio.pause();
+});
+audio.addEventListener("play",  ()=>{ musicBtn.classList.add("on");    musicLabel(); });
+audio.addEventListener("pause", ()=>{ musicBtn.classList.remove("on"); musicLabel(); });
+document.querySelectorAll(".lang button").forEach(b=>b.addEventListener("click", musicLabel));
+
+const urlLang = new URLSearchParams(window.location.search).get("lang");
+setLang(urlLang && L[urlLang] ? urlLang : "en");
+updateGoogleLink();
+</script>
+
+</body>
+</html>
