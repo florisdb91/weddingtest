@@ -53,9 +53,29 @@ body{background:linear-gradient(180deg,#F8F4EF,#F1EBE4);color:var(--ink);font-fa
 .heart-copy{position:absolute;left:20.2%;top:53.4%;width:38%;height:24%;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#89556b;padding:8% 10% 12%}
 .heart-copy .save{font-family:var(--script);font-size:clamp(2rem,4.6vw,3.25rem);line-height:.86;max-width:100%}
 .heart-copy .date{font-size:clamp(1rem,2.1vw,1.55rem);letter-spacing:.12em;margin-top:.35rem;color:#875161}
-.hero-meta{display:flex;flex-direction:column;align-items:center;gap:.7rem;text-align:center;max-width:38rem;margin-top:.1rem}
+.hero-meta{display:flex;flex-direction:column;align-items:center;gap:.65rem;text-align:center;width:min(100%,42rem);max-width:42rem;margin-top:.1rem}
 .hero-meta .pre{font-size:.78rem;letter-spacing:.28em;text-transform:uppercase;color:#8b5863}
-.hero-meta h1{font-size:clamp(2.6rem,6vw,4.4rem);line-height:.92;color:var(--accent-deep);font-weight:400}
+/* The couple's title matches the romantic calligraphy on the invitation card. */
+.hero-meta h1{
+  font-family:'Pinyon Script','Herr Von Muellerhoff','Snell Roundhand',cursive;
+  font-size:clamp(3.5rem,8vw,6.1rem);
+  font-weight:400;
+  line-height:1.13;
+  letter-spacing:0;
+  color:var(--accent-deep);
+  width:100%;
+  text-align:center;
+  text-wrap:balance;
+  padding:.04em .12em .09em;
+}
+/* Thai characters require a native Thai font instead of Latin calligraphy. */
+html[lang="th"] .hero-meta h1{
+  font-family:'Noto Serif Thai',Georgia,serif;
+  font-size:clamp(1.95rem,4.4vw,3.1rem);
+  font-weight:300;
+  line-height:1.55;
+  letter-spacing:0;
+}
 .hero-meta .sub{font-size:clamp(1rem,1.8vw,1.18rem);color:var(--ink-soft)}
 .hero-actions{display:flex;flex-direction:column;align-items:center;gap:.8rem}
 .hero-scroll{display:inline-flex;align-items:center;gap:.55rem;color:var(--accent);text-decoration:none;letter-spacing:.12em;text-transform:uppercase;font-size:.8rem;padding-bottom:.15rem;border-bottom:1px solid rgba(125,15,26,.3)}
@@ -70,7 +90,7 @@ html[lang="th"] .hero-meta .pre, html[lang="th"] .hero-scroll{letter-spacing:.04
 .leaf{position:absolute;height:auto;max-width:none;pointer-events:none;user-select:none;z-index:-1;opacity:.95}.sheet .leaf-tr{top:0;right:0;width:clamp(9rem,36%,22rem)}.sheet .leaf-bl{bottom:0;left:0;width:clamp(9rem,34%,21rem)}.sheet .leaf-tl{top:0;left:0;width:clamp(9rem,36%,22rem);transform:scaleX(-1)}.sheet .leaf-br{bottom:0;right:0;width:clamp(9rem,34%,21rem);transform:scaleX(-1)}
 .details-title{width:100%;max-width:75rem;text-align:center;margin-bottom:3.4rem}.details-title h2{font-family:var(--script);color:var(--accent);font-size:clamp(4.6rem,12vw,8rem);font-weight:400;line-height:.95;margin-bottom:.2rem}.details-title p{font-size:.9rem;letter-spacing:.2em;text-transform:uppercase;opacity:.7}.sprig{display:block;width:clamp(9rem,26vw,15rem);height:auto;margin:1.2rem auto 0;opacity:.95}
 .details-grid{width:100%;max-width:75rem;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(20rem,.9fr);gap:5rem;align-items:start}
-.timeline{position:relative;padding-left:5.5rem}.timeline::before{content:"";position:absolute;left:1.45rem;top:1rem;bottom:1rem;width:1px;background:rgba(125,15,26,.25)}.timeline-item{position:relative;display:grid;grid-template-columns:5rem 1fr;gap:1.5rem;min-height:8rem;padding-bottom:3rem}.timeline-icon{position:absolute;left:-5.5rem;top:0;width:3rem;height:3rem;border-radius:50%;background:var(--paper);border:1px solid rgba(125,15,26,.4);display:flex;align-items:center;justify-content:center;z-index:2}.timeline-icon svg{width:1.25rem;height:1.25rem;stroke:var(--accent);fill:none;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}.timeline-time{font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;padding-top:.25rem;color:var(--accent);white-space:nowrap}.timeline-content h3{font-size:1.7rem;font-weight:400;line-height:1.1;margin-bottom:.3rem}.timeline-content p{font-size:1rem;line-height:1.55;opacity:.8}
+.timeline{position:relative;padding-left:5.5rem}.timeline::before{content:"";position:absolute;left:1.45rem;top:1rem;bottom:1rem;width:1px;background:rgba(125,15,26,.25)}.timeline-item{position:relative;display:grid;grid-template-columns:5rem 1fr;gap:1.5rem;min-height:7rem;padding-bottom:2.3rem}.timeline-icon{position:absolute;left:-5.5rem;top:0;width:3rem;height:3rem;border-radius:50%;background:var(--paper);border:1px solid rgba(125,15,26,.4);display:flex;align-items:center;justify-content:center;z-index:2}.timeline-icon svg{width:1.25rem;height:1.25rem;stroke:var(--accent);fill:none;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}.timeline-time{font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;padding-top:.25rem;color:var(--accent);white-space:nowrap}.timeline-content h3{font-size:1.7rem;font-weight:400;line-height:1.1;margin-bottom:.3rem}.timeline-content p{font-size:1rem;line-height:1.55;opacity:.8}
 .dresscode{position:relative;margin-top:1rem;padding-left:5.5rem}.dresscode .timeline-icon{left:0}.dresscode h3{font-size:1.7rem;font-weight:400;line-height:1.1;margin:.2rem 0 .4rem}.dresscode p{font-size:1rem;line-height:1.6;opacity:.8}.dresscode::before{content:"";position:absolute;left:0;right:0;top:-2rem;height:1px;background:var(--line-soft)}
 .info-panel{border-left:1px solid var(--line-soft);padding-left:3rem}.info-panel h3{font-size:2rem;font-weight:400;margin-bottom:1rem}.info-panel .location-name{font-family:var(--script);color:var(--accent);font-size:clamp(3rem,5.4vw,3.8rem);line-height:1;margin-bottom:1rem}.info-panel p{font-size:1rem;line-height:1.7;opacity:.8;margin-bottom:1.5rem}
 .location-meta{display:flex;flex-direction:column;gap:.6rem;margin:2rem 0 3rem}.location-row{display:flex;align-items:center;gap:.8rem;font-size:.95rem}.location-row.address{align-items:flex-start}.location-row.address svg{margin-top:.2rem}address{font-style:normal;line-height:1.55}.map-link{display:inline-block;margin:.5rem 0 0;color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(125,15,26,.5);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;padding-bottom:.15rem}html[lang="th"] .map-link{letter-spacing:.02em;font-size:.95rem}.location-row svg{width:1.2rem;height:1.2rem;stroke:var(--accent);fill:none;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;flex:none}
@@ -82,13 +102,22 @@ html[lang="th"] .hero-meta .pre, html[lang="th"] .hero-scroll{letter-spacing:.04
 html[lang="th"] .details-title h2{font-family:var(--serif);font-style:normal;font-weight:300;line-height:1.3;font-size:clamp(2.6rem,6vw,4.5rem)}
 @media(max-width:900px){.details-grid{grid-template-columns:1fr;gap:4rem;max-width:45rem}.info-panel{border-left:0;border-top:1px solid var(--line-soft);padding-left:0;padding-top:3rem}}
 @media(max-width:700px){#p1{padding-top:4.7rem}.hero-art{width:min(95vw,37rem)}.names-card{left:50.4%;top:18.1%;width:28.9%;height:34.6%}.heart-copy{left:20%;top:53.6%;width:38.2%;height:24.2%}.hero-meta .pre{font-size:.7rem;letter-spacing:.18em}}
-@media(max-width:600px){.sheet{min-height:auto;padding:4.6rem 1.3rem 9rem}.details-title{margin-bottom:2.6rem}.timeline,.dresscode{padding-left:4.5rem}.timeline-item{grid-template-columns:4.9rem 1fr;gap:.5rem}.timeline-time{letter-spacing:.05em}.timeline-icon{left:-4.5rem}.dresscode .timeline-icon{left:0}.timeline-content h3,.dresscode h3{font-size:1.45rem}.info-panel{padding-top:2.5rem}.about-photos{grid-template-columns:1fr 1fr}.about-photo:first-child{grid-column:1 / -1}.about-photo:first-child .ph{aspect-ratio:4/3}.about-photo:nth-child(2) .ph{aspect-ratio:3/4}.hero-meta h1{font-size:2.35rem}.hero-meta .sub{font-size:1rem}.hero-scroll{font-size:.74rem}.heart-copy .save{font-size:1.65rem}.heart-copy .date{font-size:.94rem}.names-card .fn{font-size:2.18rem}.names-card .ln{font-size:1.02rem}.names-card::before{width:16%;height:16%;right:4%;top:4%;opacity:.55}.names-card::after{display:none}}
+@media(max-width:600px){.sheet{min-height:auto;padding:4.6rem 1.3rem 9rem}.details-title{margin-bottom:2.6rem}.timeline,.dresscode{padding-left:4.5rem}.timeline-item{grid-template-columns:4.9rem 1fr;gap:.5rem}.timeline-time{letter-spacing:.05em}.timeline-icon{left:-4.5rem}.dresscode .timeline-icon{left:0}.timeline-content h3,.dresscode h3{font-size:1.45rem}.info-panel{padding-top:2.5rem}.about-photos{grid-template-columns:1fr 1fr}.about-photo:first-child{grid-column:1 / -1}.about-photo:first-child .ph{aspect-ratio:4/3}.about-photo:nth-child(2) .ph{aspect-ratio:3/4}.hero-meta h1{font-size:clamp(2.75rem,10.7vw,4.2rem)}html[lang="th"] .hero-meta h1{font-size:clamp(1.95rem,6.4vw,2.55rem)}.hero-meta .sub{font-size:1rem}.hero-scroll{font-size:.74rem}.heart-copy .save{font-size:1.65rem}.heart-copy .date{font-size:.94rem}.names-card .fn{font-size:2.18rem}.names-card .ln{font-size:1.02rem}.names-card::before{width:16%;height:16%;right:4%;top:4%;opacity:.55}.names-card::after{display:none}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important}}
 
 /* Hotelnaam en meertalige adresregels in pagina 2 */
 .info-panel address[data-t="venueAddress"]{white-space:pre-line;overflow-wrap:break-word}
 html[lang="th"] .info-panel .location-name{font-family:var(--serif);font-weight:400;font-size:clamp(1.7rem,3.8vw,2.55rem);line-height:1.4}
 html[lang="th"] .info-panel address{line-height:1.85}
+
+/* Parents are displayed as two deliberate groups between invitation line and couple names. */
+.family-blocks{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);width:min(100%,45rem);margin:.28rem auto .4rem;align-items:center}
+.family-block{display:flex;align-items:center;justify-content:center;flex-direction:column;min-width:0;padding:.58rem clamp(.6rem,3vw,1.7rem);text-align:center;gap:.08rem}
+.family-block+.family-block{border-left:1px solid rgba(125,15,26,.28)}
+.family-name{font-size:clamp(1.15rem,2.3vw,1.62rem);line-height:1.22;font-weight:400;letter-spacing:.012em;color:var(--accent-deep);text-wrap:balance}
+.family-amp{font-family:var(--script);font-size:clamp(1.65rem,3.3vw,2.35rem);line-height:.86;color:var(--accent)}
+@media(max-width:540px){.family-blocks{grid-template-columns:1fr;max-width:22rem;margin:.3rem auto .45rem}.family-block{padding:.4rem .75rem}.family-block+.family-block{border-left:0;border-top:1px solid rgba(125,15,26,.22);margin-top:.4rem;padding-top:.65rem}.family-name{font-size:1.26rem}.family-amp{font-size:1.8rem}}
+html[lang="th"] .family-name{letter-spacing:0}
 </style>
 </head>
 <body>
@@ -113,7 +142,19 @@ html[lang="th"] .info-panel address{line-height:1.85}
     </div>
     <div class="hero-meta">
       <div class="pre" data-t="pre">Together with our families</div>
-      <h1>Siriya &amp; Floris</h1>
+      <div class="family-blocks" aria-label="Our parents">
+        <div class="family-block">
+          <span class="family-name">Surasak Im-erb</span>
+          <span class="family-amp">&amp;</span>
+          <span class="family-name">Nuanyai Im-erb</span>
+        </div>
+        <div class="family-block">
+          <span class="family-name">Norbertus de Beer</span>
+          <span class="family-amp">&amp;</span>
+          <span class="family-name">Jannigje in 't Veld</span>
+        </div>
+      </div>
+      <h1 data-t="coupleNames">Siriya &amp; Floris</h1>
       <div class="sub" data-t="invite1">Request the honor of your presence at the marriage</div>
     </div>
     <div class="hero-actions">
@@ -142,10 +183,21 @@ html[lang="th"] .info-panel address{line-height:1.85}
   <div class="details-grid">
     <div>
       <div class="timeline">
-        <article class="timeline-item"><div class="timeline-icon"><svg viewBox="0 0 24 24"><path d="M6 3h7l-1 8H7L6 3z"/><path d="M9 11v6"/><path d="M6 20h7"/><path d="M15 5h4l-.7 6h-2.6L15 5z"/><path d="M17 11v6"/><path d="M14.5 20h5"/></svg></div><div class="timeline-time" data-t="tmWelcome">02:00 PM</div><div class="timeline-content"><h3 data-t="welcomeTitle">Welcome Drinks</h3><p data-t="welcomeText">Welcome, mingle and enjoy a refreshing drink with family and friends.</p></div></article>
-        <article class="timeline-item"><div class="timeline-icon"><svg viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M6 20V10"/><path d="M18 20V10"/><path d="M4 10h16"/><path d="M5 10l7-6 7 6"/><path d="M9 20v-5h6v5"/></svg></div><div class="timeline-time" data-t="tmCeremony">03:00 PM</div><div class="timeline-content"><h3 data-t="ceremonyTitle">Ceremony</h3><p data-t="ceremonyText">Join us as we celebrate the beginning of our married life.</p></div></article>
-        <article class="timeline-item"><div class="timeline-icon"><svg viewBox="0 0 24 24"><path d="M4 9h12v6a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V9z"/><path d="M16 11h2a2.5 2.5 0 0 1 0 5h-2"/><path d="M7 5v2"/><path d="M11 4v3"/><path d="M15 5v2"/><path d="M4 21h14"/></svg></div><div class="timeline-time" data-t="tmCoffee">05:00 PM</div><div class="timeline-content"><h3 data-t="coffeeTitle">Coffee &amp; Snacks</h3><p data-t="coffeeText">Take a little break, enjoy coffee and something sweet.</p></div></article>
-        <article class="timeline-item"><div class="timeline-icon"><svg viewBox="0 0 24 24"><path d="M5 4v7"/><path d="M8 4v7"/><path d="M5 8h3"/><path d="M6.5 11v9"/><path d="M15 4v16"/><path d="M15 4c3 1 4 3 4 6v1h-4"/></svg></div><div class="timeline-time" data-t="tmDinner">06:00 PM</div><div class="timeline-content"><h3 data-t="dinnerTitle">Wedding Dinner</h3><p data-t="dinnerText">A relaxed dinner with our loved ones to continue the celebration.</p></div></article>
+        <article class="timeline-item">
+          <div class="timeline-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="13" r="4.6"/><circle cx="15.2" cy="13" r="4.6"/><path d="M7.7 7.7 9 5.5l1.3 2.2M13.9 7.7l1.3-2.2 1.3 2.2"/></svg></div>
+          <div class="timeline-time" data-t="tmEngagement">02:00 PM</div>
+          <div class="timeline-content"><h3 data-t="engagementTitle">Engagement Ceremony</h3></div>
+        </article>
+        <article class="timeline-item">
+          <div class="timeline-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20.2 4.5 12.5C.6 8.4 6.6 3.6 10.1 7.5L12 9.4l1.9-1.9c3.5-3.9 9.5.9 5.6 5L12 20.2Z"/></svg></div>
+          <div class="timeline-time" data-t="tmVows">04:00 PM</div>
+          <div class="timeline-content"><h3 data-t="vowsTitle">Vow Ceremony</h3></div>
+        </article>
+        <article class="timeline-item">
+          <div class="timeline-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m4 4 2 8c.5 1.7 2 2.8 3.5 2.8S12.5 13.7 13 12l2-8H4Z"/><path d="M9.5 14.8V20m-3.2 0h6.4M16 7h4l-.9 5.2c-.4 2.1-1.6 3.2-3.1 3.2"/></svg></div>
+          <div class="timeline-time" data-t="tmReception">06:00 PM</div>
+          <div class="timeline-content"><h3 data-t="receptionTitle">Wedding Reception</h3></div>
+        </article>
       </div>
       <div class="dresscode"><div class="timeline-icon"><svg viewBox="0 0 24 24"><path d="M12 6.5a2 2 0 1 0-2-2"/><path d="M12 6.5v2l8 5.5a1.2 1.2 0 0 1-.7 2.2H4.7A1.2 1.2 0 0 1 4 14l8-5.5"/></svg></div><h3 data-t="dressTitle">Dress Code</h3><p data-t="dressText">Any outfit that makes you shine and feel comfortable.</p><div class="palette" role="img" aria-label="Colour palette: Milk Ivory, Icy Blue, Powder Blue, Cherry Red, Dark Cherry Wine"><span class="dot" style="--c:#F7F1E8" title="Milk Ivory"></span><span class="dot" style="--c:#DCE5EE" title="Icy Blue"></span><span class="dot" style="--c:#BAC7D3" title="Powder Blue"></span><span class="dot" style="--c:#7D0F1A" title="Cherry Red"></span><span class="dot" style="--c:#3E0A0F" title="Dark Cherry Wine"></span></div></div>
     </div>
@@ -181,6 +233,7 @@ Loei 42000, Thailand</address><a class="map-link" href="https://www.google.com/m
 const L = {
 
   en:{
+    coupleNames:"Siriya & Floris",
     pre:"Together with our families",
     saveDate:"Save the Date",
     heroScroll:"Scroll for details",
@@ -189,18 +242,13 @@ const L = {
     dow:"Sat", dnum:"27", mon:"Mar", yearLine:"Two thousand twenty seven", cityLine:"Loei, Thailand",
     time:"Two o'clock in the Afternoon",
     dateTimeLine:"27 March 2027 · 02:00 PM",
-    tmWelcome:"02:00 PM", tmCeremony:"03:00 PM", tmCoffee:"05:00 PM", tmDinner:"06:00 PM",
+    tmEngagement:"02:00 PM", tmVows:"04:00 PM", tmReception:"06:00 PM",
     sideText:"A day of love, family, celebration and togetherness.",
     detailsTitle:"The Day",
     detailsSub:"Our wedding celebration",
-    welcomeTitle:"Welcome Drinks",
-    welcomeText:"Welcome, mingle and enjoy a refreshing drink with family and friends.",
-    ceremonyTitle:"Ceremony",
-    ceremonyText:"Join us as we celebrate the beginning of our married life.",
-    coffeeTitle:"Coffee & Snacks",
-    coffeeText:"Take a little break, enjoy coffee and something sweet.",
-    dinnerTitle:"Wedding Dinner",
-    dinnerText:"A relaxed dinner with our loved ones to continue the celebration.",
+    engagementTitle:"Engagement Ceremony",
+    vowsTitle:"Vow Ceremony",
+    receptionTitle:"Wedding Reception",
     dressTitle:"Dress Code",
     dressText:"Any outfit that makes you shine and feel comfortable.",
     locationTitle:"The Location",
@@ -217,10 +265,11 @@ const L = {
     aboutText:"We hope to see you at our wedding and apologize if we are not able to deliver this invitation personally.",
     calBtn:"Add to calendar", calGoogle:"Google Calendar",
     calTitle:"Wedding of Siriya & Floris",
-    calDesc:"We would love to celebrate with you! Welcome drinks at 2 PM, ceremony at 3 PM, wedding dinner at 6 PM."
+    calDesc:"Engagement ceremony at 2 PM, vow ceremony at 4 PM, wedding reception at 6 PM."
   },
 
   nl:{
+    coupleNames:"Siriya & Floris",
     pre:"Samen met onze families",
     saveDate:"Save the Date",
     heroScroll:"Scroll voor details",
@@ -229,18 +278,13 @@ const L = {
     dow:"Za", dnum:"27", mon:"Mrt", yearLine:"Tweeduizend zevenentwintig", cityLine:"Loei, Thailand",
     time:"Twee uur 's middags",
     dateTimeLine:"27 maart 2027 · 14:00 uur",
-    tmWelcome:"14:00", tmCeremony:"15:00", tmCoffee:"17:00", tmDinner:"18:00",
+    tmEngagement:"14:00", tmVows:"16:00", tmReception:"18:00",
     sideText:"Een dag vol liefde, familie, geluk en samenzijn.",
     detailsTitle:"De dag",
     detailsSub:"Onze huwelijksviering",
-    welcomeTitle:"Ontvangst & drankjes",
-    welcomeText:"Welkom, ontmoet elkaar en geniet samen met familie en vrienden van een drankje.",
-    ceremonyTitle:"Ceremonie",
-    ceremonyText:"Vier samen met ons het begin van ons huwelijk.",
-    coffeeTitle:"Koffie & lekkernijen",
-    coffeeText:"Een klein moment om te genieten van koffie en iets lekkers.",
-    dinnerTitle:"Huwelijksdiner",
-    dinnerText:"Een ontspannen diner met onze dierbaren om de dag samen voort te zetten.",
+    engagementTitle:"Verlovingsceremonie",
+    vowsTitle:"Ceremonie met huwelijksgeloften",
+    receptionTitle:"Bruiloftsreceptie",
     dressTitle:"Dresscode",
     dressText:"Elke outfit waarin je straalt en je comfortabel voelt.",
     locationTitle:"De locatie",
@@ -257,10 +301,11 @@ const L = {
     aboutText:"We hopen jullie te zien op onze bruiloft en bieden onze excuses aan als we deze uitnodiging niet persoonlijk kunnen overhandigen.",
     calBtn:"Toevoegen aan agenda", calGoogle:"Google Agenda",
     calTitle:"Bruiloft van Siriya & Floris",
-    calDesc:"We vieren het graag met jullie! Ontvangst om 14:00, ceremonie om 15:00, diner om 18:00."
+    calDesc:"Verlovingsceremonie om 14:00, ceremonie met huwelijksgeloften om 16:00 en bruiloftsreceptie om 18:00."
   },
 
   th:{
+    coupleNames:"สิริยา และ ฟลอริส",
     pre:"พร้อมด้วยครอบครัวของเรา",
     saveDate:"บันทึกวันสำคัญ",
     heroScroll:"เลื่อนลงเพื่อดูรายละเอียด",
@@ -269,18 +314,13 @@ const L = {
     dow:"เสาร์", dnum:"27", mon:"มี.ค.", yearLine:"พ.ศ. 2570 · ค.ศ. 2027", cityLine:"จังหวัดเลย ประเทศไทย",
     time:"บ่ายสองโมง",
     dateTimeLine:"27 มีนาคม 2570 · 14.00 น.",
-    tmWelcome:"14.00 น.", tmCeremony:"15.00 น.", tmCoffee:"17.00 น.", tmDinner:"18.00 น.",
+    tmEngagement:"14.00 น.", tmVows:"16.00 น.", tmReception:"18.00 น.",
     sideText:"วันแห่งความรัก ครอบครัว ความสุข และการเฉลิมฉลองร่วมกัน",
     detailsTitle:"กำหนดการ",
     detailsSub:"รายละเอียดงานฉลองมงคลสมรส",
-    welcomeTitle:"ต้อนรับและเครื่องดื่ม",
-    welcomeText:"ขอต้อนรับทุกท่าน พบปะพูดคุย และเพลิดเพลินกับเครื่องดื่มร่วมกับครอบครัวและเพื่อน ๆ",
-    ceremonyTitle:"พิธีมงคลสมรส",
-    ceremonyText:"ร่วมเป็นสักขีพยานและเฉลิมฉลองการเริ่มต้นชีวิตคู่ของเรา",
-    coffeeTitle:"กาแฟและของว่าง",
-    coffeeText:"พักผ่อนและเพลิดเพลินกับกาแฟและของว่าง",
-    dinnerTitle:"เลี้ยงฉลองมงคลสมรส",
-    dinnerText:"ร่วมรับประทานอาหารค่ำและเฉลิมฉลองวันสำคัญกับครอบครัวและคนที่เรารัก",
+    engagementTitle:"พิธีหมั้น",
+    vowsTitle:"พิธีกล่าวคำปฏิญาณรัก",
+    receptionTitle:"งานเลี้ยงฉลองมงคลสมรส",
     dressTitle:"การแต่งกาย",
     dressText:"ชุดอะไรก็ได้ที่ทำให้คุณเปล่งประกายและรู้สึกสบายตัว",
     locationTitle:"สถานที่",
@@ -297,7 +337,7 @@ const L = {
     aboutText:"เราหวังเป็นอย่างยิ่งว่าจะได้พบทุกท่านในงานแต่งงานของเรา และขออภัยหากไม่สามารถนำบัตรเชิญมามอบให้ด้วยตนเองได้",
     calBtn:"เพิ่มลงในปฏิทิน", calGoogle:"Google ปฏิทิน",
     calTitle:"งานแต่งงานของ Siriya & Floris",
-    calDesc:"ขอเชิญร่วมเป็นเกียรติ ต้อนรับแขก 14.00 น. พิธี 15.00 น. งานเลี้ยง 18.00 น."
+    calDesc:"พิธีหมั้น 14.00 น. พิธีกล่าวคำปฏิญาณรัก 16.00 น. และงานเลี้ยงฉลองมงคลสมรส 18.00 น."
   }
 };
 
