@@ -159,6 +159,43 @@ html[lang="th"] .family-name{
 }
 @media(max-width:540px){html[lang="th"] .family-name{font-size:clamp(.78rem,3.1vw,.99rem)}}
 @media(max-width:350px){html[lang="th"] .family-name{font-size:.74rem}}
+
+/* === v16: RSVP form (EN/NL/Thai) === */
+.rsvp{padding:clamp(1.25rem,3vw,2rem);text-align:left;background:rgba(255,253,251,.76)}
+.rsvp h3{text-align:center;color:var(--accent-deep)}
+.rsvp>p{text-align:center;margin-bottom:1.4rem}
+.rsvp-form{display:grid;gap:1rem}
+.rsvp-field{display:flex;flex-direction:column;gap:.38rem;min-width:0}
+.rsvp-field label,.rsvp-field legend{font-size:1rem;font-weight:500;color:var(--ink);line-height:1.4}
+.rsvp-field input:not([type=radio]),.rsvp-field select,.rsvp-field textarea{
+  width:100%;min-width:0;font:inherit;font-size:1rem;color:var(--ink);background:#fff;
+  border:1px solid rgba(125,15,26,.28);border-radius:0;padding:.65rem .7rem;
+  outline-offset:2px;box-shadow:none
+}
+.rsvp-field textarea{resize:vertical;min-height:3.1rem}
+.rsvp-field input:focus-visible,.rsvp-field select:focus-visible,.rsvp-field textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.rsvp-field small{font-size:.85rem;color:var(--ink-soft);line-height:1.35}
+.rsvp-attendance{border:0;padding:0;margin:0;display:grid;gap:.25rem}
+.rsvp-attendance legend{padding:0 0 .4rem}
+.rsvp-radio{display:flex;align-items:center;gap:.6rem;font-size:1rem;padding:.12rem 0;cursor:pointer}
+.rsvp-radio input,.rsvp-consent input{accent-color:var(--accent);width:1rem;height:1rem;flex:none}
+.rsvp-coming{display:grid;gap:1rem}
+.rsvp-consent{display:flex;align-items:flex-start;gap:.6rem;font-size:.89rem;line-height:1.5;color:var(--ink-soft);cursor:pointer}
+.rsvp-consent input{margin-top:.23rem}
+.rsvp-submit{width:100%;font:inherit;font-size:1rem;letter-spacing:.13em;color:#fff;background:var(--accent);
+  border:1px solid var(--accent);padding:.75rem 1rem;cursor:pointer;transition:background .15s ease}
+.rsvp-submit:hover{background:var(--accent-deep)}
+.rsvp-submit:disabled{opacity:.6;cursor:wait}
+.rsvp-feedback{font-size:.97rem;line-height:1.55;text-align:center;min-height:1.6em;margin:0!important;opacity:1!important}
+.rsvp-feedback[data-state="error"]{color:#a11f31}
+.rsvp-feedback[data-state="success"]{color:#356b51}
+.rsvp-bot{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;
+  clip-path:inset(100%)!important;white-space:nowrap!important;left:-9999px!important}
+.rsvp [hidden]{display:none!important}
+.rsvp-turnstile:empty{display:none}
+html[lang="th"] .rsvp-field label,html[lang="th"] .rsvp-field legend,html[lang="th"] .rsvp-submit{letter-spacing:0}
+@media(max-width:540px){.rsvp{padding:1rem}.rsvp-field label,.rsvp-field legend{font-size:.98rem}}
+
 </style>
 </head>
 <body>
@@ -253,7 +290,51 @@ Na An, Mueang Loei
 Loei 42000, Thailand</address><a class="map-link" href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x312147a75364f8b3:0xcbe444a94fc6d62e?sa=X&amp;ved=1t:8290&amp;ictx=111" target="_blank" rel="noopener" data-t="mapLink">Open in Google Maps</a></div><div class="map-box" id="mapBox"><iframe title="Map: Baiboon Grand Hotel, Loei" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen src="https://maps.google.com/maps?q=Baiboon%20Grand%20Hotel%2C%20Loei%2C%20Thailand&amp;z=15&amp;hl=en&amp;output=embed"></iframe><button class="map-cover" id="mapCover" type="button"><span data-t="mapTap">Tap to explore</span></button></div></div>
         <div class="location-row"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.2 2"/></svg><span data-t="dateTimeLine">27 March 2027 · 02:00 PM</span></div>
       </div>
-      <div class="rsvp"><h3 data-t="rsvpTitle">RSVP</h3><p data-t="rsvpText">Please let us know if you will be joining us on our special day.</p><div class="qr-placeholder">QR CODE<br>RSVP</div><a href="#" class="rsvp-link" data-t="rsvpLink" onclick="return false;">RSVP online</a></div>
+      <section class="rsvp" id="rsvp" aria-labelledby="rsvpHeading">
+        <h3 id="rsvpHeading" data-t="rsvpTitle">RSVP</h3>
+        <p data-t="rsvpText">Please let us know if you will be joining us on our special day.</p>
+        <form id="rsvpForm" class="rsvp-form" novalidate>
+          <div class="rsvp-field">
+            <label for="rsvpName" data-t="rsvpFullName">Your full name *</label>
+            <input id="rsvpName" name="fullName" type="text" autocomplete="name" maxlength="120" required data-ph="rsvpFullNamePh" placeholder="First and last name">
+          </div>
+          <div class="rsvp-field">
+            <label for="rsvpEmail" data-t="rsvpEmail">E-mail address *</label>
+            <input id="rsvpEmail" name="email" type="email" autocomplete="email" maxlength="180" required data-ph="rsvpEmailPh" placeholder="name@example.com">
+          </div>
+          <fieldset class="rsvp-field rsvp-attendance">
+            <legend data-t="rsvpAttendance">Will you attend? *</legend>
+            <label class="rsvp-radio"><input name="attendance" type="radio" value="yes" required checked><span data-t="rsvpYes">Yes, I will be there</span></label>
+            <label class="rsvp-radio"><input name="attendance" type="radio" value="no"><span data-t="rsvpNo">Sorry, I can't come</span></label>
+          </fieldset>
+          <div id="rsvpComing" class="rsvp-coming">
+            <div class="rsvp-field">
+              <label for="rsvpCount" data-t="rsvpCount">Number of guests, including you *</label>
+              <select id="rsvpCount" name="guests" required>
+                <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+              </select>
+              <small data-t="rsvpGuestsNote">Please only include invited guests.</small>
+            </div>
+            <div id="rsvpCompanionsWrap" class="rsvp-field" hidden>
+              <label for="rsvpCompanions" data-t="rsvpCompanions">Names of additional guests *</label>
+              <textarea id="rsvpCompanions" name="companions" rows="2" maxlength="350" data-ph="rsvpCompanionsPh" placeholder="Names of your additional guests"></textarea>
+            </div>
+            <div class="rsvp-field">
+              <label for="rsvpDiet" data-t="rsvpDiet">Dietary needs (optional)</label>
+              <textarea id="rsvpDiet" name="diet" rows="2" maxlength="500" data-ph="rsvpDietPh" placeholder="Allergies, vegetarian, etc."></textarea>
+            </div>
+          </div>
+          <div class="rsvp-field">
+            <label for="rsvpMessage" data-t="rsvpMessage">Message (optional)</label>
+            <textarea id="rsvpMessage" name="message" rows="2" maxlength="750" data-ph="rsvpMessagePh" placeholder="A message for us"></textarea>
+          </div>
+          <label class="rsvp-consent"><input id="rsvpConsent" type="checkbox" required><span data-t="rsvpPrivacy">I agree that my RSVP details will be used only to organize this wedding.</span></label>
+          <div class="rsvp-bot" aria-hidden="true"><label for="rsvpWebsite">Leave this field empty</label><input id="rsvpWebsite" type="text" name="website" tabindex="-1" autocomplete="off"></div>
+          <div id="rsvpTurnstile" class="rsvp-turnstile" aria-label="Security check"></div>
+          <button class="rsvp-submit" type="submit" id="rsvpSubmit" data-t="rsvpSubmit">Send RSVP</button>
+          <p id="rsvpFeedback" class="rsvp-feedback" role="status" aria-live="polite"></p>
+        </form>
+      </section>
       <div class="cal"><button class="cal-btn" id="calBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4M12 13v4M10 15h4"/></svg><span data-t="calBtn">Add to calendar</span></button><a class="cal-alt" id="calGoogle" href="#" target="_blank" rel="noopener" data-t="calGoogle">Google Calendar</a></div>
     </aside>
   </div>
@@ -303,6 +384,29 @@ const L = {
     rsvpTitle:"RSVP",
     rsvpText:"Please let us know if you will be joining us on our special day.",
     rsvpLink:"RSVP online",
+    rsvpFullName:"Your full name *",
+    rsvpFullNamePh:"First and last name",
+    rsvpEmail:"E-mail address *",
+    rsvpEmailPh:"name@example.com",
+    rsvpAttendance:"Will you attend? *",
+    rsvpYes:"Yes, I will be there",
+    rsvpNo:"Sorry, I can't come",
+    rsvpCount:"Number of guests, including you *",
+    rsvpGuestsNote:"Please only include invited guests.",
+    rsvpCompanions:"Names of additional guests *",
+    rsvpCompanionsPh:"Names of your additional guests",
+    rsvpDiet:"Dietary needs (optional)",
+    rsvpDietPh:"Allergies, vegetarian, etc.",
+    rsvpMessage:"Message (optional)",
+    rsvpMessagePh:"A message for us",
+    rsvpPrivacy:"I agree that my RSVP details are used only to organize the wedding.",
+    rsvpSubmit:"Send RSVP",
+    rsvpSending:"Sending…",
+    rsvpSuccess:"Thank you! Your RSVP has been received.",
+    rsvpError:"Sending failed. Please try again later.",
+    rsvpSetup:"RSVP is not yet connected. Please try again later.",
+    rsvpInvalid:"Please check the required fields.",
+    rsvpSecurity:"Please complete the security check.",
     mapLink:"Open in Google Maps",
     cdD:"Days", cdH:"Hours", cdM:"Minutes", cdS:"Seconds", cdDone:"The day is here",
     mapTap:"Tap to explore",
@@ -343,6 +447,29 @@ const L = {
     rsvpTitle:"RSVP",
     rsvpText:"Laat ons weten of je erbij kunt zijn op onze bijzondere dag.",
     rsvpLink:"RSVP online",
+    rsvpFullName:"Volledige naam *",
+    rsvpFullNamePh:"Voornaam en achternaam",
+    rsvpEmail:"E-mailadres *",
+    rsvpEmailPh:"naam@voorbeeld.nl",
+    rsvpAttendance:"Ben je aanwezig? *",
+    rsvpYes:"Ja, ik ben erbij",
+    rsvpNo:"Helaas kan ik niet komen",
+    rsvpCount:"Aantal personen, inclusief jezelf *",
+    rsvpGuestsNote:"Vul alleen personen in die zijn uitgenodigd.",
+    rsvpCompanions:"Namen van medegasten *",
+    rsvpCompanionsPh:"Namen van de extra gasten",
+    rsvpDiet:"Dieetwensen of allergieën (optioneel)",
+    rsvpDietPh:"Vegetarisch, allergieën, enz.",
+    rsvpMessage:"Berichtje (optioneel)",
+    rsvpMessagePh:"Een berichtje aan ons",
+    rsvpPrivacy:"Ik ga ermee akkoord dat mijn RSVP-gegevens alleen voor de organisatie van de bruiloft worden gebruikt.",
+    rsvpSubmit:"Verstuur RSVP",
+    rsvpSending:"Versturen…",
+    rsvpSuccess:"Bedankt! Je RSVP is ontvangen.",
+    rsvpError:"Versturen is niet gelukt. Probeer het later opnieuw.",
+    rsvpSetup:"RSVP is nog niet gekoppeld. Probeer het later opnieuw.",
+    rsvpInvalid:"Controleer de verplichte velden.",
+    rsvpSecurity:"Vul eerst de beveiligingscontrole in.",
     mapLink:"Open in Google Maps",
     cdD:"Dagen", cdH:"Uren", cdM:"Minuten", cdS:"Seconden", cdDone:"De dag is aangebroken",
     mapTap:"Tik om te bekijken",
@@ -383,6 +510,29 @@ const L = {
     rsvpTitle:"ตอบรับการเข้าร่วมงาน",
     rsvpText:"กรุณาแจ้งให้เราทราบว่าท่านจะสามารถมาร่วมงานกับเราได้หรือไม่",
     rsvpLink:"ตอบรับออนไลน์",
+    rsvpFullName:"ชื่อและนามสกุล *",
+    rsvpFullNamePh:"ชื่อและนามสกุล",
+    rsvpEmail:"อีเมล *",
+    rsvpEmailPh:"name@example.com",
+    rsvpAttendance:"ท่านจะมาร่วมงานหรือไม่? *",
+    rsvpYes:"ยินดีมาร่วมงาน",
+    rsvpNo:"ขออภัย ไม่สามารถมาร่วมงานได้",
+    rsvpCount:"จำนวนผู้เข้าร่วม รวมตัวท่านเอง *",
+    rsvpGuestsNote:"กรุณาระบุเฉพาะผู้ที่ได้รับเชิญ",
+    rsvpCompanions:"รายชื่อผู้ร่วมงานเพิ่มเติม *",
+    rsvpCompanionsPh:"ชื่อผู้ร่วมงานเพิ่มเติม",
+    rsvpDiet:"ข้อจำกัดด้านอาหารหรือการแพ้อาหาร (ไม่บังคับ)",
+    rsvpDietPh:"แพ้อาหาร มังสวิรัติ ฯลฯ",
+    rsvpMessage:"ข้อความถึงเรา (ไม่บังคับ)",
+    rsvpMessagePh:"ฝากข้อความถึงเรา",
+    rsvpPrivacy:"ข้าพเจ้ายินยอมให้ใช้ข้อมูลการตอบรับเพื่อการจัดงานแต่งงานนี้เท่านั้น",
+    rsvpSubmit:"ส่งคำตอบรับ",
+    rsvpSending:"กำลังส่ง…",
+    rsvpSuccess:"ขอบคุณค่ะ/ครับ ได้รับคำตอบรับของท่านแล้ว",
+    rsvpError:"ส่งข้อมูลไม่สำเร็จ กรุณาลองใหม่ภายหลัง",
+    rsvpSetup:"ระบบตอบรับยังไม่เปิดใช้งาน กรุณาลองใหม่ภายหลัง",
+    rsvpInvalid:"กรุณาตรวจสอบข้อมูลที่จำเป็น",
+    rsvpSecurity:"กรุณายืนยันการตรวจสอบความปลอดภัย",
     mapLink:"เปิดใน Google Maps",
     cdD:"วัน", cdH:"ชั่วโมง", cdM:"นาที", cdS:"วินาที", cdDone:"วันสำคัญมาถึงแล้ว",
     mapTap:"แตะเพื่อดู",
@@ -399,6 +549,10 @@ function setLang(lang){
   document.querySelectorAll("[data-t]").forEach(el=>{
     const key = el.dataset.t;
     if(L[lang] && L[lang][key] !== undefined) el.textContent = L[lang][key];
+  });
+  document.querySelectorAll("[data-ph]").forEach(el=>{
+    const key=el.dataset.ph;
+    if(L[lang] && L[lang][key] !== undefined) el.placeholder=L[lang][key];
   });
   document.querySelectorAll(".lang button").forEach(b=>{
     b.setAttribute("aria-pressed", b.dataset.l === lang);
@@ -512,6 +666,95 @@ document.querySelectorAll(".lang button").forEach(b=>b.addEventListener("click",
 const urlLang = new URLSearchParams(window.location.search).get("lang");
 setLang(urlLang && L[urlLang] ? urlLang : "en");
 updateGoogleLink();
+
+/* ===== RSVP v17: florisdb91.github.io -> Cloudflare Worker -> Google Apps Script ===== */
+// Public URL only. NEVER place your Apps Script token or e-mail password here.
+const RSVP_CONFIG = {
+  endpoint: "https://siriya-floris-rsvp.siriyafloris.workers.dev/", // VUL HIER DE ECHTE CLOUDFLARE WORKER-URL IN, inclusief /rsvp
+  turnstileSiteKey: "0x4AAAAAAFRmZqb1j6uG7O01" // Fill in your Cloudflare Turnstile public site key after deployment.
+};
+const rsvpForm = document.getElementById('rsvpForm');
+const rsvpComing = document.getElementById('rsvpComing');
+const rsvpCount = document.getElementById('rsvpCount');
+const rsvpCompanionsWrap = document.getElementById('rsvpCompanionsWrap');
+const rsvpCompanions = document.getElementById('rsvpCompanions');
+const rsvpFeedback = document.getElementById('rsvpFeedback');
+const rsvpSubmit = document.getElementById('rsvpSubmit');
+const rsvpConsent = document.getElementById('rsvpConsent');
+let rsvpTurnstileId = null;
+function rsvpT(key){return (L[document.documentElement.lang]||L.en)[key]||L.en[key]||key;}
+function rsvpMessage(text,state){rsvpFeedback.dataset.state=state||'';rsvpFeedback.textContent=text;}
+function rsvpRefresh(){
+  const coming=rsvpForm.querySelector('input[name="attendance"]:checked')?.value==='yes';
+  rsvpComing.hidden=!coming;
+  rsvpCount.required=coming;
+  const companions=coming&&Number(rsvpCount.value)>1;
+  rsvpCompanionsWrap.hidden=!companions;
+  rsvpCompanions.required=companions;
+}
+rsvpForm.querySelectorAll('input[name="attendance"]').forEach(r=>r.addEventListener('change',rsvpRefresh));
+rsvpCount.addEventListener('change',rsvpRefresh);
+rsvpRefresh();
+function loadRsvpTurnstile(){
+  const k=RSVP_CONFIG.turnstileSiteKey;
+  if(!k)return;
+  const script=document.createElement('script');
+  script.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+  script.async=true;script.defer=true;
+  script.onload=()=>{
+    if(window.turnstile) rsvpTurnstileId=turnstile.render('#rsvpTurnstile',{sitekey:k});
+  };
+  document.head.appendChild(script);
+}
+loadRsvpTurnstile();
+rsvpForm.addEventListener('submit',async (evt)=>{
+  evt.preventDefault();
+  if(rsvpSubmit.disabled)return;
+  rsvpMessage('');
+  rsvpRefresh();
+  if(!rsvpForm.reportValidity()){
+    rsvpMessage(rsvpT('rsvpInvalid'),'error');return;
+  }
+  if(!rsvpConsent.checked){rsvpMessage(rsvpT('rsvpInvalid'),'error');return;}
+  if(!RSVP_CONFIG.endpoint || RSVP_CONFIG.endpoint.includes('YOUR-')){
+    rsvpMessage(rsvpT('rsvpSetup'),'error');return;
+  }
+  const token=rsvpTurnstileId!==null && window.turnstile ? turnstile.getResponse(rsvpTurnstileId) : '';
+  if(RSVP_CONFIG.turnstileSiteKey && !token){rsvpMessage(rsvpT('rsvpSecurity'),'error');return;}
+  const coming=rsvpForm.querySelector('input[name="attendance"]:checked').value==='yes';
+  const payload={
+    requestId:crypto.randomUUID(),
+    fullName:document.getElementById('rsvpName').value.trim(),
+    email:document.getElementById('rsvpEmail').value.trim(),
+    attendance:coming?'yes':'no',
+    guests:coming?Number(rsvpCount.value):0,
+    companions:coming&&Number(rsvpCount.value)>1?rsvpCompanions.value.trim():'',
+    diet:coming?document.getElementById('rsvpDiet').value.trim():'',
+    message:document.getElementById('rsvpMessage').value.trim(),
+    language:document.documentElement.lang,
+    consent:true,
+    website:document.getElementById('rsvpWebsite').value,
+    turnstileToken:token
+  };
+  rsvpSubmit.disabled=true;
+  rsvpSubmit.textContent=rsvpT('rsvpSending');
+  try{
+    const resp=await fetch(RSVP_CONFIG.endpoint,{
+      method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),
+      cache:'no-store',signal:AbortSignal.timeout(20000)
+    });
+    const result=await resp.json().catch(()=>null);
+    if(!resp.ok||!result?.ok)throw Error('RSVP submission failed');
+    rsvpForm.reset();rsvpRefresh();
+    rsvpMessage(rsvpT('rsvpSuccess'),'success');
+  }catch(err){
+    rsvpMessage(rsvpT('rsvpError'),'error');
+  }finally{
+    rsvpSubmit.disabled=false;rsvpSubmit.textContent=rsvpT('rsvpSubmit');
+    if(rsvpTurnstileId!==null&&window.turnstile)turnstile.reset(rsvpTurnstileId);
+  }
+});
+
 </script>
 </body>
 </html>
