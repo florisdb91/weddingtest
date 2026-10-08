@@ -38,8 +38,8 @@ body{background:linear-gradient(180deg,#F8F4EF,#F1EBE4);color:var(--ink);font-fa
 
 /* Hero invitation */
 #p1{padding:5.2rem 1rem 2.4rem;display:flex;justify-content:center;align-items:center;background:radial-gradient(circle at top,#fbf8f3 0,#f5eee7 44%,#efe6dd 100%)}
-.hero{width:100%;max-width:62rem;display:flex;flex-direction:column;align-items:center;gap:1.2rem}
-.hero-art{position:relative;width:min(94vw,48rem);aspect-ratio:1122/1402}
+.hero{width:100%;max-width:62rem;display:flex;flex-direction:column;align-items:center;gap:1rem}
+.hero-art{position:relative;width:min(94vw,48rem);aspect-ratio:1122/1402;display:block}
 .hero-base{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:1}
 .photo-slot{position:absolute;left:11.95%;top:24.95%;width:23.9%;height:18.55%;transform:rotate(-10.5deg);overflow:hidden;z-index:2;border-radius:.02rem}
 .photo-slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 28%;transform:none}
@@ -53,7 +53,7 @@ body{background:linear-gradient(180deg,#F8F4EF,#F1EBE4);color:var(--ink);font-fa
 .heart-copy{position:absolute;left:20.2%;top:53.4%;width:38%;height:24%;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#89556b;padding:8% 10% 12%}
 .heart-copy .save{font-family:var(--script);font-size:clamp(2rem,4.6vw,3.25rem);line-height:.86;max-width:100%}
 .heart-copy .date{font-size:clamp(1rem,2.1vw,1.55rem);letter-spacing:.12em;margin-top:.35rem;color:#875161}
-.hero-meta{display:flex;flex-direction:column;align-items:center;gap:.8rem;text-align:center;max-width:38rem}
+.hero-meta{display:flex;flex-direction:column;align-items:center;gap:.7rem;text-align:center;max-width:38rem;margin-top:.1rem}
 .hero-meta .pre{font-size:.78rem;letter-spacing:.28em;text-transform:uppercase;color:#8b5863}
 .hero-meta h1{font-size:clamp(2.6rem,6vw,4.4rem);line-height:.92;color:var(--accent-deep);font-weight:400}
 .hero-meta .sub{font-size:clamp(1rem,1.8vw,1.18rem);color:var(--ink-soft)}
@@ -101,18 +101,7 @@ html[lang="th"] .details-title h2{font-family:var(--serif);font-style:normal;fon
 <section class="page" id="p1">
   <div class="hero">
     <div class="hero-art" aria-label="Save the date invitation illustration">
-      <img class="hero-base" src="images/envelope-hero.png" alt="Decorative burgundy envelope with polaroid frame, invitation card, blue heart and ribbon">
-      <!-- Vervang hieronder desgewenst images/foto-van-kaart.webp door jullie eigen foto -->
-      <div class="photo-slot"><img src="images/foto-van-kaart.webp" alt="Siriya and Floris" onerror="this.src='images/foto-placeholder.svg'"></div>
-      <div class="names-card" aria-hidden="true">
-        <div class="fn">Siriya</div>
-        <div class="amp">&amp;</div>
-        <div class="fn">Floris</div>
-      </div>
-      <div class="heart-copy">
-        <div class="save" data-t="saveDate">Save the Date</div>
-        <div class="date">27 . 03 . 27</div>
-      </div>
+      <img class="hero-base" src="images/hero-exact.png" alt="Save the date invitation with burgundy envelope, polaroid photo, floral arrangement and blue heart">
     </div>
     <div class="hero-meta">
       <div class="pre" data-t="pre">Together with our families</div>
