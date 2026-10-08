@@ -68,17 +68,17 @@ body{background:linear-gradient(180deg,#F8F4EF,#F1EBE4);color:var(--ink);font-fa
   text-wrap:balance;
   padding:.04em .12em .09em;
 }
-/* v21: make the ampersand readable without changing the calligraphy of the names. */
+/* v22: same calligraphic ampersand as the parents / invitation card. */
 .hero-meta h1 .couple-ampersand{
-  font-family:'Cormorant Garamond',Georgia,serif;
-  font-style:italic;
-  font-weight:500;
-  font-size:.78em;
-  line-height:1;
-  vertical-align:.055em;
-  color:var(--accent-deep);
+  font-family:var(--script);
+  font-style:normal;
+  font-weight:400;
+  font-size:.82em;
+  line-height:.86;
+  vertical-align:.035em;
+  color:var(--accent);
   display:inline-block;
-  margin-inline:.08em;
+  margin-inline:.05em;
 }
 /* Thai characters require a native Thai font instead of Latin calligraphy. */
 html[lang="th"] .hero-meta h1{
@@ -577,7 +577,7 @@ function setLang(lang){
     const key = el.dataset.t;
     if(L[lang] && L[lang][key] !== undefined){
       if(key === "coupleNames" && lang !== "th"){
-        // Preserve a clearly readable ampersand when switching English / Dutch.
+        // Keep the same calligraphic ampersand as the parents after language switching.
         const [first,last]=L[lang][key].split(" & ");
         const amp=document.createElement("span");
         amp.className="couple-ampersand";
