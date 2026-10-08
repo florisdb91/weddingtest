@@ -212,6 +212,11 @@ html[lang="th"] .family-name{
 .rsvp-field input:not([type=radio]){height:2.8rem}
 .rsvp-field textarea{height:3.6rem;min-height:3.6rem;resize:vertical}
 .rsvp-field input::placeholder,.rsvp-field textarea::placeholder{color:#9a838b;opacity:1}
+.rsvp-field select{display:block;width:100%;height:2.8rem;min-width:0;box-sizing:border-box;border:1px solid rgba(125,15,26,.24);border-radius:1px;background:#fff;color:var(--ink);font:inherit;font-size:1rem;line-height:1.25;padding:.55rem .68rem;cursor:pointer}
+.rsvp-field select:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.rsvp-guest-count{width:100%}
+.rsvp-guest-count[hidden]{display:none!important}
+.rsvp-guest-help{display:block;color:var(--ink-soft);font-size:.8rem;line-height:1.3}
 .rsvp-field input:focus-visible,.rsvp-field textarea:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
 .rsvp-attendance{display:flex;align-items:center;flex-wrap:wrap;gap:.32rem 1.35rem;min-width:0}
 .rsvp-options{display:flex;align-items:center;gap:clamp(1.2rem,5vw,2rem);flex-wrap:wrap}
@@ -417,6 +422,22 @@ Loei 42000, Thailand</address><a class="map-link" href="https://www.google.com/m
               <label class="rsvp-radio"><input name="attendance" type="radio" value="yes" required checked><span data-t="rsvpYes">Yes</span></label>
               <label class="rsvp-radio"><input name="attendance" type="radio" value="no"><span data-t="rsvpNo">No</span></label>
             </div>
+          </div>
+          <div class="rsvp-field rsvp-guest-count" id="rsvpGuestWrap">
+            <label for="rsvpGuestCount" data-t="rsvpCount">Number of guests, including you *</label>
+            <select id="rsvpGuestCount" name="guests" required>
+              <option value="1" selected>1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select>
+            <span class="rsvp-guest-help" data-t="rsvpGuestsNote">Please only include invited guests.</span>
           </div>
           <div class="rsvp-field">
             <label for="rsvpMessage" data-t="rsvpMessage">Message (optional)</label>
@@ -801,12 +822,23 @@ document.addEventListener('keydown',event=>{
 // Public URL only. NEVER place your Apps Script token or e-mail password here.
 const RSVP_CONFIG = {
   endpoint: "https://siriya-floris-rsvp.siriyafloris.workers.dev/rsvp", // Public Worker URL (working endpoint)
-  turnstileSiteKey: "0x4AAAAAAFRmZqb1j6uG7O01" // Fill in your Cloudflare Turnstile public site key after deployment.
+  turnstileSiteKey: "0x4AAAAAAFRmZqb1j6uG7O01" // Public Turnstile Site Key; secret remains in Cloudflare.
 };
 const rsvpForm = document.getElementById('rsvpForm');
 const rsvpFeedback = document.getElementById('rsvpFeedback');
 const rsvpSubmit = document.getElementById('rsvpSubmit');
 const rsvpConsent = document.getElementById('rsvpConsent');
+const rsvpGuestWrap = document.getElementById('rsvpGuestWrap');
+const rsvpGuestCount = document.getElementById('rsvpGuestCount');
+function updateRsvpGuestCount(){
+  const coming=rsvpForm.querySelector('input[name="attendance"]:checked')?.value==='yes';
+  rsvpGuestWrap.hidden=!coming;
+  rsvpGuestCount.disabled=!coming;
+  rsvpGuestCount.required=coming;
+  if(!coming) rsvpGuestCount.value='1';
+}
+rsvpForm.querySelectorAll('input[name="attendance"]').forEach(r=>r.addEventListener('change',updateRsvpGuestCount));
+updateRsvpGuestCount();
 let rsvpTurnstileId = null;
 function rsvpT(key){return (L[document.documentElement.lang]||L.en)[key]||L.en[key]||key;}
 function rsvpMessage(text,state){rsvpFeedback.dataset.state=state||'';rsvpFeedback.textContent=text;}
@@ -848,8 +880,8 @@ rsvpForm.addEventListener('submit',async (evt)=>{
     fullName:document.getElementById('rsvpName').value.trim(),
     email:document.getElementById('rsvpEmail').value.trim(),
     attendance:coming?'yes':'no',
-    // The compact form collects one RSVP per person; keep legacy backend fields valid.
-    guests:coming?1:0,
+    // Count includes the submitter. An RSVP with 'no' always counts as zero.
+    guests:coming?Number(rsvpGuestCount.value):0,
     companions:'',
     diet:'',
     message:document.getElementById('rsvpMessage').value.trim(),
@@ -868,6 +900,7 @@ rsvpForm.addEventListener('submit',async (evt)=>{
     const result=await resp.json().catch(()=>null);
     if(!resp.ok||!result?.ok)throw Error('RSVP submission failed');
     rsvpForm.reset();
+    updateRsvpGuestCount();
     rsvpMessage(rsvpT('rsvpSuccess'),'success');
     rsvpFeedback.setAttribute('tabindex','-1');rsvpFeedback.focus({preventScroll:true});
   }catch(err){
