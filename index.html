@@ -151,7 +151,14 @@ html[lang="th"] .info-panel address{line-height:1.85}
   .family-name{font-size:.83rem}
   .family-block{padding-inline:.18rem}
 }
-html[lang="th"] .family-name{letter-spacing:0}
+html[lang="th"] .family-name{
+  font-family:'Noto Serif Thai',Tahoma,sans-serif;
+  letter-spacing:0;
+  line-height:1.55;
+  overflow-wrap:anywhere;
+}
+@media(max-width:540px){html[lang="th"] .family-name{font-size:clamp(.78rem,3.1vw,.99rem)}}
+@media(max-width:350px){html[lang="th"] .family-name{font-size:.74rem}}
 </style>
 </head>
 <body>
@@ -178,14 +185,14 @@ html[lang="th"] .family-name{letter-spacing:0}
       <div class="pre" data-t="pre">Together with our families</div>
       <div class="family-blocks" aria-label="Our parents">
         <div class="family-block">
-          <span class="family-name">Surasak Im-erb</span>
+          <span class="family-name" data-t="parentSurasak">Surasak Im-erb</span>
           <span class="family-amp">&amp;</span>
-          <span class="family-name">Nuanyai Im-erb</span>
+          <span class="family-name" data-t="parentNuanyai">Nuanyai Im-erb</span>
         </div>
         <div class="family-block">
-          <span class="family-name">Norbertus de Beer</span>
+          <span class="family-name" data-t="parentNorbertus">Norbertus de Beer</span>
           <span class="family-amp">&amp;</span>
-          <span class="family-name">Jannigje in 't Veld</span>
+          <span class="family-name" data-t="parentJannigje">Jannigje in 't Veld</span>
         </div>
       </div>
       <h1 data-t="coupleNames">Siriya &amp; Floris</h1>
@@ -268,6 +275,10 @@ const L = {
 
   en:{
     coupleNames:"Siriya & Floris",
+    parentSurasak:"Surasak Im-erb",
+    parentNuanyai:"Nuanyai Im-erb",
+    parentNorbertus:"Norbertus de Beer",
+    parentJannigje:"Jannigje in 't Veld",
     pre:"Together with our families",
     saveDate:"Save the Date",
     heroScroll:"Scroll for details",
@@ -304,6 +315,10 @@ const L = {
 
   nl:{
     coupleNames:"Siriya & Floris",
+    parentSurasak:"Surasak Im-erb",
+    parentNuanyai:"Nuanyai Im-erb",
+    parentNorbertus:"Norbertus de Beer",
+    parentJannigje:"Jannigje in 't Veld",
     pre:"Samen met onze families",
     saveDate:"Save the Date",
     heroScroll:"Scroll voor details",
@@ -340,6 +355,10 @@ const L = {
 
   th:{
     coupleNames:"สิริยา และ ฟลอริส",
+    parentSurasak:"สุรศักดิ์ อิ่มเอิบ",
+    parentNuanyai:"นวลใย อิ่มเอิบ",
+    parentNorbertus:"นอร์เบอร์ตัส เดอ เบียร์",
+    parentJannigje:"ยานนิกเยอ อินท์ เฟลด์",
     pre:"พร้อมด้วยครอบครัวของเรา",
     saveDate:"บันทึกวันสำคัญ",
     heroScroll:"เลื่อนลงเพื่อดูรายละเอียด",
