@@ -237,6 +237,53 @@ html[lang="th"] .rsvp-field label,html[lang="th"] .rsvp-attendance-label,html[la
 @media(max-width:360px){.rsvp-modal{padding:.4rem}.rsvp-dialog{max-height:calc(100dvh - .8rem);padding:1.15rem .7rem}.rsvp-options{gap:1.2rem}.rsvp-consent{font-size:.82rem}.rsvp-dialog h3{font-size:1.9rem}}
 @media(prefers-reduced-motion:reduce){.rsvp-dialog{animation:none}}
 
+
+/* Thaise hotelnaam: geen kalligrafische fallback of losse eindletters. */
+html[lang="th"] .info-panel .location-name{
+  font-family:'Noto Serif Thai',Georgia,serif;
+  font-size:clamp(1.85rem,3vw,2.3rem);
+  line-height:1.5;
+  overflow-wrap:normal;
+  word-break:normal;
+}
+/* v25 — kalenderlinks: altijd gecentreerd onder elkaar, ook met langere Thaise tekst. */
+.info-panel .cal{
+  display:flex;
+  flex-direction:column;
+  flex-wrap:nowrap;
+  align-items:center;
+  justify-content:center;
+  gap:.55rem;
+  width:100%;
+  max-width:100%;
+  min-width:0;
+  margin:1.15rem auto 0;
+}
+.info-panel .cal-btn{
+  box-sizing:border-box;
+  justify-content:center;
+  max-width:100%;
+  min-height:2.45rem;
+  line-height:1.4;
+  text-align:center;
+  white-space:normal;
+}
+.info-panel .cal-btn svg{flex:0 0 auto}
+.info-panel .cal-alt{
+  display:inline-block;
+  align-self:center;
+  max-width:100%;
+  line-height:1.5;
+  text-align:center;
+  white-space:normal;
+}
+html[lang="th"] .info-panel .cal-btn,
+html[lang="th"] .info-panel .cal-alt{
+  font-family:'Noto Serif Thai',Georgia,serif;
+  font-size:.9rem;
+  letter-spacing:0;
+  text-transform:none;
+}
 </style>
 </head>
 <body>
@@ -574,12 +621,12 @@ const L = {
     rsvpSetup:"ระบบตอบรับยังไม่เปิดใช้งาน กรุณาลองใหม่ภายหลัง",
     rsvpInvalid:"กรุณาตรวจสอบข้อมูลที่จำเป็น",
     rsvpSecurity:"กรุณายืนยันการตรวจสอบความปลอดภัย",
-    mapLink:"เปิดใน Google Maps",
+    mapLink:"เปิดแผนที่",
     cdD:"วัน", cdH:"ชั่วโมง", cdM:"นาที", cdS:"วินาที", cdDone:"วันสำคัญมาถึงแล้ว",
     mapTap:"แตะเพื่อดู",
     aboutTitle:"เกี่ยวกับเรา",
     aboutText:"เราหวังเป็นอย่างยิ่งว่าจะได้พบทุกท่านในงานแต่งงานของเรา และขออภัยหากไม่สามารถนำบัตรเชิญมามอบให้ด้วยตนเองได้",
-    calBtn:"เพิ่มลงในปฏิทิน", calGoogle:"Google ปฏิทิน",
+    calBtn:"เพิ่มลงในปฏิทิน", calGoogle:"ปฏิทินกูเกิล",
     calTitle:"งานแต่งงานของ Siriya & Floris",
     calDesc:"พิธีหมั้น 14.00 น. พิธีกล่าวคำปฏิญาณรัก 16.00 น. และงานเลี้ยงฉลองมงคลสมรส 18.00 น."
   }
@@ -600,6 +647,13 @@ function setLang(lang){
   document.querySelectorAll(".lang button").forEach(b=>{
     b.setAttribute("aria-pressed", b.dataset.l === lang);
   });
+  /* Google Maps embed: vraag de interface op in de geselecteerde taal. */
+  const mapFrame = document.querySelector('#mapBox iframe');
+  if(mapFrame){
+    const current = mapFrame.getAttribute('src') || '';
+    const next = current.replace(/([?&]hl=)[^&]*/, '$1' + lang);
+    if(next !== current) mapFrame.setAttribute('src', next);
+  }
 }
 
 document.querySelectorAll(".lang button").forEach(b=>{
