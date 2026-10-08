@@ -160,77 +160,56 @@ html[lang="th"] .family-name{
 @media(max-width:540px){html[lang="th"] .family-name{font-size:clamp(.78rem,3.1vw,.99rem)}}
 @media(max-width:350px){html[lang="th"] .family-name{font-size:.74rem}}
 
-/* === v19: editorial RSVP, centered beneath both detail columns === */
-/* The RSVP is no longer trapped in the narrow right column. */
-#p2 .sheet{min-height:0;padding-bottom:clamp(5rem,10vw,7rem)}
-.rsvp{
-  width:min(100%,34rem);max-width:34rem;
-  margin:clamp(2.1rem,4.5vw,3.1rem) auto 0;
-  padding:clamp(1.2rem,3vw,1.85rem);
-  text-align:left;
-  background:rgba(255,253,251,.88);
-  border:1px solid rgba(125,15,26,.18);
-  border-radius:3px;
-  box-shadow:0 12px 32px rgba(90,56,59,.055);
-}
-.rsvp h3{
-  margin:0 0 1rem;
-  font-size:clamp(1.7rem,3vw,2rem);
-  font-weight:400;line-height:1.15;letter-spacing:.035em;
-  color:var(--accent-deep);text-align:center;
-}
-.rsvp h3::after{content:'';display:block;width:3.2rem;height:1px;background:rgba(125,15,26,.31);margin:.6rem auto 0}
+/* === v20: minimalist RSVP button on page 2, accessible popup === */
+#p2 .sheet{min-height:0;padding-bottom:clamp(4.8rem,10vw,7rem)}
+.rsvp-invite{display:flex;justify-content:center;align-items:center;gap:clamp(.65rem,2vw,1.45rem);width:100%;margin:clamp(1.65rem,3.3vw,2.2rem) auto 0;padding:.4rem 0 0}
+.rsvp-invite::before,.rsvp-invite::after{content:"";height:1px;flex:1 1 5rem;max-width:8.5rem;background:linear-gradient(90deg,transparent,rgba(125,15,26,.27))}
+.rsvp-invite::after{transform:rotate(180deg)}
+.rsvp-open-button{display:inline-flex;gap:.7rem;align-items:center;justify-content:center;max-width:100%;padding:.75rem 1.7rem;border:1px solid var(--accent);background:var(--accent);color:#fff;box-shadow:0 5px 14px rgba(100,24,36,.10);font:inherit;font-size:1.05rem;font-weight:400;letter-spacing:.055em;line-height:1.3;cursor:pointer;transition:background .2s ease,box-shadow .2s ease}
+.rsvp-open-button svg{width:1.1rem;height:1.1rem;fill:none;stroke:currentColor;stroke-width:1.45;flex:none}
+.rsvp-open-button:hover{background:var(--accent-deep);box-shadow:0 7px 19px rgba(100,24,36,.15)}
+.rsvp-open{overflow:hidden}
+.rsvp-modal[hidden]{display:none!important}
+.rsvp-modal{position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:clamp(.45rem,2vw,1.15rem);isolation:isolate}
+.rsvp-backdrop{position:absolute;inset:0;background:rgba(38,25,29,.64);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}
+.rsvp-dialog{position:relative;z-index:1;width:min(100%,34rem);max-height:calc(100dvh - 2rem);overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable;background:var(--paper);border:1px solid rgba(125,15,26,.25);box-shadow:0 25px 75px rgba(40,24,30,.32);padding:clamp(1.3rem,4vw,2.15rem) clamp(1.1rem,4vw,2.1rem) clamp(1.25rem,3vw,1.9rem);outline:none;animation:rsvp-appear .2s ease-out}
+@keyframes rsvp-appear{from{opacity:0;transform:translateY(10px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+.rsvp-close{position:absolute;top:.65rem;right:.72rem;border:0;background:transparent;color:var(--accent);width:2.5rem;height:2.5rem;display:grid;place-items:center;cursor:pointer;font:inherit;font-size:1.8rem;line-height:1;border-radius:50%;z-index:2}
+.rsvp-close:hover{background:#f7e9e7}
+.rsvp-dialog h3{font-family:var(--serif);font-weight:400;color:var(--accent-deep);font-size:clamp(1.9rem,5vw,2.35rem);line-height:1.15;text-align:center;margin:0 2.3rem 1.05rem;letter-spacing:.04em}
+.rsvp-dialog h3::after{content:"";display:block;margin:.65rem auto 0;width:2.7rem;height:1px;background:rgba(125,15,26,.28)}
 .rsvp-form{display:grid;gap:.8rem;width:100%;min-width:0}
-.rsvp-identity{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.9rem;min-width:0}
-.rsvp-field{display:flex;flex-direction:column;gap:.28rem;min-width:0}
-.rsvp-field label,.rsvp-attendance-label{font-size:.97rem;font-weight:500;line-height:1.3;color:var(--ink)}
-.rsvp-field input:not([type=radio]),.rsvp-field textarea{
-  display:block;width:100%;min-width:0;max-width:100%;
-  box-sizing:border-box;font:inherit;font-size:1rem;line-height:1.2;
-  color:var(--ink);background:rgba(255,255,255,.84);
-  border:1px solid rgba(125,15,26,.24);border-radius:2px;
-  padding:.65rem .7rem;box-shadow:none;outline-offset:2px;
-}
+.rsvp-identity{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem;min-width:0}
+.rsvp-field{display:flex;flex-direction:column;gap:.25rem;min-width:0}
+.rsvp-field label,.rsvp-attendance-label{font-size:.99rem;font-weight:500;line-height:1.27;color:var(--ink)}
+.rsvp-field input:not([type=radio]),.rsvp-field textarea{display:block;width:100%;min-width:0;max-width:100%;box-sizing:border-box;border:1px solid rgba(125,15,26,.24);border-radius:1px;background:#fff;font:inherit;font-size:1rem;line-height:1.25;color:var(--ink);padding:.65rem .68rem;outline-offset:2px}
 .rsvp-field input:not([type=radio]){height:2.8rem}
-.rsvp-field textarea{height:3.75rem;min-height:3.75rem;resize:vertical}
+.rsvp-field textarea{height:3.6rem;min-height:3.6rem;resize:vertical}
 .rsvp-field input::placeholder,.rsvp-field textarea::placeholder{color:#9a838b;opacity:1}
 .rsvp-field input:focus-visible,.rsvp-field textarea:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
-.rsvp-attendance{display:flex;align-items:center;flex-wrap:wrap;gap:.3rem 1.5rem;min-width:0}
-.rsvp-options{display:flex;align-items:center;gap:clamp(1.25rem,5vw,2rem);flex-wrap:wrap}
-.rsvp-radio{display:inline-flex;align-items:center;gap:.43rem;cursor:pointer;font-size:1rem;line-height:1.35;white-space:nowrap}
+.rsvp-attendance{display:flex;align-items:center;flex-wrap:wrap;gap:.32rem 1.35rem;min-width:0}
+.rsvp-options{display:flex;align-items:center;gap:clamp(1.2rem,5vw,2rem);flex-wrap:wrap}
+.rsvp-radio{display:inline-flex;align-items:center;gap:.4rem;cursor:pointer;font-size:1rem;line-height:1.35;white-space:nowrap}
 .rsvp-radio input,.rsvp-consent input{margin:0;accent-color:var(--accent);width:1rem;height:1rem;flex:none}
-.rsvp-consent{display:flex;align-items:flex-start;gap:.62rem;font-size:.85rem;line-height:1.38;color:var(--ink-soft);cursor:pointer;min-width:0}
-.rsvp-consent input{margin-top:.18rem}
+.rsvp-consent{display:flex;align-items:flex-start;gap:.6rem;font-size:.87rem;line-height:1.35;color:var(--ink-soft);cursor:pointer;min-width:0}
+.rsvp-consent input{margin-top:.16rem}
 .rsvp-consent span{flex:1;min-width:0}
-.rsvp-turnstile{display:flex;align-items:center;justify-content:center;width:100%;min-width:0;max-width:100%;margin:.1rem auto 0}
+.rsvp-turnstile{display:flex;align-items:center;justify-content:center;width:100%;max-width:100%;min-width:0;margin:.1rem auto 0}
 .rsvp-turnstile:empty{display:none}
 .rsvp-turnstile iframe{max-width:100%}
-.rsvp-submit{width:100%;min-height:2.9rem;border:1px solid var(--accent);border-radius:2px;
-  padding:.57rem 1rem;background:var(--accent);color:white;font:inherit;font-size:1.05rem;
-  letter-spacing:.13em;cursor:pointer;transition:background .15s ease}
+.rsvp-submit{width:100%;min-height:2.85rem;border:1px solid var(--accent);border-radius:1px;padding:.55rem 1rem;background:var(--accent);color:#fff;font:inherit;font-size:1.06rem;letter-spacing:.11em;cursor:pointer;transition:background .15s ease}
 .rsvp-submit:hover{background:var(--accent-deep)}
 .rsvp-submit:disabled{opacity:.65;cursor:wait}
-.rsvp-feedback{font-size:.94rem;line-height:1.45;text-align:center;margin:0!important;opacity:1!important;min-height:0}
+.rsvp-feedback{font-size:.96rem;line-height:1.4;text-align:center;margin:0!important;min-height:0;opacity:1!important}
 .rsvp-feedback:empty{display:none}
 .rsvp-feedback[data-state="error"]{color:#a11f31}
 .rsvp-feedback[data-state="success"]{color:#356b51}
-.rsvp-bot{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;
-  clip-path:inset(100%)!important;white-space:nowrap!important;left:-9999px!important}
-.rsvp [hidden]{display:none!important}
-html[lang="th"] .rsvp-field label,html[lang="th"] .rsvp-attendance-label,html[lang="th"] .rsvp-submit{letter-spacing:0}
-@media(max-width:600px){
-  #p2 .sheet{padding-bottom:clamp(4.5rem,16vw,6rem)}
-  .rsvp{width:100%;margin-top:2.25rem;padding:1.2rem 1rem}
-  .rsvp h3{font-size:1.8rem;margin-bottom:.9rem}
-  .rsvp-form{gap:.74rem}
-  .rsvp-identity{grid-template-columns:1fr;gap:.74rem}
-}
-@media(max-width:360px){
-  .rsvp{padding:1rem .65rem}
-  .rsvp-attendance{gap:.35rem .8rem}
-  .rsvp-options{gap:1.2rem}
-  .rsvp-consent{font-size:.8rem}
-}
+.rsvp-bot{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip-path:inset(100%)!important;white-space:nowrap!important;left:-9999px!important}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+html[lang="th"] .rsvp-field label,html[lang="th"] .rsvp-attendance-label,html[lang="th"] .rsvp-submit,html[lang="th"] .rsvp-open-button{letter-spacing:0}
+@media(max-width:600px){.rsvp-dialog{width:min(100%,29rem);padding:1.35rem 1.15rem 1.3rem}.rsvp-identity{grid-template-columns:1fr;gap:.74rem}.rsvp-form{gap:.7rem}.rsvp-dialog h3{margin-bottom:.8rem}}
+@media(max-width:360px){.rsvp-modal{padding:.4rem}.rsvp-dialog{max-height:calc(100dvh - .8rem);padding:1.15rem .7rem}.rsvp-options{gap:1.2rem}.rsvp-consent{font-size:.82rem}.rsvp-dialog h3{font-size:1.9rem}}
+@media(prefers-reduced-motion:reduce){.rsvp-dialog{animation:none}}
 
 </style>
 </head>
@@ -329,8 +308,27 @@ Loei 42000, Thailand</address><a class="map-link" href="https://www.google.com/m
       <div class="cal"><button class="cal-btn" id="calBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4M12 13v4M10 15h4"/></svg><span data-t="calBtn">Add to calendar</span></button><a class="cal-alt" id="calGoogle" href="#" target="_blank" rel="noopener" data-t="calGoogle">Google Calendar</a></div>
     </aside>
   </div>
-  <section class="rsvp" id="rsvp" aria-labelledby="rsvpHeading">
-        <h3 id="rsvpHeading" data-t="rsvpTitle">RSVP</h3>
+  <div class="rsvp-invite" id="rsvp">
+    <button type="button" class="rsvp-open-button" id="rsvpOpen" aria-haspopup="dialog" aria-controls="rsvpModal"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.6 4.6 13c-3.7-4 2.1-9 5.6-5.3L12 9.5l1.8-1.8c3.5-3.7 9.3 1.3 5.6 5.3L12 20.6Z"/></svg><span data-t="rsvpOpen">Confirm attendance</span></button>
+  </div>
+</div>
+</section>
+<section class="page" id="p3">
+<div class="sheet">
+  <img class="leaf leaf-tl" src="images/blad-rechtsboven.webp" alt="" aria-hidden="true" onerror="this.remove()">
+  <img class="leaf leaf-br" src="images/blad-linksonder.webp" alt="" aria-hidden="true" onerror="this.remove()">
+  <header class="details-title"><h2 data-t="aboutTitle">About us</h2></header>
+  <div class="about-photos"><figure class="about-photo"><div class="ph"><img src="images/over-ons-1.jpg" alt="" loading="lazy" onerror="this.remove()"></div></figure><figure class="about-photo"><div class="ph"><img src="images/over-ons-2.jpg" alt="" loading="lazy" onerror="this.remove()"></div></figure><figure class="about-photo"><div class="ph"><img src="images/over-ons-3.jpg" alt="" loading="lazy" onerror="this.remove()"></div></figure></div>
+  <img class="sprig about-sprig" src="images/blad-tak.webp" alt="" aria-hidden="true" onerror="this.remove()">
+  <p class="about-text" data-t="aboutText">We hope to see you at our wedding and apologize if we are not able to deliver this invitation personally.</p>
+</div>
+</section>
+</main>
+<div class="rsvp-modal" id="rsvpModal" hidden>
+  <div class="rsvp-backdrop" id="rsvpBackdrop" aria-hidden="true"></div>
+  <section class="rsvp-dialog" id="rsvpDialog" role="dialog" aria-modal="true" aria-labelledby="rsvpHeading" tabindex="-1">
+    <button type="button" class="rsvp-close" id="rsvpClose"><span aria-hidden="true">&times;</span><span class="sr-only" data-t="rsvpClose">Close</span></button>
+    <h3 id="rsvpHeading" data-t="rsvpTitle">RSVP</h3>
         <form id="rsvpForm" class="rsvp-form" novalidate>
           <div class="rsvp-identity">
           <div class="rsvp-field">
@@ -361,18 +359,7 @@ Loei 42000, Thailand</address><a class="map-link" href="https://www.google.com/m
         </form>
   </section>
 </div>
-</section>
-<section class="page" id="p3">
-<div class="sheet">
-  <img class="leaf leaf-tl" src="images/blad-rechtsboven.webp" alt="" aria-hidden="true" onerror="this.remove()">
-  <img class="leaf leaf-br" src="images/blad-linksonder.webp" alt="" aria-hidden="true" onerror="this.remove()">
-  <header class="details-title"><h2 data-t="aboutTitle">About us</h2></header>
-  <div class="about-photos"><figure class="about-photo"><div class="ph"><img src="images/over-ons-1.jpg" alt="" loading="lazy" onerror="this.remove()"></div></figure><figure class="about-photo"><div class="ph"><img src="images/over-ons-2.jpg" alt="" loading="lazy" onerror="this.remove()"></div></figure><figure class="about-photo"><div class="ph"><img src="images/over-ons-3.jpg" alt="" loading="lazy" onerror="this.remove()"></div></figure></div>
-  <img class="sprig about-sprig" src="images/blad-tak.webp" alt="" aria-hidden="true" onerror="this.remove()">
-  <p class="about-text" data-t="aboutText">We hope to see you at our wedding and apologize if we are not able to deliver this invitation personally.</p>
-</div>
-</section>
-</main>
+
 <script>
 const L = {
 
@@ -403,6 +390,8 @@ const L = {
     locationText:"We are delighted to celebrate our special day at Baiboon Grand Hotel in Loei, Thailand.",
     venueName:"Baiboon Grand Hotel",
     venueAddress:"Baiboon Grand Hotel\n111 Moo 9, Charoenrat Road\nNa An, Mueang Loei\nLoei 42000, Thailand",
+    rsvpOpen:"Confirm attendance",
+    rsvpClose:"Close RSVP",
     rsvpTitle:"RSVP",
     rsvpText:"Please let us know if you will be joining us on our special day.",
     rsvpLink:"RSVP online",
@@ -466,6 +455,8 @@ const L = {
     locationText:"Met veel plezier vieren wij onze bijzondere dag bij Baiboon Grand Hotel in Loei, Thailand.",
     venueName:"Baiboon Grand Hotel",
     venueAddress:"Baiboon Grand Hotel\n111 Moo 9, Charoenrat Road\nNa An, Mueang Loei\nLoei 42000, Thailand",
+    rsvpOpen:"Bevestig je aanwezigheid",
+    rsvpClose:"Sluit RSVP",
     rsvpTitle:"RSVP",
     rsvpText:"Laat ons weten of je erbij kunt zijn op onze bijzondere dag.",
     rsvpLink:"RSVP online",
@@ -529,6 +520,8 @@ const L = {
     locationText:"เรามีความยินดีเป็นอย่างยิ่งที่จะจัดงานฉลองมงคลสมรส ณ โรงแรมใบบุญแกรนด์ จังหวัดเลย ประเทศไทย",
     venueName:"โรงแรมใบบุญแกรนด์",
     venueAddress:"โรงแรมใบบุญแกรนด์\n111 หมู่ 9 ถนนเจริญรัฐ ตำบลนาอาน\nอำเภอเมืองเลย จังหวัดเลย 42000\nประเทศไทย",
+    rsvpOpen:"ยืนยันการเข้าร่วมงาน",
+    rsvpClose:"ปิดหน้าต่างตอบรับ",
     rsvpTitle:"ตอบรับการเข้าร่วมงาน",
     rsvpText:"กรุณาแจ้งให้เราทราบว่าท่านจะสามารถมาร่วมงานกับเราได้หรือไม่",
     rsvpLink:"ตอบรับออนไลน์",
@@ -689,11 +682,46 @@ const urlLang = new URLSearchParams(window.location.search).get("lang");
 setLang(urlLang && L[urlLang] ? urlLang : "en");
 updateGoogleLink();
 
-/* ===== RSVP v19: florisdb91.github.io -> Cloudflare Worker -> Google Apps Script ===== */
+/* Modal behaviour: trap keyboard focus, restore it on close, render Turnstile only while visible. */
+const rsvpModal=document.getElementById('rsvpModal');
+const rsvpDialog=document.getElementById('rsvpDialog');
+const rsvpOpenButton=document.getElementById('rsvpOpen');
+const rsvpCloseButton=document.getElementById('rsvpClose');
+let rsvpPreviousFocus=null;
+function openRsvp(){
+  if(!rsvpModal.hidden)return;
+  rsvpPreviousFocus=document.activeElement;
+  rsvpModal.hidden=false;
+  document.body.classList.add('rsvp-open');
+  rsvpCloseButton.focus({preventScroll:true});
+  loadRsvpTurnstile();
+}
+function closeRsvp(){
+  if(rsvpModal.hidden||rsvpSubmit.disabled)return;
+  rsvpModal.hidden=true;
+  document.body.classList.remove('rsvp-open');
+  if(rsvpPreviousFocus && rsvpPreviousFocus.isConnected)rsvpPreviousFocus.focus({preventScroll:true});
+  else rsvpOpenButton.focus({preventScroll:true});
+}
+rsvpOpenButton.addEventListener('click',openRsvp);
+rsvpCloseButton.addEventListener('click',closeRsvp);
+document.getElementById('rsvpBackdrop').addEventListener('click',closeRsvp);
+document.addEventListener('keydown',event=>{
+  if(rsvpModal.hidden)return;
+  if(event.key==='Escape'){event.preventDefault();closeRsvp();return;}
+  if(event.key!=='Tab')return;
+  const items=[...rsvpDialog.querySelectorAll('button:not([disabled]),input:not([disabled]):not([tabindex="-1"]),textarea:not([disabled]),a[href],[tabindex]:not([tabindex="-1"])')].filter(el=>el.getClientRects().length>0);
+  if(!items.length)return;
+  const first=items[0],last=items[items.length-1];
+  if(event.shiftKey&&(document.activeElement===first||document.activeElement===rsvpDialog)){event.preventDefault();last.focus();}
+  else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
+});
+
+/* ===== RSVP v20: florisdb91.github.io -> Cloudflare Worker -> Google Apps Script ===== */
 // Public URL only. NEVER place your Apps Script token or e-mail password here.
 const RSVP_CONFIG = {
   endpoint: "https://siriya-floris-rsvp.siriyafloris.workers.dev/rsvp", // Public Worker URL (working endpoint)
-  turnstileSiteKey: "0x4AAAAAAFRmZpnf9X8j5uMe4S0n_SUoeRc" // Fill in your Cloudflare Turnstile public site key after deployment.
+  turnstileSiteKey: "0x4AAAAAAFRmZqb1j6uG7O01" // Fill in your Cloudflare Turnstile public site key after deployment.
 };
 const rsvpForm = document.getElementById('rsvpForm');
 const rsvpFeedback = document.getElementById('rsvpFeedback');
@@ -702,18 +730,25 @@ const rsvpConsent = document.getElementById('rsvpConsent');
 let rsvpTurnstileId = null;
 function rsvpT(key){return (L[document.documentElement.lang]||L.en)[key]||L.en[key]||key;}
 function rsvpMessage(text,state){rsvpFeedback.dataset.state=state||'';rsvpFeedback.textContent=text;}
+let rsvpTurnstileLoading=false;
 function loadRsvpTurnstile(){
   const k=RSVP_CONFIG.turnstileSiteKey;
-  if(!k)return;
+  if(!k || rsvpTurnstileId!==null || rsvpTurnstileLoading)return;
+  rsvpTurnstileLoading=true;
+  function render(){
+    if(!window.turnstile || rsvpTurnstileId!==null || rsvpModal.hidden)return;
+    rsvpTurnstileId=window.turnstile.render('#rsvpTurnstile',{
+      sitekey:k,size:window.matchMedia('(max-width: 360px)').matches?'compact':'normal'
+    });
+  }
+  if(window.turnstile){render();return;}
   const script=document.createElement('script');
   script.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
   script.async=true;script.defer=true;
-  script.onload=()=>{
-    if(window.turnstile) rsvpTurnstileId=turnstile.render('#rsvpTurnstile',{sitekey:k,size:window.matchMedia('(max-width: 360px)').matches?'compact':'normal'});
-  };
+  script.onload=render;
+  script.onerror=()=>{rsvpTurnstileLoading=false;};
   document.head.appendChild(script);
 }
-loadRsvpTurnstile();
 rsvpForm.addEventListener('submit',async (evt)=>{
   evt.preventDefault();
   if(rsvpSubmit.disabled)return;
@@ -754,6 +789,7 @@ rsvpForm.addEventListener('submit',async (evt)=>{
     if(!resp.ok||!result?.ok)throw Error('RSVP submission failed');
     rsvpForm.reset();
     rsvpMessage(rsvpT('rsvpSuccess'),'success');
+    rsvpFeedback.setAttribute('tabindex','-1');rsvpFeedback.focus({preventScroll:true});
   }catch(err){
     rsvpMessage(rsvpT('rsvpError'),'error');
   }finally{
