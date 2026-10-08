@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Siriya &amp; Floris — 27 March 2027</title>
-<meta name="description" content="Siriya &amp; Floris — 27 March 2027 — Baiboon Grand, Loei">
+<meta name="description" content="Siriya &amp; Floris — 27 March 2027 — Baiboon Grand Hotel, Loei">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Herr+Von+Muellerhoff&family=Noto+Serif+Thai:wght@300;400&family=Pinyon+Script&display=swap" rel="stylesheet">
@@ -84,6 +84,11 @@ html[lang="th"] .details-title h2{font-family:var(--serif);font-style:normal;fon
 @media(max-width:700px){#p1{padding-top:4.7rem}.hero-art{width:min(95vw,37rem)}.names-card{left:50.4%;top:18.1%;width:28.9%;height:34.6%}.heart-copy{left:20%;top:53.6%;width:38.2%;height:24.2%}.hero-meta .pre{font-size:.7rem;letter-spacing:.18em}}
 @media(max-width:600px){.sheet{min-height:auto;padding:4.6rem 1.3rem 9rem}.details-title{margin-bottom:2.6rem}.timeline,.dresscode{padding-left:4.5rem}.timeline-item{grid-template-columns:4.9rem 1fr;gap:.5rem}.timeline-time{letter-spacing:.05em}.timeline-icon{left:-4.5rem}.dresscode .timeline-icon{left:0}.timeline-content h3,.dresscode h3{font-size:1.45rem}.info-panel{padding-top:2.5rem}.about-photos{grid-template-columns:1fr 1fr}.about-photo:first-child{grid-column:1 / -1}.about-photo:first-child .ph{aspect-ratio:4/3}.about-photo:nth-child(2) .ph{aspect-ratio:3/4}.hero-meta h1{font-size:2.35rem}.hero-meta .sub{font-size:1rem}.hero-scroll{font-size:.74rem}.heart-copy .save{font-size:1.65rem}.heart-copy .date{font-size:.94rem}.names-card .fn{font-size:2.18rem}.names-card .ln{font-size:1.02rem}.names-card::before{width:16%;height:16%;right:4%;top:4%;opacity:.55}.names-card::after{display:none}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important}}
+
+/* Hotelnaam en meertalige adresregels in pagina 2 */
+.info-panel address[data-t="venueAddress"]{white-space:pre-line;overflow-wrap:break-word}
+html[lang="th"] .info-panel .location-name{font-family:var(--serif);font-weight:400;font-size:clamp(1.7rem,3.8vw,2.55rem);line-height:1.4}
+html[lang="th"] .info-panel address{line-height:1.85}
 </style>
 </head>
 <body>
@@ -146,10 +151,13 @@ html[lang="th"] .details-title h2{font-family:var(--serif);font-style:normal;fon
     </div>
     <aside class="info-panel">
       <h3 data-t="locationTitle">The Location</h3>
-      <div class="location-name">Baiboon Grand</div>
-      <p data-t="locationText">We are delighted to celebrate our special day at Baiboon Grand in Loei, Thailand.</p>
+      <div class="location-name" data-t="venueName">Baiboon Grand Hotel</div>
+      <p data-t="locationText">We are delighted to celebrate our special day at Baiboon Grand Hotel in Loei, Thailand.</p>
       <div class="location-meta">
-        <div class="location-row address"><svg viewBox="0 0 24 24"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg><div class="addr-col"><address>Baiboon Grand<br>111 Na An, อ.เมืองเลย,<br>Loei 42000, Thailand</address><a class="map-link" href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x312147a75364f8b3:0xcbe444a94fc6d62e?sa=X&amp;ved=1t:8290&amp;ictx=111" target="_blank" rel="noopener" data-t="mapLink">Open in Google Maps</a></div><div class="map-box" id="mapBox"><iframe title="Map: Baiboon Grand, Loei" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen src="https://maps.google.com/maps?q=Baiboon%20Grand%2C%20111%20Na%20An%2C%20Loei%2042000%2C%20Thailand&amp;z=15&amp;hl=en&amp;output=embed"></iframe><button class="map-cover" id="mapCover" type="button"><span data-t="mapTap">Tap to explore</span></button></div></div>
+        <div class="location-row address"><svg viewBox="0 0 24 24"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg><div class="addr-col"><address data-t="venueAddress">Baiboon Grand Hotel
+111 Moo 9, Charoenrat Road
+Na An, Mueang Loei
+Loei 42000, Thailand</address><a class="map-link" href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x312147a75364f8b3:0xcbe444a94fc6d62e?sa=X&amp;ved=1t:8290&amp;ictx=111" target="_blank" rel="noopener" data-t="mapLink">Open in Google Maps</a></div><div class="map-box" id="mapBox"><iframe title="Map: Baiboon Grand Hotel, Loei" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen src="https://maps.google.com/maps?q=Baiboon%20Grand%20Hotel%2C%20Loei%2C%20Thailand&amp;z=15&amp;hl=en&amp;output=embed"></iframe><button class="map-cover" id="mapCover" type="button"><span data-t="mapTap">Tap to explore</span></button></div></div>
         <div class="location-row"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.2 2"/></svg><span data-t="dateTimeLine">27 March 2027 · 02:00 PM</span></div>
       </div>
       <div class="rsvp"><h3 data-t="rsvpTitle">RSVP</h3><p data-t="rsvpText">Please let us know if you will be joining us on our special day.</p><div class="qr-placeholder">QR CODE<br>RSVP</div><a href="#" class="rsvp-link" data-t="rsvpLink" onclick="return false;">RSVP online</a></div>
@@ -196,7 +204,9 @@ const L = {
     dressTitle:"Dress Code",
     dressText:"Any outfit that makes you shine and feel comfortable.",
     locationTitle:"The Location",
-    locationText:"We are delighted to celebrate our special day at Baiboon Grand in Loei, Thailand.",
+    locationText:"We are delighted to celebrate our special day at Baiboon Grand Hotel in Loei, Thailand.",
+    venueName:"Baiboon Grand Hotel",
+    venueAddress:"Baiboon Grand Hotel\n111 Moo 9, Charoenrat Road\nNa An, Mueang Loei\nLoei 42000, Thailand",
     rsvpTitle:"RSVP",
     rsvpText:"Please let us know if you will be joining us on our special day.",
     rsvpLink:"RSVP online",
@@ -234,7 +244,9 @@ const L = {
     dressTitle:"Dresscode",
     dressText:"Elke outfit waarin je straalt en je comfortabel voelt.",
     locationTitle:"De locatie",
-    locationText:"Met veel plezier vieren wij onze bijzondere dag bij Baiboon Grand in Loei, Thailand.",
+    locationText:"Met veel plezier vieren wij onze bijzondere dag bij Baiboon Grand Hotel in Loei, Thailand.",
+    venueName:"Baiboon Grand Hotel",
+    venueAddress:"Baiboon Grand Hotel\n111 Moo 9, Charoenrat Road\nNa An, Mueang Loei\nLoei 42000, Thailand",
     rsvpTitle:"RSVP",
     rsvpText:"Laat ons weten of je erbij kunt zijn op onze bijzondere dag.",
     rsvpLink:"RSVP online",
@@ -272,7 +284,9 @@ const L = {
     dressTitle:"การแต่งกาย",
     dressText:"ชุดอะไรก็ได้ที่ทำให้คุณเปล่งประกายและรู้สึกสบายตัว",
     locationTitle:"สถานที่",
-    locationText:"เรามีความยินดีเป็นอย่างยิ่งที่จะจัดงานฉลองมงคลสมรส ณ Baiboon Grand จังหวัดเลย ประเทศไทย",
+    locationText:"เรามีความยินดีเป็นอย่างยิ่งที่จะจัดงานฉลองมงคลสมรส ณ โรงแรมใบบุญแกรนด์ จังหวัดเลย ประเทศไทย",
+    venueName:"โรงแรมใบบุญแกรนด์",
+    venueAddress:"โรงแรมใบบุญแกรนด์\n111 หมู่ 9 ถนนเจริญรัฐ ตำบลนาอาน\nอำเภอเมืองเลย จังหวัดเลย 42000\nประเทศไทย",
     rsvpTitle:"ตอบรับการเข้าร่วมงาน",
     rsvpText:"กรุณาแจ้งให้เราทราบว่าท่านจะสามารถมาร่วมงานกับเราได้หรือไม่",
     rsvpLink:"ตอบรับออนไลน์",
@@ -332,7 +346,7 @@ document.getElementById("mapCover").addEventListener("click", ()=> mapBox.classL
 const EVENT = {
   start:"20270327T070000Z",
   end:"20270327T140000Z",
-  location:"Baiboon Grand, 111 Na An, อ.เมืองเลย, Loei 42000, Thailand"
+  location:"Baiboon Grand Hotel, 111 Moo 9, Charoenrat Road, Na An, Mueang Loei, Loei 42000, Thailand"
 };
 const icsEsc = t => String(t).replace(/\\/g,"\\\\").replace(/;/g,"\\;").replace(/,/g,"\\,").replace(/\n/g,"\\n");
 function calText(){
