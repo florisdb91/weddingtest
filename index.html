@@ -68,17 +68,31 @@ body{background:linear-gradient(180deg,#F8F4EF,#F1EBE4);color:var(--ink);font-fa
   text-wrap:balance;
   padding:.04em .12em .09em;
 }
-/* v22: same calligraphic ampersand as the parents / invitation card. */
-.hero-meta h1 .couple-ampersand{
-  font-family:var(--script);
-  font-style:normal;
+/* v23: a small translated word separates the names; the parents keep their calligraphic ampersands. */
+.hero-meta h1.couple-title{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:nowrap;
+  gap:clamp(.2rem,1.6vw,.8rem);
+  white-space:nowrap;
+}
+.hero-meta h1 .couple-join{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:.34em;
+  line-height:1;
+  font-style:italic;
   font-weight:400;
-  font-size:.82em;
-  line-height:.86;
-  vertical-align:.035em;
-  color:var(--accent);
-  display:inline-block;
-  margin-inline:.05em;
+  letter-spacing:.02em;
+  color:var(--accent-deep);
+  white-space:nowrap;
+  margin-top:.14em;
+}
+html[lang="th"] .hero-meta h1 .couple-join{
+  font-family:'Noto Serif Thai',serif;
+  font-size:.55em;
+  font-style:normal;
+  margin-top:0;
 }
 /* Thai characters require a native Thai font instead of Latin calligraphy. */
 html[lang="th"] .hero-meta h1{
@@ -259,7 +273,7 @@ html[lang="th"] .rsvp-field label,html[lang="th"] .rsvp-attendance-label,html[la
           <span class="family-name" data-t="parentJannigje">Jannigje in 't Veld</span>
         </div>
       </div>
-      <h1 data-t="coupleNames">Siriya <span class="couple-ampersand">&amp;</span> Floris</h1>
+      <h1 class="couple-title"><span data-t="coupleFirst">Siriya</span><span class="couple-join" data-t="coupleJoin">and</span><span data-t="coupleLast">Floris</span></h1>
       <div class="sub" data-t="invite1">Request the honor of your presence at the marriage</div>
     </div>
     <div class="hero-actions">
@@ -376,7 +390,7 @@ Loei 42000, Thailand</address><a class="map-link" href="https://www.google.com/m
 const L = {
 
   en:{
-    coupleNames:"Siriya & Floris",
+    coupleFirst:"Siriya", coupleJoin:"and", coupleLast:"Floris",
     parentSurasak:"Surasak Im-erb",
     parentNuanyai:"Nuanyai Im-erb",
     parentNorbertus:"Norbertus de Beer",
@@ -441,7 +455,7 @@ const L = {
   },
 
   nl:{
-    coupleNames:"Siriya & Floris",
+    coupleFirst:"Siriya", coupleJoin:"en", coupleLast:"Floris",
     parentSurasak:"Surasak Im-erb",
     parentNuanyai:"Nuanyai Im-erb",
     parentNorbertus:"Norbertus de Beer",
@@ -506,7 +520,7 @@ const L = {
   },
 
   th:{
-    coupleNames:"สิริยา และ ฟลอริส",
+    coupleFirst:"สิริยา", coupleJoin:"และ", coupleLast:"ฟลอริส",
     parentSurasak:"สุรศักดิ์ อิ่มเอิบ",
     parentNuanyai:"นวลใย อิ่มเอิบ",
     parentNorbertus:"นอร์เบอร์ตัส เดอ เบียร์",
@@ -576,16 +590,7 @@ function setLang(lang){
   document.querySelectorAll("[data-t]").forEach(el=>{
     const key = el.dataset.t;
     if(L[lang] && L[lang][key] !== undefined){
-      if(key === "coupleNames" && lang !== "th"){
-        // Keep the same calligraphic ampersand as the parents after language switching.
-        const [first,last]=L[lang][key].split(" & ");
-        const amp=document.createElement("span");
-        amp.className="couple-ampersand";
-        amp.textContent="&";
-        el.replaceChildren(document.createTextNode(first+" "),amp,document.createTextNode(" "+last));
-      }else{
-        el.textContent=L[lang][key];
-      }
+      el.textContent=L[lang][key];
     }
   });
   document.querySelectorAll("[data-ph]").forEach(el=>{
