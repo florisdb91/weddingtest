@@ -172,6 +172,12 @@ html[lang="th"] .hero-meta .pre, html[lang="th"] .hero-scroll{letter-spacing:.04
 @media(max-width:600px), (min-width:901px) and (max-width:1040px){
   .dresscode .palette{width:min(10.5rem,100%);margin:1.1rem auto 0;justify-content:center;column-gap:.55rem;row-gap:.7rem}
 }
+/* Centre the full colour palette on the mobile invitation sheet.
+   Dress Code text is indented by 4.5rem for its icon, so its own centre is offset
+   by 2.25rem from the page centre. Moving only the dots corrects that offset. */
+@media(max-width:600px){
+  .dresscode .palette{position:relative;left:-2.25rem}
+}
 .addr-col{flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start}.map-box{position:relative;flex:none;width:clamp(8rem,34%,10.5rem);aspect-ratio:4/3;border:1px solid var(--line);background:var(--blue-light);overflow:hidden}.map-box iframe{position:absolute;inset:0;width:100%;height:100%;border:0}.map-cover{position:absolute;inset:0;z-index:2;display:flex;align-items:flex-end;justify-content:center;padding:.4rem;background:transparent;border:0;cursor:pointer;font:inherit;color:var(--ink)}.map-cover span{background:rgba(255,255,255,.94);border:1px solid var(--line);padding:.2rem .5rem;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;line-height:1.3}html[lang="th"] .map-cover span{letter-spacing:.01em;font-size:.78rem;text-transform:none}.map-box.live .map-cover{display:none}
 .cal{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.5rem 1rem;margin-top:1rem}.cal-btn{appearance:none;border:1px solid var(--accent);background:transparent;color:var(--accent);font:inherit;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:.45rem .9rem;cursor:pointer;display:inline-flex;align-items:center;gap:.45rem;transition:background .2s,color .2s}.cal-btn svg{width:.95rem;height:.95rem;stroke:currentColor;fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}.cal-btn:hover{background:var(--accent);color:#fff}.cal-alt{color:var(--accent);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:.05rem}html[lang="th"] .cal-btn,html[lang="th"] .cal-alt{letter-spacing:.01em;text-transform:none;font-size:.9rem}
 .about-photos{width:100%;max-width:62rem;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(.8rem,2.4vw,1.8rem);align-items:end}.about-photo{padding:clamp(.35rem,1vw,.6rem);background:var(--paper);border:1px solid var(--line);box-shadow:0 14px 30px rgba(88,60,68,.1)}.about-photo .ph{position:relative;aspect-ratio:3/4;overflow:hidden;background:linear-gradient(160deg,#eadde1,#d7e3f0)}.about-photo:nth-child(2) .ph{aspect-ratio:3/3.6}.about-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.about-text{max-width:34rem;text-align:center;font-style:italic;font-size:clamp(1.05rem,2.4vw,1.3rem);line-height:1.7;opacity:.85;text-wrap:balance}html[lang="th"] .about-text{font-style:normal;line-height:1.9}.about-sprig{margin:clamp(1.6rem,4vw,2.6rem) auto 1.2rem}
@@ -548,6 +554,36 @@ html[lang="th"] .wedding-signoff .signoff-names.couple-title .couple-join{
 @media(prefers-reduced-motion:reduce) {
   .rsvp-thanks-close {transition:none;}
 }
+
+/* v46: one compact calendar button with a native, keyboard-accessible choice. */
+.info-panel .cal-picker{position:relative;width:min(15.5rem,100%);max-width:100%;min-width:0}
+.info-panel .cal-picker > summary.cal-btn{
+  width:100%;display:flex;align-items:center;gap:.55rem;
+  justify-content:center;cursor:pointer;list-style:none;user-select:none;
+  padding:.62rem .8rem;min-height:2.65rem;
+}
+.info-panel .cal-picker > summary.cal-btn::-webkit-details-marker{display:none}
+.info-panel .cal-picker > summary.cal-btn::marker{content:""}
+.info-panel .cal-picker .cal-chevron{width:.9rem;height:.9rem;margin-left:auto;transition:transform .18s ease;flex:none}
+.info-panel .cal-picker[open] .cal-chevron{transform:rotate(180deg)}
+.info-panel .cal-options{
+  display:flex;flex-direction:column;width:100%;
+  padding:.18rem;margin-top:.35rem;background:var(--paper);
+  border:1px solid rgba(125,15,26,.25);
+  box-shadow:0 8px 24px rgba(80,35,45,.09);
+}
+.info-panel .cal-option{
+  display:block;width:100%;box-sizing:border-box;
+  padding:.62rem .55rem;margin:0;border:0;border-radius:0;
+  background:transparent;color:var(--accent);
+  text-decoration:none;text-transform:none;
+  font:inherit;font-size:.94rem;line-height:1.4;
+  text-align:center;cursor:pointer;
+}
+.info-panel .cal-option+.cal-option{border-top:1px solid rgba(125,15,26,.12)}
+.info-panel .cal-option:hover,.info-panel .cal-option:focus-visible{background:#F8F0ED}
+html[lang="th"] .info-panel .cal-option{font-family:'Noto Serif Thai',Georgia,serif;font-size:.92rem;letter-spacing:0}
+@media(prefers-reduced-motion:reduce){.info-panel .cal-picker .cal-chevron{transition:none}}
 </style>
 </head>
 <body>
@@ -651,7 +687,15 @@ Na An, Mueang Loei
 Loei 42000, Thailand</address><a class="map-link" href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x312147a75364f8b3:0xcbe444a94fc6d62e?sa=X&amp;ved=1t:8290&amp;ictx=111" target="_blank" rel="noopener" data-t="mapLink">Open in Google Maps</a></div></div>
         <div class="location-row"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.2 2"/></svg><span data-t="dateTimeLine">27 March 2027 · 02:00 PM</span></div>
       </div>
-      <div class="cal"><button class="cal-btn" id="calBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4M12 13v4M10 15h4"/></svg><span data-t="calBtn">Add to calendar</span></button><a class="cal-alt" id="calGoogle" href="#" target="_blank" rel="noopener" data-t="calGoogle">Google Calendar</a></div>
+      <div class="cal">
+        <details class="cal-picker" id="calPicker">
+          <summary class="cal-btn" id="calBtn"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4M12 13v4M10 15h4"/></svg><span data-t="calBtn">Add to calendar</span><svg class="cal-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <div class="cal-options">
+            <a class="cal-option" id="calGoogle" href="#" target="_blank" rel="noopener" data-t="calGoogle">Google Calendar</a>
+            <button type="button" class="cal-option" id="calIcs" data-t="calIcs">Other calendar (.ics)</button>
+          </div>
+        </details>
+      </div>
     </aside>
   </div>
   <div class="rsvp-invite" id="rsvp">
@@ -798,7 +842,7 @@ const L = {
     mapTap:"Tap to explore",
     aboutTitle:"About us",
     aboutText:"We hope to see you at our wedding and apologize if we are not able to deliver this invitation personally.",
-    calBtn:"Add to calendar", calGoogle:"Google Calendar",
+    calBtn:"Add to calendar", calGoogle:"Google Calendar", calIcs:"Other calendar (.ics)",
     calTitle:"Wedding of Siriya & Floris",
     calDesc:"Engagement ceremony at 2 PM, vow ceremony at 4 PM, wedding reception at 6 PM."
   },
@@ -866,7 +910,7 @@ const L = {
     mapTap:"Tik om te bekijken",
     aboutTitle:"Over ons",
     aboutText:"We hopen jullie te zien op onze bruiloft en bieden onze excuses aan als we deze uitnodiging niet persoonlijk kunnen overhandigen.",
-    calBtn:"Toevoegen aan agenda", calGoogle:"Google Agenda",
+    calBtn:"Toevoegen aan agenda", calGoogle:"Google Agenda", calIcs:"Andere agenda (.ics)",
     calTitle:"Bruiloft van Siriya & Floris",
     calDesc:"Verlovingsceremonie om 14:00, ceremonie met huwelijksgeloften om 16:00 en bruiloftsreceptie om 18:00."
   },
@@ -934,7 +978,7 @@ const L = {
     mapTap:"แตะเพื่อดู",
     aboutTitle:"เกี่ยวกับเรา",
     aboutText:"เราหวังเป็นอย่างยิ่งว่าจะได้พบทุกท่านในงานแต่งงานของเรา และขออภัยหากไม่สามารถนำบัตรเชิญมามอบให้ด้วยตนเองได้",
-    calBtn:"เพิ่มลงในปฏิทิน", calGoogle:"ปฏิทินกูเกิล",
+    calBtn:"เพิ่มลงในปฏิทิน", calGoogle:"ปฏิทินกูเกิล", calIcs:"ปฏิทินอื่น (.ics)",
     calTitle:"งานแต่งงานของ Siriya & Floris",
     calDesc:"พิธีหมั้น 14.00 น. พิธีกล่าวคำปฏิญาณรัก 16.00 น. และงานเลี้ยงฉลองมงคลสมรส 18.00 น."
   }
@@ -1067,7 +1111,22 @@ function downloadICS(){
   document.body.appendChild(a); a.click(); a.remove();
   setTimeout(()=>URL.revokeObjectURL(a.href),1000);
 }
-document.getElementById("calBtn").addEventListener("click", downloadICS);
+const calPicker=document.getElementById("calPicker");
+document.getElementById("calIcs").addEventListener("click",()=>{
+  downloadICS();
+  calPicker.open=false;
+});
+document.getElementById("calGoogle").addEventListener("click",()=>{calPicker.open=false;});
+// Dismiss on an outside tap or Escape, without disturbing the RSVP popup.
+document.addEventListener("click",event=>{
+  if(calPicker.open&&!calPicker.contains(event.target))calPicker.open=false;
+});
+document.addEventListener("keydown",event=>{
+  if(event.key==="Escape"&&calPicker.open){
+    calPicker.open=false;
+    document.getElementById("calBtn").focus();
+  }
+});
 document.querySelectorAll(".lang button").forEach(b=>b.addEventListener("click", updateGoogleLink));
 updateGoogleLink();
 
