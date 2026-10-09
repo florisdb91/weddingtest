@@ -166,7 +166,7 @@ html[lang="th"] .hero-meta .pre, html[lang="th"] .hero-scroll{letter-spacing:.04
 .location-meta{display:flex;flex-direction:column;gap:.6rem;margin:2rem 0 3rem}.location-row{display:flex;align-items:center;gap:.8rem;font-size:.95rem}.location-row.address{align-items:flex-start}.location-row.address svg{margin-top:.2rem}address{font-style:normal;line-height:1.55}.map-link{display:block;width:min(9rem,100%);max-width:100%;margin:.5rem 0 0;color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(125,15,26,.5);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;padding-bottom:.15rem}html[lang="th"] .map-link{letter-spacing:.02em;font-size:.95rem}.location-row svg{width:1.2rem;height:1.2rem;stroke:var(--accent);fill:none;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;flex:none}
 .rsvp{margin-top:2rem;padding:2rem;border:1px solid rgba(125,15,26,.2);text-align:center;background:rgba(255,255,255,.75)}.rsvp h3{font-size:1.8rem;font-weight:400;margin-bottom:.5rem}.rsvp p{font-size:.95rem;margin-bottom:1.5rem}.qr-placeholder{width:8rem;height:8rem;margin:0 auto 1rem;border:1px dashed #ba9fa7;display:flex;align-items:center;justify-content:center;text-align:center;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}.rsvp-link{display:inline-block;color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(125,15,26,.5);font-size:.9rem;letter-spacing:.12em;text-transform:uppercase;padding-bottom:.2rem}
 .palette{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.1rem}.palette .dot{width:2.2rem;height:2.2rem;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(84,60,67,.18),0 2px 5px rgba(84,60,67,.12)}
-.addr-col{flex:1;min-width:0}.map-box{position:relative;flex:none;width:clamp(8rem,34%,10.5rem);aspect-ratio:4/3;border:1px solid var(--line);background:var(--blue-light);overflow:hidden}.map-box iframe{position:absolute;inset:0;width:100%;height:100%;border:0}.map-cover{position:absolute;inset:0;z-index:2;display:flex;align-items:flex-end;justify-content:center;padding:.4rem;background:transparent;border:0;cursor:pointer;font:inherit;color:var(--ink)}.map-cover span{background:rgba(255,255,255,.94);border:1px solid var(--line);padding:.2rem .5rem;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;line-height:1.3}html[lang="th"] .map-cover span{letter-spacing:.01em;font-size:.78rem;text-transform:none}.map-box.live .map-cover{display:none}
+.addr-col{flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start}.map-box{position:relative;flex:none;width:clamp(8rem,34%,10.5rem);aspect-ratio:4/3;border:1px solid var(--line);background:var(--blue-light);overflow:hidden}.map-box iframe{position:absolute;inset:0;width:100%;height:100%;border:0}.map-cover{position:absolute;inset:0;z-index:2;display:flex;align-items:flex-end;justify-content:center;padding:.4rem;background:transparent;border:0;cursor:pointer;font:inherit;color:var(--ink)}.map-cover span{background:rgba(255,255,255,.94);border:1px solid var(--line);padding:.2rem .5rem;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;line-height:1.3}html[lang="th"] .map-cover span{letter-spacing:.01em;font-size:.78rem;text-transform:none}.map-box.live .map-cover{display:none}
 .cal{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.5rem 1rem;margin-top:1rem}.cal-btn{appearance:none;border:1px solid var(--accent);background:transparent;color:var(--accent);font:inherit;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:.45rem .9rem;cursor:pointer;display:inline-flex;align-items:center;gap:.45rem;transition:background .2s,color .2s}.cal-btn svg{width:.95rem;height:.95rem;stroke:currentColor;fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}.cal-btn:hover{background:var(--accent);color:#fff}.cal-alt{color:var(--accent);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:.05rem}html[lang="th"] .cal-btn,html[lang="th"] .cal-alt{letter-spacing:.01em;text-transform:none;font-size:.9rem}
 .about-photos{width:100%;max-width:62rem;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(.8rem,2.4vw,1.8rem);align-items:end}.about-photo{padding:clamp(.35rem,1vw,.6rem);background:var(--paper);border:1px solid var(--line);box-shadow:0 14px 30px rgba(88,60,68,.1)}.about-photo .ph{position:relative;aspect-ratio:3/4;overflow:hidden;background:linear-gradient(160deg,#eadde1,#d7e3f0)}.about-photo:nth-child(2) .ph{aspect-ratio:3/3.6}.about-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.about-text{max-width:34rem;text-align:center;font-style:italic;font-size:clamp(1.05rem,2.4vw,1.3rem);line-height:1.7;opacity:.85;text-wrap:balance}html[lang="th"] .about-text{font-style:normal;line-height:1.9}.about-sprig{margin:clamp(1.6rem,4vw,2.6rem) auto 1.2rem}
 html[lang="th"] .details-title h2{font-family:var(--serif);font-style:normal;font-weight:300;line-height:1.3;font-size:clamp(2.6rem,6vw,4.5rem)}
@@ -492,17 +492,48 @@ html[lang="th"] #p3 .about-text {line-height:1.9;}
   color:var(--ink-soft);font-size:clamp(.95rem,1.8vw,1.08rem);
   font-style:italic;letter-spacing:.07em;
 }
-.wedding-signoff .signoff-names {
+.wedding-signoff .signoff-names{width:100%;text-align:center}
+.wedding-signoff .signoff-names.couple-title{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:nowrap;
+  gap:clamp(.2rem,1.6vw,.8rem);
+  white-space:nowrap;
   font-family:'Pinyon Script','Herr Von Muellerhoff','Snell Roundhand',cursive;
   font-size:clamp(2.55rem,7vw,4.15rem);
-  font-weight:400;line-height:1.2;
+  font-weight:400;
+  line-height:1.2;
   padding:0 .2em .15em;
 }
+.wedding-signoff .signoff-names.couple-title .couple-join{
+  font-family:'Pinyon Script','Herr Von Muellerhoff','Snell Roundhand',cursive;
+  font-size:.56em;
+  line-height:1;
+  font-style:normal;
+  font-weight:400;
+  letter-spacing:0;
+  color:var(--accent-deep);
+  white-space:nowrap;
+  margin-top:.10em;
+}
+html:not([lang="th"]) .wedding-signoff .signoff-names.couple-title .couple-first{
+  display:inline-block;
+  font-family:'Great Vibes','Pinyon Script','Herr Von Muellerhoff',cursive;
+  font-weight:400;
+  font-variant-ligatures:common-ligatures contextual;
+}
 html[lang="th"] .wedding-signoff .signoff-lead {font-family:'Noto Serif Thai',serif;letter-spacing:0;font-style:normal;}
-html[lang="th"] .wedding-signoff .signoff-names {
+html[lang="th"] .wedding-signoff .signoff-names.couple-title{
   font-family:'Noto Serif Thai',serif;
   font-size:clamp(1.3rem,4.4vw,2rem);
   line-height:1.65;
+}
+html[lang="th"] .wedding-signoff .signoff-names.couple-title .couple-first,
+html[lang="th"] .wedding-signoff .signoff-names.couple-title .couple-join{
+  font-family:'Noto Serif Thai',serif;
+  font-size:inherit;
+  margin-top:0;
 }
 @media(max-width:600px) {
   #p2 .info-panel > h3::after {margin:.45rem 0 0;}
@@ -611,7 +642,7 @@ html[lang="th"] .wedding-signoff .signoff-names {
         <div class="location-row address"><svg viewBox="0 0 24 24"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg><div class="addr-col"><address data-t="venueAddress">Baiboon Grand Hotel
 111 Moo 9, Charoenrat Road
 Na An, Mueang Loei
-Loei 42000, Thailand</address><a class="map-link" href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x312147a75364f8b3:0xcbe444a94fc6d62e?sa=X&amp;ved=1t:8290&amp;ictx=111" target="_blank" rel="noopener" data-t="mapLink">Open in Google Maps</a></div><div class="map-box" id="mapBox"><iframe title="Map: Baiboon Grand Hotel, Loei" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen src="https://maps.google.com/maps?q=Baiboon%20Grand%20Hotel%2C%20Loei%2C%20Thailand&amp;z=15&amp;hl=en&amp;output=embed"></iframe><button class="map-cover" id="mapCover" type="button"><span data-t="mapTap">Tap to explore</span></button></div></div>
+Loei 42000, Thailand</address><a class="map-link" href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x312147a75364f8b3:0xcbe444a94fc6d62e?sa=X&amp;ved=1t:8290&amp;ictx=111" target="_blank" rel="noopener" data-t="mapLink">Open in Google Maps</a></div></div>
         <div class="location-row"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.2 2"/></svg><span data-t="dateTimeLine">27 March 2027 · 02:00 PM</span></div>
       </div>
       <div class="cal"><button class="cal-btn" id="calBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4M12 13v4M10 15h4"/></svg><span data-t="calBtn">Add to calendar</span></button><a class="cal-alt" id="calGoogle" href="#" target="_blank" rel="noopener" data-t="calGoogle">Google Calendar</a></div>
@@ -632,7 +663,7 @@ Loei 42000, Thailand</address><a class="map-link" href="https://www.google.com/m
   <p class="about-text" data-t="aboutText">We hope to see you at our wedding and apologize if we are not able to deliver this invitation personally.</p>
   <div class="wedding-signoff" aria-label="Wedding sign-off">
     <span class="signoff-lead" data-t="signoffLead">With love,</span>
-    <span class="signoff-names" data-t="signoffNames">Siriya &amp; Floris</span>
+    <span class="signoff-names couple-title" aria-label="Siriya and Floris"><span class="couple-first" data-t="coupleFirst">Siriya</span><span class="couple-join" data-t="coupleJoin">and</span><span data-t="coupleLast">Floris</span></span>
   </div>
 </div>
 </section>
@@ -980,7 +1011,8 @@ tick();
 
 /* ===== Google Maps: tik om te activeren ===== */
 const mapBox = document.getElementById("mapBox");
-document.getElementById("mapCover").addEventListener("click", ()=> mapBox.classList.add("live"));
+const mapCover = document.getElementById("mapCover");
+if(mapBox && mapCover) mapCover.addEventListener("click", ()=> mapBox.classList.add("live"));
 
 /* ===== toevoegen aan agenda =====
    Start: 27 maart 2027, 14:00 Thaise tijd (= 07:00 UTC). Einde: 21:00 Thaise tijd (= 14:00 UTC) — pas aan indien nodig. */
@@ -1213,11 +1245,16 @@ rsvpForm.addEventListener('submit',async (evt)=>{
     '#p2 .details-title',
     '#p2 .timeline-item',
     '#p2 .dresscode',
-    '#p2 .info-panel',
+    '#p2 .info-panel > h3',
+    '#p2 .info-panel .location-name',
+    '#p2 .info-panel > p',
+    '#p2 .info-panel .location-row',
+    '#p2 .info-panel .cal',
     '#p2 .rsvp-invite',
     '#p3 .details-title',
     '#p3 .about-photos',
-    '#p3 .about-text'
+    '#p3 .about-text',
+    '#p3 .wedding-signoff'
   ].join(','));
   revealTargets.forEach(el => el.classList.add('reveal-on-scroll'));
   const observer = new IntersectionObserver(entries => {
