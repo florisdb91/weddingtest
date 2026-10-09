@@ -115,12 +115,16 @@ html[lang="th"] .hero-meta h1 .couple-join{
   font-style:normal;
   margin-top:0;
 }
-/* Only the initial S is special; the entire name remains live, translated HTML text. */
-.couple-title .couple-first{display:inline-block}
-html:not([lang="th"]) .couple-title .couple-first::first-letter{
-  font-family:'Great Vibes','Herr Von Muellerhoff','Pinyon Script',cursive;
-  font-size:1.04em;
+/* A single connected calligraphic word: do not mix fonts inside Siriya. */
+html:not([lang="th"]) .couple-title .couple-first{
+  display:inline-block;
+  font-family:'Great Vibes','Pinyon Script','Herr Von Muellerhoff',cursive;
   font-weight:400;
+  font-variant-ligatures:common-ligatures contextual;
+}
+html[lang="th"] .couple-title .couple-first{
+  display:inline-block;
+  font-family:'Noto Serif Thai',Georgia,serif;
 }
 /* Live text on the original heart: English, Dutch and Thai use the existing language switch. */
 .hero-art .heart-live{
