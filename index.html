@@ -584,6 +584,80 @@ html[lang="th"] .wedding-signoff .signoff-names.couple-title .couple-join{
 .info-panel .cal-option:hover,.info-panel .cal-option:focus-visible{background:#F8F0ED}
 html[lang="th"] .info-panel .cal-option{font-family:'Noto Serif Thai',Georgia,serif;font-size:.92rem;letter-spacing:0}
 @media(prefers-reduced-motion:reduce){.info-panel .cal-picker .cal-chevron{transition:none}}
+
+/* === v47: responsive refinement, without redesign or changing assets === */
+/* Preserve the original hero artwork geometry; improve only the layout around it. */
+#p1 .hero, #p1 .hero-meta, #p1 .family-blocks,
+#p2 .details-grid, #p2 .details-grid > *, #p3 .sheet { min-width:0; }
+.hero-meta .couple-title, .wedding-signoff .signoff-names.couple-title { min-width:0; }
+.hero-meta .couple-title > span, .wedding-signoff .couple-title > span { flex-shrink:0; }
+/* Readable wrap points for lengthy translations, rather than arbitrary line breaks. */
+#p2 .timeline-content, #p2 .info-panel, #p2 .addr-col,
+#p2 .location-row, #p2 .location-row > span { min-width:0; }
+#p2 .timeline-item { grid-template-columns:minmax(4rem,5rem) minmax(0,1fr);gap:clamp(.55rem,1.3vw,1.25rem); }
+#p2 .timeline-content h3 { overflow-wrap:normal;word-break:normal;text-wrap:pretty; }
+#p2 .info-panel .location-name { overflow-wrap:normal;text-wrap:balance; }
+#p2 .location-row.address address { overflow-wrap:break-word; }
+#p2 .map-link { max-width:100%; }
+#p2 .info-panel .cal { max-width:100%; }
+#p2 .info-panel .cal-picker, #p2 .info-panel .cal-option { min-width:0; }
+/* The gallery keeps its existing editorial grid while each photo scales freely. */
+#p3 .about-photos { grid-template-columns:repeat(3,minmax(0,1fr)); }
+#p3 .about-photo, #p3 .about-photo .ph { min-width:0; }
+#p3 .about-photo img { width:100%;height:100%; }
+/* Tablet-like widths need enough room for long venue details in three languages. */
+@media (min-width:901px) and (max-width:1080px) {
+  #p2 .details-grid { grid-template-columns:minmax(0,1fr);gap:clamp(2.5rem,5vw,4rem);max-width:45rem; }
+  #p2 .info-panel { border-left:0;border-top:1px solid var(--line-soft);padding-left:0;padding-top:3rem; }
+}
+@media (max-width:600px) {
+  /* Keep event icons and text aligned but reclaim space on narrow phones. */
+  #p2 .timeline { padding-left:clamp(3.4rem,11.25vw,4.5rem); }
+  #p2 .timeline::before { left:clamp(1.26rem,4.2vw,1.45rem); }
+  #p2 .timeline-item {grid-template-columns:clamp(4.1rem,13.4vw,4.9rem) minmax(0,1fr);gap:clamp(.3rem,1.3vw,.65rem);}
+  #p2 .timeline-item .timeline-icon {left:calc(-1 * clamp(3.4rem,11.25vw,4.5rem));width:clamp(2.6rem,8.2vw,3rem);height:clamp(2.6rem,8.2vw,3rem);}
+  #p2 .timeline-time { font-size:clamp(.71rem,2.25vw,.85rem);letter-spacing:clamp(0rem,.12vw,.05em); }
+  /* A two-column CSS grid reserves space for the existing hanger icon.
+     The seven dots span BOTH columns and center naturally, no offsets. */
+  #p2 .dresscode {display:grid;grid-template-columns:4.5rem minmax(0,1fr);padding-left:0;align-items:start;}
+  #p2 .dresscode > h3, #p2 .dresscode > p {grid-column:2;min-width:0;}
+  #p2 .dresscode > .palette {
+    grid-column:1/-1;justify-self:center;
+    position:static;left:auto;transform:none;
+    width:min(10.5rem,100%);max-width:100%;
+    margin:1.1rem auto 0;
+    justify-content:center;gap:.7rem .55rem;
+  }
+  #p2 .dresscode > .timeline-icon {left:0;}
+  #p3 .about-photos { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  #p3 .about-photo:first-child {grid-column:1/-1;}
+  #p2 .cal-btn, #p2 .rsvp-open-button { max-width:100%; }
+  /* The popup remains scrollable even when the visible mobile viewport shrinks. */
+  .rsvp-dialog {
+    scrollbar-gutter:auto;
+    max-height:calc(100dvh - 1rem - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+    scroll-padding-block:1rem 2rem;
+  }
+  .rsvp-modal {padding:max(.4rem,env(safe-area-inset-top,0px)) max(.4rem,env(safe-area-inset-right,0px)) max(.4rem,env(safe-area-inset-bottom,0px)) max(.4rem,env(safe-area-inset-left,0px));}
+}
+@media (max-width:365px) {
+  #p2 .sheet, #p3 .sheet {padding-inline:clamp(.9rem,4.2vw,1.3rem);}
+  #p2 .timeline-item {grid-template-columns:clamp(3.85rem,13vw,4.15rem) minmax(0,1fr);}
+  #p2 .timeline-content h3, #p2 .dresscode h3 {font-size:clamp(1.2rem,4.35vw,1.45rem);}
+  #p2 .timeline-time {font-size:clamp(.67rem,2.3vw,.75rem);}
+  .rsvp-dialog {padding:1.1rem .75rem;}
+  .rsvp-field input:not([type=radio]), .rsvp-field textarea, .rsvp-field select {font-size:1rem;}
+}
+@media (max-width:540px) {
+  /* Both parent groups remain side-by-side with the original vertical divider. */
+  #p1 .family-blocks {grid-template-columns:repeat(2,minmax(0,1fr));}
+  #p1 .family-block {min-width:0;}
+  #p1 .hero-meta .sub {max-width:100%;text-wrap:balance;}
+}
+@media (max-height:550px) and (max-width:900px) {
+  .rsvp-modal {align-items:start;}
+  .rsvp-dialog {max-height:calc(100dvh - .8rem);}
+}
 </style>
 </head>
 <body>
@@ -1333,6 +1407,36 @@ rsvpForm.addEventListener('submit',async (evt)=>{
   const timeline = document.querySelector('#p2 .timeline');
   if (timeline) observer.observe(timeline);
   document.documentElement.classList.add('motion-ready');
+})();
+</script>
+
+<script>
+/* v47: adjust a couple's name only if it would actually overflow
+   (e.g. 200% text size or a long fallback font). No changes at normal sizes. */
+(() => {
+  let frame=0;
+  function fitCoupleHeadings(){
+    document.querySelectorAll('#p1 .hero-meta .couple-title, #p3 .wedding-signoff .couple-title').forEach(heading=>{
+      heading.style.removeProperty('font-size');
+      const parts=Array.from(heading.children);
+      if(!parts.length)return;
+      const gap=parseFloat(getComputedStyle(heading).columnGap)||0;
+      const required=parts.reduce((sum,el)=>{
+        const r=el.getBoundingClientRect();
+        return sum+Math.max(r.width,el.scrollWidth);
+      },0)+gap*Math.max(0,parts.length-1);
+      const available=heading.clientWidth-6;
+      if(available>0 && required>available){
+        const current=parseFloat(getComputedStyle(heading).fontSize);
+        heading.style.fontSize=Math.max(18,current*available/required*.98).toFixed(2)+'px';
+      }
+    });
+  }
+  function scheduleFit(){cancelAnimationFrame(frame);frame=requestAnimationFrame(fitCoupleHeadings)}
+  window.addEventListener('resize',scheduleFit,{passive:true});
+  document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',scheduleFit));
+  if(document.fonts)document.fonts.ready.then(scheduleFit).catch(()=>{});
+  scheduleFit();
 })();
 </script>
 </body>
