@@ -72,13 +72,13 @@ body{background:linear-gradient(180deg,#F8F4EF,#F1EBE4);color:var(--ink);font-fa
 .names-card::before{right:3%;top:4%;width:19%;height:19%;background-image:url('images/blad-rechtsboven.webp');transform:none;opacity:.58}
 .names-card::after{display:none}
 .heart-copy{position:absolute;left:20.2%;top:53.4%;width:38%;height:24%;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#89556b;padding:8% 10% 12%}
-.heart-copy .save{font-family:'Great Vibes','Pinyon Script','Herr Von Muellerhoff','Snell Roundhand',cursive;font-size:clamp(2rem,4.6vw,3.25rem);line-height:.9;max-width:100%}
+.heart-copy .save{font-family:var(--script);font-size:clamp(2rem,4.6vw,3.25rem);line-height:.86;max-width:100%}
 .heart-copy .date{font-size:clamp(1rem,2.1vw,1.55rem);letter-spacing:.12em;margin-top:.35rem;color:#875161}
 .hero-meta{display:flex;flex-direction:column;align-items:center;gap:.65rem;text-align:center;width:min(100%,42rem);max-width:42rem;margin-top:.1rem}
 .hero-meta .pre{font-size:.78rem;letter-spacing:.28em;text-transform:uppercase;color:#8b5863}
 /* The couple's title matches the romantic calligraphy on the invitation card. */
 .hero-meta h1{
-  font-family:'Great Vibes','Pinyon Script','Herr Von Muellerhoff','Snell Roundhand',cursive;
+  font-family:'Pinyon Script','Herr Von Muellerhoff','Snell Roundhand',cursive;
   font-size:clamp(3.5rem,8vw,6.1rem);
   font-weight:400;
   line-height:1.13;
@@ -99,7 +99,7 @@ body{background:linear-gradient(180deg,#F8F4EF,#F1EBE4);color:var(--ink);font-fa
   white-space:nowrap;
 }
 .hero-meta h1 .couple-join{
-  font-family:'Great Vibes','Pinyon Script','Herr Von Muellerhoff','Snell Roundhand',cursive;
+  font-family:'Pinyon Script','Herr Von Muellerhoff','Snell Roundhand',cursive;
   font-size:.56em;
   line-height:1;
   font-style:normal;
@@ -308,6 +308,10 @@ html[lang="th"] .info-panel .cal-alt{
 .location-meta,.location-row.address{width:100%}
 .location-row.address{min-width:0}
 @media(max-width:900px){.details-grid{grid-template-columns:minmax(0,1fr)}.details-grid>*{min-width:0}}
+/* Ornate initial S only; no hero image or photo geometry changes. */
+.hero-meta h1 .couple-first{display:inline-block}
+.hero-meta h1 .couple-first::first-letter{font-family:'Great Vibes','Pinyon Script',cursive;font-size:1.08em}
+html[lang="th"] .hero-meta h1 .couple-first::first-letter{font-family:inherit;font-size:1em}
 </style>
 </head>
 <body>
@@ -344,7 +348,7 @@ html[lang="th"] .info-panel .cal-alt{
           <span class="family-name" data-t="parentJannigje">Mrs. Jannigje in 't Veld</span>
         </div>
       </div>
-      <h1 class="couple-title"><span data-t="coupleFirst">Siriya</span><span class="couple-join" data-t="coupleJoin">and</span><span data-t="coupleLast">Floris</span></h1>
+      <h1 class="couple-title"><span class="couple-first" data-t="coupleFirst">Siriya</span><span class="couple-join" data-t="coupleJoin">and</span><span data-t="coupleLast">Floris</span></h1>
       <div class="sub" data-t="invite1">Request the pleasure of your company as we celebrate our marriage.</div>
     </div>
     <div class="hero-actions">
