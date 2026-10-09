@@ -331,6 +331,29 @@ html[lang="th"] .info-panel .cal-alt{
 .location-meta,.location-row.address{width:100%}
 .location-row.address{min-width:0}
 @media(max-width:900px){.details-grid{grid-template-columns:minmax(0,1fr)}.details-grid>*{min-width:0}}
+
+/* v38: Namen op de minikaart zijn nooit vertaald. Zij delen exact dezelfde
+   kalligrafische lettertypekeuze als de grote namen onder de envelop. */
+.hero-art{container-type:inline-size}
+.hero-art .mini-card-title{
+  position:absolute;left:48.55%;top:19.25%;width:26.8%;height:23.0%;
+  z-index:3;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;text-align:center;pointer-events:none;
+  color:var(--accent-deep);transform:rotate(-2.5deg);
+  font-weight:400;white-space:nowrap;
+}
+.mini-card-title .mini-first{
+  display:block;font-family:'Great Vibes','Pinyon Script','Herr Von Muellerhoff',cursive;
+  font-size:8.5cqw;line-height:1.0;font-variant-ligatures:common-ligatures contextual;
+}
+.mini-card-title .mini-join{
+  display:block;font-family:'Pinyon Script','Herr Von Muellerhoff','Snell Roundhand',cursive;
+  font-size:5.1cqw;line-height:.9;margin:.04em 0;
+}
+.mini-card-title .mini-last{
+  display:block;font-family:'Pinyon Script','Herr Von Muellerhoff','Snell Roundhand',cursive;
+  font-size:8.4cqw;line-height:1.02;
+}
 </style>
 </head>
 <body>
@@ -351,6 +374,11 @@ html[lang="th"] .info-panel .cal-alt{
       <img class="hero-base" src="images/envelope-hero.png" alt="Save the date invitation with burgundy envelope, polaroid photo, floral arrangement and blue heart">
       <div class="photo-slot" aria-label="Foto in polaroid">
         <img src="images/tekening.png" alt="Foto van Siriya en Floris" onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='images/tekening.webp';}else{this.onerror=null;this.src='images/foto-placeholder.svg';this.classList.add('placeholder');}">
+      </div>
+      <div class="mini-card-title" aria-label="Siriya and Floris">
+        <span class="mini-first">Siriya</span>
+        <span class="mini-join">and</span>
+        <span class="mini-last">Floris</span>
       </div>
       <div class="heart-live" role="text">
         <span class="heart-top">Save the</span>
