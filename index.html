@@ -221,14 +221,18 @@ html[lang="th"] .info-panel address{line-height:1.85}
   .family-name{font-size:.83rem}
   .family-block{padding-inline:.18rem}
 }
+/* Thai parent names stay intact and aligned in the existing two columns.
+   Do not break Thai syllables: fit the long names by scaling only Thai text. */
 html[lang="th"] .family-name{
   font-family:'Noto Serif Thai',Tahoma,sans-serif;
+  font-size:var(--thai-parent-font,clamp(.74rem,2.8vw,1.42rem));
   letter-spacing:0;
   line-height:1.55;
-  overflow-wrap:anywhere;
+  white-space:nowrap;
+  text-wrap:nowrap;
+  overflow-wrap:normal;
+  word-break:keep-all;
 }
-@media(max-width:540px){html[lang="th"] .family-name{font-size:clamp(.78rem,3.1vw,.99rem)}}
-@media(max-width:350px){html[lang="th"] .family-name{font-size:.74rem}}
 
 /* === v20: minimalist RSVP button on page 2, accessible popup === */
 #p2 .sheet{min-height:0;padding-bottom:clamp(4.8rem,10vw,7rem)}
@@ -754,7 +758,31 @@ function setLang(lang){
     const next = current.replace(/([?&]hl=)[^&]*/, '$1' + lang);
     if(next !== current) mapFrame.setAttribute('src', next);
   }
+  requestAnimationFrame(fitThaiParentNames);
 }
+
+/* Keep all four Thai names on one line at different widths and font loads.
+   Adjust their shared font size only if a name would exceed its column. */
+function fitThaiParentNames(){
+  const grid=document.querySelector('.family-blocks');
+  if(!grid)return;
+  grid.style.removeProperty('--thai-parent-font');
+  if(document.documentElement.lang!=='th')return;
+  const names=[...grid.querySelectorAll('.family-name')];
+  let factor=1;
+  names.forEach(el=>{
+    const block=el.closest('.family-block');
+    const cs=getComputedStyle(block);
+    const available=block.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight)-4;
+    if(el.scrollWidth>available)factor=Math.min(factor,available/el.scrollWidth);
+  });
+  if(factor<.995){
+    const base=parseFloat(getComputedStyle(names[0]).fontSize);
+    grid.style.setProperty('--thai-parent-font',Math.max(9,base*factor*.98).toFixed(2)+'px');
+  }
+}
+window.addEventListener('resize',()=>requestAnimationFrame(fitThaiParentNames));
+if(document.fonts)document.fonts.ready.then(fitThaiParentNames);
 
 document.querySelectorAll(".lang button").forEach(b=>{
   b.addEventListener("click", ()=> setLang(b.dataset.l));
