@@ -126,7 +126,7 @@ html[lang="th"] .couple-title .couple-first{
   display:inline-block;
   font-family:'Noto Serif Thai',Georgia,serif;
 }
-/* Live text on the original heart: English, Dutch and Thai use the existing language switch. */
+/* The heart lettering stays in English for every selected language. */
 .hero-art .heart-live{
   position:absolute;
   left:25.65%;top:55.25%;width:24.5%;height:12.3%;
@@ -138,12 +138,6 @@ html[lang="th"] .couple-title .couple-first{
 }
 .heart-live .heart-top,.heart-live .heart-bottom{display:block;max-width:100%;white-space:nowrap}
 .heart-live .heart-bottom{font-size:1.12em;margin-top:.04em}
-html[lang="th"] .heart-live{
-  font-family:'Noto Serif Thai',Tahoma,sans-serif;
-  font-size:clamp(.69rem,2.45vw,1.55rem);line-height:1.35;
-}
-html[lang="th"] .heart-live .heart-top,
-html[lang="th"] .heart-live .heart-bottom{white-space:normal;overflow-wrap:anywhere}
 /* Thai characters require a native Thai font instead of Latin calligraphy. */
 html[lang="th"] .hero-meta h1{
   font-family:'Noto Serif Thai',Georgia,serif;
@@ -359,8 +353,8 @@ html[lang="th"] .info-panel .cal-alt{
         <img src="images/tekening.png" alt="Foto van Siriya en Floris" onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='images/tekening.webp';}else{this.onerror=null;this.src='images/foto-placeholder.svg';this.classList.add('placeholder');}">
       </div>
       <div class="heart-live" role="text">
-        <span class="heart-top" data-t="heartTop">Save the</span>
-        <span class="heart-bottom" data-t="heartBottom">Date</span>
+        <span class="heart-top">Save the</span>
+        <span class="heart-bottom">Date</span>
       </div>
     </div>
     <div class="hero-meta">
