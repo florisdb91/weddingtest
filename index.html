@@ -358,6 +358,48 @@ html[lang="th"] .info-panel .cal-alt{
   display:block;font-family:'Pinyon Script','Herr Von Muellerhoff','Snell Roundhand',cursive;
   font-size:8.4cqw;line-height:1.02;
 }
+
+/* v40: vier subtiele interacties — geen externe animatiebibliotheek.
+   Alleen opacity en transform; standaard blijft alle inhoud zichtbaar. */
+@media (prefers-reduced-motion: no-preference) {
+  /* 1. Rustige entree van de oorspronkelijke envelop en polaroidfoto. */
+  .motion-ready #p1 .hero-art {
+    animation: wedding-envelope-enter .95s cubic-bezier(.2,.74,.3,1) both;
+  }
+  @keyframes wedding-envelope-enter {
+    from { opacity:0; transform:translate3d(0,12px,0); }
+    to   { opacity:1; transform:translate3d(0,0,0); }
+  }
+  /* 2. Tekst- en informatieblokken worden maar eenmalig zacht onthuld. */
+  .motion-ready .reveal-on-scroll {
+    opacity:0;
+    transform:translate3d(0,12px,0);
+    transition:opacity .68s ease-out,transform .68s cubic-bezier(.2,.7,.3,1);
+  }
+  .motion-ready .reveal-on-scroll.is-visible {
+    opacity:1;
+    transform:translate3d(0,0,0);
+  }
+  /* 3. Het bestaande RSVP-hartje reageert zacht op tik/focus.
+        De bestaande pop-up en klikafhandeling zijn volledig ongewijzigd. */
+  .rsvp-open-button svg { transition:transform .23s cubic-bezier(.2,.8,.2,1); transform-origin:center; }
+  .rsvp-open-button:hover svg,
+  .rsvp-open-button:focus-visible svg { transform:scale(1.12); }
+  .rsvp-open-button:active svg { transform:scale(.83); transition-duration:.1s; }
+  /* 4. De bestaande verticale ceremonielijn tekent zichzelf in zodra deze zichtbaar is. */
+  .motion-ready .timeline::before {
+    transform:scaleY(.05);
+    transform-origin:top center;
+    transition:transform 1.1s cubic-bezier(.19,.65,.25,1);
+  }
+  .motion-ready .timeline.is-visible::before { transform:scaleY(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .motion-ready .reveal-on-scroll { opacity:1!important;transform:none!important; }
+  .motion-ready #p1 .hero-art { animation:none!important; }
+  .motion-ready .timeline::before { transform:none!important;transition:none!important; }
+  .rsvp-open-button svg { transition:none!important;transform:none!important; }
+}
 </style>
 </head>
 <body>
@@ -1020,6 +1062,41 @@ rsvpForm.addEventListener('submit',async (evt)=>{
   }
 });
 
+</script>
+
+<script>
+/* v40: progressieve, mobielvriendelijke scroll-interacties.
+   Zonder IntersectionObserver of met reduced motion blijft alles direct zichtbaar. */
+(() => {
+  if (!('IntersectionObserver' in window) ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const revealTargets = document.querySelectorAll([
+    '#p1 .hero-meta .pre',
+    '#p1 .family-blocks',
+    '#p1 .hero-meta .couple-title',
+    '#p1 .hero-meta .sub',
+    '#p2 .details-title',
+    '#p2 .timeline-item',
+    '#p2 .dresscode',
+    '#p2 .info-panel',
+    '#p2 .rsvp-invite',
+    '#p3 .details-title',
+    '#p3 .about-photos',
+    '#p3 .about-text'
+  ].join(','));
+  revealTargets.forEach(el => el.classList.add('reveal-on-scroll'));
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      observer.unobserve(entry.target);
+    });
+  }, { threshold:0.05, rootMargin:'0px 0px -6% 0px' });
+  revealTargets.forEach(el => observer.observe(el));
+  const timeline = document.querySelector('#p2 .timeline');
+  if (timeline) observer.observe(timeline);
+  document.documentElement.classList.add('motion-ready');
+})();
 </script>
 </body>
 </html>
