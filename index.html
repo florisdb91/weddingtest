@@ -552,6 +552,28 @@ html[lang="th"] .wedding-signoff .signoff-names.couple-title .couple-join{
 #p2 .location-symbol svg{width:1.35rem;height:1.35rem;stroke:currentColor;stroke-width:1.35;fill:none;stroke-linejoin:round}
 #p2 .location-compact .location-name{font-family:var(--serif);font-size:clamp(1.6rem,3.5vw,2.1rem);font-weight:400;line-height:1.25;margin:0;color:var(--accent-deep);text-wrap:balance}
 #p2 .location-city{color:var(--ink-soft);font-size:1.02rem;line-height:1.55;margin-top:.15rem}
+/* v44: the original trilingual hotel invitation sentence returns; balanced spacing without a street address. */
+#p2 .location-compact .location-description{
+  width:100%;max-width:21.5rem;
+  margin:.9rem auto .2rem;
+  font-size:clamp(.94rem,1.35vw,1.05rem);
+  line-height:1.65;
+  font-weight:400;
+  color:var(--ink-soft);
+  opacity:1;
+  text-wrap:pretty;
+}
+#p2 .location-compact .location-date{margin-top:1.35rem}
+html[lang="th"] #p2 .location-compact .location-description{
+  font-family:'Noto Serif Thai',serif;
+  line-height:1.8;
+  font-size:clamp(.88rem,1.25vw,.99rem);
+  text-wrap:wrap;
+}
+@media(max-width:600px){
+  #p2 .location-compact .location-description{max-width:21rem;margin-top:.75rem}
+  #p2 .location-compact .location-date{margin-top:1.15rem}
+}
 #p2 .location-date{display:flex;justify-content:center;align-items:center;gap:.55rem;width:100%;border-top:1px solid var(--line-soft);margin:1.1rem auto 1.15rem;padding-top:1rem;color:var(--accent-deep);font-size:clamp(.91rem,1.55vw,1.04rem);line-height:1.45}
 #p2 .location-date svg{height:1.05rem;width:1.05rem;flex:none;stroke:var(--accent);fill:none;stroke-width:1.4;stroke-linecap:round}
 #p2 .location-actions{display:flex;flex-direction:column;align-items:stretch;gap:.7rem;width:min(100%,17.5rem)}
@@ -672,6 +694,7 @@ html[lang="th"] #p2 .location-compact .location-name{font-family:'Noto Serif Tha
         <div class="location-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg></div>
         <div class="location-name" data-t="venueName">Baiboon Grand Hotel</div>
         <div class="location-city" data-t="venueCity">Loei, Thailand</div>
+        <p class="location-description" data-t="locationText">We are delighted to celebrate our special day at Baiboon Grand Hotel in Loei, Thailand.</p>
         <div class="location-date"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.2 2"/></svg><span data-t="dateTimeLine">27 March 2027 · 02:00 PM</span></div>
         <div class="location-actions">
           <a class="location-action location-action--primary" id="mapLink" href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x312147a75364f8b3:0xcbe444a94fc6d62e?sa=X&amp;ved=1t:8290&amp;ictx=111" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg><span data-t="mapLink">View location</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 16 16 8M9 8h7v7"/></svg></a>
