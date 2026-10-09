@@ -28,7 +28,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Herr+Von+Muellerhoff&family=Noto+Serif+Thai:wght@300;400&family=Pinyon+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Great+Vibes&family=Herr+Von+Muellerhoff&family=Noto+Serif+Thai:wght@300;400&family=Pinyon+Script&display=swap" rel="stylesheet">
 <style>
 :root{
   --ink:#50383f;
@@ -115,21 +115,31 @@ html[lang="th"] .hero-meta h1 .couple-join{
   font-style:normal;
   margin-top:0;
 }
-/* Decorative initial traced from the S on the card; all other text styles stay unchanged. */
-html:not([lang="th"]) .couple-title .ornate-first{
-  display:inline-flex;
-  align-items:center;
+/* Only the initial S is special; the entire name remains live, translated HTML text. */
+.couple-title .couple-first{display:inline-block}
+html:not([lang="th"]) .couple-title .couple-first::first-letter{
+  font-family:'Great Vibes','Herr Von Muellerhoff','Pinyon Script',cursive;
+  font-size:1.04em;
+  font-weight:400;
 }
-html:not([lang="th"]) .couple-title .ornate-first::before{
-  content:"";
-  display:block;
-  flex:0 0 auto;
-  width:1.04em;
-  height:1.07em;
-  margin-right:-.26em;
-  background:url("images/sierlijke-s.svg") center center/contain no-repeat;
-  transform:translateY(.065em);
+/* Live text on the original heart: English, Dutch and Thai use the existing language switch. */
+.hero-art .heart-live{
+  position:absolute;
+  left:25.65%;top:55.25%;width:24.5%;height:12.3%;
+  z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  pointer-events:none;text-align:center;color:#8B1022;
+  font-family:'Great Vibes','Herr Von Muellerhoff','Pinyon Script',cursive;
+  font-size:clamp(1.1rem,4.0vw,3.05rem);font-weight:400;
+  line-height:.93;
 }
+.heart-live .heart-top,.heart-live .heart-bottom{display:block;max-width:100%;white-space:nowrap}
+.heart-live .heart-bottom{font-size:1.12em;margin-top:.04em}
+html[lang="th"] .heart-live{
+  font-family:'Noto Serif Thai',Tahoma,sans-serif;
+  font-size:clamp(.69rem,2.45vw,1.55rem);line-height:1.35;
+}
+html[lang="th"] .heart-live .heart-top,
+html[lang="th"] .heart-live .heart-bottom{white-space:normal;overflow-wrap:anywhere}
 /* Thai characters require a native Thai font instead of Latin calligraphy. */
 html[lang="th"] .hero-meta h1{
   font-family:'Noto Serif Thai',Georgia,serif;
@@ -344,6 +354,10 @@ html[lang="th"] .info-panel .cal-alt{
       <div class="photo-slot" aria-label="Foto in polaroid">
         <img src="images/tekening.png" alt="Foto van Siriya en Floris" onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='images/tekening.webp';}else{this.onerror=null;this.src='images/foto-placeholder.svg';this.classList.add('placeholder');}">
       </div>
+      <div class="heart-live" role="text">
+        <span class="heart-top" data-t="heartTop">Save the</span>
+        <span class="heart-bottom" data-t="heartBottom">Date</span>
+      </div>
     </div>
     <div class="hero-meta">
       <div class="pre" data-t="pre">Together with our families</div>
@@ -359,7 +373,7 @@ html[lang="th"] .info-panel .cal-alt{
           <span class="family-name" data-t="parentJannigje">Mrs. Jannigje in 't Veld</span>
         </div>
       </div>
-      <h1 class="couple-title" aria-label="Siriya and Floris"><span class="ornate-first" data-t="coupleFirst" aria-label="Siriya">iriya</span><span class="couple-join" data-t="coupleJoin">and</span><span data-t="coupleLast">Floris</span></h1>
+      <h1 class="couple-title" aria-label="Siriya and Floris"><span class="couple-first" data-t="coupleFirst">Siriya</span><span class="couple-join" data-t="coupleJoin">and</span><span data-t="coupleLast">Floris</span></h1>
       <div class="sub" data-t="invite1">Request the pleasure of your company as we celebrate our marriage.</div>
     </div>
     <div class="hero-actions">
@@ -499,6 +513,7 @@ const L = {
     parentJannigje:"Mrs. Jannigje in 't Veld",
     pre:"Together with our families",
     saveDate:"Save the Date",
+    heartTop:"Save the",heartBottom:"Date",
     heroScroll:"Scroll for details",
     invite1:"Request the pleasure of your company as we celebrate our marriage.",
     date:"27 March 2027",
@@ -564,6 +579,7 @@ const L = {
     parentJannigje:"Mrs. Jannigje in 't Veld",
     pre:"Samen met onze families",
     saveDate:"Save the Date",
+    heartTop:"Noteer de",heartBottom:"datum",
     heroScroll:"Scroll voor details",
     invite1:"Wij nodigen u van harte uit om samen ons huwelijk te vieren.",
     date:"27 maart 2027",
@@ -629,6 +645,7 @@ const L = {
     parentJannigje:"นางยานนิกเยอ อินท์ เฟลด์",
     pre:"พร้อมด้วยครอบครัวของเรา",
     saveDate:"บันทึกวันสำคัญ",
+    heartTop:"บันทึก",heartBottom:"วันสำคัญ",
     heroScroll:"เลื่อนลงเพื่อดูรายละเอียด",
     invite1:"ขอเรียนเชิญท่านมาร่วมเฉลิมฉลองงานมงคลสมรสของเรา",
     date:"27 มีนาคม 2570",
@@ -692,10 +709,7 @@ function setLang(lang){
   document.querySelectorAll("[data-t]").forEach(el=>{
     const key = el.dataset.t;
     if(L[lang] && L[lang][key] !== undefined){
-      // Latin names use the original ornate S from the card; Thai stays fully in Thai script.
-      el.textContent = key === "coupleFirst" && lang !== "th"
-        ? L[lang][key].slice(1) : L[lang][key];
-      if(key === "coupleFirst") el.setAttribute("aria-label",L[lang][key]);
+      el.textContent = L[lang][key];
     }
   });
   document.querySelector(".couple-title").setAttribute("aria-label",
