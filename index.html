@@ -542,60 +542,6 @@ html[lang="th"] .wedding-signoff .signoff-names.couple-title .couple-join{
 @media(prefers-reduced-motion:reduce) {
   .rsvp-thanks-close {transition:none;}
 }
-
-/* v43 — rustige locatie-informatie, zonder zichtbaar straatadres of ingebedde kaart. */
-#p2 .info-panel{min-width:0}
-#p2 .info-panel > h3{text-align:center}
-#p2 .info-panel > h3::after{margin:.55rem auto 0}
-#p2 .location-compact{width:100%;max-width:26rem;margin:1.25rem auto 0;text-align:center;display:flex;flex-direction:column;align-items:center;min-width:0}
-#p2 .location-symbol{display:grid;place-items:center;color:var(--accent);margin-bottom:.35rem}
-#p2 .location-symbol svg{width:1.35rem;height:1.35rem;stroke:currentColor;stroke-width:1.35;fill:none;stroke-linejoin:round}
-#p2 .location-compact .location-name{font-family:var(--serif);font-size:clamp(1.6rem,3.5vw,2.1rem);font-weight:400;line-height:1.25;margin:0;color:var(--accent-deep);text-wrap:balance}
-#p2 .location-city{color:var(--ink-soft);font-size:1.02rem;line-height:1.55;margin-top:.15rem}
-/* v44: the original trilingual hotel invitation sentence returns; balanced spacing without a street address. */
-#p2 .location-compact .location-description{
-  width:100%;max-width:21.5rem;
-  margin:.9rem auto .2rem;
-  font-size:clamp(.94rem,1.35vw,1.05rem);
-  line-height:1.65;
-  font-weight:400;
-  color:var(--ink-soft);
-  opacity:1;
-  text-wrap:pretty;
-}
-#p2 .location-compact .location-date{margin-top:1.35rem}
-html[lang="th"] #p2 .location-compact .location-description{
-  font-family:'Noto Serif Thai',serif;
-  line-height:1.8;
-  font-size:clamp(.88rem,1.25vw,.99rem);
-  text-wrap:wrap;
-}
-@media(max-width:600px){
-  #p2 .location-compact .location-description{max-width:21rem;margin-top:.75rem}
-  #p2 .location-compact .location-date{margin-top:1.15rem}
-}
-#p2 .location-date{display:flex;justify-content:center;align-items:center;gap:.55rem;width:100%;border-top:1px solid var(--line-soft);margin:1.1rem auto 1.15rem;padding-top:1rem;color:var(--accent-deep);font-size:clamp(.91rem,1.55vw,1.04rem);line-height:1.45}
-#p2 .location-date svg{height:1.05rem;width:1.05rem;flex:none;stroke:var(--accent);fill:none;stroke-width:1.4;stroke-linecap:round}
-#p2 .location-actions{display:flex;flex-direction:column;align-items:stretch;gap:.7rem;width:min(100%,17.5rem)}
-#p2 .location-action{display:flex;align-items:center;justify-content:center;gap:.6rem;width:100%;min-height:2.85rem;padding:.6rem .8rem;text-decoration:none;border:1px solid var(--accent);border-radius:1px;font:inherit;font-size:.98rem;line-height:1.3;letter-spacing:.03em;cursor:pointer;transition:background .2s,color .2s;white-space:normal}
-#p2 .location-action svg{width:1rem;height:1rem;stroke:currentColor;fill:none;stroke-width:1.45;stroke-linecap:round;stroke-linejoin:round;flex:none}
-#p2 .location-action--primary{color:#fff;background:var(--accent)}
-#p2 .location-action--primary:hover{background:var(--accent-deep)}
-#p2 .location-action--secondary{color:var(--accent);background:transparent}
-#p2 .location-action--secondary:hover{background:rgba(125,15,26,.05)}
-#p2 .cal-chevron{width:.84rem;height:.84rem;transition:transform .2s ease}
-#p2 #calBtn[aria-expanded="true"] .cal-chevron{transform:rotate(180deg)}
-#p2 .calendar-choice{position:relative;width:100%}
-#p2 .calendar-menu[hidden]{display:none!important}
-#p2 .calendar-menu{display:flex;flex-direction:column;width:100%;margin-top:.32rem;background:var(--paper);border:1px solid rgba(125,15,26,.23);box-shadow:0 8px 19px rgba(72,43,49,.09);text-align:left;position:relative;z-index:4}
-#p2 .calendar-menu a,#p2 .calendar-menu button{font:inherit;font-size:.94rem;color:var(--accent-deep);line-height:1.4;text-align:left;padding:.65rem .8rem;text-decoration:none;background:transparent;border:0;cursor:pointer;display:block;width:100%}
-#p2 .calendar-menu a:hover,#p2 .calendar-menu button:hover{background:#F7EEE9}
-#p2 .calendar-menu > * + *{border-top:1px solid var(--line-soft)!important}
-html[lang="th"] #p2 .location-action{font-family:'Noto Serif Thai',serif;letter-spacing:0}
-html[lang="th"] #p2 .location-compact .location-name{font-family:'Noto Serif Thai',serif;font-size:clamp(1.38rem,3vw,1.85rem)}
-@media(max-width:900px){#p2 .location-compact{margin:1.2rem auto 0}}
-@media(prefers-reduced-motion:reduce){#p2 .location-action,#p2 .cal-chevron{transition:none}}
-
 </style>
 </head>
 <body>
@@ -690,23 +636,16 @@ html[lang="th"] #p2 .location-compact .location-name{font-family:'Noto Serif Tha
     </div>
     <aside class="info-panel">
       <h3 data-t="locationTitle">The Location</h3>
-      <div class="location-compact">
-        <div class="location-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg></div>
-        <div class="location-name" data-t="venueName">Baiboon Grand Hotel</div>
-        <div class="location-city" data-t="venueCity">Loei, Thailand</div>
-        <p class="location-description" data-t="locationText">We are delighted to celebrate our special day at Baiboon Grand Hotel in Loei, Thailand.</p>
-        <div class="location-date"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.2 2"/></svg><span data-t="dateTimeLine">27 March 2027 · 02:00 PM</span></div>
-        <div class="location-actions">
-          <a class="location-action location-action--primary" id="mapLink" href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x312147a75364f8b3:0xcbe444a94fc6d62e?sa=X&amp;ved=1t:8290&amp;ictx=111" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg><span data-t="mapLink">View location</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 16 16 8M9 8h7v7"/></svg></a>
-          <div class="calendar-choice">
-            <button class="location-action location-action--secondary" id="calBtn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="calMenu"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4M12 13v4M10 15h4"/></svg><span data-t="calBtn">Add to calendar</span><svg class="cal-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg></button>
-            <div class="calendar-menu" id="calMenu" hidden>
-              <a id="calGoogle" href="#" target="_blank" rel="noopener" data-t="calGoogle">Google Calendar</a>
-              <button type="button" id="calDownload" data-t="calDownload">Download calendar file (.ics)</button>
-            </div>
-          </div>
-        </div>
+      <div class="location-name" data-t="venueName">Baiboon Grand Hotel</div>
+      <p data-t="locationText">We are delighted to celebrate our special day at Baiboon Grand Hotel in Loei, Thailand.</p>
+      <div class="location-meta">
+        <div class="location-row address"><svg viewBox="0 0 24 24"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg><div class="addr-col"><address data-t="venueAddress">Baiboon Grand Hotel
+111 Moo 9, Charoenrat Road
+Na An, Mueang Loei
+Loei 42000, Thailand</address><a class="map-link" href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x312147a75364f8b3:0xcbe444a94fc6d62e?sa=X&amp;ved=1t:8290&amp;ictx=111" target="_blank" rel="noopener" data-t="mapLink">Open in Google Maps</a></div></div>
+        <div class="location-row"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.2 2"/></svg><span data-t="dateTimeLine">27 March 2027 · 02:00 PM</span></div>
       </div>
+      <div class="cal"><button class="cal-btn" id="calBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4M12 13v4M10 15h4"/></svg><span data-t="calBtn">Add to calendar</span></button><a class="cal-alt" id="calGoogle" href="#" target="_blank" rel="noopener" data-t="calGoogle">Google Calendar</a></div>
     </aside>
   </div>
   <div class="rsvp-invite" id="rsvp">
@@ -816,7 +755,7 @@ const L = {
     dressText:"Any outfit that makes you shine and feel comfortable.",
     locationTitle:"The Location",
     locationText:"We are delighted to celebrate our special day at Baiboon Grand Hotel in Loei, Thailand.",
-    venueName:"Baiboon Grand Hotel", venueCity:"Loei, Thailand",
+    venueName:"Baiboon Grand Hotel",
     venueAddress:"Baiboon Grand Hotel\n111 Moo 9, Charoenrat Road\nNa An, Mueang Loei\nLoei 42000, Thailand",
     rsvpOpen:"Confirm attendance",
     rsvpClose:"Close RSVP",
@@ -848,12 +787,12 @@ const L = {
     rsvpSetup:"RSVP is not yet connected. Please try again later.",
     rsvpInvalid:"Please check the required fields.",
     rsvpSecurity:"Please complete the security check.",
-    mapLink:"View location",
+    mapLink:"Open in Google Maps",
     cdD:"Days", cdH:"Hours", cdM:"Minutes", cdS:"Seconds", cdDone:"The day is here",
     mapTap:"Tap to explore",
     aboutTitle:"About us",
     aboutText:"We hope to see you at our wedding and apologize if we are not able to deliver this invitation personally.",
-    calBtn:"Add to calendar", calGoogle:"Google Calendar", calDownload:"Download calendar file (.ics)",
+    calBtn:"Add to calendar", calGoogle:"Google Calendar",
     calTitle:"Wedding of Siriya & Floris",
     calDesc:"Engagement ceremony at 2 PM, vow ceremony at 4 PM, wedding reception at 6 PM."
   },
@@ -884,7 +823,7 @@ const L = {
     dressText:"Elke outfit waarin je straalt en je comfortabel voelt.",
     locationTitle:"De locatie",
     locationText:"Met veel plezier vieren wij onze bijzondere dag bij Baiboon Grand Hotel in Loei, Thailand.",
-    venueName:"Baiboon Grand Hotel", venueCity:"Loei, Thailand",
+    venueName:"Baiboon Grand Hotel",
     venueAddress:"Baiboon Grand Hotel\n111 Moo 9, Charoenrat Road\nNa An, Mueang Loei\nLoei 42000, Thailand",
     rsvpOpen:"Bevestig je aanwezigheid",
     rsvpClose:"Sluit RSVP",
@@ -916,12 +855,12 @@ const L = {
     rsvpSetup:"RSVP is nog niet gekoppeld. Probeer het later opnieuw.",
     rsvpInvalid:"Controleer de verplichte velden.",
     rsvpSecurity:"Vul eerst de beveiligingscontrole in.",
-    mapLink:"Bekijk locatie",
+    mapLink:"Open in Google Maps",
     cdD:"Dagen", cdH:"Uren", cdM:"Minuten", cdS:"Seconden", cdDone:"De dag is aangebroken",
     mapTap:"Tik om te bekijken",
     aboutTitle:"Over ons",
     aboutText:"We hopen jullie te zien op onze bruiloft en bieden onze excuses aan als we deze uitnodiging niet persoonlijk kunnen overhandigen.",
-    calBtn:"Toevoegen aan agenda", calGoogle:"Google Agenda", calDownload:"Agenda-bestand downloaden (.ics)",
+    calBtn:"Toevoegen aan agenda", calGoogle:"Google Agenda",
     calTitle:"Bruiloft van Siriya & Floris",
     calDesc:"Verlovingsceremonie om 14:00, ceremonie met huwelijksgeloften om 16:00 en bruiloftsreceptie om 18:00."
   },
@@ -952,7 +891,7 @@ const L = {
     dressText:"ชุดอะไรก็ได้ที่ทำให้คุณเปล่งประกายและรู้สึกสบายตัว",
     locationTitle:"สถานที่",
     locationText:"เรามีความยินดีเป็นอย่างยิ่งที่จะจัดงานฉลองมงคลสมรส ณ โรงแรมใบบุญแกรนด์ จังหวัดเลย ประเทศไทย",
-    venueName:"โรงแรมใบบุญแกรนด์", venueCity:"เลย ประเทศไทย",
+    venueName:"โรงแรมใบบุญแกรนด์",
     venueAddress:"โรงแรมใบบุญแกรนด์\n111 หมู่ 9 ถนนเจริญรัฐ ตำบลนาอาน\nอำเภอเมืองเลย จังหวัดเลย 42000\nประเทศไทย",
     rsvpOpen:"ยืนยันการเข้าร่วมงาน",
     rsvpClose:"ปิดหน้าต่างตอบรับ",
@@ -984,12 +923,12 @@ const L = {
     rsvpSetup:"ระบบตอบรับยังไม่เปิดใช้งาน กรุณาลองใหม่ภายหลัง",
     rsvpInvalid:"กรุณาตรวจสอบข้อมูลที่จำเป็น",
     rsvpSecurity:"กรุณายืนยันการตรวจสอบความปลอดภัย",
-    mapLink:"ดูแผนที่",
+    mapLink:"เปิดแผนที่",
     cdD:"วัน", cdH:"ชั่วโมง", cdM:"นาที", cdS:"วินาที", cdDone:"วันสำคัญมาถึงแล้ว",
     mapTap:"แตะเพื่อดู",
     aboutTitle:"เกี่ยวกับเรา",
     aboutText:"เราหวังเป็นอย่างยิ่งว่าจะได้พบทุกท่านในงานแต่งงานของเรา และขออภัยหากไม่สามารถนำบัตรเชิญมามอบให้ด้วยตนเองได้",
-    calBtn:"เพิ่มลงในปฏิทิน", calGoogle:"ปฏิทินกูเกิล", calDownload:"ดาวน์โหลดไฟล์ปฏิทิน (.ics)",
+    calBtn:"เพิ่มลงในปฏิทิน", calGoogle:"ปฏิทินกูเกิล",
     calTitle:"งานแต่งงานของ Siriya & Floris",
     calDesc:"พิธีหมั้น 14.00 น. พิธีกล่าวคำปฏิญาณรัก 16.00 น. และงานเลี้ยงฉลองมงคลสมรส 18.00 น."
   }
@@ -1122,19 +1061,7 @@ function downloadICS(){
   document.body.appendChild(a); a.click(); a.remove();
   setTimeout(()=>URL.revokeObjectURL(a.href),1000);
 }
-/* Één zichtbare agendaknop, met keuze voor Google of een .ics-bestand. */
-const calButton=document.getElementById('calBtn');
-const calMenu=document.getElementById('calMenu');
-function closeCalMenu(){calMenu.hidden=true;calButton.setAttribute('aria-expanded','false');}
-calButton.addEventListener('click',()=>{
-  const opening=calMenu.hidden;
-  calMenu.hidden=!opening;
-  calButton.setAttribute('aria-expanded',String(opening));
-});
-document.getElementById('calDownload').addEventListener('click',()=>{closeCalMenu();downloadICS();});
-document.getElementById('calGoogle').addEventListener('click',closeCalMenu);
-document.addEventListener('click',e=>{if(!e.target.closest('.calendar-choice'))closeCalMenu();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!calMenu.hidden){closeCalMenu();calButton.focus();}});
+document.getElementById("calBtn").addEventListener("click", downloadICS);
 document.querySelectorAll(".lang button").forEach(b=>b.addEventListener("click", updateGoogleLink));
 updateGoogleLink();
 
@@ -1319,7 +1246,10 @@ rsvpForm.addEventListener('submit',async (evt)=>{
     '#p2 .timeline-item',
     '#p2 .dresscode',
     '#p2 .info-panel > h3',
-    '#p2 .info-panel .location-compact',
+    '#p2 .info-panel .location-name',
+    '#p2 .info-panel > p',
+    '#p2 .info-panel .location-row',
+    '#p2 .info-panel .cal',
     '#p2 .rsvp-invite',
     '#p3 .details-title',
     '#p3 .about-photos',
