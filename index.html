@@ -400,6 +400,117 @@ html[lang="th"] .info-panel .cal-alt{
   .motion-ready .timeline::before { transform:none!important;transition:none!important; }
   .rsvp-open-button svg { transition:none!important;transform:none!important; }
 }
+
+/* v41 — verfijnde vormgeving; geen nieuwe externe bestanden of libraries. */
+/* 1. Subtiele filigrane scheidingslijnen, uitsluitend op de informatiepagina's. */
+#p2 .details-title h2::after,
+#p3 .details-title h2::after {
+  content:"✧";
+  display:block;
+  width:min(10rem,48vw);
+  margin:.24rem auto .36rem;
+  font-family:Georgia,serif;
+  font-size:.91rem;
+  font-weight:400;
+  line-height:1.2rem;
+  color:var(--accent);
+  opacity:.72;
+  background:linear-gradient(90deg,transparent,rgba(125,15,26,.32),transparent) center / 100% 1px no-repeat;
+}
+#p2 .info-panel > h3::after {
+  content:"";
+  display:block;
+  width:3.8rem;
+  height:1px;
+  margin:.55rem 0 0;
+  background:linear-gradient(90deg,rgba(125,15,26,.47),rgba(158,181,207,.42),transparent);
+}
+/* 2. Editoriale teksthiërarchie en consistentere tussenruimtes. */
+#p2 .details-title p {line-height:1.65;letter-spacing:.16em;}
+#p2 .timeline-content h3,
+#p2 .dresscode h3 {line-height:1.19;}
+#p2 .timeline-content p,
+#p2 .dresscode p {line-height:1.68;}
+#p2 .info-panel > p {line-height:1.78;}
+#p3 .about-text {line-height:1.78;}
+html[lang="th"] #p2 .details-title p {letter-spacing:.015em;}
+html[lang="th"] #p3 .about-text {line-height:1.9;}
+/* 3. De bevestiging verschijnt alleen na een succesvolle bestaande RSVP-fetch. */
+.rsvp-form[hidden],.rsvp-thanks[hidden] {display:none!important;}
+.rsvp-thanks {
+  padding:clamp(.55rem,2vw,1rem) .3rem .4rem;
+  text-align:center;
+  display:flex;flex-direction:column;align-items:center;
+  gap:.75rem;
+}
+.rsvp-thanks-mark {
+  display:grid;place-items:center;
+  width:4.3rem;height:4.3rem;
+  border:1px solid rgba(125,15,26,.35);
+  border-radius:50%;
+  color:var(--accent);
+  background:linear-gradient(160deg,#fffefd,#f9f3f0);
+}
+.rsvp-thanks-mark svg {width:2.25rem;height:2.25rem;fill:none;stroke:currentColor;stroke-width:1.1;stroke-linecap:round;stroke-linejoin:round;}
+.rsvp-thanks h4 {
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(1.7rem,4vw,2.15rem);
+  color:var(--accent-deep);line-height:1.2;
+}
+.rsvp-thanks h4::after {
+  content:"";display:block;width:3.4rem;height:1px;
+  margin:.65rem auto 0;background:rgba(125,15,26,.31);
+}
+.rsvp-thanks p {max-width:24rem;font-size:1.08rem;line-height:1.65;color:var(--ink-soft);}
+.rsvp-thanks-close {
+  margin-top:.55rem;min-height:2.6rem;
+  padding:.55rem 1.6rem;
+  border:1px solid var(--accent);
+  color:var(--accent);background:transparent;
+  font:inherit;font-size:.95rem;cursor:pointer;
+  transition:background .2s,color .2s;
+}
+.rsvp-thanks-close:hover {background:var(--accent);color:#fff;}
+/* 4. Eenvoudige, meertalige afsluiting na de bestaande About us-inhoud. */
+.wedding-signoff {
+  width:100%;max-width:33rem;
+  margin:clamp(2.8rem,6vw,4.5rem) auto 0;
+  text-align:center;
+  color:var(--accent-deep);
+  display:flex;flex-direction:column;align-items:center;
+  gap:.25rem;
+}
+.wedding-signoff::before {
+  content:"✧";display:block;
+  width:min(10rem,50vw);
+  margin-bottom:.65rem;
+  color:var(--accent);opacity:.7;
+  line-height:1.3rem;font-family:Georgia,serif;
+  background:linear-gradient(90deg,transparent,rgba(125,15,26,.3),transparent) center / 100% 1px no-repeat;
+}
+.wedding-signoff .signoff-lead {
+  color:var(--ink-soft);font-size:clamp(.95rem,1.8vw,1.08rem);
+  font-style:italic;letter-spacing:.07em;
+}
+.wedding-signoff .signoff-names {
+  font-family:'Pinyon Script','Herr Von Muellerhoff','Snell Roundhand',cursive;
+  font-size:clamp(2.55rem,7vw,4.15rem);
+  font-weight:400;line-height:1.2;
+  padding:0 .2em .15em;
+}
+html[lang="th"] .wedding-signoff .signoff-lead {font-family:'Noto Serif Thai',serif;letter-spacing:0;font-style:normal;}
+html[lang="th"] .wedding-signoff .signoff-names {
+  font-family:'Noto Serif Thai',serif;
+  font-size:clamp(1.3rem,4.4vw,2rem);
+  line-height:1.65;
+}
+@media(max-width:600px) {
+  #p2 .info-panel > h3::after {margin:.45rem 0 0;}
+  .wedding-signoff {margin-top:2.8rem;}
+}
+@media(prefers-reduced-motion:reduce) {
+  .rsvp-thanks-close {transition:none;}
+}
 </style>
 </head>
 <body>
@@ -519,6 +630,10 @@ Loei 42000, Thailand</address><a class="map-link" href="https://www.google.com/m
   <div class="about-photos"><figure class="about-photo"><div class="ph"><img src="images/over-ons-1.jpg" alt="" loading="lazy" onerror="this.remove()"></div></figure><figure class="about-photo"><div class="ph"><img src="images/over-ons-2.jpg" alt="" loading="lazy" onerror="this.remove()"></div></figure><figure class="about-photo"><div class="ph"><img src="images/over-ons-3.jpg" alt="" loading="lazy" onerror="this.remove()"></div></figure></div>
   <img class="sprig about-sprig" src="images/blad-tak.webp" alt="" aria-hidden="true" onerror="this.remove()">
   <p class="about-text" data-t="aboutText">We hope to see you at our wedding and apologize if we are not able to deliver this invitation personally.</p>
+  <div class="wedding-signoff" aria-label="Wedding sign-off">
+    <span class="signoff-lead" data-t="signoffLead">With love,</span>
+    <span class="signoff-names" data-t="signoffNames">Siriya &amp; Floris</span>
+  </div>
 </div>
 </section>
 </main>
@@ -571,6 +686,12 @@ Loei 42000, Thailand</address><a class="map-link" href="https://www.google.com/m
           <button class="rsvp-submit" type="submit" id="rsvpSubmit" data-t="rsvpSubmit">Send</button>
           <p id="rsvpFeedback" class="rsvp-feedback" role="status" aria-live="polite"></p>
         </form>
+        <div class="rsvp-thanks" id="rsvpThankYou" hidden tabindex="-1" role="status" aria-live="polite">
+          <div class="rsvp-thanks-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20.6 4.6 13c-3.7-4 2.1-9 5.6-5.3L12 9.5l1.8-1.8c3.5-3.7 9.3 1.3 5.6 5.3L12 20.6Z"/></svg></div>
+          <h4 data-t="rsvpThanksTitle">Thank you</h4>
+          <p data-t="rsvpThanksText">We have received your reply. Thank you for letting us know.</p>
+          <button type="button" class="rsvp-thanks-close" id="rsvpThanksClose" data-t="rsvpThanksClose">Close</button>
+        </div>
   </section>
 </div>
 
@@ -629,6 +750,8 @@ const L = {
     rsvpSubmit:"Send",
     rsvpSending:"Sending…",
     rsvpSuccess:"Thank you! Your RSVP has been received.",
+    signoffLead:'With love,', signoffNames:'Siriya & Floris',
+    rsvpThanksTitle:'Thank you', rsvpThanksText:'We have received your reply. Thank you for letting us know.', rsvpThanksClose:'Close',
     rsvpError:"Sending failed. Please try again later.",
     rsvpSetup:"RSVP is not yet connected. Please try again later.",
     rsvpInvalid:"Please check the required fields.",
@@ -695,6 +818,8 @@ const L = {
     rsvpSubmit:"Verstuur",
     rsvpSending:"Versturen…",
     rsvpSuccess:"Bedankt! Je RSVP is ontvangen.",
+    signoffLead:'Veel liefs,', signoffNames:'Siriya & Floris',
+    rsvpThanksTitle:'Hartelijk dank', rsvpThanksText:'We hebben je reactie ontvangen. Bedankt dat je het ons laat weten.', rsvpThanksClose:'Sluiten',
     rsvpError:"Versturen is niet gelukt. Probeer het later opnieuw.",
     rsvpSetup:"RSVP is nog niet gekoppeld. Probeer het later opnieuw.",
     rsvpInvalid:"Controleer de verplichte velden.",
@@ -761,6 +886,8 @@ const L = {
     rsvpSubmit:"ส่ง",
     rsvpSending:"กำลังส่ง…",
     rsvpSuccess:"ขอบคุณค่ะ/ครับ ได้รับคำตอบรับของท่านแล้ว",
+    signoffLead:'ด้วยรัก,', signoffNames:'สิริยา และ ฟลอริส',
+    rsvpThanksTitle:'ขอบคุณจากใจ', rsvpThanksText:'เราได้รับคำตอบรับของท่านแล้ว ขอบคุณที่แจ้งให้เราทราบ', rsvpThanksClose:'ปิด',
     rsvpError:"ส่งข้อมูลไม่สำเร็จ กรุณาลองใหม่ภายหลัง",
     rsvpSetup:"ระบบตอบรับยังไม่เปิดใช้งาน กรุณาลองใหม่ภายหลัง",
     rsvpInvalid:"กรุณาตรวจสอบข้อมูลที่จำเป็น",
@@ -939,10 +1066,15 @@ const rsvpModal=document.getElementById('rsvpModal');
 const rsvpDialog=document.getElementById('rsvpDialog');
 const rsvpOpenButton=document.getElementById('rsvpOpen');
 const rsvpCloseButton=document.getElementById('rsvpClose');
+const rsvpThankYou=document.getElementById('rsvpThankYou');
+const rsvpThanksClose=document.getElementById('rsvpThanksClose');
 let rsvpPreviousFocus=null;
 function openRsvp(){
   if(!rsvpModal.hidden)return;
   rsvpPreviousFocus=document.activeElement;
+  rsvpThankYou.hidden=true;
+  rsvpForm.hidden=false;
+  rsvpMessage('');
   rsvpModal.hidden=false;
   document.body.classList.add('rsvp-open');
   rsvpCloseButton.focus({preventScroll:true});
@@ -957,6 +1089,7 @@ function closeRsvp(){
 }
 rsvpOpenButton.addEventListener('click',openRsvp);
 rsvpCloseButton.addEventListener('click',closeRsvp);
+rsvpThanksClose.addEventListener('click',closeRsvp);
 document.getElementById('rsvpBackdrop').addEventListener('click',closeRsvp);
 document.addEventListener('keydown',event=>{
   if(rsvpModal.hidden)return;
@@ -1053,7 +1186,9 @@ rsvpForm.addEventListener('submit',async (evt)=>{
     rsvpForm.reset();
     updateRsvpGuestCount();
     rsvpMessage(rsvpT('rsvpSuccess'),'success');
-    rsvpFeedback.setAttribute('tabindex','-1');rsvpFeedback.focus({preventScroll:true});
+    rsvpForm.hidden=true;
+    rsvpThankYou.hidden=false;
+    rsvpThankYou.focus({preventScroll:true});
   }catch(err){
     rsvpMessage(rsvpT('rsvpError'),'error');
   }finally{
