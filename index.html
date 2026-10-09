@@ -115,6 +115,21 @@ html[lang="th"] .hero-meta h1 .couple-join{
   font-style:normal;
   margin-top:0;
 }
+/* Decorative initial traced from the S on the card; all other text styles stay unchanged. */
+html:not([lang="th"]) .couple-title .ornate-first{
+  display:inline-flex;
+  align-items:center;
+}
+html:not([lang="th"]) .couple-title .ornate-first::before{
+  content:"";
+  display:block;
+  flex:0 0 auto;
+  width:1.04em;
+  height:1.07em;
+  margin-right:-.26em;
+  background:url("images/sierlijke-s.svg") center center/contain no-repeat;
+  transform:translateY(.065em);
+}
 /* Thai characters require a native Thai font instead of Latin calligraphy. */
 html[lang="th"] .hero-meta h1{
   font-family:'Noto Serif Thai',Georgia,serif;
@@ -344,7 +359,7 @@ html[lang="th"] .info-panel .cal-alt{
           <span class="family-name" data-t="parentJannigje">Mrs. Jannigje in 't Veld</span>
         </div>
       </div>
-      <h1 class="couple-title"><span data-t="coupleFirst">Siriya</span><span class="couple-join" data-t="coupleJoin">and</span><span data-t="coupleLast">Floris</span></h1>
+      <h1 class="couple-title" aria-label="Siriya and Floris"><span class="ornate-first" data-t="coupleFirst" aria-label="Siriya">iriya</span><span class="couple-join" data-t="coupleJoin">and</span><span data-t="coupleLast">Floris</span></h1>
       <div class="sub" data-t="invite1">Request the pleasure of your company as we celebrate our marriage.</div>
     </div>
     <div class="hero-actions">
@@ -677,9 +692,14 @@ function setLang(lang){
   document.querySelectorAll("[data-t]").forEach(el=>{
     const key = el.dataset.t;
     if(L[lang] && L[lang][key] !== undefined){
-      el.textContent=L[lang][key];
+      // Latin names use the original ornate S from the card; Thai stays fully in Thai script.
+      el.textContent = key === "coupleFirst" && lang !== "th"
+        ? L[lang][key].slice(1) : L[lang][key];
+      if(key === "coupleFirst") el.setAttribute("aria-label",L[lang][key]);
     }
   });
+  document.querySelector(".couple-title").setAttribute("aria-label",
+    `${L[lang].coupleFirst} ${L[lang].coupleJoin} ${L[lang].coupleLast}`);
   document.querySelectorAll("[data-ph]").forEach(el=>{
     const key=el.dataset.ph;
     if(L[lang] && L[lang][key] !== undefined) el.placeholder=L[lang][key];
