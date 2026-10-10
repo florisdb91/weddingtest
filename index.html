@@ -584,6 +584,28 @@ html[lang="th"] .wedding-signoff .signoff-names.couple-title .couple-join{
 .info-panel .cal-option:hover,.info-panel .cal-option:focus-visible{background:#F8F0ED}
 html[lang="th"] .info-panel .cal-option{font-family:'Noto Serif Thai',Georgia,serif;font-size:.92rem;letter-spacing:0}
 @media(prefers-reduced-motion:reduce){.info-panel .cal-picker .cal-chevron{transition:none}}
+/* Mobiele bediening: grotere, goed leesbare aanraakvlakken zonder de desktopversie te wijzigen. */
+@media (max-width:700px){
+  .music{
+    top:.75rem;left:.75rem;
+    width:clamp(2.75rem,8vw,3rem);
+    height:clamp(2.75rem,8vw,3rem);
+    min-width:2.75rem;min-height:2.75rem;
+  }
+  .music svg{width:1.3rem;height:1.3rem}
+  .lang{
+    top:.75rem;right:.75rem;
+    gap:.05rem;padding:.2rem .25rem;
+  }
+  .lang button{
+    min-width:2.75rem;min-height:2.75rem;
+    padding:.45rem .45rem;
+    font-size:clamp(.91rem,2.5vw,1rem);
+    line-height:1.15;
+    opacity:.7;
+  }
+  .lang button[aria-pressed="true"]{opacity:1}
+}
 </style>
 </head>
 <body>
