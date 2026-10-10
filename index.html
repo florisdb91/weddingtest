@@ -622,9 +622,186 @@ html[lang="th"] .info-panel .cal-option{font-family:'Noto Serif Thai',Georgia,se
   #p2 .timeline-content{grid-column:1;grid-row:2;min-width:0}
   #p2 .timeline-content h3{overflow-wrap:break-word;hyphens:auto}
 }
+
+
+/* Realistische schermvullende vouwkaart — de website erachter blijft intact. */
+:root{
+  --intro-bg:#e8dfd6;
+  --intro-ivory:#f7efe5;
+  --intro-ivory-soft:#efe4d7;
+  --intro-wine-dark:#671019;
+  --intro-wine:#7d0f1a;
+  --intro-wine-mid:#991925;
+  --intro-wine-light:#b5313b;
+  --intro-line:rgba(255,230,212,.24);
+  --intro-shadow:rgba(18,3,7,.46);
+  --intro-shadow-soft:rgba(18,3,7,.18);
+}
+html.wedding-intro-lock,html.wedding-intro-lock body{overflow:hidden}
+.wedding-intro{
+  position:fixed;inset:0;z-index:5000;overflow:hidden;isolation:isolate;
+  background:
+    radial-gradient(circle at 50% 36%, rgba(255,250,246,.78) 0%, rgba(245,236,227,.72) 24%, rgba(230,220,210,.92) 76%, rgba(219,207,196,1) 100%),
+    linear-gradient(180deg,#ebe2d8 0%,#e6ddd4 100%);
+  perspective:2600px;
+}
+.wedding-intro::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(circle at 50% 48%, transparent 38%, rgba(0,0,0,.045) 100%),
+    linear-gradient(90deg, rgba(0,0,0,.085), transparent 16%, transparent 84%, rgba(0,0,0,.085));
+}
+.wedding-intro::after{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.16;mix-blend-mode:multiply;
+  background:
+    repeating-linear-gradient(125deg, rgba(255,255,255,.18) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(35deg, rgba(0,0,0,.045) 0 1px, transparent 1px 7px);
+}
+.intro-inside{
+  position:absolute;inset:clamp(14px,2vw,26px);border-radius:20px;padding:2rem;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;gap:.2rem;
+  background:radial-gradient(circle at 50% 38%, rgba(255,255,255,.92), rgba(247,239,229,.97) 44%, rgba(240,231,221,.98) 100%);
+  box-shadow:inset 0 0 0 1px rgba(153,122,99,.16), inset 0 0 80px rgba(92,61,35,.07);
+  text-align:center;pointer-events:none;z-index:0;
+}
+.intro-inside::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:.08;
+  background:repeating-linear-gradient(110deg, rgba(0,0,0,.25) 0 1px, transparent 1px 6px);
+  mix-blend-mode:multiply;
+}
+.intro-inside .intro-small{font:500 clamp(.92rem,1.4vw,1.08rem)/1 'Cormorant Garamond',serif;letter-spacing:.38em;text-transform:uppercase;color:#a68e84}
+.intro-inside .intro-flourish{font-size:clamp(1rem,1.4vw,1.2rem);color:#c1a7a3;margin:.3rem 0 .2rem}
+.intro-inside .intro-couple{display:flex;align-items:flex-end;gap:.18em;white-space:nowrap;font:400 clamp(2.8rem,6.5vw,6rem)/.95 'Cormorant Garamond',serif;color:#981824;text-shadow:0 1px 0 rgba(255,255,255,.45)}
+.intro-inside .intro-couple span{display:block}
+.intro-inside .intro-amp{font-size:.7em;line-height:1.1;margin-bottom:.09em}
+.intro-inside .intro-date{font:500 clamp(1rem,1.6vw,1.26rem)/1.2 'Cormorant Garamond',serif;letter-spacing:.18em;color:#9b7d7b;margin-top:.55rem}
+.intro-stage-shadow{position:absolute;inset:6vh 7vw;border-radius:30px;pointer-events:none;z-index:0;filter:blur(32px);opacity:.62;
+  background:radial-gradient(ellipse at center, rgba(18,3,7,.32) 0%, rgba(18,3,7,.16) 38%, rgba(18,3,7,0) 72%);
+  transform:translateY(3.5vh);
+}
+.intro-perspective{position:absolute;inset:clamp(12px,1.8vw,24px);display:flex;transform-style:preserve-3d;z-index:1;pointer-events:none}
+.intro-cast-shadow,.intro-center-shadow{position:absolute;pointer-events:none;z-index:0;will-change:transform,opacity}
+.intro-cast-shadow--left{top:4%;bottom:4%;left:1%;width:49%;filter:blur(24px);opacity:.18;transform-origin:left center;
+  background:radial-gradient(ellipse at 84% 50%, rgba(18,3,7,.42) 0%, rgba(18,3,7,.22) 26%, rgba(18,3,7,.09) 45%, rgba(18,3,7,0) 72%);
+}
+.intro-cast-shadow--right{top:4%;bottom:4%;right:1%;width:49%;filter:blur(24px);opacity:.18;transform-origin:right center;
+  background:radial-gradient(ellipse at 16% 50%, rgba(18,3,7,.42) 0%, rgba(18,3,7,.22) 26%, rgba(18,3,7,.09) 45%, rgba(18,3,7,0) 72%);
+}
+.intro-center-shadow{left:50%;top:5%;bottom:5%;width:min(7vw,64px);transform:translateX(-50%);filter:blur(16px);opacity:.52;
+  background:radial-gradient(ellipse at center, rgba(20,3,8,.50) 0%, rgba(20,3,8,.18) 52%, rgba(20,3,8,0) 78%);
+}
+.intro-panel{position:relative;flex:1 1 50%;min-width:0;transform-style:preserve-3d;backface-visibility:visible;will-change:transform;pointer-events:auto}
+.intro-panel--left{transform-origin:left center;z-index:3}
+.intro-panel--right{transform-origin:right center;z-index:4}
+.intro-panel-face,.intro-panel-back{
+  position:absolute;inset:0;border-radius:18px;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  background:
+    radial-gradient(circle at 22% 22%, rgba(255,255,255,.22) 0%, rgba(255,255,255,.07) 17%, rgba(255,255,255,0) 40%),
+    linear-gradient(115deg, rgba(255,255,255,.16) 0%, rgba(255,255,255,.04) 14%, rgba(0,0,0,.02) 60%, rgba(0,0,0,.14) 100%),
+    linear-gradient(135deg, var(--intro-wine-mid) 0%, #8a1520 26%, var(--intro-wine) 48%, var(--intro-wine-dark) 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,242,232,.08),
+    inset 0 0 38px rgba(255,255,255,.05),
+    0 15px 34px rgba(12,0,4,.18);
+}
+.intro-panel-back{
+  transform:rotateY(180deg);
+  background:
+    radial-gradient(circle at 78% 20%, rgba(255,255,255,.15) 0%, rgba(255,255,255,.04) 18%, rgba(255,255,255,0) 38%),
+    linear-gradient(125deg, rgba(255,255,255,.06) 0%, rgba(255,255,255,.02) 22%, rgba(0,0,0,.02) 64%, rgba(0,0,0,.12) 100%),
+    linear-gradient(135deg, #9c2732 0%, #7c1521 42%, #590c17 100%);
+}
+.intro-panel-face::before,.intro-panel-back::before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.17;mix-blend-mode:soft-light;
+  background:
+    repeating-linear-gradient(125deg, rgba(255,255,255,.30) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(32deg, rgba(0,0,0,.12) 0 1px, transparent 1px 6px);
+}
+.intro-panel-face::after,.intro-panel-back::after{
+  content:"";position:absolute;inset:1rem;border-radius:12px;pointer-events:none;border:1px solid var(--intro-line);
+  box-shadow:inset 0 0 0 1px rgba(255,230,214,.05);
+}
+.intro-panel--left .intro-panel-face{box-shadow:inset -54px 0 68px rgba(18,3,7,.31), inset 18px 0 32px rgba(255,255,255,.085), 0 18px 36px rgba(12,0,4,.26)}
+.intro-panel--right .intro-panel-face{box-shadow:inset 54px 0 68px rgba(18,3,7,.31), inset -18px 0 32px rgba(255,255,255,.085), 0 18px 36px rgba(12,0,4,.26)}
+.intro-paper-spine{position:absolute;top:0;bottom:0;width:6px;pointer-events:none;background:linear-gradient(90deg, rgba(47,5,12,.9), rgba(164,64,74,.82) 52%, rgba(255,190,185,.38) 72%, rgba(74,8,16,.82) 100%);filter:drop-shadow(0 0 6px rgba(24,0,5,.25))}
+.intro-panel--left .intro-paper-spine{right:0}
+.intro-panel--right .intro-paper-spine{left:0}
+.intro-crease{position:absolute;left:50%;top:0;height:100%;width:24px;transform:translateX(-50%);pointer-events:none;z-index:2;opacity:.85;
+  background:linear-gradient(90deg, transparent 0%, rgba(26,4,10,.34) 42%, rgba(255,201,190,.22) 54%, rgba(26,4,10,.18) 68%, transparent 100%);
+}
+.intro-ornament{position:absolute;width:clamp(56px,8vw,118px);height:clamp(56px,8vw,118px);color:rgba(245,214,194,.48);filter:drop-shadow(0 1px 1px rgba(0,0,0,.06))}
+.intro-panel--left .intro-ornament.top{top:clamp(1.35rem,3vw,3.6rem);left:clamp(1.35rem,3vw,3.6rem)}
+.intro-panel--right .intro-ornament.top{top:clamp(1.35rem,3vw,3.6rem);right:clamp(1.35rem,3vw,3.6rem);transform:scaleX(-1)}
+.intro-panel--left .intro-ornament.bottom{bottom:clamp(1.35rem,3vw,3.6rem);left:clamp(1.35rem,3vw,3.6rem);transform:scaleY(-1)}
+.intro-panel--right .intro-ornament.bottom{bottom:clamp(1.35rem,3vw,3.6rem);right:clamp(1.35rem,3vw,3.6rem);transform:scale(-1)}
+.intro-seal{position:absolute;left:0;top:50%;width:clamp(106px,14vmin,162px);height:clamp(126px,17vmin,194px);z-index:5;transform:translate(-46%,-50%) translateZ(34px);backface-visibility:hidden;-webkit-backface-visibility:hidden;border:0;padding:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;filter:drop-shadow(0 12px 9px rgba(19,0,5,.54)) drop-shadow(0 27px 22px rgba(19,0,5,.22))}
+.intro-seal::after{content:"";position:absolute;left:12%;right:12%;bottom:12%;height:30%;border-radius:50%;z-index:-1;transform:translateY(26%);background:radial-gradient(ellipse at center, rgba(28,8,8,.38) 0%, rgba(28,8,8,.12) 48%, rgba(28,8,8,0) 72%);filter:blur(10px)}
+.intro-seal:focus-visible{outline:none}
+.intro-seal svg{width:100%;height:100%;display:block}
+.intro-monogram{position:absolute;inset:0;display:flex;justify-content:center;align-items:center;white-space:nowrap;transform:translateY(-1%);font-family:'Pinyon Script','Herr Von Muellerhoff',cursive;font-weight:400;color:#7D0F1A;font-size:clamp(2.1rem,5.1vmin,4.2rem);line-height:1;text-shadow:0 1px 0 rgba(255,255,255,.7)}
+.intro-monogram .intro-monogram-first{font-family:'Great Vibes','Pinyon Script',cursive}
+.intro-monogram .intro-monogram-join{font-family:'Pinyon Script',cursive;font-size:.48em;margin:0 .06em}
+.intro-hint{position:absolute;left:50%;bottom:max(1.8rem,env(safe-area-inset-bottom,0px) + 1.25rem);transform:translateX(-50%);width:max-content;max-width:90vw;text-align:center;color:#f5dad0;pointer-events:none;font:italic clamp(1rem,1.9vw,1.2rem)/1.45 'Cormorant Garamond',Georgia,serif;letter-spacing:.035em;text-shadow:0 1px 2px rgba(55,0,10,.54);z-index:8;transition:opacity .4s ease}
+.intro-hint:before{content:"✧";display:block;opacity:.85;font-style:normal}
+#weddingIntro.intro-opening .intro-hint{opacity:0}
+#weddingIntro.intro-opening .intro-seal{pointer-events:none}
+#weddingIntro.intro-opening .intro-panel--left{animation:intro-left-unfold 4100ms cubic-bezier(.55,0,.45,1) 120ms forwards}
+#weddingIntro.intro-opening .intro-panel--right{animation:intro-right-unfold 4100ms cubic-bezier(.55,0,.45,1) 120ms forwards}
+#weddingIntro.intro-opening .intro-cast-shadow--left{animation:intro-left-shadow 4100ms cubic-bezier(.55,0,.45,1) 120ms forwards}
+#weddingIntro.intro-opening .intro-cast-shadow--right{animation:intro-right-shadow 4100ms cubic-bezier(.55,0,.45,1) 120ms forwards}
+#weddingIntro.intro-opening .intro-center-shadow{animation:intro-center-shadow-fade 4100ms cubic-bezier(.2,.74,.2,1) 120ms forwards}
+#weddingIntro.intro-opening .intro-crease{animation:intro-crease-fade 1200ms ease forwards}
+#weddingIntro.intro-reveal{opacity:0;transition:opacity 1180ms cubic-bezier(.26,.7,.3,1);pointer-events:none}
+@keyframes intro-seal-settle{0%{transform:translate(-46%,-50%) translateZ(34px) scale(1)}26%{transform:translate(-46%,-50%) translateZ(34px) scale(.975)}62%{transform:translate(-46%,-50%) translateZ(34px) scale(1.015)}100%{transform:translate(-46%,-50%) translateZ(34px) scale(1)}}
+/* Gatefold opens OUTWARD around its outside hinges. The right flap carries the seal. */
+/* Genuine outward gate opening: the front faces sweep away from the central seal,
+   to the LEFT and RIGHT. No flat collapse inward and no keyframe speed changes. */
+@keyframes intro-left-unfold{from{transform:translateX(0) rotateY(0deg)}to{transform:translateX(-112%) rotateY(-35deg)}}
+@keyframes intro-right-unfold{from{transform:translateX(0) rotateY(0deg)}to{transform:translateX(112%) rotateY(35deg)}}
+@keyframes intro-left-shadow{0%{opacity:.18;transform:translateX(0) scaleX(.96)}18%{opacity:.28;transform:translateX(-1%) scaleX(1.02)}50%{opacity:.22;transform:translateX(-8%) scaleX(1.12)}100%{opacity:0;transform:translateX(-16%) scaleX(1.3)}}
+@keyframes intro-right-shadow{0%{opacity:.18;transform:translateX(0) scaleX(.96)}18%{opacity:.28;transform:translateX(1%) scaleX(1.02)}50%{opacity:.22;transform:translateX(8%) scaleX(1.12)}100%{opacity:0;transform:translateX(16%) scaleX(1.3)}}
+@keyframes intro-center-shadow-fade{0%{opacity:.52;transform:translateX(-50%) scaleX(1)}18%{opacity:.58;transform:translateX(-50%) scaleX(1.1)}60%{opacity:.26;transform:translateX(-50%) scaleX(.7)}100%{opacity:0;transform:translateX(-50%) scaleX(.35)}}
+@keyframes intro-crease-fade{0%{opacity:.85}100%{opacity:0}}
+@media(max-width:700px){
+  .intro-panel-face::after,.intro-panel-back::after{inset:.9rem}
+  .intro-ornament{width:clamp(42px,12vw,76px);height:clamp(42px,12vw,76px)}
+  .intro-panel--left .intro-ornament.top{top:1rem;left:1rem}
+  .intro-panel--right .intro-ornament.top{top:1rem;right:1rem}
+  .intro-panel--left .intro-ornament.bottom{bottom:1rem;left:1rem}
+  .intro-panel--right .intro-ornament.bottom{bottom:1rem;right:1rem}
+  .intro-stage-shadow{inset:5vh 4vw;filter:blur(24px)}
+  .intro-seal{transform:translate(-44%,-50%) translateZ(30px)}
+}
+@media(prefers-reduced-motion:reduce){
+  #weddingIntro.intro-opening .intro-panel,
+  #weddingIntro.intro-opening .intro-seal,
+  #weddingIntro.intro-opening .intro-cast-shadow,
+  #weddingIntro.intro-opening .intro-center-shadow{animation:none!important}
+  #weddingIntro.intro-reveal{transition:opacity .18s ease!important}
+}
+
+
 </style>
 </head>
 <body>
+
+<div id="weddingIntro" class="wedding-intro" aria-label="Openvouwende trouwuitnodiging" hidden>
+  <div class="intro-inside" aria-hidden="true"><div class="intro-small">Our Wedding Invitation</div><div class="intro-flourish">✧</div><div class="intro-couple"><span>Siriya</span><span class="intro-amp">&amp;</span><span>Floris</span></div><div class="intro-date">27 March 2027</div></div>
+  <div class="intro-stage-shadow" aria-hidden="true"></div>
+  <div class="intro-perspective">
+    <div class="intro-cast-shadow intro-cast-shadow--left" aria-hidden="true"></div>
+    <div class="intro-cast-shadow intro-cast-shadow--right" aria-hidden="true"></div>
+    <div class="intro-center-shadow" aria-hidden="true"></div>
+    <div class="intro-panel intro-panel--left" aria-hidden="true"><div class="intro-panel-back"></div><div class="intro-panel-face"><span class="intro-ornament top"><svg viewBox="0 0 90 90" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 76V27Q6 6 27 6H76M13 61V30Q13 13 30 13H60"/><path d="M20 53C34 48 39 30 29 24C24 21 17 27 23 32C29 37 38 25 48 20M26 47C31 50 36 55 31 61M44 21C53 25 56 33 51 38M36 36C45 36 52 46 43 52"/><path d="M47 20Q56 13 64 21M16 56Q8 66 18 73"/><circle cx="39" cy="27" r="1.6" fill="currentColor" stroke="none"/></svg></span><span class="intro-ornament bottom"><svg viewBox="0 0 90 90" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 76V27Q6 6 27 6H76M13 61V30Q13 13 30 13H60"/><path d="M20 53C34 48 39 30 29 24C24 21 17 27 23 32C29 37 38 25 48 20M26 47C31 50 36 55 31 61M44 21C53 25 56 33 51 38M36 36C45 36 52 46 43 52"/><path d="M47 20Q56 13 64 21M16 56Q8 66 18 73"/><circle cx="39" cy="27" r="1.6" fill="currentColor" stroke="none"/></svg></span></div><span class="intro-paper-spine"></span></div>
+    <div class="intro-panel intro-panel--right"><div class="intro-panel-back"></div><div class="intro-panel-face"><span class="intro-ornament top"><svg viewBox="0 0 90 90" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 76V27Q6 6 27 6H76M13 61V30Q13 13 30 13H60"/><path d="M20 53C34 48 39 30 29 24C24 21 17 27 23 32C29 37 38 25 48 20M26 47C31 50 36 55 31 61M44 21C53 25 56 33 51 38M36 36C45 36 52 46 43 52"/><path d="M47 20Q56 13 64 21M16 56Q8 66 18 73"/><circle cx="39" cy="27" r="1.6" fill="currentColor" stroke="none"/></svg></span><span class="intro-ornament bottom"><svg viewBox="0 0 90 90" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 76V27Q6 6 27 6H76M13 61V30Q13 13 30 13H60"/><path d="M20 53C34 48 39 30 29 24C24 21 17 27 23 32C29 37 38 25 48 20M26 47C31 50 36 55 31 61M44 21C53 25 56 33 51 38M36 36C45 36 52 46 43 52"/><path d="M47 20Q56 13 64 21M16 56Q8 66 18 73"/><circle cx="39" cy="27" r="1.6" fill="currentColor" stroke="none"/></svg></span></div><span class="intro-paper-spine"></span>
+      <button class="intro-seal" id="introOpen" type="button" aria-label="Open de trouwuitnodiging"><svg viewBox="0 0 150 180" role="presentation" aria-hidden="true"><defs><linearGradient id="sealCream" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fffdfa"/><stop offset=".52" stop-color="#f7f0e5"/><stop offset="1" stop-color="#ead8c0"/></linearGradient><linearGradient id="sealEdge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff9ef"/><stop offset="1" stop-color="#d8bea1"/></linearGradient></defs><path d="M75 6 C87 15 98 6 108 17 C117 28 128 22 132 38 C136 50 147 53 143 68 C140 79 151 88 143 100 C139 111 145 121 135 134 C126 141 128 155 111 157 C99 158 90 172 75 173 C61 172 51 158 39 157 C22 155 24 141 15 134 C5 121 11 111 7 100 C-1 88 10 79 7 68 C3 53 14 50 18 38 C22 22 33 28 42 17 C52 6 63 15 75 6 Z" fill="url(#sealCream)" stroke="url(#sealEdge)" stroke-width="3.4"/><path d="M75 16C86 22 98 15 106 25C115 35 123 30 125 42C130 54 137 55 133 69C131 79 142 89 133 99C128 112 134 118 125 130C116 138 119 146 108 148C96 151 89 163 75 164C61 163 53 151 42 148C31 146 34 138 25 130C16 118 22 112 17 99C8 89 19 79 17 69C13 55 20 54 25 42C27 30 35 35 44 25C52 15 64 22 75 16Z" fill="none" stroke="#c9aa89" stroke-width="1.4"/><path d="M49 30Q75 17 101 30" stroke="#bb9a75" stroke-width="1.1" fill="none"/><path d="M49 145Q75 158 101 145" stroke="#bb9a75" stroke-width="1.1" fill="none"/><path d="M34 62q-10 13 0 24q8 7 13-3m69-21q10 13 0 24q-8 7-13-3" stroke="#d2b695" stroke-width="1" fill="none"/></svg><span class="intro-monogram"><span class="intro-monogram-first">S</span><span class="intro-monogram-join">&amp;</span><span>F</span></span></button>
+    </div>
+    <div class="intro-crease" aria-hidden="true"></div>
+  </div>
+  <div class="intro-hint" id="introHint">Tik of klik op het zegel om de kaart te openen</div>
+</div>
+<script>document.getElementById('weddingIntro').hidden=false;document.documentElement.classList.add('wedding-intro-lock');</script>
+
 <nav class="lang" aria-label="Language">
   <button data-l="en" aria-pressed="true">EN</button>
   <button data-l="th" aria-pressed="false" lang="th">ไทย</button>
@@ -1373,5 +1550,38 @@ rsvpForm.addEventListener('submit',async (evt)=>{
   document.documentElement.classList.add('motion-ready');
 })();
 </script>
+
+<script>
+/* Realistic introduction card only; the rest of the wedding website remains unchanged. */
+(()=>{
+  const overlay=document.getElementById('weddingIntro');
+  const trigger=document.getElementById('introOpen');
+  const hint=document.getElementById('introHint');
+  if(!overlay||!trigger)return;
+  let opened=false,leaveTimer=null,removeTimer=null;
+  const txt={en:'Tap or click the seal to open your invitation',nl:'Tik of klik op het zegel om de uitnodiging te openen',th:'แตะตราประทับเพื่อเปิดบัตรเชิญ'};
+  const lang=(navigator.language||'en').toLowerCase();
+  const locale=lang.startsWith('nl')?'nl':(lang.startsWith('th')?'th':'en');
+  hint.textContent=txt[locale];
+  function removeIntro(){
+    if(!overlay.isConnected)return;
+    overlay.remove();
+    document.documentElement.classList.remove('wedding-intro-lock');
+    if(document.activeElement===document.body){document.querySelector('.lang button[aria-pressed="true"]')?.focus({preventScroll:true});}
+  }
+  function openCard(){
+    if(opened)return;
+    opened=true;
+    trigger.disabled=true;
+    const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduced){overlay.classList.add('intro-reveal');removeTimer=setTimeout(removeIntro,260);return;}
+    overlay.classList.add('intro-opening');
+    leaveTimer=setTimeout(()=>overlay.classList.add('intro-reveal'),4320);
+    removeTimer=setTimeout(removeIntro,5660);
+  }
+  trigger.addEventListener('click',openCard,{once:true});
+})();
+</script>
+
 </body>
 </html>
