@@ -637,8 +637,8 @@ html[lang="th"] .info-panel .cal-option{font-family:'Noto Serif Thai',Georgia,se
   --intro-shadow:rgba(18,3,7,.46);
   --intro-shadow-soft:rgba(18,3,7,.18);
 }
-/* De bladzijde blijft op haar originele breedte; ontsluiten gebeurt
-   ruim voor de fade-out, terwijl de binnenkaart nog alles afdekt. */
+/* Houd dezelfde viewport-breedte tijdens en na het openen van de kaart. */
+html{scrollbar-gutter:stable}
 html.wedding-intro-lock,html.wedding-intro-lock body{overflow:hidden}
 .wedding-intro{
   position:fixed;inset:0;z-index:5000;overflow:hidden;isolation:isolate;
@@ -725,12 +725,11 @@ html.wedding-intro-lock,html.wedding-intro-lock body{overflow:hidden}
 }
 .intro-panel--left .intro-panel-face{box-shadow:inset -54px 0 68px rgba(18,3,7,.31), inset 18px 0 32px rgba(255,255,255,.085), 0 18px 36px rgba(12,0,4,.26)}
 .intro-panel--right .intro-panel-face{box-shadow:inset 54px 0 68px rgba(18,3,7,.31), inset -18px 0 32px rgba(255,255,255,.085), 0 18px 36px rgba(12,0,4,.26)}
-/* Geen dubbele decoratieve verticale streepjes achter het zegel. */
-.intro-paper-spine{display:none}
+.intro-paper-spine{position:absolute;top:0;bottom:0;width:6px;pointer-events:none;background:linear-gradient(90deg, rgba(47,5,12,.9), rgba(164,64,74,.82) 52%, rgba(255,190,185,.38) 72%, rgba(74,8,16,.82) 100%);filter:drop-shadow(0 0 6px rgba(24,0,5,.25))}
 .intro-panel--left .intro-paper-spine{right:0}
 .intro-panel--right .intro-paper-spine{left:0}
 .intro-crease{position:absolute;left:50%;top:0;height:100%;width:24px;transform:translateX(-50%);pointer-events:none;z-index:2;opacity:.85;
-  background:linear-gradient(90deg, transparent, rgba(26,4,10,.24) 50%, transparent);
+  background:linear-gradient(90deg, transparent 0%, rgba(26,4,10,.34) 42%, rgba(255,201,190,.22) 54%, rgba(26,4,10,.18) 68%, transparent 100%);
 }
 .intro-ornament{position:absolute;width:clamp(56px,8vw,118px);height:clamp(56px,8vw,118px);color:rgba(245,214,194,.48);filter:drop-shadow(0 1px 1px rgba(0,0,0,.06))}
 .intro-panel--left .intro-ornament.top{top:clamp(1.35rem,3vw,3.6rem);left:clamp(1.35rem,3vw,3.6rem)}
@@ -757,7 +756,17 @@ html.wedding-intro-lock,html.wedding-intro-lock body{overflow:hidden}
 #weddingIntro.intro-opening .intro-cast-shadow--right{animation:intro-right-shadow 4100ms cubic-bezier(.55,0,.45,1) 120ms forwards}
 #weddingIntro.intro-opening .intro-center-shadow{animation:intro-center-shadow-fade 4100ms cubic-bezier(.2,.74,.2,1) 120ms forwards}
 #weddingIntro.intro-opening .intro-crease{animation:intro-crease-fade 1200ms ease forwards}
-#weddingIntro.intro-reveal{opacity:0;transition:opacity 1180ms cubic-bezier(.26,.7,.3,1);pointer-events:none}
+/* v6: two-stage fade. The invitation first disappears behind solid paper;
+   scrolling/layout/fonts are settled while fully hidden, then the paper fades
+   out to the live website. This prevents any visible position jump. */
+.intro-transition-veil{
+  position:absolute;inset:0;z-index:20;pointer-events:none;
+  background:#F6F1EC;
+  opacity:0;
+  transition:opacity 520ms ease-in-out;
+}
+#weddingIntro.intro-veiled .intro-transition-veil{opacity:1}
+#weddingIntro.intro-reveal{opacity:0;transition:opacity 1250ms cubic-bezier(.26,.7,.3,1);pointer-events:none}
 @keyframes intro-seal-settle{0%{transform:translate(-46%,-50%) translateZ(34px) scale(1)}26%{transform:translate(-46%,-50%) translateZ(34px) scale(.975)}62%{transform:translate(-46%,-50%) translateZ(34px) scale(1.015)}100%{transform:translate(-46%,-50%) translateZ(34px) scale(1)}}
 /* Gatefold opens OUTWARD around its outside hinges. The right flap carries the seal. */
 /* Genuine outward gate opening: the front faces sweep away from the central seal,
@@ -808,6 +817,7 @@ html.wedding-intro-lock,html.wedding-intro-lock body{overflow:hidden}
     <div class="intro-crease" aria-hidden="true"></div>
   </div>
   <div class="intro-hint" id="introHint"></div>
+  <div class="intro-transition-veil" aria-hidden="true"></div>
 </div>
 <script>document.getElementById('weddingIntro').hidden=false;document.documentElement.classList.add('wedding-intro-lock');</script>
 
@@ -1567,7 +1577,7 @@ rsvpForm.addEventListener('submit',async (evt)=>{
   const trigger=document.getElementById('introOpen');
   const hint=document.getElementById('introHint');
   if(!overlay||!trigger)return;
-  let opened=false,unlockTimer=null,leaveTimer=null,removeTimer=null;
+  let opened=false,leaveTimer=null,removeTimer=null;
   const txt={en:'Tap or click the seal to open your invitation',nl:'Tik of klik op het zegel om de uitnodiging te openen',th:'แตะหรือคลิกที่ตราประทับเพื่อเปิดคำเชิญของคุณ'};
   const thaiLine='แตะหรือคลิกที่ตราประทับเพื่อเปิดคำเชิญของคุณ';
   const lang=(navigator.language||'en').toLowerCase();
@@ -1584,13 +1594,31 @@ rsvpForm.addEventListener('submit',async (evt)=>{
     opened=true;
     trigger.disabled=true;
     const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if(reduced){overlay.classList.add('intro-reveal');removeTimer=setTimeout(removeIntro,260);return;}
+    if(reduced){
+      // Skip the motion and unlock only when the opaque cover is in front.
+      const veil=overlay.querySelector('.intro-transition-veil');
+      if(veil)veil.style.transition='none';
+      overlay.classList.add('intro-veiled');
+      document.documentElement.classList.remove('wedding-intro-lock');
+      overlay.classList.add('intro-reveal');
+      removeTimer=setTimeout(removeIntro,260);
+      return;
+    }
     overlay.classList.add('intro-opening');
-    /* De oorspronkelijke pagina krijgt haar normale scrollruimte terug
-       terwijl de binnenkaart nog volledig zichtbaar is, dus zonder sprong. */
-    unlockTimer=setTimeout(()=>document.documentElement.classList.remove('wedding-intro-lock'),3960);
-    leaveTimer=setTimeout(()=>overlay.classList.add('intro-reveal'),4320);
-    removeTimer=setTimeout(removeIntro,5660);
+    // The card finishes opening; a paper-coloured veil fades over the entire
+    // invitation before we change the page's scroll/viewport state.
+    leaveTimer=setTimeout(async()=>{
+      overlay.classList.add('intro-veiled');
+      await new Promise(resolve=>setTimeout(resolve,590)); // veil is opaque
+      // Hide any width/position changes caused by restoring the scrollbar.
+      document.documentElement.classList.remove('wedding-intro-lock');
+      // Allow 2 layout/paint frames, and a brief chance for late font swaps.
+      await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+      const fontsReady=document.fonts ? document.fonts.ready : Promise.resolve();
+      await Promise.race([fontsReady,new Promise(resolve=>setTimeout(resolve,850))]);
+      overlay.classList.add('intro-reveal');
+      removeTimer=setTimeout(removeIntro,1380);
+    },4120);
   }
   trigger.addEventListener('click',openCard,{once:true});
 })();
