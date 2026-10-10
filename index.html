@@ -1638,7 +1638,7 @@ rsvpForm.addEventListener('submit',async (evt)=>{
       await Promise.race([fontsReady,new Promise(resolve=>setTimeout(resolve,320))]);
       overlay.classList.add('intro-reveal');
       removeTimer=setTimeout(removeIntro,920);
-    },2760);
+    },3260);
   }
   trigger.addEventListener('click',openCard,{once:true});
 })();
