@@ -625,24 +625,55 @@ html[lang="th"] .info-panel .cal-option{font-family:'Noto Serif Thai',Georgia,se
 
 /* Locatie — dezelfde hotelkop en ondertitel; alleen de adres-/datumregels
    vervangen door een rustige Google Maps-actie direct boven de agenda. */
-#p2 .info-panel .location-actions{margin:2rem 0 .65rem;align-items:center;gap:0}
+/* Locatieknoppen: identieke breedte en exact gedeelde drie-koloms-icoonindeling.
+   Eerste kolom: pictogram. Midden: gecentreerde tekst. Laatste: pijltje of
+   even brede lege ruimte. Zo springen de iconen noch de teksten op mobiel. */
+#p2 .info-panel .venue-city{
+  text-align:center;color:var(--ink-soft);font-size:.88rem;
+  letter-spacing:.16em;line-height:1.5;font-weight:400;
+  margin:.25rem auto 0;width:100%;
+}
+#p2 .info-panel .location-actions{margin:.9rem 0 0;align-items:center;gap:0}
+#p2 .info-panel .location-map-button,
+#p2 .info-panel .cal-picker > summary.cal-btn{
+  box-sizing:border-box;display:grid;
+  grid-template-columns:1rem minmax(0,1fr) 1rem;
+  align-items:center;column-gap:.55rem;
+  width:100%;min-height:2.65rem;padding:.62rem .8rem;
+  text-align:center;
+}
 #p2 .info-panel .location-map-button{
-  box-sizing:border-box;display:flex;align-items:center;justify-content:center;
-  gap:.55rem;width:min(15.5rem,100%);min-height:2.65rem;
-  padding:.62rem .8rem;border:1px solid var(--accent);
+  max-width:15.5rem;border:1px solid var(--accent);
   background:transparent;color:var(--accent);text-decoration:none;
   font:inherit;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
-  line-height:1.4;text-align:center;transition:background .2s,color .2s;
+  line-height:1.4;transition:background .2s,color .2s;
 }
-#p2 .info-panel .location-map-button svg{
-  width:1rem;height:1rem;flex:none;stroke:currentColor;fill:none;
-  stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;
+#p2 .info-panel .location-map-button svg,
+#p2 .info-panel .cal-picker > summary.cal-btn svg:first-child{
+  display:block;grid-column:1;width:1rem;height:1rem;flex:none;
+  stroke:currentColor;fill:none;stroke-width:1.4;
+  stroke-linecap:round;stroke-linejoin:round;
+}
+#p2 .info-panel .location-map-button span,
+#p2 .info-panel .cal-picker > summary.cal-btn span{
+  display:block;grid-column:2;min-width:0;text-align:center;
+}
+#p2 .info-panel .cal-picker > summary.cal-btn .cal-chevron{
+  grid-column:3;margin:0 auto;width:.9rem;height:.9rem;
 }
 #p2 .info-panel .location-map-button:hover{background:var(--accent);color:#fff}
-#p2 .info-panel .location-actions + .cal{margin:.65rem auto 0}
+#p2 .info-panel .location-actions + .cal{margin:.55rem auto 0}
 html[lang="th"] #p2 .info-panel .location-map-button{
   font-family:'Noto Serif Thai',Georgia,serif;font-size:.9rem;
   letter-spacing:0;text-transform:none;
+}
+html[lang="th"] #p2 .info-panel .venue-city{
+  font-family:'Noto Serif Thai',Georgia,serif;letter-spacing:.025em;
+  font-size:.94rem;
+}
+@media(max-width:600px){
+  #p2 .info-panel .venue-city{margin-top:.12rem}
+  #p2 .info-panel .location-actions{margin-top:.9rem}
 }
 /* Behoud de oorspronkelijke hoogte van de locatiekolom; daardoor blijft de
    RSVP onder de tweekolomsindeling staan en wordt pagina 2 niet ingekort. */
@@ -790,6 +821,7 @@ html[lang="th"] #p2 .info-panel .location-map-button{
       <h3 data-t="locationTitle">The Location</h3>
       <div class="location-name" data-t="venueName">Baiboon Grand Hotel</div>
       <p data-t="locationText">We are delighted to celebrate our special day at Baiboon Grand Hotel in Loei, Thailand.</p>
+      <div class="venue-city" data-t="venueCity">Loei, Thailand</div>
       <div class="location-meta location-actions">
         <a class="location-map-button" href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x312147a75364f8b3:0xcbe444a94fc6d62e?sa=X&amp;ved=1t:8290&amp;ictx=111" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg><span data-t="mapLink">Open in Google Maps</span></a>
       </div>
@@ -910,6 +942,7 @@ const L = {
     dressTitle:"Dress Code",
     dressText:"Any outfit that makes you shine and feel comfortable.",
     locationTitle:"The Location",
+    venueCity:"Loei, Thailand",
     locationText:"We are delighted to celebrate our special day at Baiboon Grand Hotel in Loei, Thailand.",
     venueName:"Baiboon Grand Hotel",
     venueAddress:"Baiboon Grand Hotel\n111 Moo 9, Charoenrat Road\nNa An, Mueang Loei\nLoei 42000, Thailand",
@@ -978,6 +1011,7 @@ const L = {
     dressTitle:"Dresscode",
     dressText:"Elke outfit waarin je straalt en je comfortabel voelt.",
     locationTitle:"De locatie",
+    venueCity:"Loei, Thailand",
     locationText:"Met veel plezier vieren wij onze bijzondere dag bij Baiboon Grand Hotel in Loei, Thailand.",
     venueName:"Baiboon Grand Hotel",
     venueAddress:"Baiboon Grand Hotel\n111 Moo 9, Charoenrat Road\nNa An, Mueang Loei\nLoei 42000, Thailand",
@@ -1046,6 +1080,7 @@ const L = {
     dressTitle:"การแต่งกาย",
     dressText:"ชุดอะไรก็ได้ที่ทำให้คุณเปล่งประกายและรู้สึกสบายตัว",
     locationTitle:"สถานที่",
+    venueCity:"จังหวัดเลย ประเทศไทย",
     locationText:"เรามีความยินดีเป็นอย่างยิ่งที่จะจัดงานฉลองมงคลสมรส ณ โรงแรมใบบุญแกรนด์ จังหวัดเลย ประเทศไทย",
     venueName:"โรงแรมใบบุญแกรนด์",
     venueAddress:"โรงแรมใบบุญแกรนด์\n111 หมู่ 9 ถนนเจริญรัฐ ตำบลนาอาน\nอำเภอเมืองเลย จังหวัดเลย 42000\nประเทศไทย",
