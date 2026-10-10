@@ -664,7 +664,7 @@ html.wedding-intro-lock,html.wedding-intro-lock body{overflow:hidden}
   display:flex;flex-direction:column;justify-content:center;align-items:center;gap:.2rem;
   background:radial-gradient(circle at 50% 38%, rgba(255,255,255,.92), rgba(247,239,229,.97) 44%, rgba(240,231,221,.98) 100%);
   box-shadow:inset 0 0 0 1px rgba(153,122,99,.16), inset 0 0 80px rgba(92,61,35,.07);
-  text-align:center;pointer-events:none;z-index:0;
+  text-align:center;pointer-events:none;z-index:1;
 }
 .intro-inside::before{
   content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:.08;
@@ -679,9 +679,9 @@ html.wedding-intro-lock,html.wedding-intro-lock body{overflow:hidden}
 .intro-inside .intro-date{font:500 clamp(1rem,1.6vw,1.26rem)/1.2 'Cormorant Garamond',serif;letter-spacing:.18em;color:#9b7d7b;margin-top:.55rem}
 .intro-stage-shadow{position:absolute;inset:6vh 7vw;border-radius:30px;pointer-events:none;z-index:0;filter:blur(32px);opacity:.62;
   background:radial-gradient(ellipse at center, rgba(18,3,7,.32) 0%, rgba(18,3,7,.16) 38%, rgba(18,3,7,0) 72%);
-  transform:translateY(3.5vh);
+  transform:translateY(3.5vh);z-index:0;will-change:opacity;
 }
-.intro-perspective{position:absolute;inset:clamp(12px,1.8vw,24px);display:flex;transform-style:preserve-3d;z-index:1;pointer-events:none}
+.intro-perspective{position:absolute;inset:clamp(12px,1.8vw,24px);display:flex;transform-style:preserve-3d;z-index:2;pointer-events:none}
 .intro-cast-shadow,.intro-center-shadow{position:absolute;pointer-events:none;z-index:0;will-change:transform,opacity}
 .intro-cast-shadow--left{top:4%;bottom:4%;left:1%;width:49%;filter:blur(24px);opacity:.18;transform-origin:left center;
   background:radial-gradient(ellipse at 84% 50%, rgba(18,3,7,.42) 0%, rgba(18,3,7,.22) 26%, rgba(18,3,7,.09) 45%, rgba(18,3,7,0) 72%);
@@ -750,32 +750,42 @@ html.wedding-intro-lock,html.wedding-intro-lock body{overflow:hidden}
 .intro-hint .intro-hint-th{display:block;font-style:normal;font-family:'Noto Serif Thai',serif;font-size:.84em;letter-spacing:.01em;opacity:.95}
 #weddingIntro.intro-opening .intro-hint{opacity:0}
 #weddingIntro.intro-opening .intro-seal{pointer-events:none}
-#weddingIntro.intro-opening .intro-panel--left{animation:intro-left-unfold 4100ms cubic-bezier(.55,0,.45,1) 120ms forwards}
-#weddingIntro.intro-opening .intro-panel--right{animation:intro-right-unfold 4100ms cubic-bezier(.55,0,.45,1) 120ms forwards}
-#weddingIntro.intro-opening .intro-cast-shadow--left{animation:intro-left-shadow 4100ms cubic-bezier(.55,0,.45,1) 120ms forwards}
-#weddingIntro.intro-opening .intro-cast-shadow--right{animation:intro-right-shadow 4100ms cubic-bezier(.55,0,.45,1) 120ms forwards}
-#weddingIntro.intro-opening .intro-center-shadow{animation:intro-center-shadow-fade 4100ms cubic-bezier(.2,.74,.2,1) 120ms forwards}
-#weddingIntro.intro-opening .intro-crease{animation:intro-crease-fade 1200ms ease forwards}
-/* v6: two-stage fade. The invitation first disappears behind solid paper;
-   scrolling/layout/fonts are settled while fully hidden, then the paper fades
-   out to the live website. This prevents any visible position jump. */
+#weddingIntro.intro-opening .intro-panel--left{animation:intro-left-unfold 2800ms cubic-bezier(.55,0,.45,1) 80ms forwards}
+#weddingIntro.intro-opening .intro-panel--right{animation:intro-right-unfold 2800ms cubic-bezier(.55,0,.45,1) 80ms forwards}
+#weddingIntro.intro-opening .intro-cast-shadow--left{animation:intro-left-shadow 2700ms cubic-bezier(.55,0,.45,1) 80ms forwards}
+#weddingIntro.intro-opening .intro-cast-shadow--right{animation:intro-right-shadow 2700ms cubic-bezier(.55,0,.45,1) 80ms forwards}
+#weddingIntro.intro-opening .intro-center-shadow{animation:intro-center-shadow-fade 2450ms cubic-bezier(.2,.74,.2,1) 80ms forwards}
+#weddingIntro.intro-opening .intro-crease{animation:intro-crease-fade 900ms ease forwards}
+/* The soft casting shadow belongs to the moving doors: it must not linger
+   on the interior paper or be visible during the fade to the real homepage. */
+#weddingIntro.intro-opening .intro-stage-shadow{
+  animation:intro-stage-shadow-lift 2150ms ease-out 100ms both;
+}
+@keyframes intro-stage-shadow-lift{
+  0%{opacity:.62;transform:translateY(3.5vh) scale(1)}
+  35%{opacity:.32;transform:translateY(3vh) scale(1.035)}
+  100%{opacity:0;transform:translateY(2vh) scale(1.09)}
+}
+/* v8: concise two-stage fade. The shadow has already dissipated when
+   opaque paper briefly covers the intro for viewport/font settling.
+   The visitor sees a single gentle transition into the live website. */
 .intro-transition-veil{
   position:absolute;inset:0;z-index:20;pointer-events:none;
   background:#F6F1EC;
   opacity:0;
-  transition:opacity 520ms ease-in-out;
+  transition:opacity 340ms ease-in-out;
 }
 #weddingIntro.intro-veiled .intro-transition-veil{opacity:1}
-#weddingIntro.intro-reveal{opacity:0;transition:opacity 1250ms cubic-bezier(.26,.7,.3,1);pointer-events:none}
+#weddingIntro.intro-reveal{opacity:0;transition:opacity 820ms cubic-bezier(.26,.7,.3,1);pointer-events:none}
 @keyframes intro-seal-settle{0%{transform:translate(-46%,-50%) translateZ(34px) scale(1)}26%{transform:translate(-46%,-50%) translateZ(34px) scale(.975)}62%{transform:translate(-46%,-50%) translateZ(34px) scale(1.015)}100%{transform:translate(-46%,-50%) translateZ(34px) scale(1)}}
 /* Gatefold opens OUTWARD around its outside hinges. The right flap carries the seal. */
 /* Genuine outward gate opening: the front faces sweep away from the central seal,
    to the LEFT and RIGHT. No flat collapse inward and no keyframe speed changes. */
 @keyframes intro-left-unfold{from{transform:translateX(0) rotateY(0deg)}to{transform:translateX(-112%) rotateY(-35deg)}}
 @keyframes intro-right-unfold{from{transform:translateX(0) rotateY(0deg)}to{transform:translateX(112%) rotateY(35deg)}}
-@keyframes intro-left-shadow{0%{opacity:.18;transform:translateX(0) scaleX(.96)}18%{opacity:.28;transform:translateX(-1%) scaleX(1.02)}50%{opacity:.22;transform:translateX(-8%) scaleX(1.12)}100%{opacity:0;transform:translateX(-16%) scaleX(1.3)}}
-@keyframes intro-right-shadow{0%{opacity:.18;transform:translateX(0) scaleX(.96)}18%{opacity:.28;transform:translateX(1%) scaleX(1.02)}50%{opacity:.22;transform:translateX(8%) scaleX(1.12)}100%{opacity:0;transform:translateX(16%) scaleX(1.3)}}
-@keyframes intro-center-shadow-fade{0%{opacity:.52;transform:translateX(-50%) scaleX(1)}18%{opacity:.58;transform:translateX(-50%) scaleX(1.1)}60%{opacity:.26;transform:translateX(-50%) scaleX(.7)}100%{opacity:0;transform:translateX(-50%) scaleX(.35)}}
+@keyframes intro-left-shadow{0%{opacity:.18;transform:translateX(0) scaleX(.96)}20%{opacity:.24;transform:translateX(-2%) scaleX(1.02)}55%{opacity:.12;transform:translateX(-8%) scaleX(1.12)}82%,100%{opacity:0;transform:translateX(-16%) scaleX(1.3)}}
+@keyframes intro-right-shadow{0%{opacity:.18;transform:translateX(0) scaleX(.96)}20%{opacity:.24;transform:translateX(2%) scaleX(1.02)}55%{opacity:.12;transform:translateX(8%) scaleX(1.12)}82%,100%{opacity:0;transform:translateX(16%) scaleX(1.3)}}
+@keyframes intro-center-shadow-fade{0%{opacity:.52;transform:translateX(-50%) scaleX(1)}18%{opacity:.49;transform:translateX(-50%) scaleX(1.1)}55%{opacity:.16;transform:translateX(-50%) scaleX(.7)}78%,100%{opacity:0;transform:translateX(-50%) scaleX(.35)}}
 @keyframes intro-crease-fade{0%{opacity:.85}100%{opacity:0}}
 @media(max-width:700px){
   .intro-panel-face::after,.intro-panel-back::after{inset:.9rem}
@@ -1605,20 +1615,22 @@ rsvpForm.addEventListener('submit',async (evt)=>{
       return;
     }
     overlay.classList.add('intro-opening');
-    // The card finishes opening; a paper-coloured veil fades over the entire
-    // invitation before we change the page's scroll/viewport state.
+    // Begin the cover as the flaps reach their final outward position. The
+    // moving paper shadows are already gone, so none remain over the interior.
     leaveTimer=setTimeout(async()=>{
       overlay.classList.add('intro-veiled');
-      await new Promise(resolve=>setTimeout(resolve,590)); // veil is opaque
-      // Hide any width/position changes caused by restoring the scrollbar.
+      // Wait until the opaque cover completely hides the website before
+      // unlocking scroll. This prevents the old post-intro layout jump.
+      await new Promise(resolve=>setTimeout(resolve,380));
       document.documentElement.classList.remove('wedding-intro-lock');
-      // Allow 2 layout/paint frames, and a brief chance for late font swaps.
       await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
       const fontsReady=document.fonts ? document.fonts.ready : Promise.resolve();
-      await Promise.race([fontsReady,new Promise(resolve=>setTimeout(resolve,850))]);
+      // Fonts have had almost 3 seconds to load while the doors opened; only
+      // allow a short remaining grace period behind the opaque paper.
+      await Promise.race([fontsReady,new Promise(resolve=>setTimeout(resolve,320))]);
       overlay.classList.add('intro-reveal');
-      removeTimer=setTimeout(removeIntro,1380);
-    },4120);
+      removeTimer=setTimeout(removeIntro,920);
+    },2760);
   }
   trigger.addEventListener('click',openCard,{once:true});
 })();
