@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Prefer the invitation's original cream/burgundy colours, including in Samsung Internet dark mode. -->
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#F6F1EC">
 <title>Siriya &amp; Floris — 27 March 2027 - bijgewerkt</title>
 <meta name="description" content="Siriya &amp; Floris — 27 March 2027 — Baiboon Grand Hotel, Loei">
 <!-- Social sharing / WhatsApp preview (v29): server-readable Open Graph metadata. -->
@@ -30,6 +33,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Great+Vibes&family=Herr+Von+Muellerhoff&family=Noto+Serif+Thai:wght@300;400&family=Pinyon+Script&display=swap" rel="stylesheet">
 <style>
+/* This invitation is always designed in light colours. `only light` asks browsers
+   not to auto-darken its cream paper, wax seal, imagery or form controls.
+   Some browsers' user-forced dark mode may still override author preferences. */
+:root{color-scheme:only light}
+html{background-color:#F3EFE9}
 :root{
   --ink:#50383f;
   --ink-soft:#745d65;
