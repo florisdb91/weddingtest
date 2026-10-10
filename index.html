@@ -796,16 +796,43 @@ html.wedding-intro-lock,html.wedding-intro-lock body{overflow:hidden}
 @keyframes intro-center-shadow-fade{0%{opacity:.52;transform:translateX(-50%) scaleX(1)}18%{opacity:.49;transform:translateX(-50%) scaleX(1.1)}55%{opacity:.16;transform:translateX(-50%) scaleX(.7)}78%,100%{opacity:0;transform:translateX(-50%) scaleX(.35)}}
 @keyframes intro-crease-fade{0%{opacity:.85}100%{opacity:0}}
 @media(max-width:700px){
+  .wedding-intro{padding:clamp(14px,4vw,24px)}
+  .intro-perspective{
+    inset:auto;
+    left:50%;
+    top:41%;
+    width:min(92vw,560px);
+    max-height:42vh;
+    aspect-ratio:1.66 / 1;
+    transform:translate(-50%,-50%);
+  }
+  .intro-stage-shadow{
+    inset:auto;
+    left:50%;
+    top:41%;
+    width:min(92vw,560px);
+    max-height:42vh;
+    aspect-ratio:1.66 / 1;
+    transform:translate(-50%,-50%);
+    border-radius:22px;
+    filter:blur(22px);
+    opacity:.5;
+  }
+  .intro-cast-shadow--left,.intro-cast-shadow--right{top:3%;bottom:3%;width:48%;filter:blur(18px)}
+  .intro-center-shadow{top:4%;bottom:4%;width:26px;filter:blur(12px)}
   .intro-panel-face::after,.intro-panel-back::after{inset:.9rem}
-  .intro-ornament{width:clamp(42px,12vw,76px);height:clamp(42px,12vw,76px)}
-  .intro-panel--left .intro-ornament.top{top:1rem;left:1rem}
-  .intro-panel--right .intro-ornament.top{top:1rem;right:1rem}
-  .intro-panel--left .intro-ornament.bottom{bottom:1rem;left:1rem}
-  .intro-panel--right .intro-ornament.bottom{bottom:1rem;right:1rem}
-  .intro-stage-shadow{inset:5vh 4vw;filter:blur(24px)}
+  .intro-ornament{width:clamp(36px,10vw,58px);height:clamp(36px,10vw,58px)}
+  .intro-panel--left .intro-ornament.top{top:.95rem;left:.95rem}
+  .intro-panel--right .intro-ornament.top{top:.95rem;right:.95rem}
+  .intro-panel--left .intro-ornament.bottom{bottom:.95rem;left:.95rem}
+  .intro-panel--right .intro-ornament.bottom{bottom:.95rem;right:.95rem}
   .intro-seal{transform:translate(-44%,-50%) translateZ(30px)}
-  .intro-hint{max-width:86vw;gap:.1rem}
+  .intro-hint{max-width:82vw;gap:.12rem;bottom:max(1.25rem,env(safe-area-inset-bottom,0px) + .9rem)}
   .intro-hint .intro-hint-th{font-size:.8em;line-height:1.35}
+}
+@media(max-width:480px){
+  .intro-perspective,.intro-stage-shadow{width:min(94vw,520px);top:39.5%}
+  .intro-hint{max-width:84vw;font-size:clamp(.82rem,3.45vw,.98rem);bottom:max(1rem,env(safe-area-inset-bottom,0px) + .7rem)}
 }
 
 @media(prefers-reduced-motion:reduce){
@@ -843,8 +870,8 @@ html.wedding-intro-lock,html.wedding-intro-lock body{overflow:hidden}
   .intro-panel--right .intro-panel-face{background-image:linear-gradient(133deg,rgba(229,91,83,.20),transparent 42%,rgba(24,0,7,.34)),url('images/intro-red-leather.webp');background-size:100% 100%,cover;background-position:center}
   .intro-panel-face::after{display:block;inset:10px;border-radius:10px;border:1px solid rgba(232,178,117,.65);box-shadow:inset 0 0 0 1px rgba(75,11,15,.22)}
   .intro-panel-face .intro-ornament{display:block;color:#e2aa76;filter:drop-shadow(0 1px 0 rgba(255,215,165,.35)) drop-shadow(0 1px 1px rgba(52,4,12,.8))}
-  .intro-seal{width:clamp(118px,23vw,150px);height:clamp(133px,27vw,170px)}
-  .intro-hint{font-size:clamp(.87rem,3.15vw,1.04rem);bottom:max(3.6rem,env(safe-area-inset-bottom,0px) + 2.7rem)}
+  .intro-seal{width:clamp(82px,20vw,102px);height:clamp(92px,22.8vw,114px);filter:drop-shadow(0 5px 5px rgba(26,0,7,.40)) drop-shadow(0 12px 12px rgba(26,0,7,.20))}
+  .intro-hint{font-size:clamp(.84rem,2.9vw,1rem)}
 }
 
 </style>
