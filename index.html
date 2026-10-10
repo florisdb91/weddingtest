@@ -817,6 +817,36 @@ html.wedding-intro-lock,html.wedding-intro-lock body{overflow:hidden}
 }
 
 
+
+/* v12 — authentic embossed red-paper skin from the approved invitation artwork.
+   The two independent leaves retain the real paper texture while they move. */
+.intro-panel-face{background-image:url('images/intro-gold-left.webp');background-repeat:no-repeat;background-size:100% 100%;background-position:center;box-shadow:inset -10px 0 19px rgba(20,0,6,.21),0 8px 17px rgba(27,5,10,.22)}
+.intro-panel--right .intro-panel-face{background-image:url('images/intro-gold-right.webp');box-shadow:inset 12px 0 20px rgba(20,0,6,.20),0 8px 17px rgba(27,5,10,.22)}
+.intro-panel-face::before,.intro-panel-face::after{display:none}
+/* Decorations and filigree are embossed directly into the artwork on desktop. */
+.intro-panel-face .intro-ornament{display:none}
+.intro-panel-back{background:linear-gradient(112deg,#9b2930 0%,#811621 30%,#6f111b 84%,#530711 100%);box-shadow:inset 0 0 0 2px rgba(223,169,119,.20),inset 0 0 30px rgba(26,0,5,.18)}
+.intro-panel-back::after{border:1px solid rgba(224,169,115,.42);inset:14px}
+.intro-paper-spine{width:3px;background:linear-gradient(90deg,#32050e,#a65051 40%,#b96654 70%,#3c0811);opacity:.88}
+/* Genuine wax seal from the same artwork; no overlaid lettering to misalign. */
+.intro-seal{background:transparent url('images/intro-gold-wax.png') center/contain no-repeat;filter:drop-shadow(0 7px 6px rgba(26,0,7,.43)) drop-shadow(0 17px 16px rgba(26,0,7,.24));width:clamp(122px,15vmin,186px);height:clamp(136px,17.2vmin,207px)}
+.intro-seal>svg,.intro-seal>.intro-monogram,.intro-seal::after{display:none}
+.intro-hint{font-size:clamp(.97rem,1.65vw,1.22rem);color:#fff0dc;text-shadow:0 1px 3px rgba(33,0,5,.7);bottom:max(4rem,env(safe-area-inset-bottom,0px) + 3rem)}
+/* Continuous gold spine; its middle is transparent so it never crosses S&F.
+   It dissolves as soon as the doors start moving. */
+@media(min-width:701px){.intro-crease{z-index:5;opacity:.64;background:linear-gradient(90deg,transparent 0%,rgba(28,2,8,.7) 27%,rgba(211,142,97,.86) 50%,rgba(42,3,11,.7) 74%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 36%,transparent 43%,transparent 58%,#000 65%,#000 100%);mask-image:linear-gradient(to bottom,#000 0%,#000 36%,transparent 43%,transparent 58%,#000 65%,#000 100%)}
+#weddingIntro.intro-opening .intro-crease{opacity:0;transition:opacity 250ms ease}}
+.intro-hint .intro-hint-th{font-size:.86em;color:#f8dfc7}
+/* Gold stamping is visible on any viewport, but stays proportional on phones. */
+@media(max-width:700px){
+  .intro-panel-face{background-image:linear-gradient(133deg,rgba(239,95,88,.2),transparent 36%,rgba(29,0,7,.28)),url('images/intro-red-leather.webp');background-size:100% 100%,cover;background-position:center}
+  .intro-panel--right .intro-panel-face{background-image:linear-gradient(133deg,rgba(229,91,83,.20),transparent 42%,rgba(24,0,7,.34)),url('images/intro-red-leather.webp');background-size:100% 100%,cover;background-position:center}
+  .intro-panel-face::after{display:block;inset:10px;border-radius:10px;border:1px solid rgba(232,178,117,.65);box-shadow:inset 0 0 0 1px rgba(75,11,15,.22)}
+  .intro-panel-face .intro-ornament{display:block;color:#e2aa76;filter:drop-shadow(0 1px 0 rgba(255,215,165,.35)) drop-shadow(0 1px 1px rgba(52,4,12,.8))}
+  .intro-seal{width:clamp(118px,23vw,150px);height:clamp(133px,27vw,170px)}
+  .intro-hint{font-size:clamp(.87rem,3.15vw,1.04rem);bottom:max(3.6rem,env(safe-area-inset-bottom,0px) + 2.7rem)}
+}
+
 </style>
 </head>
 <body>
