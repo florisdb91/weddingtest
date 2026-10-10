@@ -55,7 +55,7 @@ body{background:linear-gradient(180deg,#F8F4EF,#F1EBE4);color:var(--ink);font-fa
 .music{position:fixed;top:1rem;left:1rem;z-index:100;width:2.4rem;height:2.4rem;border-radius:50%;border:1px solid var(--line-soft);background:rgba(255,255,255,.93);backdrop-filter:blur(8px);color:var(--accent);display:grid;place-items:center;cursor:pointer;padding:0}
 .music[hidden]{display:none}.music svg{width:1.1rem;height:1.1rem;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}.music .i-pause{display:none}.music.on .i-note{display:none}.music.on .i-pause{display:block}.music.on{box-shadow:0 0 0 0 rgba(125,15,26,.3);animation:pulse 2.4s ease-out infinite}@keyframes pulse{to{box-shadow:0 0 0 .7rem rgba(125,15,26,0)}}
 .lang{position:fixed;top:1rem;right:1rem;z-index:100;display:flex;gap:.1rem;padding:.2rem .35rem;background:rgba(255,255,255,.93);border:1px solid var(--line-soft);border-radius:2rem;backdrop-filter:blur(8px)}
-.lang button{appearance:none;border:0;background:none;color:var(--ink);opacity:.45;font-family:inherit;font-size:.85rem;padding:.25rem .5rem;cursor:pointer}.lang button[aria-pressed="true"]{opacity:1;border-bottom:1px solid var(--accent)}
+.lang button{appearance:none;border:0;background:none;color:var(--ink);opacity:.45;font-family:inherit;font-size:.85rem;padding:.25rem .5rem;cursor:pointer}.lang button[aria-pressed="true"]{opacity:1}
 
 /* Hero invitation */
 #p1{padding:5.2rem 1rem 2.4rem;display:flex;justify-content:center;align-items:center;background:radial-gradient(circle at top,#fbf8f3 0,#f5eee7 44%,#efe6dd 100%)}
@@ -584,6 +584,14 @@ html[lang="th"] .wedding-signoff .signoff-names.couple-title .couple-join{
 .info-panel .cal-option:hover,.info-panel .cal-option:focus-visible{background:#F8F0ED}
 html[lang="th"] .info-panel .cal-option{font-family:'Noto Serif Thai',Georgia,serif;font-size:.92rem;letter-spacing:0}
 @media(prefers-reduced-motion:reduce){.info-panel .cal-picker .cal-chevron{transition:none}}
+/* Geselecteerde taal: een kort, gecentreerd streepje BINNEN de witte pill,
+   in plaats van een border over de hele breedte van de knop. */
+.lang button{position:relative}
+.lang button[aria-pressed="true"]::after{
+  content:"";position:absolute;left:50%;bottom:.31rem;
+  width:1.1rem;height:1px;transform:translateX(-50%);
+  border-radius:1px;background:var(--accent);pointer-events:none;
+}
 /* Mobiele bediening: grotere, goed leesbare aanraakvlakken zonder de desktopversie te wijzigen. */
 @media (max-width:700px){
   .music{
