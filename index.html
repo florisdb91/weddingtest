@@ -622,6 +622,78 @@ html[lang="th"] .info-panel .cal-option{font-family:'Noto Serif Thai',Georgia,se
   #p2 .timeline-content{grid-column:1;grid-row:2;min-width:0}
   #p2 .timeline-content h3{overflow-wrap:break-word;hyphens:auto}
 }
+
+/* Locatie — dezelfde hotelkop en ondertitel; alleen de adres-/datumregels
+   vervangen door een rustige Google Maps-actie direct boven de agenda. */
+#p2 .info-panel .location-actions{margin:2rem 0 .65rem;align-items:center;gap:0}
+#p2 .info-panel .location-map-button{
+  box-sizing:border-box;display:flex;align-items:center;justify-content:center;
+  gap:.55rem;width:min(15.5rem,100%);min-height:2.65rem;
+  padding:.62rem .8rem;border:1px solid var(--accent);
+  background:transparent;color:var(--accent);text-decoration:none;
+  font:inherit;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
+  line-height:1.4;text-align:center;transition:background .2s,color .2s;
+}
+#p2 .info-panel .location-map-button svg{
+  width:1rem;height:1rem;flex:none;stroke:currentColor;fill:none;
+  stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;
+}
+#p2 .info-panel .location-map-button:hover{background:var(--accent);color:#fff}
+#p2 .info-panel .location-actions + .cal{margin:.65rem auto 0}
+html[lang="th"] #p2 .info-panel .location-map-button{
+  font-family:'Noto Serif Thai',Georgia,serif;font-size:.9rem;
+  letter-spacing:0;text-transform:none;
+}
+/* Behoud de oorspronkelijke hoogte van de locatiekolom; daardoor blijft de
+   RSVP onder de tweekolomsindeling staan en wordt pagina 2 niet ingekort. */
+@media(min-width:901px){
+  html[lang="en"] #p2 .info-panel{min-height:clamp(570px,calc(526px + 4.3vw),581px)}
+  html[lang="nl"] #p2 .info-panel{min-height:clamp(586px,calc(676px - 7vw),604px)}
+  html[lang="th"] #p2 .info-panel{min-height:clamp(592px,calc(570px + 2.1vw),597px)}
+}
+@media(min-width:601px) and (max-width:900px){
+  html[lang="en"] #p2 .info-panel{min-height:528px}
+  html[lang="nl"] #p2 .info-panel{min-height:536px}
+  html[lang="th"] #p2 .info-panel{min-height:544px}
+}
+@media(max-width:600px){
+  html[lang="en"] #p2 .info-panel{min-height:clamp(540px,calc(735px - 36vw),620px)}
+  html[lang="nl"] #p2 .info-panel{min-height:clamp(552px,calc(745px - 36vw),630px)}
+  html[lang="th"] #p2 .info-panel{min-height:clamp(532px,calc(703px - 36vw),588px)}
+}
+@media(min-width:351px) and (max-width:380px){
+  html[lang="nl"] #p2 .info-panel{min-height:628px}
+}
+/* Net onder/boven de oorspronkelijke breekpunten is de adressectie voorheen
+   hoger door regelafbreking. Deze reserves houden de RSVP daar op zijn plaats. */
+@media(min-width:901px) and (max-width:1023px){
+  html[lang="en"] #p2 .info-panel{min-height:584px}
+  html[lang="nl"] #p2 .info-panel{min-height:604px}
+  html[lang="th"] #p2 .info-panel{min-height:597px}
+}
+@media(min-width:601px) and (max-width:680px){
+  html[lang="en"] #p2 .info-panel{min-height:552px}
+  html[lang="nl"] #p2 .info-panel{min-height:566px}
+  html[lang="th"] #p2 .info-panel{min-height:568px}
+}
+@media(min-width:401px) and (max-width:500px){
+  html[lang="en"] #p2 .info-panel{min-height:594px}
+  html[lang="nl"] #p2 .info-panel{min-height:600px}
+  html[lang="th"] #p2 .info-panel{min-height:588px}
+}
+@media(max-width:370px){
+  html[lang="en"] #p2 .info-panel{min-height:618px}
+  html[lang="nl"] #p2 .info-panel{min-height:630px}
+  html[lang="th"] #p2 .info-panel{min-height:618px}
+}
+@media(min-width:951px) and (max-width:1023px){
+  html[lang="en"] #p2 .info-panel{min-height:596px}
+  html[lang="nl"] #p2 .info-panel{min-height:612px}
+  html[lang="th"] #p2 .info-panel{min-height:612px}
+}
+@media(prefers-reduced-motion:reduce){
+  #p2 .info-panel .location-map-button{transition:none}
+}
 </style>
 </head>
 <body>
@@ -718,12 +790,8 @@ html[lang="th"] .info-panel .cal-option{font-family:'Noto Serif Thai',Georgia,se
       <h3 data-t="locationTitle">The Location</h3>
       <div class="location-name" data-t="venueName">Baiboon Grand Hotel</div>
       <p data-t="locationText">We are delighted to celebrate our special day at Baiboon Grand Hotel in Loei, Thailand.</p>
-      <div class="location-meta">
-        <div class="location-row address"><svg viewBox="0 0 24 24"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg><div class="addr-col"><address data-t="venueAddress">Baiboon Grand Hotel
-111 Moo 9, Charoenrat Road
-Na An, Mueang Loei
-Loei 42000, Thailand</address><a class="map-link" href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x312147a75364f8b3:0xcbe444a94fc6d62e?sa=X&amp;ved=1t:8290&amp;ictx=111" target="_blank" rel="noopener" data-t="mapLink">Open in Google Maps</a></div></div>
-        <div class="location-row"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.2 2"/></svg><span data-t="dateTimeLine">27 March 2027 · 02:00 PM</span></div>
+      <div class="location-meta location-actions">
+        <a class="location-map-button" href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x312147a75364f8b3:0xcbe444a94fc6d62e?sa=X&amp;ved=1t:8290&amp;ictx=111" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg><span data-t="mapLink">Open in Google Maps</span></a>
       </div>
       <div class="cal">
         <details class="cal-picker" id="calPicker">
