@@ -632,199 +632,343 @@ html[lang="th"] .info-panel .cal-option{font-family:'Noto Serif Thai',Georgia,se
 }
 
 
-/* v15 — Realistisch openende envelop, opgebouwd uit de originele uitnodigingsillustratie.
-   Eén schaalbare compositie: geen uitgerekte deuren, geen losstaande mockup.
-   Uitsluitend transform/opacity voor beweging; echte site blijft onaangeraakt. */
+/* Realistische schermvullende vouwkaart — de website erachter blijft intact. */
+:root{
+  --intro-bg:#e8dfd6;
+  --intro-ivory:#f7efe5;
+  --intro-ivory-soft:#efe4d7;
+  --intro-wine-dark:#671019;
+  --intro-wine:#7d0f1a;
+  --intro-wine-mid:#991925;
+  --intro-wine-light:#b5313b;
+  --intro-line:rgba(255,230,212,.24);
+  --intro-shadow:rgba(18,3,7,.46);
+  --intro-shadow-soft:rgba(18,3,7,.18);
+}
+/* Houd dezelfde viewport-breedte tijdens en na het openen van de kaart. */
 html{scrollbar-gutter:stable}
 html.wedding-intro-lock,html.wedding-intro-lock body{overflow:hidden}
 .wedding-intro{
-  position:fixed;inset:0;z-index:5000;isolation:isolate;overflow:hidden;
-  color-scheme:only light;
-  background:radial-gradient(ellipse at 50% 37%,#fffcf7 0%,#f7f0e8 47%,#eae0d5 100%);
+  position:fixed;inset:0;z-index:5000;overflow:hidden;isolation:isolate;
+  background:
+    radial-gradient(circle at 50% 36%, rgba(255,250,246,.78) 0%, rgba(245,236,227,.72) 24%, rgba(230,220,210,.92) 76%, rgba(219,207,196,1) 100%),
+    linear-gradient(180deg,#ebe2d8 0%,#e6ddd4 100%);
+  perspective:2600px;
 }
 .wedding-intro::before{
-  content:"";position:absolute;inset:0;pointer-events:none;opacity:.34;
-  background:repeating-linear-gradient(130deg,rgba(141,107,89,.045) 0 1px,transparent 1px 6px);
-}
-.env-stage{
-  --wine:#7d0f1a;
-  position:absolute;left:50%;top:48%;
-  width:min(91vw,550px,calc(78svh * 0.8016));
-  aspect-ratio:1123/1401;
-  transform:translate(-50%,-50%);
-  transform-style:preserve-3d;
-  perspective:1400px;
-  container-type:inline-size;
-  isolation:isolate;
-}
-.env-floor-shadow{
-  position:absolute;left:13%;top:77%;width:76%;height:15%;z-index:0;
-  border-radius:50%;background:radial-gradient(ellipse at center,rgba(45,15,20,.34),rgba(45,15,20,.14) 52%,transparent 74%);
-  filter:blur(17px);transform:scaleX(.92);transition:opacity 1s ease,transform 2.1s ease;
-}
-.env-back,
-.env-front,
-.env-flap{
-  background-color:#83121d;
-  background-image:
-    linear-gradient(110deg,rgba(255,215,200,.14),transparent 32%,rgba(29,0,9,.22) 95%),
-    url('images/intro-red-leather.webp');
-  background-size:100% 100%,cover;
-}
-.env-back{
-  position:absolute;left:6.3%;top:42%;width:87.4%;height:40.5%;z-index:2;
-  border-radius:3.8% 3.8% 4.5% 4.5%;
-  box-shadow:inset 0 1px 0 rgba(255,223,204,.34),inset 0 0 0 1px rgba(92,7,17,.32),
-   0 14px 32px rgba(47,10,18,.24),0 5px 9px rgba(47,10,18,.13);
-  overflow:hidden;
-}
-.env-back::before{content:"";position:absolute;inset:4%;border:1px solid rgba(255,208,185,.18);border-radius:3.4%}
-.env-back::after{
-  content:"";position:absolute;left:0;right:0;top:0;height:42%;
-  background:linear-gradient(180deg,rgba(40,1,9,.46),rgba(69,3,11,.12) 55%,transparent);
-  clip-path:polygon(0 0,50% 100%,100% 0);
-}
-.env-piece{position:absolute;pointer-events:none;opacity:0;will-change:transform,opacity;transform-origin:center center}
-.env-piece img{width:100%;height:100%;display:block;object-fit:fill;filter:drop-shadow(0 6px 5px rgba(35,10,14,.12))}
-.env-piece--card{left:37.49%;top:7.99%;width:47.02%;height:44.97%;z-index:5;transform:translate3d(-2%,80%,0) rotate(-5deg) scale(.92)}
-.env-piece--photo{left:4.99%;top:12.99%;width:46.04%;height:36.54%;z-index:8;transform:translate3d(28%,95%,0) rotate(8deg) scale(.8)}
-.env-piece--flowers{left:70.35%;top:18.77%;width:29.65%;height:71.66%;z-index:16;transform:translate3d(-24%,32%,0) rotate(-9deg) scale(.83)}
-.env-piece--heart{left:12.11%;top:42.68%;width:54.85%;height:42.97%;z-index:15;opacity:1;transform:translate3d(0,8%,0) rotate(-2deg) scale(.94)}
-.env-piece--silk{left:50.13%;top:48.89%;width:46.22%;height:51.11%;z-index:18;opacity:1;transform-origin:36% 10%;transform:translate3d(-3%,5%,0) rotate(4deg) scale(.92)}
-.env-paper-names{
-  position:absolute;left:48%;top:27%;width:40%;height:38%;
-  text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  color:#811426;transform:rotate(-3deg);font:400 clamp(.9rem,5.2cqw,2.15rem)/.8 'Pinyon Script',cursive;
-  text-shadow:0 1px 1px rgba(255,255,255,.7);
-}
-.env-paper-names .and{font:400 .5em/1 'Great Vibes',cursive;margin:.16em 0}
-.env-heart-lettering{position:absolute;left:22%;top:31%;width:56%;height:30%;display:grid;place-items:center;color:#8d1630;font:400 clamp(.9rem,6cqw,2.55rem)/.92 'Pinyon Script',cursive;text-align:center;transform:rotate(3deg)}
-.env-front{
-  position:absolute;left:6.3%;top:55.1%;width:87.4%;height:27.4%;z-index:12;
-  border-radius:0 0 4.5% 4.5%;
-  box-shadow:inset 0 -9px 20px rgba(44,2,8,.21),inset 0 0 0 1px rgba(194,91,85,.14);
-  overflow:hidden;
-}
-.env-front::before{
-  content:"";position:absolute;inset:0;background:linear-gradient(135deg,#981d29,#660711);
-  clip-path:polygon(0 0,50% 69%,100% 0,100% 100%,0 100%);opacity:.62;
-}
-.env-front::after{
-  content:"";position:absolute;left:0;top:0;width:100%;height:100%;
-  background:linear-gradient(45deg,transparent 49.5%,rgba(253,195,177,.23) 50%,transparent 50.5%),
-  linear-gradient(-45deg,transparent 49.5%,rgba(253,195,177,.20) 50%,transparent 50.5%);
-  opacity:.55;
-}
-.env-flap{
-  position:absolute;left:6.3%;top:41.9%;width:87.4%;height:30%;z-index:25;
-  transform-origin:50% 0;transform-style:preserve-3d;backface-visibility:visible;
-  filter:drop-shadow(0 7px 4px rgba(41,3,12,.23));will-change:transform;
-}
-.env-flap::before{
-  content:"";position:absolute;inset:0;
-  background-color:#83121d;
-  background-image:linear-gradient(145deg,rgba(255,213,191,.2),transparent 42%,rgba(40,0,9,.24)),url('images/intro-red-leather.webp');
-  background-size:100% 100%,cover;
-  clip-path:polygon(0 0,100% 0,50% 82%);
-}
-.env-flap::after{
   content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(180deg,rgba(255,218,197,.5),rgba(255,218,197,.1) 2%,transparent 4%);
-  clip-path:polygon(0 0,100% 0,50% 82%);
+  background:
+    radial-gradient(circle at 50% 48%, transparent 38%, rgba(0,0,0,.045) 100%),
+    linear-gradient(90deg, rgba(0,0,0,.085), transparent 16%, transparent 84%, rgba(0,0,0,.085));
+}
+.wedding-intro::after{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.16;mix-blend-mode:multiply;
+  background:
+    repeating-linear-gradient(125deg, rgba(255,255,255,.18) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(35deg, rgba(0,0,0,.045) 0 1px, transparent 1px 7px);
+}
+.intro-inside{
+  position:absolute;inset:clamp(14px,2vw,26px);border-radius:20px;padding:2rem;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;gap:.2rem;
+  background:radial-gradient(circle at 50% 38%, rgba(255,255,255,.92), rgba(247,239,229,.97) 44%, rgba(240,231,221,.98) 100%);
+  box-shadow:inset 0 0 0 1px rgba(153,122,99,.16), inset 0 0 80px rgba(92,61,35,.07);
+  text-align:center;pointer-events:none;z-index:1;
+}
+.intro-inside::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:.08;
+  background:repeating-linear-gradient(110deg, rgba(0,0,0,.25) 0 1px, transparent 1px 6px);
+  mix-blend-mode:multiply;
+}
+.intro-inside .intro-small{font:500 clamp(.92rem,1.4vw,1.08rem)/1 'Cormorant Garamond',serif;letter-spacing:.38em;text-transform:uppercase;color:#a68e84}
+.intro-inside .intro-flourish{font-size:clamp(1rem,1.4vw,1.2rem);color:#c1a7a3;margin:.3rem 0 .2rem}
+.intro-inside .intro-couple{display:flex;align-items:flex-end;gap:.18em;white-space:nowrap;font:400 clamp(2.8rem,6.5vw,6rem)/.95 'Cormorant Garamond',serif;color:#981824;text-shadow:0 1px 0 rgba(255,255,255,.45)}
+.intro-inside .intro-couple span{display:block}
+.intro-inside .intro-amp{font-size:.7em;line-height:1.1;margin-bottom:.09em}
+.intro-inside .intro-date{font:500 clamp(1rem,1.6vw,1.26rem)/1.2 'Cormorant Garamond',serif;letter-spacing:.18em;color:#9b7d7b;margin-top:.55rem}
+.intro-stage-shadow{position:absolute;inset:6vh 7vw;border-radius:30px;pointer-events:none;z-index:0;filter:blur(32px);opacity:.62;
+  background:radial-gradient(ellipse at center, rgba(18,3,7,.32) 0%, rgba(18,3,7,.16) 38%, rgba(18,3,7,0) 72%);
+  transform:translateY(3.5vh);z-index:0;will-change:opacity;
+}
+.intro-perspective{position:absolute;inset:clamp(12px,1.8vw,24px);display:flex;transform-style:preserve-3d;z-index:2;pointer-events:none}
+.intro-cast-shadow,.intro-center-shadow{position:absolute;pointer-events:none;z-index:0;will-change:transform,opacity}
+.intro-cast-shadow--left{top:4%;bottom:4%;left:1%;width:49%;filter:blur(24px);opacity:.18;transform-origin:left center;
+  background:radial-gradient(ellipse at 84% 50%, rgba(18,3,7,.42) 0%, rgba(18,3,7,.22) 26%, rgba(18,3,7,.09) 45%, rgba(18,3,7,0) 72%);
+}
+.intro-cast-shadow--right{top:4%;bottom:4%;right:1%;width:49%;filter:blur(24px);opacity:.18;transform-origin:right center;
+  background:radial-gradient(ellipse at 16% 50%, rgba(18,3,7,.42) 0%, rgba(18,3,7,.22) 26%, rgba(18,3,7,.09) 45%, rgba(18,3,7,0) 72%);
+}
+.intro-center-shadow{left:50%;top:5%;bottom:5%;width:min(7vw,64px);transform:translateX(-50%);filter:blur(16px);opacity:.52;
+  background:radial-gradient(ellipse at center, rgba(20,3,8,.50) 0%, rgba(20,3,8,.18) 52%, rgba(20,3,8,0) 78%);
+}
+.intro-panel{position:relative;flex:1 1 50%;min-width:0;transform-style:preserve-3d;backface-visibility:visible;will-change:transform;pointer-events:auto}
+.intro-panel--left{transform-origin:left center;z-index:3}
+.intro-panel--right{transform-origin:right center;z-index:4}
+.intro-panel-face,.intro-panel-back{
+  position:absolute;inset:0;border-radius:18px;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  background:
+    radial-gradient(circle at 22% 22%, rgba(255,255,255,.22) 0%, rgba(255,255,255,.07) 17%, rgba(255,255,255,0) 40%),
+    linear-gradient(115deg, rgba(255,255,255,.16) 0%, rgba(255,255,255,.04) 14%, rgba(0,0,0,.02) 60%, rgba(0,0,0,.14) 100%),
+    linear-gradient(135deg, var(--intro-wine-mid) 0%, #8a1520 26%, var(--intro-wine) 48%, var(--intro-wine-dark) 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,242,232,.08),
+    inset 0 0 38px rgba(255,255,255,.05),
+    0 15px 34px rgba(12,0,4,.18);
+}
+.intro-panel-back{
+  transform:rotateY(180deg);
+  background:
+    radial-gradient(circle at 78% 20%, rgba(255,255,255,.15) 0%, rgba(255,255,255,.04) 18%, rgba(255,255,255,0) 38%),
+    linear-gradient(125deg, rgba(255,255,255,.06) 0%, rgba(255,255,255,.02) 22%, rgba(0,0,0,.02) 64%, rgba(0,0,0,.12) 100%),
+    linear-gradient(135deg, #9c2732 0%, #7c1521 42%, #590c17 100%);
+}
+.intro-panel-face::before,.intro-panel-back::before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.17;mix-blend-mode:soft-light;
+  background:
+    repeating-linear-gradient(125deg, rgba(255,255,255,.30) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(32deg, rgba(0,0,0,.12) 0 1px, transparent 1px 6px);
+}
+.intro-panel-face::after,.intro-panel-back::after{
+  content:"";position:absolute;inset:1rem;border-radius:12px;pointer-events:none;border:1px solid var(--intro-line);
+  box-shadow:inset 0 0 0 1px rgba(255,230,214,.05);
+}
+.intro-panel--left .intro-panel-face{box-shadow:inset -54px 0 68px rgba(18,3,7,.31), inset 18px 0 32px rgba(255,255,255,.085), 0 18px 36px rgba(12,0,4,.26)}
+.intro-panel--right .intro-panel-face{box-shadow:inset 54px 0 68px rgba(18,3,7,.31), inset -18px 0 32px rgba(255,255,255,.085), 0 18px 36px rgba(12,0,4,.26)}
+.intro-paper-spine{position:absolute;top:0;bottom:0;width:6px;pointer-events:none;background:linear-gradient(90deg, rgba(47,5,12,.9), rgba(164,64,74,.82) 52%, rgba(255,190,185,.38) 72%, rgba(74,8,16,.82) 100%);filter:drop-shadow(0 0 6px rgba(24,0,5,.25))}
+.intro-panel--left .intro-paper-spine{right:0}
+.intro-panel--right .intro-paper-spine{left:0}
+.intro-crease{position:absolute;left:50%;top:0;height:100%;width:24px;transform:translateX(-50%);pointer-events:none;z-index:2;opacity:.85;
+  background:linear-gradient(90deg, transparent 0%, rgba(26,4,10,.34) 42%, rgba(255,201,190,.22) 54%, rgba(26,4,10,.18) 68%, transparent 100%);
+}
+.intro-ornament{position:absolute;width:clamp(56px,8vw,118px);height:clamp(56px,8vw,118px);color:rgba(245,214,194,.48);filter:drop-shadow(0 1px 1px rgba(0,0,0,.06))}
+.intro-panel--left .intro-ornament.top{top:clamp(1.35rem,3vw,3.6rem);left:clamp(1.35rem,3vw,3.6rem)}
+.intro-panel--right .intro-ornament.top{top:clamp(1.35rem,3vw,3.6rem);right:clamp(1.35rem,3vw,3.6rem);transform:scaleX(-1)}
+.intro-panel--left .intro-ornament.bottom{bottom:clamp(1.35rem,3vw,3.6rem);left:clamp(1.35rem,3vw,3.6rem);transform:scaleY(-1)}
+.intro-panel--right .intro-ornament.bottom{bottom:clamp(1.35rem,3vw,3.6rem);right:clamp(1.35rem,3vw,3.6rem);transform:scale(-1)}
+.intro-seal{position:absolute;left:0;top:50%;width:clamp(106px,14vmin,162px);height:clamp(126px,17vmin,194px);z-index:5;transform:translate(-46%,-50%) translateZ(34px);backface-visibility:hidden;-webkit-backface-visibility:hidden;border:0;padding:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;filter:drop-shadow(0 12px 9px rgba(19,0,5,.54)) drop-shadow(0 27px 22px rgba(19,0,5,.22));overflow:visible}
+.intro-seal::after{content:"";position:absolute;left:12%;right:12%;bottom:12%;height:30%;border-radius:50%;z-index:-1;transform:translateY(26%);background:radial-gradient(ellipse at center, rgba(28,8,8,.38) 0%, rgba(28,8,8,.12) 48%, rgba(28,8,8,0) 72%);filter:blur(10px)}
+.intro-seal:focus-visible{outline:none}
+.intro-seal svg{width:100%;height:100%;display:block}
+.intro-monogram{position:absolute;inset:0;display:flex;justify-content:center;align-items:center;gap:.02em;white-space:nowrap;transform:translateX(-.8%) translateY(-2.1%);font-family:'Pinyon Script','Herr Von Muellerhoff',cursive;font-weight:400;color:#7D0F1A;font-size:clamp(1.48rem,3.7vmin,2.82rem);line-height:1;letter-spacing:0;text-shadow:0 1px 0 rgba(255,255,255,.72);pointer-events:none;overflow:visible}
+.intro-monogram .intro-monogram-first{font-family:'Great Vibes','Pinyon Script',cursive;font-size:.96em;transform:translateX(.02em) translateY(-.01em)}
+.intro-monogram .intro-monogram-join{font-family:'Pinyon Script',cursive;font-size:.34em;margin:0 .005em;transform:translateY(.035em);opacity:.9}
+.intro-monogram .intro-monogram-last{font-family:'Great Vibes','Pinyon Script',cursive;font-size:.92em;transform:translateX(.00em) translateY(.02em)}
+.intro-hint{position:absolute;left:50%;bottom:max(1.8rem,env(safe-area-inset-bottom,0px) + 1.25rem);transform:translateX(-50%);width:max-content;max-width:90vw;text-align:center;color:#f5dad0;pointer-events:none;font:italic clamp(1rem,1.9vw,1.2rem)/1.45 'Cormorant Garamond',Georgia,serif;letter-spacing:.035em;text-shadow:0 1px 2px rgba(55,0,10,.54);z-index:8;transition:opacity .4s ease;display:flex;flex-direction:column;align-items:center;gap:.05rem}
+.intro-hint:before{content:"✧";display:block;opacity:.85;font-style:normal;margin-bottom:.08rem}
+.intro-hint .intro-hint-main{display:block}
+.intro-hint .intro-hint-th{display:block;font-style:normal;font-family:'Noto Serif Thai',serif;font-size:.84em;letter-spacing:.01em;opacity:.95}
+#weddingIntro.intro-opening .intro-hint{opacity:0}
+#weddingIntro.intro-opening .intro-seal{pointer-events:none}
+#weddingIntro.intro-opening .intro-panel--left{animation:intro-left-unfold 2800ms cubic-bezier(.55,0,.45,1) 80ms forwards}
+#weddingIntro.intro-opening .intro-panel--right{animation:intro-right-unfold 2800ms cubic-bezier(.55,0,.45,1) 80ms forwards}
+#weddingIntro.intro-opening .intro-cast-shadow--left{animation:intro-left-shadow 2700ms cubic-bezier(.55,0,.45,1) 80ms forwards}
+#weddingIntro.intro-opening .intro-cast-shadow--right{animation:intro-right-shadow 2700ms cubic-bezier(.55,0,.45,1) 80ms forwards}
+#weddingIntro.intro-opening .intro-center-shadow{animation:intro-center-shadow-fade 2450ms cubic-bezier(.2,.74,.2,1) 80ms forwards}
+#weddingIntro.intro-opening .intro-crease{animation:intro-crease-fade 900ms ease forwards}
+/* The soft casting shadow belongs to the moving doors: it must not linger
+   on the interior paper or be visible during the fade to the real homepage. */
+#weddingIntro.intro-opening .intro-stage-shadow{
+  animation:intro-stage-shadow-lift 2150ms ease-out 100ms both;
+}
+@keyframes intro-stage-shadow-lift{
+  0%{opacity:.62;transform:translateY(3.5vh) scale(1)}
+  35%{opacity:.32;transform:translateY(3vh) scale(1.035)}
+  100%{opacity:0;transform:translateY(2vh) scale(1.09)}
+}
+/* v8: concise two-stage fade. The shadow has already dissipated when
+   opaque paper briefly covers the intro for viewport/font settling.
+   The visitor sees a single gentle transition into the live website. */
+.intro-transition-veil{
+  position:absolute;inset:0;z-index:20;pointer-events:none;
+  background:#F6F1EC;
+  opacity:0;
+  transition:opacity 340ms ease-in-out;
+}
+#weddingIntro.intro-veiled .intro-transition-veil{opacity:1}
+#weddingIntro.intro-reveal{opacity:0;transition:opacity 820ms cubic-bezier(.26,.7,.3,1);pointer-events:none}
+@keyframes intro-seal-settle{0%{transform:translate(-46%,-50%) translateZ(34px) scale(1)}26%{transform:translate(-46%,-50%) translateZ(34px) scale(.975)}62%{transform:translate(-46%,-50%) translateZ(34px) scale(1.015)}100%{transform:translate(-46%,-50%) translateZ(34px) scale(1)}}
+/* Gatefold opens OUTWARD around its outside hinges. The right flap carries the seal. */
+/* Genuine outward gate opening: the front faces sweep away from the central seal,
+   to the LEFT and RIGHT. No flat collapse inward and no keyframe speed changes. */
+@keyframes intro-left-unfold{from{transform:translateX(0) rotateY(0deg)}to{transform:translateX(-112%) rotateY(-35deg)}}
+@keyframes intro-right-unfold{from{transform:translateX(0) rotateY(0deg)}to{transform:translateX(112%) rotateY(35deg)}}
+@keyframes intro-left-shadow{0%{opacity:.18;transform:translateX(0) scaleX(.96)}20%{opacity:.24;transform:translateX(-2%) scaleX(1.02)}55%{opacity:.12;transform:translateX(-8%) scaleX(1.12)}82%,100%{opacity:0;transform:translateX(-16%) scaleX(1.3)}}
+@keyframes intro-right-shadow{0%{opacity:.18;transform:translateX(0) scaleX(.96)}20%{opacity:.24;transform:translateX(2%) scaleX(1.02)}55%{opacity:.12;transform:translateX(8%) scaleX(1.12)}82%,100%{opacity:0;transform:translateX(16%) scaleX(1.3)}}
+@keyframes intro-center-shadow-fade{0%{opacity:.52;transform:translateX(-50%) scaleX(1)}18%{opacity:.49;transform:translateX(-50%) scaleX(1.1)}55%{opacity:.16;transform:translateX(-50%) scaleX(.7)}78%,100%{opacity:0;transform:translateX(-50%) scaleX(.35)}}
+@keyframes intro-crease-fade{0%{opacity:.85}100%{opacity:0}}
+@media(max-width:700px){
+  .wedding-intro{padding:clamp(14px,4vw,24px)}
+  .intro-perspective{
+    inset:auto;
+    left:50%;
+    top:41%;
+    width:min(92vw,560px);
+    max-height:42vh;
+    aspect-ratio:1.66 / 1;
+    transform:translate(-50%,-50%);
+  }
+  .intro-stage-shadow{
+    inset:auto;
+    left:50%;
+    top:41%;
+    width:min(92vw,560px);
+    max-height:42vh;
+    aspect-ratio:1.66 / 1;
+    transform:translate(-50%,-50%);
+    border-radius:22px;
+    filter:blur(22px);
+    opacity:.5;
+  }
+  .intro-cast-shadow--left,.intro-cast-shadow--right{top:3%;bottom:3%;width:48%;filter:blur(18px)}
+  .intro-center-shadow{top:4%;bottom:4%;width:26px;filter:blur(12px)}
+  .intro-panel-face::after,.intro-panel-back::after{inset:.9rem}
+  .intro-ornament{width:clamp(36px,10vw,58px);height:clamp(36px,10vw,58px)}
+  .intro-panel--left .intro-ornament.top{top:.95rem;left:.95rem}
+  .intro-panel--right .intro-ornament.top{top:.95rem;right:.95rem}
+  .intro-panel--left .intro-ornament.bottom{bottom:.95rem;left:.95rem}
+  .intro-panel--right .intro-ornament.bottom{bottom:.95rem;right:.95rem}
+  .intro-seal{transform:translate(-44%,-50%) translateZ(30px)}
+  .intro-hint{max-width:82vw;gap:.12rem;bottom:max(1.25rem,env(safe-area-inset-bottom,0px) + .9rem)}
+  .intro-hint .intro-hint-th{font-size:.8em;line-height:1.35}
+}
+@media(max-width:480px){
+  .intro-perspective,.intro-stage-shadow{width:min(94vw,520px);top:39.5%}
+  .intro-hint{max-width:84vw;font-size:clamp(.82rem,3.45vw,.98rem);bottom:max(1rem,env(safe-area-inset-bottom,0px) + .7rem)}
 }
 
-.env-seal{
-  position:absolute;left:50%;top:67%;z-index:26;
-  width:25%;aspect-ratio:179/189;
-  padding:0;border:0;background:transparent url('images/intro-gold-wax.png') center/contain no-repeat;
-  transform:translate(-50%,-50%);cursor:pointer;pointer-events:auto;touch-action:manipulation;
-  filter:drop-shadow(0 5px 4px rgba(35,4,11,.46)) drop-shadow(0 12px 11px rgba(35,4,11,.22));
-  -webkit-tap-highlight-color:transparent;backface-visibility:hidden;-webkit-backface-visibility:hidden;
-}
-.env-seal:focus-visible{outline:2px solid #fff1da;outline-offset:3px;border-radius:50%}
-.env-finish{
-  position:absolute;inset:0;z-index:35;opacity:0;pointer-events:none;transition:opacity .68s ease;
-}
-.env-finish .hero-art{position:relative;width:100%;height:100%;aspect-ratio:1123/1401;max-width:none}
-.env-finish .hero-base{object-fit:fill}
-.env-finish .names-card .fn{font-size:clamp(1.2rem,6cqw,2.9rem)}
-.env-finish .names-card .ln{font-size:clamp(.65rem,2.3cqw,1.45rem)}
-.env-finish .names-card .amp{font-size:clamp(.8rem,3.2cqw,1.5rem)}
-.env-finish .heart-copy .save{font-size:clamp(1rem,5cqw,2.4rem)}
-.env-finish .heart-copy .date{font-size:clamp(.6rem,2.2cqw,1.1rem)}
-.env-hint{
-  position:absolute;left:50%;bottom:max(1.9rem,env(safe-area-inset-bottom,0px) + 1rem);
-  transform:translateX(-50%);width:max-content;max-width:88vw;
-  display:flex;flex-direction:column;gap:.05rem;align-items:center;
-  font:italic clamp(.95rem,1.6vw,1.18rem)/1.35 'Cormorant Garamond',serif;
-  color:#873b47;text-align:center;letter-spacing:.025em;
-  text-shadow:0 1px 0 #fff;pointer-events:none;z-index:4;
-  transition:opacity .3s ease;
-}
-.env-hint::before{content:"✧";font-style:normal;color:#a0616b;font-size:.83rem;margin-bottom:.25rem}
-.env-hint-th{font-style:normal;font:400 .85em/1.5 'Noto Serif Thai',serif;letter-spacing:0}
-.env-veil{
-  position:absolute;inset:0;z-index:50;pointer-events:none;opacity:0;
-  background:#f6f1ec;
-  transition:opacity .4s ease;
-}
-.wedding-intro.env-opened .env-flap{z-index:4;animation:env-unseal .99s cubic-bezier(.2,.67,.16,1) both}
-.wedding-intro.env-opened .env-hint{opacity:0}
-.wedding-intro.env-opened .env-piece--card{animation:env-card-rise 1.8s cubic-bezier(.2,.82,.14,1) .33s forwards}
-.wedding-intro.env-opened .env-piece--photo{animation:env-photo-rise 1.85s cubic-bezier(.16,.8,.24,1) .64s forwards}
-.wedding-intro.env-opened .env-piece--heart{animation:env-heart-rise 1.1s cubic-bezier(.16,.84,.24,1) .95s forwards}
-.wedding-intro.env-opened .env-piece--flowers{animation:env-flowers-rise 1.7s cubic-bezier(.19,.79,.2,1) 1.02s forwards}
-.wedding-intro.env-opened .env-piece--silk{animation:env-silk-unfurl 1.25s cubic-bezier(.19,.87,.24,1) 1.0s forwards}
-.wedding-intro.env-opened .env-floor-shadow{opacity:.18;transform:scaleX(1.06)}
-.wedding-intro.env-composed .env-finish{opacity:1}
-.wedding-intro.env-composed .env-flap,.wedding-intro.env-composed .env-front{opacity:0;transition:opacity .64s ease}
-.wedding-intro.env-covered .env-veil{opacity:1}
-.wedding-intro.env-fading{opacity:0;pointer-events:none;transition:opacity .85s cubic-bezier(.22,.7,.3,1)}
-@keyframes env-unseal{0%{transform:rotateX(0deg)}20%{transform:rotateX(-16deg)}55%{transform:rotateX(-106deg)}100%{transform:rotateX(-175deg)}}
-@keyframes env-card-rise{0%{opacity:0;transform:translate3d(-2%,80%,0) rotate(-5deg) scale(.92)}12%{opacity:1}77%{transform:translate3d(0,-3%,0) rotate(1.2deg) scale(1.005)}100%{opacity:1;transform:translate3d(0,0,0) rotate(0) scale(1)}}
-@keyframes env-photo-rise{0%{opacity:0;transform:translate3d(28%,95%,0) rotate(8deg) scale(.8)}15%{opacity:1}73%{transform:translate3d(-2%,-4%,0) rotate(-2deg) scale(1.02)}100%{opacity:1;transform:translate3d(0,0,0) rotate(0) scale(1)}}
-@keyframes env-heart-rise{0%{opacity:1;transform:translate3d(0,8%,0) rotate(-2deg) scale(.94)}68%{opacity:1;transform:translate3d(0,-1.5%,0) rotate(1deg) scale(1.02)}100%{opacity:1;transform:translate3d(0,0,0) rotate(0) scale(1)}}
-@keyframes env-flowers-rise{0%{opacity:0;transform:translate3d(-24%,32%,0) rotate(-9deg) scale(.83)}17%{opacity:1}77%{transform:translate3d(2%,-1%,0) rotate(1deg) scale(1.02)}100%{opacity:1;transform:translate3d(0,0,0) rotate(0) scale(1)}}
-@keyframes env-silk-unfurl{0%{opacity:1;transform:translate3d(-3%,5%,0) rotate(4deg) scale(.92)}72%{opacity:1;transform:translate3d(0,-1%,0) rotate(-2deg) scale(1.02)}100%{opacity:1;transform:translate3d(0,0,0) rotate(0) scale(1)}}
-@media(max-width:650px){
-  .env-stage{top:48%;width:min(94vw,500px,calc(72svh * .8016))}
-  .env-hint{bottom:max(1.5rem,env(safe-area-inset-bottom,0px) + 1rem);max-width:85vw;font-size:clamp(.89rem,3.5vw,1rem)}
-  .env-seal{width:24%}
-}
-@media(max-width:650px) and (orientation:landscape){
-  .env-stage{width:min(64vw,520px,calc(83svh * .8016));top:49%}
-  .env-hint{font-size:.82rem;bottom:.55rem}
-}
-@media(max-height:540px) and (orientation:landscape){.env-hint{bottom:.25rem}.env-stage{top:48%}}
 @media(prefers-reduced-motion:reduce){
-  .wedding-intro.env-opened .env-flap,.wedding-intro.env-opened .env-piece{animation:none!important}
-  .wedding-intro.env-fading{transition:opacity .16s ease}
+  #weddingIntro.intro-opening .intro-panel,
+  #weddingIntro.intro-opening .intro-seal,
+  #weddingIntro.intro-opening .intro-cast-shadow,
+  #weddingIntro.intro-opening .intro-center-shadow{animation:none!important}
+  #weddingIntro.intro-reveal{transition:opacity .18s ease!important}
+}
+
+
+
+/* v12 — authentic embossed red-paper skin from the approved invitation artwork.
+   The two independent leaves retain the real paper texture while they move. */
+.intro-panel-face{background-image:url('images/intro-gold-left.webp');background-repeat:no-repeat;background-size:100% 100%;background-position:center;box-shadow:inset -10px 0 19px rgba(20,0,6,.21),0 8px 17px rgba(27,5,10,.22)}
+.intro-panel--right .intro-panel-face{background-image:url('images/intro-gold-right.webp');box-shadow:inset 12px 0 20px rgba(20,0,6,.20),0 8px 17px rgba(27,5,10,.22)}
+.intro-panel-face::before,.intro-panel-face::after{display:none}
+/* Decorations and filigree are embossed directly into the artwork on desktop. */
+.intro-panel-face .intro-ornament{display:none}
+.intro-panel-back{background:linear-gradient(112deg,#9b2930 0%,#811621 30%,#6f111b 84%,#530711 100%);box-shadow:inset 0 0 0 2px rgba(223,169,119,.20),inset 0 0 30px rgba(26,0,5,.18)}
+.intro-panel-back::after{border:1px solid rgba(224,169,115,.42);inset:14px}
+.intro-paper-spine{width:3px;background:linear-gradient(90deg,#32050e,#a65051 40%,#b96654 70%,#3c0811);opacity:.88}
+/* Genuine wax seal from the same artwork; no overlaid lettering to misalign. */
+.intro-seal{background:transparent url('images/intro-gold-wax.png') center/contain no-repeat;filter:drop-shadow(0 7px 6px rgba(26,0,7,.43)) drop-shadow(0 17px 16px rgba(26,0,7,.24));width:clamp(122px,15vmin,186px);height:clamp(136px,17.2vmin,207px)}
+.intro-seal>svg,.intro-seal>.intro-monogram,.intro-seal::after{display:none}
+.intro-hint{font-size:clamp(.97rem,1.65vw,1.22rem);color:#fff0dc;text-shadow:0 1px 3px rgba(33,0,5,.7);bottom:max(4rem,env(safe-area-inset-bottom,0px) + 3rem)}
+/* Continuous gold spine; its middle is transparent so it never crosses S&F.
+   It dissolves as soon as the doors start moving. */
+@media(min-width:701px){.intro-crease{z-index:5;opacity:.64;background:linear-gradient(90deg,transparent 0%,rgba(28,2,8,.7) 27%,rgba(211,142,97,.86) 50%,rgba(42,3,11,.7) 74%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 36%,transparent 43%,transparent 58%,#000 65%,#000 100%);mask-image:linear-gradient(to bottom,#000 0%,#000 36%,transparent 43%,transparent 58%,#000 65%,#000 100%)}
+#weddingIntro.intro-opening .intro-crease{opacity:0;transition:opacity 250ms ease}}
+.intro-hint .intro-hint-th{font-size:.86em;color:#f8dfc7}
+/* Gold stamping is visible on any viewport, but stays proportional on phones. */
+@media(max-width:700px){
+  .intro-panel-face{background-image:linear-gradient(133deg,rgba(239,95,88,.2),transparent 36%,rgba(29,0,7,.28)),url('images/intro-red-leather.webp');background-size:100% 100%,cover;background-position:center}
+  .intro-panel--right .intro-panel-face{background-image:linear-gradient(133deg,rgba(229,91,83,.20),transparent 42%,rgba(24,0,7,.34)),url('images/intro-red-leather.webp');background-size:100% 100%,cover;background-position:center}
+  .intro-panel-face::after{display:block;inset:10px;border-radius:10px;border:1px solid rgba(232,178,117,.65);box-shadow:inset 0 0 0 1px rgba(75,11,15,.22)}
+  .intro-panel-face .intro-ornament{display:block;color:#e2aa76;filter:drop-shadow(0 1px 0 rgba(255,215,165,.35)) drop-shadow(0 1px 1px rgba(52,4,12,.8))}
+  .intro-seal{width:clamp(82px,20vw,102px);height:clamp(92px,22.8vw,114px);filter:drop-shadow(0 5px 5px rgba(26,0,7,.40)) drop-shadow(0 12px 12px rgba(26,0,7,.20))}
+  .intro-hint{font-size:clamp(.84rem,2.9vw,1rem)}
+}
+
+
+/* v14: On phones, the FRONT and INNER sheet are now the same real card.
+   Do not scale the front flaps independently of the inner card: that was the
+   cause of the 'saloon doors' floating over a tall, already visible insert. */
+@media (max-width:700px){
+  .wedding-intro{
+    perspective:1800px;
+    background:radial-gradient(circle at 50% 40%, #fbf5ef 0%, #eee4d9 68%, #e4d6cb 100%);
+  }
+  .intro-inside,
+  .intro-perspective,
+  .intro-stage-shadow{
+    position:absolute;
+    inset:auto;
+    left:50%;
+    top:45%;
+    width:min(88vw, 440px, calc(62dvh * .78));
+    max-height:none;
+    height:auto;
+    aspect-ratio: .78 / 1;
+    transform:translate(-50%,-50%);
+    box-sizing:border-box;
+  }
+  .intro-inside{
+    z-index:1;
+    border-radius:14px;
+    padding:clamp(1rem,4vw,1.6rem);
+    overflow:hidden;
+    box-shadow:0 12px 38px rgba(61,29,21,.13), inset 0 0 0 1px rgba(157,126,106,.18), inset 0 0 26px rgba(122,81,60,.06);
+  }
+  .intro-perspective{z-index:2; display:flex;}
+  .intro-stage-shadow{
+    z-index:0;
+    border-radius:16px;
+    filter:blur(22px);
+    opacity:.42;
+    background:radial-gradient(ellipse at 50% 65%, rgba(51,20,20,.38), transparent 73%);
+  }
+  #weddingIntro.intro-opening .intro-stage-shadow{animation:none;opacity:0;transition:opacity 2.15s ease .1s}
+  .intro-panel{height:100%;min-height:0;flex:1 1 50%;}
+  .intro-panel-face,.intro-panel-back{border-radius:12px;}
+  .intro-panel--left .intro-panel-face,.intro-panel--left .intro-panel-back{border-radius:12px 0 0 12px;}
+  .intro-panel--right .intro-panel-face,.intro-panel--right .intro-panel-back{border-radius:0 12px 12px 0;}
+  .intro-panel-face::after{inset:9px;border-radius:8px;}
+  .intro-seal{
+    width:clamp(68px,18vw,88px);
+    height:clamp(78px,20vw,101px);
+    transform:translate(-46%,-50%) translateZ(28px);
+    filter:drop-shadow(0 4px 5px rgba(26,0,7,.41)) drop-shadow(0 10px 10px rgba(26,0,7,.20));
+  }
+  .intro-hint{
+    bottom:max(1.25rem,env(safe-area-inset-bottom,0px) + .8rem);
+    max-width:90vw;
+    font-size:clamp(.89rem,3.1vw,1.05rem);
+    text-shadow:0 1px 2px rgba(60,22,19,.55);
+    color:#7a3030;
+  }
+  .intro-hint .intro-hint-th{color:#854545;opacity:1;}
+  .intro-inside .intro-couple{font-size:clamp(2.05rem,8.5vw,3.75rem);}
+  .intro-inside .intro-small{font-size:clamp(.66rem,2.5vw,.91rem);letter-spacing:.22em;}
+  .intro-inside .intro-date{font-size:clamp(.79rem,3.3vw,1.04rem);letter-spacing:.12em;}
+}
+/* Landscape phones can carry a landscape gatefold, but its inside remains
+   exactly the same size as the two closed front leaves. */
+@media (max-width:700px) and (orientation:landscape){
+  .intro-inside,.intro-perspective,.intro-stage-shadow{
+    width:min(82vw, 560px, calc(61dvh * 1.55));
+    aspect-ratio:1.55 / 1;
+    top:43%;
+  }
+  .intro-hint{font-size:clamp(.78rem,1.9vw,.94rem);bottom:max(.5rem,env(safe-area-inset-bottom,0px) + .45rem)}
+  .intro-inside .intro-couple{font-size:clamp(2rem,5.2vw,3rem)}
 }
 
 </style>
 </head>
 <body>
 
-<div id="weddingIntro" class="wedding-intro" aria-label="Trouwuitnodiging in een verzegelde envelop" hidden>
-  <div class="env-stage" id="envStage">
-    <div class="env-floor-shadow" aria-hidden="true"></div>
-    <div class="env-back" aria-hidden="true"></div>
-    <div class="env-piece env-piece--card" aria-hidden="true"><img src="images/intro-insert.webp" alt=""><div class="env-paper-names"><span>Siriya</span><span class="and">&amp;</span><span>Floris</span></div></div>
-    <div class="env-piece env-piece--photo" aria-hidden="true"><img src="images/intro-polaroid.webp" alt=""></div>
-    <div class="env-front" aria-hidden="true"></div>
-    <div class="env-piece env-piece--flowers" aria-hidden="true"><img src="images/intro-flowers.webp" alt=""></div>
-    <div class="env-piece env-piece--heart" aria-hidden="true"><img src="images/intro-heart.webp" alt=""><div class="env-heart-lettering">Save the Date</div></div>
-    <div class="env-piece env-piece--silk" aria-hidden="true"><img src="images/intro-silk.webp" alt=""></div>
-    <div class="env-flap">
-      <button type="button" class="env-seal" id="introOpen" aria-label="Open de envelop en bekijk de trouwuitnodiging"></button>
+<div id="weddingIntro" class="wedding-intro" aria-label="Openvouwende trouwuitnodiging" hidden>
+  <div class="intro-inside" aria-hidden="true"><div class="intro-small">Our Wedding Invitation</div><div class="intro-flourish">✧</div><div class="intro-couple"><span>Siriya</span><span class="intro-amp">&amp;</span><span>Floris</span></div><div class="intro-date">27 March 2027</div></div>
+  <div class="intro-stage-shadow" aria-hidden="true"></div>
+  <div class="intro-perspective">
+    <div class="intro-cast-shadow intro-cast-shadow--left" aria-hidden="true"></div>
+    <div class="intro-cast-shadow intro-cast-shadow--right" aria-hidden="true"></div>
+    <div class="intro-center-shadow" aria-hidden="true"></div>
+    <div class="intro-panel intro-panel--left" aria-hidden="true"><div class="intro-panel-back"></div><div class="intro-panel-face"><span class="intro-ornament top"><svg viewBox="0 0 90 90" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 76V27Q6 6 27 6H76M13 61V30Q13 13 30 13H60"/><path d="M20 53C34 48 39 30 29 24C24 21 17 27 23 32C29 37 38 25 48 20M26 47C31 50 36 55 31 61M44 21C53 25 56 33 51 38M36 36C45 36 52 46 43 52"/><path d="M47 20Q56 13 64 21M16 56Q8 66 18 73"/><circle cx="39" cy="27" r="1.6" fill="currentColor" stroke="none"/></svg></span><span class="intro-ornament bottom"><svg viewBox="0 0 90 90" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 76V27Q6 6 27 6H76M13 61V30Q13 13 30 13H60"/><path d="M20 53C34 48 39 30 29 24C24 21 17 27 23 32C29 37 38 25 48 20M26 47C31 50 36 55 31 61M44 21C53 25 56 33 51 38M36 36C45 36 52 46 43 52"/><path d="M47 20Q56 13 64 21M16 56Q8 66 18 73"/><circle cx="39" cy="27" r="1.6" fill="currentColor" stroke="none"/></svg></span></div><span class="intro-paper-spine"></span></div>
+    <div class="intro-panel intro-panel--right"><div class="intro-panel-back"></div><div class="intro-panel-face"><span class="intro-ornament top"><svg viewBox="0 0 90 90" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 76V27Q6 6 27 6H76M13 61V30Q13 13 30 13H60"/><path d="M20 53C34 48 39 30 29 24C24 21 17 27 23 32C29 37 38 25 48 20M26 47C31 50 36 55 31 61M44 21C53 25 56 33 51 38M36 36C45 36 52 46 43 52"/><path d="M47 20Q56 13 64 21M16 56Q8 66 18 73"/><circle cx="39" cy="27" r="1.6" fill="currentColor" stroke="none"/></svg></span><span class="intro-ornament bottom"><svg viewBox="0 0 90 90" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 76V27Q6 6 27 6H76M13 61V30Q13 13 30 13H60"/><path d="M20 53C34 48 39 30 29 24C24 21 17 27 23 32C29 37 38 25 48 20M26 47C31 50 36 55 31 61M44 21C53 25 56 33 51 38M36 36C45 36 52 46 43 52"/><path d="M47 20Q56 13 64 21M16 56Q8 66 18 73"/><circle cx="39" cy="27" r="1.6" fill="currentColor" stroke="none"/></svg></span></div><span class="intro-paper-spine"></span>
+      <button class="intro-seal" id="introOpen" type="button" aria-label="Open de trouwuitnodiging"><svg viewBox="0 0 150 180" role="presentation" aria-hidden="true"><defs><linearGradient id="sealCream" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fffdfa"/><stop offset=".52" stop-color="#f7f0e5"/><stop offset="1" stop-color="#ead8c0"/></linearGradient><linearGradient id="sealEdge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff9ef"/><stop offset="1" stop-color="#d8bea1"/></linearGradient></defs><path d="M75 6 C87 15 98 6 108 17 C117 28 128 22 132 38 C136 50 147 53 143 68 C140 79 151 88 143 100 C139 111 145 121 135 134 C126 141 128 155 111 157 C99 158 90 172 75 173 C61 172 51 158 39 157 C22 155 24 141 15 134 C5 121 11 111 7 100 C-1 88 10 79 7 68 C3 53 14 50 18 38 C22 22 33 28 42 17 C52 6 63 15 75 6 Z" fill="url(#sealCream)" stroke="url(#sealEdge)" stroke-width="3.4"/><path d="M75 16C86 22 98 15 106 25C115 35 123 30 125 42C130 54 137 55 133 69C131 79 142 89 133 99C128 112 134 118 125 130C116 138 119 146 108 148C96 151 89 163 75 164C61 163 53 151 42 148C31 146 34 138 25 130C16 118 22 112 17 99C8 89 19 79 17 69C13 55 20 54 25 42C27 30 35 35 44 25C52 15 64 22 75 16Z" fill="none" stroke="#c9aa89" stroke-width="1.4"/><path d="M49 30Q75 17 101 30" stroke="#bb9a75" stroke-width="1.1" fill="none"/><path d="M49 145Q75 158 101 145" stroke="#bb9a75" stroke-width="1.1" fill="none"/></svg><span class="intro-monogram"><span class="intro-monogram-first">S</span><span class="intro-monogram-join">&amp;</span><span class="intro-monogram-last">F</span></span></button>
     </div>
-    <div class="env-finish" aria-hidden="true" id="envFinish"></div>
+    <div class="intro-crease" aria-hidden="true"></div>
   </div>
-  <div class="env-hint" id="introHint"><span class="env-hint-primary"></span><span class="env-hint-th" lang="th"></span></div>
-  <div class="env-veil" aria-hidden="true"></div>
+  <div class="intro-hint" id="introHint"></div>
+  <div class="intro-transition-veil" aria-hidden="true"></div>
 </div>
 <script>document.getElementById('weddingIntro').hidden=false;document.documentElement.classList.add('wedding-intro-lock');</script>
-
 
 <nav class="lang" aria-label="Language">
   <button data-l="en" aria-pressed="true">EN</button>
@@ -1576,60 +1720,60 @@ rsvpForm.addEventListener('submit',async (evt)=>{
 </script>
 
 <script>
-/* v15: originele envelopillustratie als bewegende papieren onderdelen.
-   Alleen deze startanimatie; RSVP, tijdlijn, taal en homepage blijven ongewijzigd. */
+/* Realistic introduction card only; the rest of the wedding website remains unchanged. */
 (()=>{
   const overlay=document.getElementById('weddingIntro');
-  const seal=document.getElementById('introOpen');
-  if(!overlay||!seal)return;
+  const trigger=document.getElementById('introOpen');
+  const hint=document.getElementById('introHint');
+  if(!overlay||!trigger)return;
+  let opened=false,leaveTimer=null,removeTimer=null;
+  const txt={en:'Tap or click the seal to open your invitation',nl:'Tik of klik op het zegel om de uitnodiging te openen',th:'แตะหรือคลิกที่ตราประทับเพื่อเปิดคำเชิญของคุณ'};
+  const thaiLine='แตะหรือคลิกที่ตราประทับเพื่อเปิดคำเชิญของคุณ';
   const lang=(navigator.language||'en').toLowerCase();
-  const locale=lang.startsWith('nl')?'nl':lang.startsWith('th')?'th':'en';
-  const message={
-    en:'Tap the seal to open our invitation',
-    nl:'Tik op het zegel om onze uitnodiging te openen',
-    th:'แตะที่ตราประทับเพื่อเปิดการ์ดเชิญของเรา'
-  };
-  const hint=overlay.querySelector('.env-hint-primary');
-  const thai=overlay.querySelector('.env-hint-th');
-  hint.textContent=message[locale];
-  thai.textContent=locale==='th'?'':'แตะที่ตราประทับเพื่อเปิดการ์ดเชิญของเรา';
-  // Reuse the real homepage artwork and typography at the end of the movement.
-  const original=document.querySelector('#p1 .hero-art');
-  const finish=overlay.querySelector('#envFinish');
-  if(original&&finish){const copy=original.cloneNode(true);copy.classList.add('env-art-clone');finish.appendChild(copy);}
-  let opened=false;
-  const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
-  const paint=()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+  const locale=lang.startsWith('nl')?'nl':(lang.startsWith('th')?'th':'en');
+  hint.innerHTML='<span class="intro-hint-main">'+txt[locale]+'</span>' + (locale==='th' ? '' : '<span class="intro-hint-th" lang="th">'+thaiLine+'</span>');
   function removeIntro(){
+    if(!overlay.isConnected)return;
     overlay.remove();
     document.documentElement.classList.remove('wedding-intro-lock');
+    if(document.activeElement===document.body){document.querySelector('.lang button[aria-pressed="true"]')?.focus({preventScroll:true});}
   }
-  async function openEnvelope(){
+  function openCard(){
     if(opened)return;
-    opened=true;seal.disabled=true;
-    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-      overlay.classList.add('env-covered');
+    opened=true;
+    trigger.disabled=true;
+    const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduced){
+      // Skip the motion and unlock only when the opaque cover is in front.
+      const veil=overlay.querySelector('.intro-transition-veil');
+      if(veil)veil.style.transition='none';
+      overlay.classList.add('intro-veiled');
       document.documentElement.classList.remove('wedding-intro-lock');
-      await paint(); overlay.classList.add('env-fading');
-      await wait(200);removeIntro();return;
+      overlay.classList.add('intro-reveal');
+      removeTimer=setTimeout(removeIntro,260);
+      return;
     }
-    overlay.classList.add('env-opened');
-    await wait(3120);
-    overlay.classList.add('env-composed');
-    await wait(1050); // Let guests admire the finished illustration.
-    overlay.classList.add('env-covered');
-    await wait(430); // Hide any scroll/font reflow completely behind opaque paper.
-    document.documentElement.classList.remove('wedding-intro-lock');
-    await paint();
-    if(document.fonts){await Promise.race([document.fonts.ready,wait(250)]);}
-    overlay.classList.add('env-fading');
-    await wait(970);
-    removeIntro();
+    overlay.classList.add('intro-opening');
+    // Begin the cover as the flaps reach their final outward position. The
+    // moving paper shadows are already gone, so none remain over the interior.
+    leaveTimer=setTimeout(async()=>{
+      overlay.classList.add('intro-veiled');
+      // Wait until the opaque cover completely hides the website before
+      // unlocking scroll. This prevents the old post-intro layout jump.
+      await new Promise(resolve=>setTimeout(resolve,380));
+      document.documentElement.classList.remove('wedding-intro-lock');
+      await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+      const fontsReady=document.fonts ? document.fonts.ready : Promise.resolve();
+      // Fonts have had almost 3 seconds to load while the doors opened; only
+      // allow a short remaining grace period behind the opaque paper.
+      await Promise.race([fontsReady,new Promise(resolve=>setTimeout(resolve,320))]);
+      overlay.classList.add('intro-reveal');
+      removeTimer=setTimeout(removeIntro,920);
+    },3260);
   }
-  seal.addEventListener('click',openEnvelope,{once:true});
+  trigger.addEventListener('click',openCard,{once:true});
 })();
 </script>
-
 
 </body>
 </html>
