@@ -948,6 +948,73 @@ html.wedding-intro-lock,html.wedding-intro-lock body{overflow:hidden}
   .intro-inside .intro-couple{font-size:clamp(2rem,5.2vw,3rem)}
 }
 
+
+/* v19 — alleen de muziek- en taalknoppen. Intro en overige site blijven intact. */
+.music{
+  width:2.9rem;height:2.9rem;min-width:2.75rem;min-height:2.75rem;
+  border-color:rgba(125,15,26,.27);background:rgba(255,253,250,.97);
+  box-shadow:0 5px 17px rgba(74,28,36,.17),inset 0 1px rgba(255,255,255,.9);
+  isolation:isolate;transition:box-shadow .2s ease,background-color .2s ease;
+}
+.music .i-heart{
+  position:absolute;width:1.97rem;height:1.97rem;z-index:0;
+  fill:#9d3544;stroke:#781722;stroke-width:.9;
+  filter:drop-shadow(0 2px 1px rgba(75,19,30,.18));
+  transition:fill .2s ease;
+}
+.music .i-note,.music .i-pause{
+  position:relative;z-index:1;width:1.06rem;height:1.06rem;
+  stroke:#fffdfa;stroke-width:1.7;
+}
+.music .i-note{transform:translateY(-1px)}
+.music.on .i-heart{fill:#bd4a5d}
+/* Bij afspelen blijft het hart herkenbaar, zonder oneindig te pulseren. */
+.music.on{animation:none;box-shadow:0 5px 17px rgba(74,28,36,.21),0 0 0 2px rgba(125,15,26,.10)}
+.music.controls-attention{animation:music-heartbeat 1s ease-in-out 4 both}
+.music.controls-attention::after{
+  content:"";position:absolute;inset:-4px;border:1px solid rgba(145,41,60,.52);
+  border-radius:50%;pointer-events:none;z-index:-1;
+  animation:music-attention-ring 1s ease-out 4 both;
+}
+@keyframes music-heartbeat{
+  0%,100%{transform:scale(1)}
+  14%{transform:scale(1.11)}
+  27%{transform:scale(1.015)}
+  42%{transform:scale(1.075)}
+  58%{transform:scale(1)}
+}
+@keyframes music-attention-ring{
+  0%,100%{transform:scale(.91);opacity:0}
+  22%{opacity:.72}
+  68%{transform:scale(1.23);opacity:0}
+}
+.lang{
+  border-color:rgba(125,15,26,.22);background:rgba(255,253,251,.97);
+  box-shadow:0 5px 17px rgba(74,28,36,.14),inset 0 1px rgba(255,255,255,.9);
+}
+.lang button{
+  opacity:.82;font-weight:500;transition:background-color .18s ease,color .18s ease,opacity .18s ease;
+}
+.lang button[aria-pressed="true"]{
+  opacity:1;color:#fffdf9;background-color:var(--accent);
+  background-image:none;border-radius:1.5rem;
+}
+.lang button:hover:not([aria-pressed="true"]){opacity:1;background:rgba(125,15,26,.07);border-radius:1.5rem}
+.lang.controls-attention{animation:lang-soft-spotlight 2s ease-in-out 2 both}
+@keyframes lang-soft-spotlight{
+  0%,100%{box-shadow:0 5px 17px rgba(74,28,36,.14),0 0 0 0 rgba(125,15,26,0)}
+  45%{box-shadow:0 6px 20px rgba(74,28,36,.22),0 0 0 5px rgba(125,15,26,.15)}
+}
+@media(max-width:700px){
+  .music{width:2.9rem;height:2.9rem}
+  .music .i-heart{width:2rem;height:2rem}
+  .lang button{opacity:.86}
+}
+@media(prefers-reduced-motion:reduce){
+  .music.controls-attention,.music.controls-attention::after,
+  .lang.controls-attention{animation:none!important}
+}
+
 </style>
 </head>
 <body>
@@ -977,6 +1044,7 @@ html.wedding-intro-lock,html.wedding-intro-lock body{overflow:hidden}
 </nav>
 <audio id="bgm" src="music/song.mp3" loop preload="none"></audio>
 <button class="music" id="musicBtn" type="button" aria-label="Play music" hidden>
+  <svg class="i-heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>
   <svg class="i-note" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg>
   <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5v14M15 5v14"/></svg>
 </button>
@@ -1526,8 +1594,28 @@ function musicLabel(){
   musicBtn.setAttribute("aria-label", audio.paused ? l[0] : l[1]);
 }
 /* knop alleen tonen als het bestand echt bestaat */
+const langControl=document.querySelector('.lang');
+let attentionUntil=0;
+function showMusicPulseIfReady(){
+  if(musicBtn.hidden || Date.now()>=attentionUntil)return;
+  musicBtn.classList.add('controls-attention');
+  // Never extend the attention beyond the four seconds after the card closes.
+  setTimeout(()=>musicBtn.classList.remove('controls-attention'),Math.max(0,attentionUntil-Date.now()));
+}
+document.addEventListener('wedding:home-visible',()=>{
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  attentionUntil=Date.now()+4000;
+  langControl?.classList.add('controls-attention');
+  showMusicPulseIfReady();
+  setTimeout(()=>{
+    langControl?.classList.remove('controls-attention');
+    musicBtn.classList.remove('controls-attention');
+    attentionUntil=0;
+  },4000);
+},{once:true});
+/* De knop blijft verborgen totdat de echte muziekfile beschikbaar is. */
 fetch("music/song.mp3",{method:"HEAD"})
-  .then(r=>{ if(r.ok){ musicBtn.hidden=false; musicLabel(); } })
+  .then(r=>{ if(r.ok){ musicBtn.hidden=false; musicLabel(); showMusicPulseIfReady(); } })
   .catch(()=>{});
 musicBtn.addEventListener("click", ()=>{
   if(audio.paused){ audio.volume = .6; audio.play().catch(()=>{}); }
@@ -1736,6 +1824,8 @@ rsvpForm.addEventListener('submit',async (evt)=>{
     if(!overlay.isConnected)return;
     overlay.remove();
     document.documentElement.classList.remove('wedding-intro-lock');
+    // Pas ná het verdwijnen van de openingskaart vallen de bedieningselementen op.
+    document.dispatchEvent(new Event('wedding:home-visible'));
     if(document.activeElement===document.body){document.querySelector('.lang button[aria-pressed="true"]')?.focus({preventScroll:true});}
   }
   function openCard(){
