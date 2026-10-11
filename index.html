@@ -1000,6 +1000,24 @@ html.wedding-intro-lock,html.wedding-intro-lock body{overflow:hidden}
   background-image:none;border-radius:1.5rem;
 }
 .lang button:hover:not([aria-pressed="true"]){opacity:1;background:rgba(125,15,26,.07);border-radius:1.5rem}
+/* v21: taalkeuze wordt gedurende maximaal tien seconden subtiel benadrukt.
+   De muziekhart-animatie (tot eerste Play) blijft ongewijzigd. */
+.lang.lang-attention{
+  animation:language-discovery-pulse 2s ease-in-out 5;
+}
+@keyframes language-discovery-pulse{
+  0%,100%{
+    box-shadow:0 5px 17px rgba(74,28,36,.14),inset 0 1px rgba(255,255,255,.9);
+    border-color:rgba(125,15,26,.22);
+  }
+  45%{
+    box-shadow:0 5px 17px rgba(74,28,36,.17),0 0 0 4px rgba(125,15,26,.12),inset 0 1px rgba(255,255,255,.9);
+    border-color:rgba(125,15,26,.52);
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .lang.lang-attention{animation:none!important}
+}
 /* v20: beide bedieningselementen op mobiel even hoog en op dezelfde bovenlijn. */
 @media(max-width:700px){
   .music{
@@ -1613,6 +1631,12 @@ function showMusicPulseIfReady(){
 document.addEventListener('wedding:home-visible',()=>{
   weddingHomeVisible=true;
   showMusicPulseIfReady();
+  // Begin pas wanneer de openingskaart weg is; stop altijd na 10 seconden.
+  const languageChoice=document.querySelector('.lang');
+  if(languageChoice && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    languageChoice.classList.add('lang-attention');
+    window.setTimeout(()=>languageChoice.classList.remove('lang-attention'),10000);
+  }
 },{once:true});
 /* De knop blijft verborgen totdat de echte muziekfile beschikbaar is. */
 fetch("music/song.mp3",{method:"HEAD"})
