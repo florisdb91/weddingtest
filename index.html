@@ -1103,17 +1103,13 @@ html.wedding-intro-lock,html.wedding-intro-lock body{overflow:hidden}
 
 /* v49 — alleen OPENVOUW-BEWEGING EN FYSIEKE SCHADUWWERKING.
    De binnenste tekst, de tweede pagina en de oorspronkelijke fade zijn niet gewijzigd.
-   Een gatefold opent om de twee vaste buitenvouwen. Bij 150 graden moet de
-   gehele kaart kleiner in beeld passen: de camera trekt daarom subtiel terug.
-   Alle geanimeerde eigenschappen zijn transform en opacity (GPU-vriendelijk). */
+   Een gatefold opent om de twee vaste buitenvouwen, zonder camera-uitzoom.
+   De oorspronkelijke vouwbeweging, schaduw en fade blijven ongewijzigd. */
 .intro-book-stage{
   position:absolute;inset:0;z-index:1;pointer-events:none;
-  transform:scale(1);transform-origin:50% 50%;
-  -webkit-transform:translateZ(0) scale(1);
-  transition:transform 2690ms cubic-bezier(.38,0,.62,1);
-  will-change:transform;
+  transform:translateZ(0);transform-origin:50% 50%;
+  -webkit-transform:translateZ(0);
 }
-#weddingIntro.intro-opening .intro-book-stage{transform:scale(.50);-webkit-transform:scale(.50)}
 /* Stage descendants retain their original geometry; no layout reflow. */
 .intro-book-stage .intro-inside{
   background:radial-gradient(circle at 50% 38%,rgba(255,255,255,.93),rgba(247,239,229,.98) 44%,rgba(240,231,221,.99) 100%);
@@ -1224,7 +1220,6 @@ html.wedding-intro-lock,html.wedding-intro-lock body{overflow:hidden}
 #weddingIntro.intro-opening .intro-crease{animation:intro-crease-new 520ms ease-out both!important}
 @keyframes intro-crease-new{from{opacity:.64}to{opacity:0}}
 @media(max-width:700px){
-  #weddingIntro.intro-opening .intro-book-stage{transform:scale(.58);-webkit-transform:scale(.58)}
   .intro-book-stage .intro-inside{box-shadow:0 0 0 1px rgba(133,91,72,.23) inset,0 0 25px rgba(110,69,51,.09) inset,0 14px 30px rgba(44,22,17,.16),0 4px 9px rgba(44,22,17,.12)}
   .intro-book-stage .intro-panel::after{width:2px}
 }
