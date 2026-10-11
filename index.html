@@ -1238,28 +1238,6 @@ html.wedding-intro-lock,html.wedding-intro-lock body{overflow:hidden}
   #weddingIntro.intro-opening .intro-paper-shadow{animation:none!important}
 }
 
-/* v50 — S&F-zegel blijft op het karton liggen, niet op 28–34px vóór de kaft.
-   Bij de eerste opening breekt de verzegeling subtiel weg voordat de kleppen
-   echt beginnen te draaien. De overige vouwanimatie en fade blijven gelijk. */
-.intro-book-stage .intro-seal {
-  transform:translate(-46%,-50%) translateZ(2px);
-  -webkit-backface-visibility:hidden;
-  backface-visibility:hidden;
-  filter:drop-shadow(0 2px 2px rgba(26,0,7,.32)) drop-shadow(0 5px 5px rgba(26,0,7,.13));
-}
-#weddingIntro.intro-opening .intro-seal {
-  animation:intro-seal-release 150ms ease-out both;
-  pointer-events:none;
-}
-@keyframes intro-seal-release {
-  0%{opacity:1}
-  30%{opacity:.95}
-  100%{opacity:0}
-}
-@media(prefers-reduced-motion:reduce){
-  #weddingIntro.intro-opening .intro-seal{animation:none!important;opacity:0}
-}
-
 /* Startup paint protection: neither the site nor the invitation insert may
    flash before the front-cover images have been decoded. The main page is
    made paintable only under the already opaque fade veil. */
