@@ -685,6 +685,7 @@ html.wedding-intro-lock,html.wedding-intro-lock body{overflow:hidden}
   mix-blend-mode:multiply;
 }
 .intro-inside .intro-small{font:500 clamp(.92rem,1.4vw,1.08rem)/1 'Cormorant Garamond',serif;letter-spacing:.38em;text-transform:uppercase;color:#a68e84}
+.intro-inside .intro-small-th{font:400 clamp(.87rem,1.25vw,1.02rem)/1.55 'Noto Serif Thai',Tahoma,serif;letter-spacing:0;color:#9a807c;margin:.06rem 0 .1rem;text-wrap:balance}
 .intro-inside .intro-flourish{font-size:clamp(1rem,1.4vw,1.2rem);color:#c1a7a3;margin:.3rem 0 .2rem}
 .intro-inside .intro-couple{display:flex;align-items:flex-end;gap:.18em;white-space:nowrap;font:400 clamp(2.8rem,6.5vw,6rem)/.95 'Cormorant Garamond',serif;color:#981824;text-shadow:0 1px 0 rgba(255,255,255,.45)}
 .intro-inside .intro-couple span{display:block}
@@ -1246,7 +1247,7 @@ html.wedding-intro-lock body > main{visibility:hidden}
 
 <div id="weddingIntro" class="wedding-intro" aria-label="Openvouwende trouwuitnodiging">
   <div class="intro-book-stage">
-  <div class="intro-inside" aria-hidden="true"><div class="intro-small">Our Wedding Invitation</div><div class="intro-flourish">✧</div><div class="intro-couple"><span>Siriya</span><span class="intro-amp">&amp;</span><span>Floris</span></div><div class="intro-date">27 March 2027</div><span class="intro-paper-shadow intro-paper-shadow--left"></span><span class="intro-paper-shadow intro-paper-shadow--right"></span></div>
+  <div class="intro-inside" aria-hidden="true"><div class="intro-small">Our Wedding Invitation</div><div class="intro-small-th" lang="th">บัตรเชิญงานแต่งงานของเรา</div><div class="intro-flourish">✧</div><div class="intro-couple"><span>Siriya</span><span class="intro-amp">&amp;</span><span>Floris</span></div><div class="intro-date">27 March 2027</div><span class="intro-paper-shadow intro-paper-shadow--left"></span><span class="intro-paper-shadow intro-paper-shadow--right"></span></div>
   <div class="intro-stage-shadow" aria-hidden="true"></div>
   <div class="intro-perspective">
     <div class="intro-cast-shadow intro-cast-shadow--left" aria-hidden="true"></div>
@@ -2096,7 +2097,7 @@ rsvpForm.addEventListener('submit',async (evt)=>{
     });
   }
   function beginExitCountdown(){
-    // Keep the invitation insert fully visible for four seconds AFTER the
+    // Keep the invitation insert fully visible for two seconds AFTER the
     // 2620ms gatefold motion and its 60ms starting delay. The original opaque
     // veil and final fade remain unchanged.
     leaveTimer=setTimeout(async()=>{
@@ -2112,7 +2113,7 @@ rsvpForm.addEventListener('submit',async (evt)=>{
       await Promise.race([fontsReady,new Promise(resolve=>setTimeout(resolve,320))]);
       overlay.classList.add('intro-reveal');
       removeTimer=setTimeout(removeIntro,920);
-    },2680 + 4000);
+    },2680 + 2000);
   }
   trigger.addEventListener('click',openCard,{once:true});
 })();
