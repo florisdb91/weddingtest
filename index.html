@@ -970,11 +970,11 @@ html.wedding-intro-lock,html.wedding-intro-lock body{overflow:hidden}
 .music.on .i-heart{fill:#bd4a5d}
 /* Bij afspelen blijft het hart herkenbaar, zonder oneindig te pulseren. */
 .music.on{animation:none;box-shadow:0 5px 17px rgba(74,28,36,.21),0 0 0 2px rgba(125,15,26,.10)}
-.music.controls-attention{animation:music-heartbeat 1s ease-in-out 4 both}
+.music.controls-attention{animation:music-heartbeat 1.75s ease-in-out infinite}
 .music.controls-attention::after{
   content:"";position:absolute;inset:-4px;border:1px solid rgba(145,41,60,.52);
   border-radius:50%;pointer-events:none;z-index:-1;
-  animation:music-attention-ring 1s ease-out 4 both;
+  animation:music-attention-ring 1.75s ease-out infinite;
 }
 @keyframes music-heartbeat{
   0%,100%{transform:scale(1)}
@@ -1000,19 +1000,28 @@ html.wedding-intro-lock,html.wedding-intro-lock body{overflow:hidden}
   background-image:none;border-radius:1.5rem;
 }
 .lang button:hover:not([aria-pressed="true"]){opacity:1;background:rgba(125,15,26,.07);border-radius:1.5rem}
-.lang.controls-attention{animation:lang-soft-spotlight 2s ease-in-out 2 both}
-@keyframes lang-soft-spotlight{
-  0%,100%{box-shadow:0 5px 17px rgba(74,28,36,.14),0 0 0 0 rgba(125,15,26,0)}
-  45%{box-shadow:0 6px 20px rgba(74,28,36,.22),0 0 0 5px rgba(125,15,26,.15)}
-}
+/* v20: beide bedieningselementen op mobiel even hoog en op dezelfde bovenlijn. */
 @media(max-width:700px){
-  .music{width:2.9rem;height:2.9rem}
+  .music{
+    top:.75rem;left:.75rem;
+    width:2.9rem;height:2.9rem;
+    min-width:2.9rem;min-height:2.9rem;
+  }
   .music .i-heart{width:2rem;height:2rem}
-  .lang button{opacity:.86}
+  .lang{
+    top:.75rem;right:calc(.75rem - (100vw - 100%));
+    height:2.9rem;
+    padding:.15rem .22rem;
+    align-items:stretch;gap:.05rem;
+  }
+  .lang button{
+    display:grid;place-items:center;
+    height:100%;min-height:0;min-width:2.65rem;
+    padding:0 .38rem;line-height:1.15;opacity:.86;
+  }
 }
 @media(prefers-reduced-motion:reduce){
-  .music.controls-attention,.music.controls-attention::after,
-  .lang.controls-attention{animation:none!important}
+  .music.controls-attention,.music.controls-attention::after{animation:none!important}
 }
 
 </style>
@@ -1594,31 +1603,29 @@ function musicLabel(){
   musicBtn.setAttribute("aria-label", audio.paused ? l[0] : l[1]);
 }
 /* knop alleen tonen als het bestand echt bestaat */
-const langControl=document.querySelector('.lang');
-let attentionUntil=0;
+let weddingHomeVisible=false;
+let hasPressedMusicPlay=false;
 function showMusicPulseIfReady(){
-  if(musicBtn.hidden || Date.now()>=attentionUntil)return;
+  if(!weddingHomeVisible || hasPressedMusicPlay || musicBtn.hidden ||
+     window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   musicBtn.classList.add('controls-attention');
-  // Never extend the attention beyond the four seconds after the card closes.
-  setTimeout(()=>musicBtn.classList.remove('controls-attention'),Math.max(0,attentionUntil-Date.now()));
 }
 document.addEventListener('wedding:home-visible',()=>{
-  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  attentionUntil=Date.now()+4000;
-  langControl?.classList.add('controls-attention');
+  weddingHomeVisible=true;
   showMusicPulseIfReady();
-  setTimeout(()=>{
-    langControl?.classList.remove('controls-attention');
-    musicBtn.classList.remove('controls-attention');
-    attentionUntil=0;
-  },4000);
 },{once:true});
 /* De knop blijft verborgen totdat de echte muziekfile beschikbaar is. */
 fetch("music/song.mp3",{method:"HEAD"})
   .then(r=>{ if(r.ok){ musicBtn.hidden=false; musicLabel(); showMusicPulseIfReady(); } })
   .catch(()=>{});
 musicBtn.addEventListener("click", ()=>{
-  if(audio.paused){ audio.volume = .6; audio.play().catch(()=>{}); }
+  if(audio.paused){
+    // Na de eerste bewuste Play-klik blijft het hart stil, ook bij later pauzeren.
+    hasPressedMusicPlay=true;
+    musicBtn.classList.remove('controls-attention');
+    audio.volume = .6;
+    audio.play().catch(()=>{});
+  }
   else audio.pause();
 });
 audio.addEventListener("play",  ()=>{ musicBtn.classList.add("on");    musicLabel(); });
