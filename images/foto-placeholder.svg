@@ -1,11 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 720">
-<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e0e8ed"/><stop offset=".55" stop-color="#bacbd4"/><stop offset="1" stop-color="#d7c7bf"/></linearGradient></defs>
-<rect width="600" height="720" fill="url(#bg)"/>
-<circle cx="475" cy="125" r="170" fill="#f5efe6" opacity=".4"/>
-<path d="M0 510 Q130 398 260 484 T600 460 V720 H0Z" fill="#e0d5cf" opacity=".65"/>
-<circle cx="237" cy="280" r="82" fill="#a88f89" opacity=".65"/><circle cx="380" cy="280" r="83" fill="#786e73" opacity=".65"/>
-<path d="M65 650 C93 430 174 388 240 390 C321 392 332 459 339 650Z" fill="#92858b" opacity=".77"/>
-<path d="M275 650 C303 430 365 392 410 395 C505 399 554 490 560 650Z" fill="#75666c" opacity=".7"/>
-<text x="300" y="585" text-anchor="middle" fill="#fffefb" font-family="Georgia,serif" font-size="44" letter-spacing="7">S &amp; F</text>
-<text x="300" y="623" text-anchor="middle" fill="#fffefb" font-family="Georgia,serif" font-size="17" letter-spacing="3">YOUR PHOTO HERE</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f8f2ea"/><stop offset="1" stop-color="#e5d7cc"/></linearGradient></defs>
+<rect width="800" height="1000" fill="url(#g)"/>
+<g fill="none" stroke="#a16a74" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" opacity="0.9">
+<circle cx="400" cy="380" r="90"/>
+<path d="M240 690c38-112 120-168 160-168s122 56 160 168"/>
+<path d="M329 282c18-34 48-50 71-50 33 0 61 17 82 50"/>
+</g>
+<text x="400" y="850" font-family="Cormorant Garamond, serif" font-size="42" text-anchor="middle" fill="#8f6066">Photo coming soon</text>
 </svg>
