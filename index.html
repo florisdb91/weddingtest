@@ -8,6 +8,9 @@
 <meta name="theme-color" content="#F6F1EC">
 <title>Siriya &amp; Floris — 27 March 2027 - bijgewerkt</title>
 <meta name="description" content="Siriya &amp; Floris — 27 March 2027 — Baiboon Grand Hotel, Loei">
+<!-- Adviseer zoekmachines deze uitnodiging en de afbeeldingen niet te indexeren. -->
+<meta name="robots" content="noindex, nofollow, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noimageindex">
 <!-- Social sharing / WhatsApp preview (v29): server-readable Open Graph metadata. -->
 <link rel="canonical" href="https://florisdb91.github.io/WeddingSiriyaFloris/">
 <meta property="og:type" content="website">
@@ -1241,6 +1244,16 @@ html.wedding-intro-lock,html.wedding-intro-lock body{overflow:hidden}
 html.wedding-intro-lock body > main{visibility:hidden}
 #weddingIntro:not(.intro-cover-ready) .intro-inside{visibility:hidden}
 #weddingIntro .intro-panel-face{background-color:#74131d}
+
+/* Afbeeldingen: voorkom standaard opslaan via lang indrukken en slepen.
+   Browserzoom en het scrollen van de uitnodiging blijven gewoon werken. */
+img, picture, .intro-panel-face, .intro-panel-back, .intro-seal,
+.hero-art, .photo-slot, .about-photo, .leaf {
+  -webkit-touch-callout:none;
+  -webkit-user-select:none;
+  user-select:none;
+  -webkit-user-drag:none;
+}
 </style>
 </head>
 <body>
@@ -2119,5 +2132,22 @@ rsvpForm.addEventListener('submit',async (evt)=>{
 })();
 </script>
 
+
+<script>
+/* Beperk eenvoudig downloaden, mobiel lang indrukken en slepen van beelden.
+   Dit is geen kopieerbeveiliging: beelden blijven publiek op GitHub Pages. */
+(()=>{
+  const visualSelector = 'img, picture, .intro-panel-face, .intro-panel-back, .intro-seal, .hero-art, .photo-slot, .about-photo, .leaf';
+  // Ook afbeeldingen die later worden ingevoegd zijn beschermd via de events.
+  document.querySelectorAll('img').forEach(img => img.draggable = false);
+  const onImage = target => target instanceof Element && !!target.closest(visualSelector);
+  document.addEventListener('contextmenu', event => {
+    if(onImage(event.target)) event.preventDefault();
+  }, {capture:true});
+  document.addEventListener('dragstart', event => {
+    if(onImage(event.target)) event.preventDefault();
+  }, {capture:true});
+})();
+</script>
 </body>
 </html>
