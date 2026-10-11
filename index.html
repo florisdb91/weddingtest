@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="wedding-intro-lock">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,6 +29,11 @@
 <meta name="twitter:description" content="27 March 2027 · Loei, Thailand. Join us for our wedding and RSVP online.">
 <meta name="twitter:image" content="https://florisdb91.github.io/WeddingSiriyaFloris/images/whatsapp-preview-v29.jpg">
 
+<!-- Load the physical cover artwork early, before the HTML body is painted. -->
+<link rel="preload" as="image" href="images/intro-gold-left.webp">
+<link rel="preload" as="image" href="images/intro-gold-right.webp">
+<link rel="preload" as="image" href="images/intro-red-leather.webp">
+<link rel="preload" as="image" href="images/intro-gold-wax.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Great+Vibes&family=Herr+Von+Muellerhoff&family=Noto+Serif+Thai:wght@300;400&family=Pinyon+Script&display=swap" rel="stylesheet">
@@ -1229,11 +1234,17 @@ html.wedding-intro-lock,html.wedding-intro-lock body{overflow:hidden}
   #weddingIntro.intro-opening .intro-paper-shadow{animation:none!important}
 }
 
+/* Startup paint protection: neither the site nor the invitation insert may
+   flash before the front-cover images have been decoded. The main page is
+   made paintable only under the already opaque fade veil. */
+html.wedding-intro-lock body > main{visibility:hidden}
+#weddingIntro:not(.intro-cover-ready) .intro-inside{visibility:hidden}
+#weddingIntro .intro-panel-face{background-color:#74131d}
 </style>
 </head>
 <body>
 
-<div id="weddingIntro" class="wedding-intro" aria-label="Openvouwende trouwuitnodiging" hidden>
+<div id="weddingIntro" class="wedding-intro" aria-label="Openvouwende trouwuitnodiging">
   <div class="intro-book-stage">
   <div class="intro-inside" aria-hidden="true"><div class="intro-small">Our Wedding Invitation</div><div class="intro-flourish">✧</div><div class="intro-couple"><span>Siriya</span><span class="intro-amp">&amp;</span><span>Floris</span></div><div class="intro-date">27 March 2027</div><span class="intro-paper-shadow intro-paper-shadow--left"></span><span class="intro-paper-shadow intro-paper-shadow--right"></span></div>
   <div class="intro-stage-shadow" aria-hidden="true"></div>
@@ -1251,7 +1262,6 @@ html.wedding-intro-lock,html.wedding-intro-lock body{overflow:hidden}
   <div class="intro-hint" id="introHint"></div>
   <div class="intro-transition-veil" aria-hidden="true"></div>
 </div>
-<script>document.getElementById('weddingIntro').hidden=false;document.documentElement.classList.add('wedding-intro-lock');</script>
 
 <nav class="lang" aria-label="Language">
   <button data-l="en" aria-pressed="true">EN</button>
@@ -2034,6 +2044,19 @@ rsvpForm.addEventListener('submit',async (evt)=>{
   const trigger=document.getElementById('introOpen');
   const hint=document.getElementById('introHint');
   if(!overlay||!trigger)return;
+  // Wait for the leather and gilded cover artwork to decode before showing
+  // the insert behind the closed flaps, preventing an initial paper flash.
+  const coverImages=['images/intro-gold-left.webp','images/intro-gold-right.webp',
+                     'images/intro-red-leather.webp','images/intro-gold-wax.png'];
+  const coverReady=Promise.all(coverImages.map(src=>{
+    const image=new Image();
+    image.src=src;
+    if(typeof image.decode==='function')return image.decode().catch(()=>{});
+    return new Promise(resolve=>{
+      if(image.complete){resolve();return;}
+      image.onload=image.onerror=resolve;
+    });
+  })).then(()=>overlay.classList.add('intro-cover-ready'));
   let opened=false,leaveTimer=null,removeTimer=null;
   const txt={en:'Tap or click the seal to open your invitation',nl:'Tik of klik op het zegel om de uitnodiging te openen',th:'แตะหรือคลิกที่ตราประทับเพื่อเปิดคำเชิญของคุณ'};
   const thaiLine='แตะหรือคลิกที่ตราประทับเพื่อเปิดคำเชิญของคุณ';
@@ -2063,9 +2086,19 @@ rsvpForm.addEventListener('submit',async (evt)=>{
       removeTimer=setTimeout(removeIntro,260);
       return;
     }
-    overlay.classList.add('intro-opening');
-    // Begin the cover as the flaps reach their final outward position. The
-    // moving paper shadows are already gone, so none remain over the interior.
+    awaitCoverAndOpen();
+  }
+  function awaitCoverAndOpen(){
+    coverReady.then(()=>{
+      if(!overlay.isConnected)return;
+      overlay.classList.add('intro-opening');
+      beginExitCountdown();
+    });
+  }
+  function beginExitCountdown(){
+    // Keep the invitation insert fully visible for four seconds AFTER the
+    // 2620ms gatefold motion and its 60ms starting delay. The original opaque
+    // veil and final fade remain unchanged.
     leaveTimer=setTimeout(async()=>{
       overlay.classList.add('intro-veiled');
       // Wait until the opaque cover completely hides the website before
@@ -2079,7 +2112,7 @@ rsvpForm.addEventListener('submit',async (evt)=>{
       await Promise.race([fontsReady,new Promise(resolve=>setTimeout(resolve,320))]);
       overlay.classList.add('intro-reveal');
       removeTimer=setTimeout(removeIntro,920);
-    },3260);
+    },2680 + 4000);
   }
   trigger.addEventListener('click',openCard,{once:true});
 })();
