@@ -1254,6 +1254,17 @@ img, picture, .intro-panel-face, .intro-panel-back, .intro-seal,
   user-select:none;
   -webkit-user-drag:none;
 }
+
+/* Mobiel: het waszegel hoort tegen de leren kaft aan te liggen.
+   Alleen de 3D-afstand en slagschaduw zijn kleiner gemaakt.
+   Het zegel blijft gewoon zichtbaar en beweegt met de bestaande rechterkaft. */
+@media (max-width:700px){
+  .intro-book-stage .intro-seal{
+    transform:translate(-46%,-50%) translateZ(2px);
+    filter:drop-shadow(0 1px 1px rgba(28,5,10,.35))
+           drop-shadow(0 3px 3px rgba(28,5,10,.15));
+  }
+}
 </style>
 </head>
 <body>
