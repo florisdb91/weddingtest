@@ -1280,40 +1280,59 @@ img, picture, .intro-panel-face, .intro-panel-back, .intro-seal,
 }
 
 
-/* v50 — subtiele materiaaldikte (ongeveer 2px) voor karton en lakzegel.
-   Alleen optische dikte: scharnieren, zegelpositie, animatie en timing blijven intact. */
+/* v51 — zichtbaar maar verfijnd reliëf, alleen kaartdikte en lakzegel.
+   De openingshoeken, scharnierpunten, animatie, zegelpositie en timing blijven intact. */
+/* Voor- en achtervel liggen nu 4px uiteen: een dunne luxe kartonkaart,
+   geen dikke doos. De rand heeft licht aan de ene en schaduw aan de andere zijde. */
 .intro-book-stage .intro-panel-face{
-  transform:translateZ(1.15px);
-  border-top:1px solid rgba(255,237,215,.30);
-  border-bottom:1px solid rgba(51,10,18,.23);
+  transform:translateZ(2px);
+  border-top:1px solid rgba(255,240,219,.76);
+  border-bottom:2px solid rgba(43,9,14,.52);
+  box-shadow:inset 0 2px 2px rgba(255,246,223,.18),
+             inset 0 -3px 3px rgba(29,3,9,.30),
+             0 3px 8px rgba(23,1,6,.16);
 }
 .intro-book-stage .intro-panel-back{
-  transform:rotateY(180deg) translateZ(1.15px);
-  border-top:1px solid rgba(255,225,195,.25);
-  border-bottom:1px solid rgba(47,9,16,.23);
+  transform:rotateY(180deg) translateZ(2px);
+  border-top:1px solid rgba(255,224,183,.58);
+  border-bottom:2px solid rgba(47,7,15,.46);
+  box-shadow:inset 0 2px 3px rgba(251,224,186,.14),
+             inset 0 -3px 4px rgba(25,1,8,.25),
+             inset 0 0 0 1px rgba(247,205,151,.29);
 }
-/* Smalle doorsnede van het karton, die al met de bewegende kaft meedraait. */
+/* Het bestaande verticale randje krijgt genoeg contrast om op mobiel te lezen. */
 .intro-book-stage .intro-panel::after{
-  width:2px;
-  background:linear-gradient(90deg,#47121b 0%,#b68069 35%,#f0d8b5 65%,#6c2029 100%);
-  box-shadow:0 0 1px rgba(45,9,14,.27);
-  transform:translateZ(1.3px);
+  width:5px;
+  background:linear-gradient(90deg,#391019 0%,#7c2d36 21%,
+           #dfb38a 54%,#f2d6af 73%,#6a2730 100%);
+  box-shadow:inset 1px 0 1px rgba(255,237,202,.28),
+             1px 0 2px rgba(33,4,12,.26);
+  transform:translateZ(2.25px);
 }
-/* Het transparante zegelbeeld bevat al reliëf; geef alleen het randje
-   een bescheiden dikte en een korte contactschaduw, zonder een tweede schijf. */
+/* Lakzegel als een laagje was: dezelfde originele afbeelding twee keer,
+   slechts 3px verschoven. Geen aparte schijf, geen nieuwe zegelafbeelding. */
 .intro-seal-surface .intro-seal{
-  filter:
-    drop-shadow(0 1px 0 rgba(248,232,205,.56))
-    drop-shadow(0 2px 0 rgba(146,103,73,.36))
-    drop-shadow(0 5px 6px rgba(28,3,9,.29));
+  background-image:none;
+  isolation:isolate;
+  filter:drop-shadow(0 3px 3px rgba(35,9,9,.32));
+}
+.intro-seal-surface .intro-seal::before,
+.intro-seal-surface .intro-seal::after{
+  content:"";position:absolute;inset:0;display:block;pointer-events:none;
+  background:url('images/intro-gold-wax.png') center/contain no-repeat;
+}
+.intro-seal-surface .intro-seal::before{
+  transform:translateY(3px);
+  filter:brightness(.62) sepia(.25);
+  z-index:0;
+}
+.intro-seal-surface .intro-seal::after{
+  transform:none;
+  z-index:1;
 }
 @media(max-width:700px){
-  .intro-seal-surface .intro-seal{
-    filter:
-      drop-shadow(0 1px 0 rgba(248,231,205,.50))
-      drop-shadow(0 2px 0 rgba(146,103,73,.32))
-      drop-shadow(0 3px 4px rgba(28,3,9,.27));
-  }
+  .intro-book-stage .intro-panel::after{width:4px}
+  .intro-seal-surface .intro-seal{filter:drop-shadow(0 2px 2px rgba(35,9,9,.27))}
 }
 
 </style>
