@@ -1279,108 +1279,6 @@ img, picture, .intro-panel-face, .intro-panel-back, .intro-seal,
   .intro-seal-surface .intro-seal{transform:translate(-46%,-50%)}
 }
 
-
-/* v52 — echte, dunne 3D-doorsnede in plaats van een geschilderde dikke rand.
-   Kaftvlakken blijven dezelfde afmetingen, positie en vouwanimatie gebruiken.
-   De vier snijranden zitten tussen het voor- en achtervel van ieder paneel. */
-.intro-book-stage .intro-panel{
-  --intro-stock:2.2px;
-  transform-style:preserve-3d;
-  -webkit-transform-style:preserve-3d;
-}
-.intro-book-stage .intro-panel-face{
-  transform:translateZ(calc(var(--intro-stock) / 2));
-  border:0;
-  box-shadow:inset 0 1px 1px rgba(255,245,221,.16),
-             inset 0 -1px 1px rgba(31,6,13,.16);
-}
-.intro-book-stage .intro-panel-back{
-  transform:rotateY(180deg) translateZ(calc(var(--intro-stock) / 2));
-  border:0;
-  box-shadow:inset 0 0 0 1px rgba(247,205,151,.25),
-             inset 0 0 16px rgba(25,0,6,.19);
-}
-/* De oude, verticale goudstrook op het paneel was geen echte doorsnede. */
-.intro-book-stage .intro-panel::after{display:none}
-/* Smalle vlakjes zijn aan het bewegende paneel bevestigd: een echte
-   opening toont alleen die doorsnede die naar de kijker gericht is. */
-.intro-card-edge{
-  position:absolute;display:block;pointer-events:none;
-  box-sizing:border-box;
-  backface-visibility:visible;
-  background:linear-gradient(90deg,#702a30 0%,#b98172 12%,#e4d0b2 43%,
-    #f6e8d2 57%,#a66a65 87%,#64222b 100%);
-}
-.intro-card-edge--top,.intro-card-edge--bottom{
-  left:0;right:0;height:var(--intro-stock);
-  background:linear-gradient(180deg,#6c2029 0%,#e1cdb5 35%,#f4e5ce 54%,#803944 100%);
-}
-.intro-card-edge--top{
-  top:0;transform-origin:center top;
-  transform:translateZ(calc(var(--intro-stock) / 2)) rotateX(-90deg);
-}
-.intro-card-edge--bottom{
-  bottom:0;transform-origin:center bottom;
-  transform:translateZ(calc(var(--intro-stock) / 2)) rotateX(90deg);
-}
-.intro-card-edge--left,.intro-card-edge--right{
-  top:0;bottom:0;width:var(--intro-stock);
-}
-.intro-card-edge--left{
-  left:0;transform-origin:left center;
-  transform:translateZ(calc(var(--intro-stock) / 2)) rotateY(90deg);
-}
-.intro-card-edge--right{
-  right:0;transform-origin:right center;
-  transform:translateZ(calc(var(--intro-stock) / 2)) rotateY(-90deg);
-}
-/* De lak heeft zelf al een realistisch licht-donker verloop. Niet opnieuw
-   tekenen of verschuiven: één originele afbeelding, op de voorkant geplakt. */
-.intro-seal-surface{
-  transform:translateZ(2.8px);
-  backface-visibility:hidden;
-  -webkit-backface-visibility:hidden;
-  transform-style:flat;
-}
-.intro-seal-surface .intro-seal{
-  transform:translate(-46%,-50%);
-  background:transparent url('images/intro-gold-wax.png') center/contain no-repeat;
-  isolation:auto;
-  filter:drop-shadow(0 1px 1px rgba(43,11,14,.42))
-         drop-shadow(0 2px 2px rgba(36,8,12,.19));
-}
-.intro-seal-surface .intro-seal::before,
-.intro-seal-surface .intro-seal::after{display:none}
-@media(max-width:700px){
-  .intro-book-stage .intro-panel{--intro-stock:1.8px}
-  .intro-seal-surface{transform:translateZ(2.5px)}
-  .intro-seal-surface .intro-seal{
-    filter:drop-shadow(0 1px 1px rgba(43,11,14,.38))
-           drop-shadow(0 2px 2px rgba(36,8,12,.17));
-  }
-}
-
-/* Een aparte, exact meelopende 3D-laag houdt het intacte lakzegel vóór
-   beide gesloten kafthelften. Zo wordt de linkerhelft niet weggeclipt.
-   De laag heeft hetzelfde scharnier, dezelfde animatie en dezelfde timing
-   als de rechter kaft; het zegel blijft voorzijde-only. */
-.intro-book-stage .intro-perspective--seal{
-  z-index:4;
-  pointer-events:none;
-  isolation:isolate;
-}
-.intro-seal-anchor{
-  position:absolute;top:0;left:50%;width:50%;height:100%;
-  pointer-events:none;transform-origin:right center;transform-style:preserve-3d;
-}
-#weddingIntro.intro-opening .intro-seal-anchor{
-  animation:intro-real-right 2620ms cubic-bezier(.40,0,.60,1) 60ms both;
-}
-.intro-seal-anchor .intro-seal{pointer-events:auto}
-@media(prefers-reduced-motion:reduce){
-  #weddingIntro.intro-opening .intro-seal-anchor{animation:none!important}
-}
-
 </style>
 </head>
 <body>
@@ -1393,13 +1291,12 @@ img, picture, .intro-panel-face, .intro-panel-back, .intro-seal,
     <div class="intro-cast-shadow intro-cast-shadow--left" aria-hidden="true"></div>
     <div class="intro-cast-shadow intro-cast-shadow--right" aria-hidden="true"></div>
     <div class="intro-center-shadow" aria-hidden="true"></div>
-    <div class="intro-panel intro-panel--left" aria-hidden="true"><div class="intro-panel-back"></div><div class="intro-panel-face"><span class="intro-ornament top"><svg viewBox="0 0 90 90" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 76V27Q6 6 27 6H76M13 61V30Q13 13 30 13H60"/><path d="M20 53C34 48 39 30 29 24C24 21 17 27 23 32C29 37 38 25 48 20M26 47C31 50 36 55 31 61M44 21C53 25 56 33 51 38M36 36C45 36 52 46 43 52"/><path d="M47 20Q56 13 64 21M16 56Q8 66 18 73"/><circle cx="39" cy="27" r="1.6" fill="currentColor" stroke="none"/></svg></span><span class="intro-ornament bottom"><svg viewBox="0 0 90 90" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 76V27Q6 6 27 6H76M13 61V30Q13 13 30 13H60"/><path d="M20 53C34 48 39 30 29 24C24 21 17 27 23 32C29 37 38 25 48 20M26 47C31 50 36 55 31 61M44 21C53 25 56 33 51 38M36 36C45 36 52 46 43 52"/><path d="M47 20Q56 13 64 21M16 56Q8 66 18 73"/><circle cx="39" cy="27" r="1.6" fill="currentColor" stroke="none"/></svg></span></div><span class="intro-card-edge intro-card-edge--top" aria-hidden="true"></span><span class="intro-card-edge intro-card-edge--bottom" aria-hidden="true"></span><span class="intro-card-edge intro-card-edge--left" aria-hidden="true"></span><span class="intro-card-edge intro-card-edge--right" aria-hidden="true"></span><span class="intro-paper-spine"></span></div>
-    <div class="intro-panel intro-panel--right"><div class="intro-panel-back"></div><div class="intro-panel-face"><span class="intro-ornament top"><svg viewBox="0 0 90 90" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 76V27Q6 6 27 6H76M13 61V30Q13 13 30 13H60"/><path d="M20 53C34 48 39 30 29 24C24 21 17 27 23 32C29 37 38 25 48 20M26 47C31 50 36 55 31 61M44 21C53 25 56 33 51 38M36 36C45 36 52 46 43 52"/><path d="M47 20Q56 13 64 21M16 56Q8 66 18 73"/><circle cx="39" cy="27" r="1.6" fill="currentColor" stroke="none"/></svg></span><span class="intro-ornament bottom"><svg viewBox="0 0 90 90" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 76V27Q6 6 27 6H76M13 61V30Q13 13 30 13H60"/><path d="M20 53C34 48 39 30 29 24C24 21 17 27 23 32C29 37 38 25 48 20M26 47C31 50 36 55 31 61M44 21C53 25 56 33 51 38M36 36C45 36 52 46 43 52"/><path d="M47 20Q56 13 64 21M16 56Q8 66 18 73"/><circle cx="39" cy="27" r="1.6" fill="currentColor" stroke="none"/></svg></span></div><span class="intro-card-edge intro-card-edge--top" aria-hidden="true"></span><span class="intro-card-edge intro-card-edge--bottom" aria-hidden="true"></span><span class="intro-card-edge intro-card-edge--left" aria-hidden="true"></span><span class="intro-card-edge intro-card-edge--right" aria-hidden="true"></span><span class="intro-paper-spine"></span>
-      
+    <div class="intro-panel intro-panel--left" aria-hidden="true"><div class="intro-panel-back"></div><div class="intro-panel-face"><span class="intro-ornament top"><svg viewBox="0 0 90 90" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 76V27Q6 6 27 6H76M13 61V30Q13 13 30 13H60"/><path d="M20 53C34 48 39 30 29 24C24 21 17 27 23 32C29 37 38 25 48 20M26 47C31 50 36 55 31 61M44 21C53 25 56 33 51 38M36 36C45 36 52 46 43 52"/><path d="M47 20Q56 13 64 21M16 56Q8 66 18 73"/><circle cx="39" cy="27" r="1.6" fill="currentColor" stroke="none"/></svg></span><span class="intro-ornament bottom"><svg viewBox="0 0 90 90" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 76V27Q6 6 27 6H76M13 61V30Q13 13 30 13H60"/><path d="M20 53C34 48 39 30 29 24C24 21 17 27 23 32C29 37 38 25 48 20M26 47C31 50 36 55 31 61M44 21C53 25 56 33 51 38M36 36C45 36 52 46 43 52"/><path d="M47 20Q56 13 64 21M16 56Q8 66 18 73"/><circle cx="39" cy="27" r="1.6" fill="currentColor" stroke="none"/></svg></span></div><span class="intro-paper-spine"></span></div>
+    <div class="intro-panel intro-panel--right"><div class="intro-panel-back"></div><div class="intro-panel-face"><span class="intro-ornament top"><svg viewBox="0 0 90 90" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 76V27Q6 6 27 6H76M13 61V30Q13 13 30 13H60"/><path d="M20 53C34 48 39 30 29 24C24 21 17 27 23 32C29 37 38 25 48 20M26 47C31 50 36 55 31 61M44 21C53 25 56 33 51 38M36 36C45 36 52 46 43 52"/><path d="M47 20Q56 13 64 21M16 56Q8 66 18 73"/><circle cx="39" cy="27" r="1.6" fill="currentColor" stroke="none"/></svg></span><span class="intro-ornament bottom"><svg viewBox="0 0 90 90" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 76V27Q6 6 27 6H76M13 61V30Q13 13 30 13H60"/><path d="M20 53C34 48 39 30 29 24C24 21 17 27 23 32C29 37 38 25 48 20M26 47C31 50 36 55 31 61M44 21C53 25 56 33 51 38M36 36C45 36 52 46 43 52"/><path d="M47 20Q56 13 64 21M16 56Q8 66 18 73"/><circle cx="39" cy="27" r="1.6" fill="currentColor" stroke="none"/></svg></span></div><span class="intro-paper-spine"></span>
+      <div class="intro-seal-surface"><button class="intro-seal" id="introOpen" type="button" aria-label="Open de trouwuitnodiging"><svg viewBox="0 0 150 180" role="presentation" aria-hidden="true"><defs><linearGradient id="sealCream" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fffdfa"/><stop offset=".52" stop-color="#f7f0e5"/><stop offset="1" stop-color="#ead8c0"/></linearGradient><linearGradient id="sealEdge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff9ef"/><stop offset="1" stop-color="#d8bea1"/></linearGradient></defs><path d="M75 6 C87 15 98 6 108 17 C117 28 128 22 132 38 C136 50 147 53 143 68 C140 79 151 88 143 100 C139 111 145 121 135 134 C126 141 128 155 111 157 C99 158 90 172 75 173 C61 172 51 158 39 157 C22 155 24 141 15 134 C5 121 11 111 7 100 C-1 88 10 79 7 68 C3 53 14 50 18 38 C22 22 33 28 42 17 C52 6 63 15 75 6 Z" fill="url(#sealCream)" stroke="url(#sealEdge)" stroke-width="3.4"/><path d="M75 16C86 22 98 15 106 25C115 35 123 30 125 42C130 54 137 55 133 69C131 79 142 89 133 99C128 112 134 118 125 130C116 138 119 146 108 148C96 151 89 163 75 164C61 163 53 151 42 148C31 146 34 138 25 130C16 118 22 112 17 99C8 89 19 79 17 69C13 55 20 54 25 42C27 30 35 35 44 25C52 15 64 22 75 16Z" fill="none" stroke="#c9aa89" stroke-width="1.4"/><path d="M49 30Q75 17 101 30" stroke="#bb9a75" stroke-width="1.1" fill="none"/><path d="M49 145Q75 158 101 145" stroke="#bb9a75" stroke-width="1.1" fill="none"/></svg><span class="intro-monogram"><span class="intro-monogram-first">S</span><span class="intro-monogram-join">&amp;</span><span class="intro-monogram-last">F</span></span></button></div>
     </div>
     <div class="intro-crease" aria-hidden="true"></div>
   </div>
-  <div class="intro-perspective intro-perspective--seal"><div class="intro-seal-anchor"><div class="intro-seal-surface"><button class="intro-seal" id="introOpen" type="button" aria-label="Open de trouwuitnodiging"><svg viewBox="0 0 150 180" role="presentation" aria-hidden="true"><defs><linearGradient id="sealCream" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fffdfa"/><stop offset=".52" stop-color="#f7f0e5"/><stop offset="1" stop-color="#ead8c0"/></linearGradient><linearGradient id="sealEdge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff9ef"/><stop offset="1" stop-color="#d8bea1"/></linearGradient></defs><path d="M75 6 C87 15 98 6 108 17 C117 28 128 22 132 38 C136 50 147 53 143 68 C140 79 151 88 143 100 C139 111 145 121 135 134 C126 141 128 155 111 157 C99 158 90 172 75 173 C61 172 51 158 39 157 C22 155 24 141 15 134 C5 121 11 111 7 100 C-1 88 10 79 7 68 C3 53 14 50 18 38 C22 22 33 28 42 17 C52 6 63 15 75 6 Z" fill="url(#sealCream)" stroke="url(#sealEdge)" stroke-width="3.4"/><path d="M75 16C86 22 98 15 106 25C115 35 123 30 125 42C130 54 137 55 133 69C131 79 142 89 133 99C128 112 134 118 125 130C116 138 119 146 108 148C96 151 89 163 75 164C61 163 53 151 42 148C31 146 34 138 25 130C16 118 22 112 17 99C8 89 19 79 17 69C13 55 20 54 25 42C27 30 35 35 44 25C52 15 64 22 75 16Z" fill="none" stroke="#c9aa89" stroke-width="1.4"/><path d="M49 30Q75 17 101 30" stroke="#bb9a75" stroke-width="1.1" fill="none"/><path d="M49 145Q75 158 101 145" stroke="#bb9a75" stroke-width="1.1" fill="none"/></svg><span class="intro-monogram"><span class="intro-monogram-first">S</span><span class="intro-monogram-join">&amp;</span><span class="intro-monogram-last">F</span></span></button></div></div></div>
   </div><!-- /intro-book-stage: alleen de fysieke kaart beweegt -->
   <div class="intro-hint" id="introHint"></div>
   <div class="intro-transition-veil" aria-hidden="true"></div>
