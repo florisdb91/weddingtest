@@ -1254,15 +1254,10 @@ img, picture, .intro-panel-face, .intro-panel-back, .intro-seal,
   user-select:none;
   -webkit-user-drag:none;
 }
-
-/* Mobiel: behoud de oorspronkelijke veilige 3D-diepte van het hele waszegel.
-   Alleen de slagschaduw wordt verzacht, zonder de vouwanimatie aan te passen. */
-@media (max-width:700px){
-  .intro-book-stage .intro-seal{
-    transform:translate(-46%,-50%) translateZ(28px);
-    filter:drop-shadow(0 1px 1px rgba(28,5,10,.35))
-           drop-shadow(0 3px 3px rgba(28,5,10,.15));
-  }
+/* Mobile: a gentler 3D perspective keeps the open cover edges aligned
+   with the invitation sheet. The animation, seal and shadows stay unchanged. */
+@media(max-width:700px){
+  .intro-book-stage .intro-perspective{perspective:6800px}
 }
 </style>
 </head>
