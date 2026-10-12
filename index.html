@@ -1279,6 +1279,43 @@ img, picture, .intro-panel-face, .intro-panel-back, .intro-seal,
   .intro-seal-surface .intro-seal{transform:translate(-46%,-50%)}
 }
 
+
+/* v50 — subtiele materiaaldikte (ongeveer 2px) voor karton en lakzegel.
+   Alleen optische dikte: scharnieren, zegelpositie, animatie en timing blijven intact. */
+.intro-book-stage .intro-panel-face{
+  transform:translateZ(1.15px);
+  border-top:1px solid rgba(255,237,215,.30);
+  border-bottom:1px solid rgba(51,10,18,.23);
+}
+.intro-book-stage .intro-panel-back{
+  transform:rotateY(180deg) translateZ(1.15px);
+  border-top:1px solid rgba(255,225,195,.25);
+  border-bottom:1px solid rgba(47,9,16,.23);
+}
+/* Smalle doorsnede van het karton, die al met de bewegende kaft meedraait. */
+.intro-book-stage .intro-panel::after{
+  width:2px;
+  background:linear-gradient(90deg,#47121b 0%,#b68069 35%,#f0d8b5 65%,#6c2029 100%);
+  box-shadow:0 0 1px rgba(45,9,14,.27);
+  transform:translateZ(1.3px);
+}
+/* Het transparante zegelbeeld bevat al reliëf; geef alleen het randje
+   een bescheiden dikte en een korte contactschaduw, zonder een tweede schijf. */
+.intro-seal-surface .intro-seal{
+  filter:
+    drop-shadow(0 1px 0 rgba(248,232,205,.56))
+    drop-shadow(0 2px 0 rgba(146,103,73,.36))
+    drop-shadow(0 5px 6px rgba(28,3,9,.29));
+}
+@media(max-width:700px){
+  .intro-seal-surface .intro-seal{
+    filter:
+      drop-shadow(0 1px 0 rgba(248,231,205,.50))
+      drop-shadow(0 2px 0 rgba(146,103,73,.32))
+      drop-shadow(0 3px 4px rgba(28,3,9,.27));
+  }
+}
+
 </style>
 </head>
 <body>
