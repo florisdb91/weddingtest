@@ -1243,7 +1243,7 @@ html.wedding-intro-lock,html.wedding-intro-lock body{overflow:hidden}
    made paintable only under the already opaque fade veil. */
 html.wedding-intro-lock body > main{visibility:hidden}
 #weddingIntro:not(.intro-cover-ready) .intro-inside{visibility:hidden}
-#weddingIntro .intro-panel-face{background-color:#74131d}
+#weddingIntro .intro-panel-face{background-color:#718B98}
 
 /* Afbeeldingen: voorkom standaard opslaan via lang indrukken en slepen.
    Browserzoom en het scrollen van de uitnodiging blijven gewoon werken. */
@@ -1515,77 +1515,57 @@ body::before{
 }
 
 
-/* Avondgasten V18: programma-regel op de verticale middenlijn van
-   het oorspronkelijke grote tijdlijnvlak. De typografie en horizontale
-   icoon/tijd/tekst indeling zijn identiek aan de daggasten. */
-#p2 .timeline{
-  min-height:28rem;
-  padding-left:5.5rem;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
+/* v14.2 / v18.2 — wacht uitsluitend op de drie afbeeldingen van de openingskaart.
+   De rest van de website hoeft niet mee te laden. */
+#weddingIntro:not(.intro-cover-ready) .intro-book-stage,
+#weddingIntro:not(.intro-cover-ready) .intro-hint{
+  opacity:0;
+  visibility:hidden;
 }
-#p2 .timeline::before{
-  display:none!important;
-  content:none!important;
+#weddingIntro .intro-book-stage,
+#weddingIntro .intro-hint{
+  transition:opacity .26s ease;
 }
-#p2 .timeline-item{
-  position:relative;
-  display:grid;
-  grid-template-columns:5rem minmax(0,1fr);
-  column-gap:1.5rem;
-  min-height:3rem;
-  width:100%;
-  padding:0;
-  margin:0;
-  align-items:center;
+#weddingIntro .intro-loading{
+  position:absolute;inset:0;z-index:8;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:.65rem;text-align:center;pointer-events:none;
+  color:#557487;font-family:'Cormorant Garamond',Georgia,serif;
+  transition:opacity .22s ease,visibility .22s ease;
 }
-#p2 .timeline-item .timeline-icon{
-  position:absolute;
-  left:-5.5rem;
-  top:50%;
-  transform:translateY(-50%);
-  width:3rem;
-  height:3rem;
+#weddingIntro .intro-loading-mark{
+  width:2rem;height:2rem;border-radius:50%;
+  border:1.5px solid rgba(107,147,165,.25);
+  border-top-color:#7699AA;
+  animation:intro-loading-spin 1s linear infinite;
 }
-#p2 .timeline-item .timeline-time,
-#p2 .timeline-item .timeline-content{
-  position:static!important;
-  width:auto!important;
-  height:auto!important;
-  margin:0!important;
-  overflow:visible!important;
-  clip-path:none!important;
-  white-space:normal!important;
-  border:0!important;
+#weddingIntro .intro-loading-caption{
+  font-size:clamp(.95rem,2vw,1.14rem);
+  letter-spacing:.06em;
 }
-#p2 .timeline-item .timeline-time{padding:.25rem 0 0!important;grid-column:1;grid-row:1;}
-#p2 .timeline-item .timeline-content{padding:0!important;grid-column:2;grid-row:1;min-width:0;}
-#p2 .timeline-item .timeline-content h3{margin-bottom:0;}
-@media(max-width:600px){
-  #p2 .timeline{min-height:26rem;padding-left:4.5rem;}
-  #p2 .timeline-item{grid-template-columns:4.9rem minmax(0,1fr);column-gap:.5rem;}
-  #p2 .timeline-item .timeline-icon{left:-4.5rem;}
+#weddingIntro.intro-cover-ready .intro-loading{opacity:0;visibility:hidden}
+/* Wanneer een afbeelding ontbreekt of de verbinding blijft hangen:
+   geen rode of onvolledige kaart, maar een nette blauwgrijze omslag. */
+#weddingIntro.intro-cover-fallback .intro-panel-face{
+  background-image:none!important;
+  background-color:#718B98!important;
 }
-@media(max-width:420px){
-  /* Tot 420px: icoon, tijd en titel houden hun originele lettergroottes. */
-  #p2 .timeline-item{grid-template-columns:4.9rem minmax(0,1fr);}
-  #p2 .timeline-item .timeline-time{grid-column:1;grid-row:1;}
-  #p2 .timeline-item .timeline-content{grid-column:2;grid-row:1;}
+#weddingIntro.intro-cover-fallback .intro-panel-back{
+  background:#667F8D!important;
 }
-@media(max-width:350px){
-  /* Op zeer smalle telefoons past de volledige titel niet naast de tijd.
-     Stapel alleen tijd en titel, rechts van het icoon, zonder tekst te verkleinen. */
-  #p2 .timeline-item{grid-template-columns:minmax(0,1fr);row-gap:.15rem;}
-  #p2 .timeline-item .timeline-time{grid-column:1;grid-row:1;padding-top:0!important;}
-  #p2 .timeline-item .timeline-content{grid-column:1;grid-row:2;}
+@keyframes intro-loading-spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){
+  #weddingIntro .intro-loading-mark{animation:none}
+  #weddingIntro .intro-book-stage,
+  #weddingIntro .intro-hint,
+  #weddingIntro .intro-loading{transition:none!important}
 }
 
 </style>
 </head>
 <body>
 
-<div id="weddingIntro" class="wedding-intro" aria-label="Openvouwende trouwuitnodiging">
+<div id="weddingIntro" class="wedding-intro" aria-label="Openvouwende trouwuitnodiging" aria-busy="true">
   <div class="intro-book-stage">
   <div class="intro-inside" aria-hidden="true"><div class="intro-small">Our Wedding Invitation</div><div class="intro-small-th" lang="th">บัตรเชิญงานแต่งงานของเรา</div><div class="intro-flourish">✧</div><div class="intro-couple"><span>Siriya</span><span class="intro-amp">&amp;</span><span>Floris</span></div><div class="intro-date">27 March 2027</div><span class="intro-paper-shadow intro-paper-shadow--left"></span><span class="intro-paper-shadow intro-paper-shadow--right"></span></div>
   <div class="intro-stage-shadow" aria-hidden="true"></div>
@@ -1600,6 +1580,7 @@ body::before{
     <div class="intro-crease" aria-hidden="true"></div>
   </div>
   </div><!-- /intro-book-stage: alleen de fysieke kaart beweegt -->
+  <div class="intro-loading" role="status" aria-live="polite"><span class="intro-loading-mark" aria-hidden="true"></span><span class="intro-loading-caption">Preparing your invitation…</span></div>
   <div class="intro-hint" id="introHint"></div>
   <div class="intro-transition-veil" aria-hidden="true"></div>
 </div>
@@ -1677,6 +1658,21 @@ body::before{
     <div>
       <div class="timeline">
         <article class="timeline-item">
+          <div class="timeline-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="13" r="4.6"/><circle cx="15.2" cy="13" r="4.6"/><path d="M7.7 7.7 9 5.5l1.3 2.2M13.9 7.7l1.3-2.2 1.3 2.2"/></svg></div>
+          <div class="timeline-time" data-t="tmEngagement">03:00 PM</div>
+          <div class="timeline-content"><h3 data-t="engagementTitle">Engagement Ceremony</h3></div>
+        </article>
+        <article class="timeline-item">
+          <div class="timeline-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 14c2 2.2 4.3 3.3 7 3.3s5-1.1 7-3.3"/><path d="M5 14h14M7.1 17.5h9.8M12 3.2s-3.5 4.1-3.5 6.7a3.5 3.5 0 0 0 7 0c0-2.6-3.5-6.7-3.5-6.7Z"/></svg></div>
+          <div class="timeline-time" data-t="tmBlessing">03:45 PM</div>
+          <div class="timeline-content"><h3 data-t="blessingTitle">Water Blessing Ceremony</h3></div>
+        </article>
+        <article class="timeline-item">
+          <div class="timeline-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20.2 4.5 12.5C.6 8.4 6.6 3.6 10.1 7.5L12 9.4l1.9-1.9c3.5-3.9 9.5.9 5.6 5L12 20.2Z"/></svg></div>
+          <div class="timeline-time" data-t="tmVows">05:00 PM</div>
+          <div class="timeline-content"><h3 data-t="vowsTitle">Vow Ceremony</h3></div>
+        </article>
+        <article class="timeline-item">
           <div class="timeline-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3.5 4.5h9l-.8 5.3c-.3 2.1-1.7 3.3-3.7 3.3s-3.4-1.2-3.7-3.3l-.8-5.3Z"/><path d="M8 13.1V20m-3 0h6"/><path d="M15.5 4.5v5.2a2.5 2.5 0 0 0 5 0V4.5M18 4.5V20"/></svg></div>
           <div class="timeline-time" data-t="tmReception">06:00 PM</div>
           <div class="timeline-content"><h3 data-t="receptionTitle">Wedding Reception</h3></div>
@@ -1693,7 +1689,7 @@ body::before{
 111 Moo 9, Charoenrat Road
 Na An, Mueang Loei
 Loei 42000, Thailand</address><a class="map-link" href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x312147a75364f8b3:0xcbe444a94fc6d62e?sa=X&amp;ved=1t:8290&amp;ictx=111" target="_blank" rel="noopener" data-t="mapLink">Open in Google Maps</a></div></div>
-        <div class="location-row"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.2 2"/></svg><span data-t="dateTimeLine">27 March 2027 · 06:00 PM</span></div>
+        <div class="location-row"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.2 2"/></svg><span data-t="dateTimeLine">27 March 2027 · 03:00 PM</span></div>
       </div>
       <div class="cal">
         <details class="cal-picker" id="calPicker">
@@ -1801,8 +1797,8 @@ const L = {
     invite1:"Request the pleasure of your company as we celebrate our marriage.",
     date:"27 March 2027",
     dow:"Sat", dnum:"27", mon:"Mar", yearLine:"Two thousand twenty seven", cityLine:"Loei, Thailand",
-    time:"Six o'clock in the Evening",
-    dateTimeLine:"27 March 2027 · 06:00 PM",
+    time:"Three o'clock in the Afternoon",
+    dateTimeLine:"27 March 2027 · 03:00 PM",
     tmEngagement:"03:00 PM", tmBlessing:"03:45 PM", tmVows:"05:00 PM", tmReception:"06:00 PM",
     sideText:"A day of love, family, celebration and togetherness.",
     detailsTitle:"The Day",
@@ -1854,7 +1850,7 @@ const L = {
     aboutText:"We hope to see you at our wedding and apologize if we are not able to deliver this invitation personally.",
     calBtn:"Add to calendar", calGoogle:"Google Calendar", calIcs:"Other calendar (.ics)",
     calTitle:"Wedding of Siriya & Floris",
-    calDesc:"Guests are welcome from 6 PM, followed by the wedding reception and an evening together."
+    calDesc:"Engagement ceremony at 3 PM, water blessing ceremony at 3:45 PM, vow ceremony at 5 PM, wedding reception at 6 PM."
   },
 
   nl:{
@@ -1870,8 +1866,8 @@ const L = {
     invite1:"Wij nodigen u van harte uit om samen ons huwelijk te vieren.",
     date:"27 maart 2027",
     dow:"Za", dnum:"27", mon:"Mrt", yearLine:"Tweeduizend zevenentwintig", cityLine:"Loei, Thailand",
-    time:"Zes uur 's avonds",
-    dateTimeLine:"27 maart 2027 · 18:00 uur",
+    time:"Drie uur 's middags",
+    dateTimeLine:"27 maart 2027 · 15:00 uur",
     tmEngagement:"15:00", tmBlessing:"15:45", tmVows:"17:00", tmReception:"18:00",
     sideText:"Een dag vol liefde, familie, geluk en samenzijn.",
     detailsTitle:"De dag",
@@ -1923,7 +1919,7 @@ const L = {
     aboutText:"We hopen jullie te zien op onze bruiloft en bieden onze excuses aan als we deze uitnodiging niet persoonlijk kunnen overhandigen.",
     calBtn:"Toevoegen aan agenda", calGoogle:"Google Agenda", calIcs:"Andere agenda (.ics)",
     calTitle:"Bruiloft van Siriya & Floris",
-    calDesc:"Gasten zijn welkom vanaf 18:00 uur, gevolgd door de bruiloftsreceptie en een gezellige avond samen."
+    calDesc:"Verlovingsceremonie om 15:00, waterzegeningsceremonie om 15:45, ceremonie met huwelijksgeloften om 17:00 en bruiloftsreceptie om 18:00."
   },
 
   th:{
@@ -1939,8 +1935,8 @@ const L = {
     invite1:"ขอเรียนเชิญท่านมาร่วมเฉลิมฉลองงานมงคลสมรสของเรา",
     date:"27 มีนาคม 2570",
     dow:"เสาร์", dnum:"27", mon:"มี.ค.", yearLine:"พ.ศ. 2570 · ค.ศ. 2027", cityLine:"จังหวัดเลย ประเทศไทย",
-    time:"หกโมงเย็น",
-    dateTimeLine:"27 มีนาคม 2570 · 18.00 น.",
+    time:"บ่ายสามโมง",
+    dateTimeLine:"27 มีนาคม 2570 · 15.00 น.",
     tmEngagement:"15.00 น.", tmBlessing:"15.45 น.", tmVows:"17.00 น.", tmReception:"18.00 น.",
     sideText:"วันแห่งความรัก ครอบครัว ความสุข และการเฉลิมฉลองร่วมกัน",
     detailsTitle:"กำหนดการ",
@@ -1992,7 +1988,7 @@ const L = {
     aboutText:"เราหวังเป็นอย่างยิ่งว่าจะได้พบทุกท่านในงานแต่งงานของเรา และขออภัยหากไม่สามารถนำบัตรเชิญมามอบให้ด้วยตนเองได้",
     calBtn:"เพิ่มลงในปฏิทิน", calGoogle:"ปฏิทินกูเกิล", calIcs:"ปฏิทินอื่น (.ics)",
     calTitle:"งานแต่งงานของ Siriya & Floris",
-    calDesc:"ยินดีต้อนรับแขกตั้งแต่เวลา 18.00 น. จากนั้นร่วมงานเลี้ยงฉลองมงคลสมรสและใช้เวลาร่วมกันในช่วงค่ำ"
+    calDesc:"พิธีหมั้น 15.00 น. พิธีรดน้ำสังข์ 15.45 น. พิธีกล่าวคำปฏิญาณรัก 17.00 น. และงานเลี้ยงฉลองมงคลสมรส 18.00 น."
   }
 };
 
@@ -2050,8 +2046,8 @@ document.querySelectorAll(".lang button").forEach(b=>{
   b.addEventListener("click", ()=> setLang(b.dataset.l));
 });
 
-/* ===== countdown avondgasten (27 maart 2027, 18:00 Thaise tijd = UTC+7) ===== */
-const TARGET = new Date("2027-03-27T18:00:00+07:00").getTime();
+/* ===== countdown (27 maart 2027, 15:00 Thaise tijd = UTC+7) ===== */
+const TARGET = new Date("2027-03-27T15:00:00+07:00").getTime();
 const cd = {d:document.getElementById("nD"),h:document.getElementById("nH"),m:document.getElementById("nM"),s:document.getElementById("nS")};
 const pad = n => String(n).padStart(2,"0");
 function tick(){
@@ -2077,9 +2073,9 @@ const mapCover = document.getElementById("mapCover");
 if(mapBox && mapCover) mapCover.addEventListener("click", ()=> mapBox.classList.add("live"));
 
 /* ===== toevoegen aan agenda =====
-   Start: 27 maart 2027, 18:00 Thaise tijd (= 11:00 UTC). Einde: 21:00 Thaise tijd (= 14:00 UTC) — pas aan indien nodig. */
+   Start: 27 maart 2027, 15:00 Thaise tijd (= 08:00 UTC). Einde: 21:00 Thaise tijd (= 14:00 UTC) — pas aan indien nodig. */
 const EVENT = {
-  start:"20270327T110000Z",
+  start:"20270327T080000Z",
   end:"20270327T140000Z",
   location:"Baiboon Grand Hotel, 111 Moo 9, Charoenrat Road, Na An, Mueang Loei, Loei 42000, Thailand"
 };
@@ -2379,24 +2375,50 @@ rsvpForm.addEventListener('submit',async (evt)=>{
   const trigger=document.getElementById('introOpen');
   const hint=document.getElementById('introHint');
   if(!overlay||!trigger)return;
-  // Wait for the leather and gilded cover artwork to decode before showing
-  // the insert behind the closed flaps, preventing an initial paper flash.
+  // De openingskaart wordt pas zichtbaar zodra haar drie eigen afbeeldingen
+  // gedecodeerd zijn. Andere pagina-afbeeldingen vertragen de intro niet.
+  // Een limiet van 4,5 seconden voorkomt vastlopen op trage verbindingen.
+  trigger.disabled=true;
   const coverImages=['images/intro-gold-left.webp','images/intro-gold-right.webp',
                      'images/intro-red-leather.webp'];
-  const coverReady=Promise.all(coverImages.map(src=>{
+  const decodeCoverImage=src=>new Promise(resolve=>{
     const image=new Image();
+    let completed=false;
+    const finish=ok=>{
+      if(completed)return;
+      completed=true;
+      resolve(ok);
+    };
+    image.onload=()=>{
+      if(typeof image.decode==='function')image.decode().then(()=>finish(true),()=>finish(false));
+      else finish(true);
+    };
+    image.onerror=()=>finish(false);
     image.src=src;
-    if(typeof image.decode==='function')return image.decode().catch(()=>{});
-    return new Promise(resolve=>{
-      if(image.complete){resolve();return;}
-      image.onload=image.onerror=resolve;
-    });
-  })).then(()=>overlay.classList.add('intro-cover-ready'));
+    if(image.complete){
+      if(!image.naturalWidth)finish(false);
+      else if(typeof image.decode==='function')image.decode().then(()=>finish(true),()=>finish(false));
+      else finish(true);
+    }
+  });
+  const coverReady=Promise.race([
+    Promise.all(coverImages.map(decodeCoverImage)),
+    new Promise(resolve=>setTimeout(()=>resolve(null),4500))
+  ]).then(results=>{
+    if(!overlay.isConnected)return;
+    if(!results||!results.every(Boolean))overlay.classList.add('intro-cover-fallback');
+    overlay.classList.add('intro-cover-ready');
+    overlay.setAttribute('aria-busy','false');
+    trigger.disabled=false;
+  });
   let opened=false,leaveTimer=null,removeTimer=null;
   const txt={en:'Tap or click the seal to open your invitation',nl:'Tik of klik op het zegel om de uitnodiging te openen',th:'แตะหรือคลิกที่ตราประทับเพื่อเปิดคำเชิญของคุณ'};
   const thaiLine='แตะหรือคลิกที่ตราประทับเพื่อเปิดคำเชิญของคุณ';
   const lang=(navigator.language||'en').toLowerCase();
   const locale=lang.startsWith('nl')?'nl':(lang.startsWith('th')?'th':'en');
+  const loadingText={en:"Preparing your invitation…",nl:"Jullie uitnodiging wordt klaargemaakt…",th:"กำลังเตรียมบัตรเชิญของคุณ…"};
+  const loadingLabel=overlay.querySelector('.intro-loading-caption');
+  if(loadingLabel)loadingLabel.textContent=loadingText[locale];
   hint.innerHTML='<span class="intro-hint-main">'+txt[locale]+'</span>' + (locale==='th' ? '' : '<span class="intro-hint-th" lang="th">'+thaiLine+'</span>');
   function removeIntro(){
     if(!overlay.isConnected)return;
