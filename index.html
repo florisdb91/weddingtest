@@ -19,8 +19,8 @@
 <meta property="og:url" content="https://florisdb91.github.io/WeddingSiriyaFloris/">
 <meta property="og:title" content="Siriya &amp; Floris | Wedding Invitation">
 <meta property="og:description" content="You're invited to celebrate our wedding on 27 March 2027 at Baiboon Grand Hotel, Loei, Thailand. View the invitation and RSVP.">
-<meta property="og:image" content="https://florisdb91.github.io/WeddingSiriyaFloris/images/whatsapp-preview-v35.jpg">
-<meta property="og:image:secure_url" content="https://florisdb91.github.io/WeddingSiriyaFloris/images/whatsapp-preview-v35.jpg">
+<meta property="og:image" content="https://florisdb91.github.io/WeddingSiriyaFloris/images/whatsapp-preview-v31.jpg">
+<meta property="og:image:secure_url" content="https://florisdb91.github.io/WeddingSiriyaFloris/images/whatsapp-preview-v31.jpg">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -31,7 +31,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Siriya &amp; Floris | Wedding Invitation">
 <meta name="twitter:description" content="27 March 2027 · Loei, Thailand. Join us for our wedding and RSVP online.">
-<meta name="twitter:image" content="https://florisdb91.github.io/WeddingSiriyaFloris/images/whatsapp-preview-v35.jpg">
+<meta name="twitter:image" content="https://florisdb91.github.io/WeddingSiriyaFloris/images/whatsapp-preview-v31.jpg">
 
 <!-- Load the physical cover artwork early, before the HTML body is painted. -->
 <link rel="preload" as="image" href="images/intro-gold-left.webp">
@@ -1453,167 +1453,6 @@ body::before{
   z-index:1;
   background:transparent;
 }
-
-/* v7 — Brighter powder-blue wedding stationery (instead of dark slate).
-   Lightened source images preserve original gold foil details and leather grain. */
-:root {
-  --intro-wine:#A8C7D8;
-  --intro-wine-dark:#86ADBF;
-  --intro-wine-mid:#AACCDC;
-  --intro-wine-light:#C4DEEA;
-}
-#weddingIntro .intro-panel-face {background-color:#A9C9D9;}
-#weddingIntro .intro-panel-back {
-  background:linear-gradient(112deg,rgba(255,255,255,.12),transparent 43%,rgba(52,83,103,.12)),
-             url('images/intro-red-leather.webp') center/cover no-repeat,#ACCBDB;
-}
-#weddingIntro .intro-card-edge--top,
-#weddingIntro .intro-card-edge--bottom {
-  background:linear-gradient(180deg,#FBF2DF 0%,#D7D9D3 35%,#AAC5D2 71%,#789FAF 100%);
-}
-#weddingIntro .intro-card-edge--free {
-  background:linear-gradient(90deg,#F6EEDC 0%,#C7DBE1 37%,#9CBECE 76%,#7295AA 100%);
-}
-#weddingIntro .intro-paper-spine {
-  background:linear-gradient(90deg,#7FA2B6,#C4DCE6 42%,#EBE4CE 70%,#7F9DAD);
-}
-/* The mobile watercolor is pale; navy-blue instructions have proper contrast. */
-@media (max-width:700px) {
-  #weddingIntro .intro-hint,
-  #weddingIntro .intro-hint .intro-hint-main,
-  #weddingIntro .intro-hint .intro-hint-th {
-    color:#314B5C;
-    text-shadow:0 1px 0 rgba(255,255,255,.83);
-    opacity:1;
-  }
-}
-
-
-/* v8 – exact dress-code Royal Blue (#287FBD). No powder-blue slate layers on envelope.
-   All paper imagery was rebuilt from the original pre-v7 texture assets. */
-:root{
-  --intro-wine:#287FBD;
-  --intro-wine-dark:#185E96;
-  --intro-wine-mid:#338AC4;
-  --intro-wine-light:#5BA4D6;
-}
-#weddingIntro .intro-panel-face{background-color:#287FBD;}
-#weddingIntro .intro-panel-back,
-#weddingIntro .intro-book-stage .intro-panel-back{
-  background:linear-gradient(112deg,rgba(255,255,255,.07),transparent 44%,rgba(6,40,93,.18)),
-             url('images/intro-red-leather.webp') center/cover no-repeat,#287FBD;
-}
-#weddingIntro .intro-card-edge--top,
-#weddingIntro .intro-card-edge--bottom{
-  background:linear-gradient(180deg,#B1D5EA 0%,#5296C8 33%,#287FBD 68%,#165990 100%);
-}
-#weddingIntro .intro-card-edge--free{
-  background:linear-gradient(90deg,#86B6D9 0%,#287FBD 43%,#216BA4 80%,#154E83 100%);
-}
-#weddingIntro .intro-paper-spine{
-  background:linear-gradient(90deg,#155281,#2A7BB5 43%,#D1BFA7 71%,#1B5B8F);
-}
-#weddingIntro .intro-book-stage .intro-panel::after{
-  background:linear-gradient(90deg,#18558B,#3E89C0 42%,#D2B999 78%,#1A598D);
-}
-/* Keep the legible dark mobile instruction from version 7. */
-@media(max-width:700px){
-  #weddingIntro .intro-hint,
-  #weddingIntro .intro-hint .intro-hint-main,
-  #weddingIntro .intro-hint .intro-hint-th{
-    color:#314B5C;
-    text-shadow:0 1px 0 rgba(255,255,255,.85);
-    opacity:1;
-  }
-}
-
-
-
-/* V12 — turquoise wedding card. Exact third dress-code colour from supplied card.
-   One artwork panel = one embossed border; no extra HTML strips overlaid. */
-:root{
-  --wedding-cover-blue:#7CC8D6;
-  --wedding-cover-blue-deep:#4C9FAF;
-  --wedding-cover-blue-light:#BCE9EC;
-}
-/* A harmonious, accessible pair of controls above the invitation. */
-.music{
-  border-color:rgba(76,159,175,.32)!important;
-  background:rgba(255,253,251,.97)!important;
-  box-shadow:0 5px 17px rgba(50,115,129,.12),inset 0 1px rgba(255,255,255,.94)!important;
-  color:#326D7D!important;
-}
-.music .i-heart{
-  fill:var(--wedding-cover-blue)!important;
-  stroke:#4C94A3!important;
-  filter:drop-shadow(0 2px 1px rgba(49,102,113,.11))!important;
-}
-.music.on .i-heart{fill:#5CB4C4!important;stroke:#397F90!important}
-.music .i-note,.music .i-pause{stroke:#FFFFFF!important}
-.music.on{box-shadow:0 5px 17px rgba(50,115,129,.16),0 0 0 2px rgba(124,200,214,.14)!important}
-.music.controls-attention::after{border-color:rgba(124,200,214,.52)!important}
-.lang{
-  border-color:rgba(76,159,175,.28)!important;
-  background:rgba(255,253,251,.97)!important;
-  box-shadow:0 5px 17px rgba(50,115,129,.12),inset 0 1px rgba(255,255,255,.94)!important;
-}
-.lang button{color:#477889!important}
-.lang button[aria-pressed="true"]{
-  opacity:1!important;color:#244B56!important;
-  background:var(--wedding-cover-blue)!important;
-  background-image:none!important;border-radius:1.5rem;
-  box-shadow:inset 0 1px rgba(255,255,255,.30),0 1px 2px rgba(50,115,129,.14)!important;
-}
-.lang button:hover:not([aria-pressed="true"]){background:rgba(124,200,214,.17)!important}
-@keyframes language-discovery-pulse{
-  0%,100%{box-shadow:0 5px 17px rgba(50,115,129,.12);border-color:rgba(76,159,175,.28)}
-  45%{box-shadow:0 5px 17px rgba(50,115,129,.17),0 0 0 4px rgba(124,200,214,.16);border-color:rgba(76,159,175,.50)}
-}
-/* No doubled borders: only the foil-stamped lines painted in the panels. */
-#weddingIntro .intro-card-edge,
-#weddingIntro .intro-book-stage .intro-panel::after,
-#weddingIntro .intro-panel-face::after,
-#weddingIntro .intro-panel-face::before{display:none!important}
-#weddingIntro .intro-panel-face{
-  background-image:url('images/intro-gold-left.webp')!important;
-  background-color:var(--wedding-cover-blue)!important;
-  background-repeat:no-repeat!important;
-  background-position:center!important;
-  background-size:100% 100%!important;
-  box-shadow:0 8px 20px rgba(40,92,104,.12)!important;
-}
-#weddingIntro .intro-panel--right .intro-panel-face{background-image:url('images/intro-gold-right.webp')!important}
-#weddingIntro .intro-panel-back,
-#weddingIntro .intro-book-stage .intro-panel-back{
-  background:linear-gradient(125deg,rgba(255,255,255,.05),transparent 42%,rgba(33,103,118,.09)),
-             url('images/intro-red-leather.webp') center/cover no-repeat,
-             var(--wedding-cover-blue)!important;
-  box-shadow:inset 0 0 0 1px rgba(244,253,255,.18),inset 0 0 18px rgba(39,93,103,.10)!important;
-}
-#weddingIntro .intro-panel-back::after{border-color:rgba(235,248,250,.23)!important}
-#weddingIntro .intro-paper-spine{
-  background:linear-gradient(90deg,#438D9D,#7CC8D6 47%,#C5E8EC 70%,#438D9D 100%)!important;
-  width:2px!important;opacity:.86!important;
-}
-#weddingIntro .intro-crease{
-  background:linear-gradient(90deg,transparent,rgba(51,120,133,.22),rgba(220,245,247,.25),rgba(51,120,133,.18),transparent)!important;
-}
-/* Desktop: white stays clear against the card; mobile: darker ink on pale meadow. */
-#weddingIntro .intro-hint,
-#weddingIntro .intro-hint .intro-hint-main,
-#weddingIntro .intro-hint .intro-hint-th{
-  color:#FFFFFF!important;
-  text-shadow:0 1px 3px rgba(35,82,93,.76),0 0 7px rgba(35,82,93,.25)!important;
-}
-@media(max-width:700px){
-  #weddingIntro .intro-hint,
-  #weddingIntro .intro-hint .intro-hint-main,
-  #weddingIntro .intro-hint .intro-hint-th{
-    color:#315C65!important;
-    text-shadow:0 1px 0 rgba(255,255,255,.93),0 0 7px rgba(255,255,255,.35)!important;
-  }
-}
-
 </style>
 </head>
 <body>
