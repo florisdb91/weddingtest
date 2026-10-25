@@ -7,31 +7,31 @@
 <!-- Prefer the invitation's original cream/burgundy colours, including in Samsung Internet dark mode. -->
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#F6F1EC">
-<title>Siriya &amp; Floris — 27 March 2027 - bijgewerkt</title>
+<title>Siriya &amp; Floris — 27 March 2027</title>
 <meta name="description" content="Siriya &amp; Floris — 27 March 2027 — Baiboon Grand Hotel, Loei">
 <!-- Adviseer zoekmachines deze uitnodiging en de afbeeldingen niet te indexeren. -->
 <meta name="robots" content="noindex, nofollow, noimageindex">
 <meta name="googlebot" content="noindex, nofollow, noimageindex">
-<!-- Social sharing / WhatsApp preview (v29): server-readable Open Graph metadata. -->
+<!-- Social sharing / WhatsApp preview (v30): server-readable Open Graph metadata. -->
 <link rel="canonical" href="https://florisdb91.github.io/WeddingSiriyaFloris/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Siriya &amp; Floris">
 <meta property="og:url" content="https://florisdb91.github.io/WeddingSiriyaFloris/">
 <meta property="og:title" content="Siriya &amp; Floris | Wedding Invitation">
 <meta property="og:description" content="You're invited to celebrate our wedding on 27 March 2027 at Baiboon Grand Hotel, Loei, Thailand. View the invitation and RSVP.">
-<meta property="og:image" content="https://florisdb91.github.io/WeddingSiriyaFloris/images/whatsapp-preview-v29.jpg">
-<meta property="og:image:secure_url" content="https://florisdb91.github.io/WeddingSiriyaFloris/images/whatsapp-preview-v29.jpg">
+<meta property="og:image" content="https://florisdb91.github.io/WeddingSiriyaFloris/images/whatsapp-preview-v30.jpg">
+<meta property="og:image:secure_url" content="https://florisdb91.github.io/WeddingSiriyaFloris/images/whatsapp-preview-v30.jpg">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Siriya and Floris wedding invitation with cherry-red envelope, powder-blue bow and polaroid photo; 27 March 2027.">
+<meta property="og:image:alt" content="Siriya and Floris wedding invitation with dusty-blue envelope, powder-blue bow and polaroid photo; 27 March 2027.">
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="nl_NL">
 <meta property="og:locale:alternate" content="th_TH">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Siriya &amp; Floris | Wedding Invitation">
 <meta name="twitter:description" content="27 March 2027 · Loei, Thailand. Join us for our wedding and RSVP online.">
-<meta name="twitter:image" content="https://florisdb91.github.io/WeddingSiriyaFloris/images/whatsapp-preview-v29.jpg">
+<meta name="twitter:image" content="https://florisdb91.github.io/WeddingSiriyaFloris/images/whatsapp-preview-v30.jpg">
 
 <!-- Load the physical cover artwork early, before the HTML body is painted. -->
 <link rel="preload" as="image" href="images/intro-gold-left.webp">
@@ -1346,6 +1346,79 @@ img, picture, .intro-panel-face, .intro-panel-back, .intro-seal,
   }
 }
 
+
+/* === New printed wedding invitation • matching blue stationery and watercolor landscape === */
+:root{
+  --ink:#493A32;--ink-soft:#706054;
+  --blue:#9CC6D8;--blue-deep:#5D8597;--blue-light:#DAECF1;
+  --accent:#6B4B3A;--accent-deep:#4C352C;
+  --paper:#FFFEFB;--paper-warm:#FBF8F1;--bg:#EAF3F1;
+  --line:rgba(108,84,65,.25);--line-soft:rgba(108,84,65,.13);
+  --intro-wine:#7993A1;--intro-wine-dark:#425C69;--intro-wine-mid:#708B98;
+  --intro-wine-light:#9BB4C0;--intro-line:rgba(250,243,221,.30);
+}
+html{background-color:#EAF3F1}
+body{background:#EAF3F1;color:var(--ink)}
+/* Keep the new original watercolor card visible behind the existing interactive pages. */
+#p1,#p2,#p3{
+  background-image:linear-gradient(rgba(255,255,255,.25),rgba(255,255,255,.48)),url('images/watercolor-landscape.webp');
+  background-size:cover;background-position:center center;background-repeat:no-repeat;
+}
+#p2 .sheet,#p3 .sheet{
+  background:rgba(255,254,250,.95);
+  border:1px solid rgba(115,96,79,.14);
+  box-shadow:0 14px 48px rgba(49,67,58,.14);
+}
+#p2 .details-title h2,#p3 .details-title h2{color:var(--accent)}
+.hero-meta .pre,.hero-meta h1,.hero-meta .couple-join,.family-name,
+.hero-art .mini-card-title,.hero-art .heart-live{color:var(--accent-deep)}
+.hero-meta .sub,.hero-meta .countdown span{color:var(--ink-soft)}
+.timeline::before{background:rgba(106,78,58,.31)}
+.timeline-icon{border-color:rgba(106,78,58,.43)}
+.timeline-time,.timeline-icon svg{color:var(--accent);stroke:var(--accent)}
+/* New invitation's real blue cover. The actual book-opening transforms are unchanged. */
+.wedding-intro{
+  background-image:linear-gradient(rgba(253,250,245,.68),rgba(242,247,246,.76)),url('images/watercolor-landscape.webp');
+  background-position:center;background-size:cover;
+}
+.intro-panel-back{background:linear-gradient(115deg,#90AAB5 0%,#718C9A 36%,#536D7A 81%,#3D5966 100%)}
+.intro-book-stage .intro-panel-back{
+  background:linear-gradient(115deg,rgba(255,255,255,.13),transparent 38%,rgba(15,30,41,.16)),
+    url('images/intro-red-leather.webp') center/cover no-repeat,#667F8D;
+}
+.intro-paper-spine{background:linear-gradient(90deg,#3B5664,#6E8E9F 41%,#B1C3C6 72%,#405D6C)}
+.intro-book-stage .intro-panel::after{background:linear-gradient(90deg,#3E5967,#819CA5 43%,#CFB998 78%,#4F6B76)}
+.intro-inside .intro-couple{color:var(--accent-deep)}
+.intro-inside .intro-date{color:#856B57}
+.intro-hint,.intro-hint .intro-hint-th{color:#4A423A;text-shadow:0 1px 2px rgba(255,255,255,.75)}
+.intro-crease{background:linear-gradient(90deg,transparent,rgba(31,53,64,.38),rgba(235,225,199,.30),rgba(31,53,64,.24),transparent)}
+.music .i-heart{fill:#7694A5;stroke:#4F7283}
+.music.on .i-heart{fill:#94B1BF}
+.music.on{box-shadow:0 5px 17px rgba(49,72,82,.16),0 0 0 2px rgba(94,133,152,.14)}
+#p2 .dresscode .palette{gap:.55rem;margin-top:1.2rem}
+/* The printed invitation has six colour dots, arranged 3+3 on smaller devices. */
+@media(max-width:600px){#p2 .dresscode .palette{width:min(8.5rem,100%);justify-content:center}}
+.wedding-hashtag{
+  display:block;align-self:center;text-align:center;margin:2.1rem auto 0;
+  max-width:100%;font-family:'Cormorant Garamond',serif;
+  color:var(--accent-deep);font-size:clamp(1.15rem,2.7vw,1.55rem);
+  font-weight:500;letter-spacing:.14em;overflow-wrap:anywhere;
+}
+.wedding-hashtag::before{
+  content:"✧";display:block;margin:0 auto .5rem;width:10rem;max-width:100%;
+  font:400 .8rem/1.3 Georgia,serif;color:#7C977E;
+  background:linear-gradient(90deg,transparent,rgba(119,140,110,.35),transparent) center / 100% 1px no-repeat;
+}
+@media(max-width:700px){
+  .intro-panel-face{
+    background-image:linear-gradient(133deg,rgba(247,250,251,.07),transparent 36%,rgba(20,42,54,.20)),url('images/intro-red-leather.webp');
+  }
+  .intro-panel--right .intro-panel-face{
+    background-image:linear-gradient(133deg,rgba(248,251,252,.07),transparent 42%,rgba(20,42,54,.24)),url('images/intro-red-leather.webp');
+  }
+  #p1,#p2,#p3{background-position:center center}
+}
+
 </style>
 </head>
 <body>
@@ -1384,7 +1457,7 @@ img, picture, .intro-panel-face, .intro-panel-back, .intro-seal,
 <section class="page" id="p1">
   <div class="hero">
     <div class="hero-art" aria-label="Save the date invitation illustration">
-      <img class="hero-base" src="images/envelope-hero.png" alt="Save the date invitation with burgundy envelope, polaroid photo, floral arrangement and blue heart">
+      <img class="hero-base" src="images/envelope-hero.png" alt="Save the date invitation with a dusty blue envelope, polaroid illustration, flowers and blue heart">
       <div class="photo-slot" aria-label="Foto in polaroid">
         <img src="images/tekening.png" alt="Foto van Siriya en Floris" onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='images/tekening.webp';}else{this.onerror=null;this.src='images/foto-placeholder.svg';this.classList.add('placeholder');}">
       </div>
@@ -1447,6 +1520,11 @@ img, picture, .intro-panel-face, .intro-panel-back, .intro-seal,
           <div class="timeline-content"><h3 data-t="engagementTitle">Engagement Ceremony</h3></div>
         </article>
         <article class="timeline-item">
+          <div class="timeline-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 14c2 2.2 4.3 3.3 7 3.3s5-1.1 7-3.3"/><path d="M5 14h14M7.1 17.5h9.8M12 3.2s-3.5 4.1-3.5 6.7a3.5 3.5 0 0 0 7 0c0-2.6-3.5-6.7-3.5-6.7Z"/></svg></div>
+          <div class="timeline-time" data-t="tmBlessing">03:45 PM</div>
+          <div class="timeline-content"><h3 data-t="blessingTitle">Water Blessing Ceremony</h3></div>
+        </article>
+        <article class="timeline-item">
           <div class="timeline-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20.2 4.5 12.5C.6 8.4 6.6 3.6 10.1 7.5L12 9.4l1.9-1.9c3.5-3.9 9.5.9 5.6 5L12 20.2Z"/></svg></div>
           <div class="timeline-time" data-t="tmVows">05:00 PM</div>
           <div class="timeline-content"><h3 data-t="vowsTitle">Vow Ceremony</h3></div>
@@ -1457,7 +1535,7 @@ img, picture, .intro-panel-face, .intro-panel-back, .intro-seal,
           <div class="timeline-content"><h3 data-t="receptionTitle">Wedding Reception</h3></div>
         </article>
       </div>
-      <div class="dresscode"><div class="timeline-icon"><svg viewBox="0 0 24 24"><path d="M12 6.5a2 2 0 1 0-2-2"/><path d="M12 6.5v2l8 5.5a1.2 1.2 0 0 1-.7 2.2H4.7A1.2 1.2 0 0 1 4 14l8-5.5"/></svg></div><h3 data-t="dressTitle">Dress Code</h3><p data-t="dressText">Any outfit that makes you feel comfortable.</p><div class="palette" role="img" aria-label="Colour palette: Milk Ivory, Icy Blue, Powder Blue, Baby Blue, Midnight Blue, Cherry Red, Dark Cherry Wine"><span class="dot" style="--c:#F7F1E8" title="Milk Ivory"></span><span class="dot" style="--c:#DCE5EE" title="Icy Blue"></span><span class="dot" style="--c:#BAC7D3" title="Powder Blue"></span><span class="dot" style="--c:#A7C7E7" title="Baby Blue"></span><span class="dot" style="--c:#1C2B48" title="Midnight Blue"></span><span class="dot" style="--c:#7D0F1A" title="Cherry Red"></span><span class="dot" style="--c:#3E0A0F" title="Dark Cherry Wine"></span></div></div>
+      <div class="dresscode"><div class="timeline-icon"><svg viewBox="0 0 24 24"><path d="M12 6.5a2 2 0 1 0-2-2"/><path d="M12 6.5v2l8 5.5a1.2 1.2 0 0 1-.7 2.2H4.7A1.2 1.2 0 0 1 4 14l8-5.5"/></svg></div><h3 data-t="dressTitle">Dress Code</h3><p data-t="dressText">Please use our wedding colour theme as inspiration.</p><div class="palette" role="img" aria-label="Wedding dress-code palette: pearl grey, ice blue, turquoise blue, royal blue, ruby red and burgundy"><span class="dot" style="--c:#D7D7D7" title="Pearl Grey"></span><span class="dot" style="--c:#B9E6F0" title="Ice Blue"></span><span class="dot" style="--c:#7EC6D5" title="Turquoise Blue"></span><span class="dot" style="--c:#287FBD" title="Royal Blue"></span><span class="dot" style="--c:#B80832" title="Ruby Red"></span><span class="dot" style="--c:#65000D" title="Burgundy"></span></div></div>
     </div>
     <aside class="info-panel">
       <h3 data-t="locationTitle">The Location</h3>
@@ -1484,6 +1562,7 @@ Loei 42000, Thailand</address><a class="map-link" href="https://www.google.com/m
   <div class="rsvp-invite" id="rsvp">
     <button type="button" class="rsvp-open-button" id="rsvpOpen" aria-haspopup="dialog" aria-controls="rsvpModal"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.6 4.6 13c-3.7-4 2.1-9 5.6-5.3L12 9.5l1.8-1.8c3.5-3.7 9.3 1.3 5.6 5.3L12 20.6Z"/></svg><span data-t="rsvpOpen">Confirm attendance</span></button>
   </div>
+  <p class="wedding-hashtag" aria-label="Wedding hashtag">#SPtobedeBeer</p>
 </div>
 </section>
 <section class="page" id="p3">
@@ -1577,15 +1656,16 @@ const L = {
     dow:"Sat", dnum:"27", mon:"Mar", yearLine:"Two thousand twenty seven", cityLine:"Loei, Thailand",
     time:"Three o'clock in the Afternoon",
     dateTimeLine:"27 March 2027 · 03:00 PM",
-    tmEngagement:"03:00 PM", tmVows:"05:00 PM", tmReception:"06:00 PM",
+    tmEngagement:"03:00 PM", tmBlessing:"03:45 PM", tmVows:"05:00 PM", tmReception:"06:00 PM",
     sideText:"A day of love, family, celebration and togetherness.",
     detailsTitle:"The Day",
     detailsSub:"Our wedding celebration",
     engagementTitle:"Engagement Ceremony",
+    blessingTitle:"Water Blessing Ceremony",
     vowsTitle:"Vow Ceremony",
     receptionTitle:"Wedding Reception",
     dressTitle:"Dress Code",
-    dressText:"Any outfit that makes you feel comfortable.",
+    dressText:"Please use our wedding colour theme as inspiration.",
     locationTitle:"The Location",
     locationText:"We are delighted to celebrate our special day at Baiboon Grand Hotel in Loei, Thailand.",
     venueName:"Baiboon Grand Hotel",
@@ -1627,7 +1707,7 @@ const L = {
     aboutText:"We hope to see you at our wedding and apologize if we are not able to deliver this invitation personally.",
     calBtn:"Add to calendar", calGoogle:"Google Calendar", calIcs:"Other calendar (.ics)",
     calTitle:"Wedding of Siriya & Floris",
-    calDesc:"Engagement ceremony at 3 PM, vow ceremony at 5 PM, wedding reception at 6 PM."
+    calDesc:"Engagement ceremony at 3 PM, water blessing ceremony at 3:45 PM, vow ceremony at 5 PM, wedding reception at 6 PM."
   },
 
   nl:{
@@ -1645,15 +1725,16 @@ const L = {
     dow:"Za", dnum:"27", mon:"Mrt", yearLine:"Tweeduizend zevenentwintig", cityLine:"Loei, Thailand",
     time:"Drie uur 's middags",
     dateTimeLine:"27 maart 2027 · 15:00 uur",
-    tmEngagement:"15:00", tmVows:"17:00", tmReception:"18:00",
+    tmEngagement:"15:00", tmBlessing:"15:45", tmVows:"17:00", tmReception:"18:00",
     sideText:"Een dag vol liefde, familie, geluk en samenzijn.",
     detailsTitle:"De dag",
     detailsSub:"Onze huwelijksviering",
     engagementTitle:"Verlovingsceremonie",
+    blessingTitle:"Waterzegeningsceremonie",
     vowsTitle:"Ceremonie met huwelijksgeloften",
     receptionTitle:"Bruiloftsreceptie",
     dressTitle:"Dresscode",
-    dressText:"Elke outfit waarin je je comfortabel voelt.",
+    dressText:"Laat je inspireren door de kleuren van ons bruiloftsthema.",
     locationTitle:"De locatie",
     locationText:"Met veel plezier vieren wij onze bijzondere dag bij Baiboon Grand Hotel in Loei, Thailand.",
     venueName:"Baiboon Grand Hotel",
@@ -1695,7 +1776,7 @@ const L = {
     aboutText:"We hopen jullie te zien op onze bruiloft en bieden onze excuses aan als we deze uitnodiging niet persoonlijk kunnen overhandigen.",
     calBtn:"Toevoegen aan agenda", calGoogle:"Google Agenda", calIcs:"Andere agenda (.ics)",
     calTitle:"Bruiloft van Siriya & Floris",
-    calDesc:"Verlovingsceremonie om 15:00, ceremonie met huwelijksgeloften om 17:00 en bruiloftsreceptie om 18:00."
+    calDesc:"Verlovingsceremonie om 15:00, waterzegeningsceremonie om 15:45, ceremonie met huwelijksgeloften om 17:00 en bruiloftsreceptie om 18:00."
   },
 
   th:{
@@ -1713,15 +1794,16 @@ const L = {
     dow:"เสาร์", dnum:"27", mon:"มี.ค.", yearLine:"พ.ศ. 2570 · ค.ศ. 2027", cityLine:"จังหวัดเลย ประเทศไทย",
     time:"บ่ายสามโมง",
     dateTimeLine:"27 มีนาคม 2570 · 15.00 น.",
-    tmEngagement:"15.00 น.", tmVows:"17.00 น.", tmReception:"18.00 น.",
+    tmEngagement:"15.00 น.", tmBlessing:"15.45 น.", tmVows:"17.00 น.", tmReception:"18.00 น.",
     sideText:"วันแห่งความรัก ครอบครัว ความสุข และการเฉลิมฉลองร่วมกัน",
     detailsTitle:"กำหนดการ",
     detailsSub:"รายละเอียดงานฉลองมงคลสมรส",
     engagementTitle:"พิธีหมั้น",
+    blessingTitle:"พิธีรดน้ำสังข์",
     vowsTitle:"พิธีกล่าวคำปฏิญาณรัก",
     receptionTitle:"งานเลี้ยงฉลองมงคลสมรส",
     dressTitle:"การแต่งกาย",
-    dressText:"ชุดอะไรก็ได้ที่ทำให้คุณรู้สึกสบายตัว",
+    dressText:"ขอเชิญแต่งกายตามโทนสีธีมงานแต่งของเรา",
     locationTitle:"สถานที่",
     locationText:"เรามีความยินดีเป็นอย่างยิ่งที่จะจัดงานฉลองมงคลสมรส ณ โรงแรมใบบุญแกรนด์ จังหวัดเลย ประเทศไทย",
     venueName:"โรงแรมใบบุญแกรนด์",
@@ -1763,7 +1845,7 @@ const L = {
     aboutText:"เราหวังเป็นอย่างยิ่งว่าจะได้พบทุกท่านในงานแต่งงานของเรา และขออภัยหากไม่สามารถนำบัตรเชิญมามอบให้ด้วยตนเองได้",
     calBtn:"เพิ่มลงในปฏิทิน", calGoogle:"ปฏิทินกูเกิล", calIcs:"ปฏิทินอื่น (.ics)",
     calTitle:"งานแต่งงานของ Siriya & Floris",
-    calDesc:"พิธีหมั้น 15.00 น. พิธีกล่าวคำปฏิญาณรัก 17.00 น. และงานเลี้ยงฉลองมงคลสมรส 18.00 น."
+    calDesc:"พิธีหมั้น 15.00 น. พิธีรดน้ำสังข์ 15.45 น. พิธีกล่าวคำปฏิญาณรัก 17.00 น. และงานเลี้ยงฉลองมงคลสมรส 18.00 น."
   }
 };
 
