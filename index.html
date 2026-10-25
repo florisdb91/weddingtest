@@ -1453,6 +1453,23 @@ body::before{
   z-index:1;
   background:transparent;
 }
+/* Mobiele browserbalken veranderen tijdens het scrollen de zichtbare
+   viewport. Op een automatisch meeschalende fixed-laag veroorzaakte dat
+   een korte aquarelverschuiving bij de overgang tussen pagina 1 en 2.
+   De grootst mogelijke (stabiele) viewporthoogte voorkomt herschalen;
+   een eigen compositorlaag voorkomt het korte scrollen-en-terugspringen. */
+@media (max-width:900px), (hover:none) and (pointer:coarse){
+  body::before{
+    top:0;
+    bottom:auto;
+    height:100vh;  /* fallback voor oudere mobiele browsers */
+    height:100lvh; /* blijft constant als de browserbalk in-/uitschuift */
+    transform:translate3d(0,0,0);
+    -webkit-backface-visibility:hidden;
+    backface-visibility:hidden;
+    will-change:transform;
+  }
+}
 
 /* v14 — uitsluitend de mobiele introductie: geen donkere 3D-streep;
    leesbare tekst op de aquarelachtergrond. De vouwbeweging blijft intact. */
