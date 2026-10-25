@@ -1515,11 +1515,49 @@ body::before{
 }
 
 
-/* Avondgasten: dezelfde afmetingen als de daggasten, met alleen de receptie zichtbaar.
-   Vier daggasten-items x 7rem = 28rem. De gereserveerde ruimte houdt de
-   Dress Code en de kaartvlakken op exact dezelfde hoogte. */
-#p2 .timeline{min-height:28rem;}
-#p2 .timeline::before{bottom:auto;height:4.75rem;}
+/* Avondgasten: behoud precies dezelfde gereserveerde hoogte van 28rem
+   als de daggasten, maar toon GEEN tijdlijn of getekende verticale lijn.
+   Uitsluitend het originele ronde receptie-icoon staat in het midden. */
+#p2 .timeline{
+  min-height:28rem;
+  padding:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+#p2 .timeline::before{display:none!important;content:none!important;}
+#p2 .timeline-item{
+  display:flex;
+  min-height:0;
+  width:auto;
+  padding:0;
+  margin:0;
+  gap:0;
+  align-items:center;
+  justify-content:center;
+}
+#p2 .timeline-item .timeline-icon{
+  position:static;
+  inset:auto;
+  width:3.4rem;
+  height:3.4rem;
+  flex:0 0 3.4rem;
+}
+#p2 .timeline-item .timeline-icon svg{width:1.45rem;height:1.45rem;}
+/* Tijd en receptietitel blijven toegankelijk voor schermlezers; ze staan
+   visueel niet in het vlak. De gast ziet de tijd ook bij de locatie. */
+#p2 .timeline-item .timeline-time,
+#p2 .timeline-item .timeline-content{
+  position:absolute!important;
+  width:1px!important;
+  height:1px!important;
+  padding:0!important;
+  margin:-1px!important;
+  overflow:hidden!important;
+  clip-path:inset(50%)!important;
+  white-space:nowrap!important;
+  border:0!important;
+}
 
 </style>
 </head>
