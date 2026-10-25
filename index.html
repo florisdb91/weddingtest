@@ -19,8 +19,8 @@
 <meta property="og:url" content="https://florisdb91.github.io/WeddingSiriyaFloris/">
 <meta property="og:title" content="Siriya &amp; Floris | Wedding Invitation">
 <meta property="og:description" content="You're invited to celebrate our wedding on 27 March 2027 at Baiboon Grand Hotel, Loei, Thailand. View the invitation and RSVP.">
-<meta property="og:image" content="https://florisdb91.github.io/WeddingSiriyaFloris/images/whatsapp-preview-v34.jpg">
-<meta property="og:image:secure_url" content="https://florisdb91.github.io/WeddingSiriyaFloris/images/whatsapp-preview-v34.jpg">
+<meta property="og:image" content="https://florisdb91.github.io/WeddingSiriyaFloris/images/whatsapp-preview-v35.jpg">
+<meta property="og:image:secure_url" content="https://florisdb91.github.io/WeddingSiriyaFloris/images/whatsapp-preview-v35.jpg">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -31,7 +31,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Siriya &amp; Floris | Wedding Invitation">
 <meta name="twitter:description" content="27 March 2027 · Loei, Thailand. Join us for our wedding and RSVP online.">
-<meta name="twitter:image" content="https://florisdb91.github.io/WeddingSiriyaFloris/images/whatsapp-preview-v34.jpg">
+<meta name="twitter:image" content="https://florisdb91.github.io/WeddingSiriyaFloris/images/whatsapp-preview-v35.jpg">
 
 <!-- Load the physical cover artwork early, before the HTML body is painted. -->
 <link rel="preload" as="image" href="images/intro-gold-left.webp">
@@ -1529,83 +1529,88 @@ body::before{
 
 
 
-/* v11 — warm, fresh wedding-blue system.
-   One physical sheet per wing: stamped details stay embedded in artwork.
-   Color family: #76A8C8, between royal blue and ice blue in the dress code. */
+/* V12 — turquoise wedding card. Exact third dress-code colour from supplied card.
+   One artwork panel = one embossed border; no extra HTML strips overlaid. */
 :root{
-  --wedding-cover-blue:#76A8C8;
-  --wedding-cover-blue-deep:#527FA1;
-  --wedding-cover-blue-light:#B7D5E6;
+  --wedding-cover-blue:#7CC8D6;
+  --wedding-cover-blue-deep:#4C9FAF;
+  --wedding-cover-blue-light:#BCE9EC;
 }
+/* A harmonious, accessible pair of controls above the invitation. */
 .music{
-  border-color:rgba(88,130,162,.34)!important;
+  border-color:rgba(76,159,175,.32)!important;
   background:rgba(255,253,251,.97)!important;
-  color:var(--wedding-cover-blue-deep)!important;
-  box-shadow:0 5px 17px rgba(54,93,121,.14),inset 0 1px rgba(255,255,255,.93)!important;
+  box-shadow:0 5px 17px rgba(50,115,129,.12),inset 0 1px rgba(255,255,255,.94)!important;
+  color:#326D7D!important;
 }
 .music .i-heart{
   fill:var(--wedding-cover-blue)!important;
-  stroke:var(--wedding-cover-blue-deep)!important;
-  filter:drop-shadow(0 2px 1px rgba(63,99,122,.13))!important;
+  stroke:#4C94A3!important;
+  filter:drop-shadow(0 2px 1px rgba(49,102,113,.11))!important;
 }
-.music.on .i-heart{fill:#93BBD5!important;stroke:var(--wedding-cover-blue-deep)!important}
-.music.on{box-shadow:0 5px 17px rgba(54,93,121,.18),0 0 0 2px rgba(118,168,200,.13)!important}
-.music.controls-attention::after{border-color:rgba(118,168,200,.50)!important}
+.music.on .i-heart{fill:#5CB4C4!important;stroke:#397F90!important}
+.music .i-note,.music .i-pause{stroke:#FFFFFF!important}
+.music.on{box-shadow:0 5px 17px rgba(50,115,129,.16),0 0 0 2px rgba(124,200,214,.14)!important}
+.music.controls-attention::after{border-color:rgba(124,200,214,.52)!important}
 .lang{
-  border-color:rgba(88,130,162,.30)!important;
+  border-color:rgba(76,159,175,.28)!important;
   background:rgba(255,253,251,.97)!important;
-  box-shadow:0 5px 17px rgba(54,93,121,.12),inset 0 1px rgba(255,255,255,.93)!important;
+  box-shadow:0 5px 17px rgba(50,115,129,.12),inset 0 1px rgba(255,255,255,.94)!important;
 }
-.lang button{color:#547B97!important}
+.lang button{color:#477889!important}
 .lang button[aria-pressed="true"]{
-  color:#fff!important;
+  opacity:1!important;color:#244B56!important;
   background:var(--wedding-cover-blue)!important;
-  background-image:none!important;
-  border-radius:1.5rem;
-  box-shadow:inset 0 1px rgba(255,255,255,.27),0 1px 2px rgba(54,93,121,.13)!important;
+  background-image:none!important;border-radius:1.5rem;
+  box-shadow:inset 0 1px rgba(255,255,255,.30),0 1px 2px rgba(50,115,129,.14)!important;
 }
-.lang button:hover:not([aria-pressed="true"]){background:rgba(118,168,200,.16)!important}
-/* Reuse ONE gold border: it is already embossed in each cover illustration.
-   Extra HTML edge strips were the source of the doubled outline. */
+.lang button:hover:not([aria-pressed="true"]){background:rgba(124,200,214,.17)!important}
+@keyframes language-discovery-pulse{
+  0%,100%{box-shadow:0 5px 17px rgba(50,115,129,.12);border-color:rgba(76,159,175,.28)}
+  45%{box-shadow:0 5px 17px rgba(50,115,129,.17),0 0 0 4px rgba(124,200,214,.16);border-color:rgba(76,159,175,.50)}
+}
+/* No doubled borders: only the foil-stamped lines painted in the panels. */
 #weddingIntro .intro-card-edge,
-#weddingIntro .intro-book-stage .intro-panel::after{display:none!important}
-#weddingIntro .intro-panel-face,
-#weddingIntro .intro-panel--right .intro-panel-face{
+#weddingIntro .intro-book-stage .intro-panel::after,
+#weddingIntro .intro-panel-face::after,
+#weddingIntro .intro-panel-face::before{display:none!important}
+#weddingIntro .intro-panel-face{
   background-image:url('images/intro-gold-left.webp')!important;
   background-color:var(--wedding-cover-blue)!important;
   background-repeat:no-repeat!important;
-  background-size:100% 100%!important;
   background-position:center!important;
-  box-shadow:0 8px 22px rgba(49,79,101,.16)!important;
+  background-size:100% 100%!important;
+  box-shadow:0 8px 20px rgba(40,92,104,.12)!important;
 }
-#weddingIntro .intro-panel--right .intro-panel-face{
-  background-image:url('images/intro-gold-right.webp')!important;
-}
+#weddingIntro .intro-panel--right .intro-panel-face{background-image:url('images/intro-gold-right.webp')!important}
 #weddingIntro .intro-panel-back,
 #weddingIntro .intro-book-stage .intro-panel-back{
-  background:
-    linear-gradient(125deg,rgba(255,255,255,.11),transparent 42%,rgba(49,92,127,.10)),
-    url('images/intro-red-leather.webp') center/cover no-repeat,
-    var(--wedding-cover-blue)!important;
-  box-shadow:inset 0 0 0 1px rgba(237,245,250,.22),inset 0 0 20px rgba(51,85,105,.11)!important;
+  background:linear-gradient(125deg,rgba(255,255,255,.05),transparent 42%,rgba(33,103,118,.09)),
+             url('images/intro-red-leather.webp') center/cover no-repeat,
+             var(--wedding-cover-blue)!important;
+  box-shadow:inset 0 0 0 1px rgba(244,253,255,.18),inset 0 0 18px rgba(39,93,103,.10)!important;
 }
-#weddingIntro .intro-panel-back::after{border-color:rgba(238,242,245,.25)!important}
+#weddingIntro .intro-panel-back::after{border-color:rgba(235,248,250,.23)!important}
 #weddingIntro .intro-paper-spine{
-  background:linear-gradient(90deg,#5987A7 0%,#80AFCB 45%,#C5DBE8 70%,#5987A7 100%)!important;
-  opacity:.92!important;
+  background:linear-gradient(90deg,#438D9D,#7CC8D6 47%,#C5E8EC 70%,#438D9D 100%)!important;
+  width:2px!important;opacity:.86!important;
 }
 #weddingIntro .intro-crease{
-  background:linear-gradient(90deg,transparent,rgba(79,121,155,.24),rgba(231,244,249,.25),rgba(79,121,155,.19),transparent)!important;
+  background:linear-gradient(90deg,transparent,rgba(51,120,133,.22),rgba(220,245,247,.25),rgba(51,120,133,.18),transparent)!important;
 }
-/* Small, discreet inner hinge; no extra visible borders. */
-#weddingIntro .intro-paper-spine{width:2px!important}
-/* Mobile readability over the light landscape beneath the stationery. */
+/* Desktop: white stays clear against the card; mobile: darker ink on pale meadow. */
+#weddingIntro .intro-hint,
+#weddingIntro .intro-hint .intro-hint-main,
+#weddingIntro .intro-hint .intro-hint-th{
+  color:#FFFFFF!important;
+  text-shadow:0 1px 3px rgba(35,82,93,.76),0 0 7px rgba(35,82,93,.25)!important;
+}
 @media(max-width:700px){
   #weddingIntro .intro-hint,
   #weddingIntro .intro-hint .intro-hint-main,
   #weddingIntro .intro-hint .intro-hint-th{
-    color:#34566F!important;
-    text-shadow:0 1px 0 rgba(255,255,255,.93),0 0 8px rgba(255,255,255,.48)!important;
+    color:#315C65!important;
+    text-shadow:0 1px 0 rgba(255,255,255,.93),0 0 7px rgba(255,255,255,.35)!important;
   }
 }
 
