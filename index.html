@@ -19,8 +19,8 @@
 <meta property="og:url" content="https://florisdb91.github.io/WeddingSiriyaFloris/">
 <meta property="og:title" content="Siriya &amp; Floris | Wedding Invitation">
 <meta property="og:description" content="You're invited to celebrate our wedding on 27 March 2027 at Baiboon Grand Hotel, Loei, Thailand. View the invitation and RSVP.">
-<meta property="og:image" content="https://florisdb91.github.io/WeddingSiriyaFloris/images/whatsapp-preview-v31.jpg">
-<meta property="og:image:secure_url" content="https://florisdb91.github.io/WeddingSiriyaFloris/images/whatsapp-preview-v31.jpg">
+<meta property="og:image" content="https://florisdb91.github.io/WeddingSiriyaFloris/images/whatsapp-preview-v32.jpg">
+<meta property="og:image:secure_url" content="https://florisdb91.github.io/WeddingSiriyaFloris/images/whatsapp-preview-v32.jpg">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -31,7 +31,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Siriya &amp; Floris | Wedding Invitation">
 <meta name="twitter:description" content="27 March 2027 · Loei, Thailand. Join us for our wedding and RSVP online.">
-<meta name="twitter:image" content="https://florisdb91.github.io/WeddingSiriyaFloris/images/whatsapp-preview-v31.jpg">
+<meta name="twitter:image" content="https://florisdb91.github.io/WeddingSiriyaFloris/images/whatsapp-preview-v32.jpg">
 
 <!-- Load the physical cover artwork early, before the HTML body is painted. -->
 <link rel="preload" as="image" href="images/intro-gold-left.webp">
@@ -1453,6 +1453,41 @@ body::before{
   z-index:1;
   background:transparent;
 }
+
+/* v7 — Brighter powder-blue wedding stationery (instead of dark slate).
+   Lightened source images preserve original gold foil details and leather grain. */
+:root {
+  --intro-wine:#A8C7D8;
+  --intro-wine-dark:#86ADBF;
+  --intro-wine-mid:#AACCDC;
+  --intro-wine-light:#C4DEEA;
+}
+#weddingIntro .intro-panel-face {background-color:#A9C9D9;}
+#weddingIntro .intro-panel-back {
+  background:linear-gradient(112deg,rgba(255,255,255,.12),transparent 43%,rgba(52,83,103,.12)),
+             url('images/intro-red-leather.webp') center/cover no-repeat,#ACCBDB;
+}
+#weddingIntro .intro-card-edge--top,
+#weddingIntro .intro-card-edge--bottom {
+  background:linear-gradient(180deg,#FBF2DF 0%,#D7D9D3 35%,#AAC5D2 71%,#789FAF 100%);
+}
+#weddingIntro .intro-card-edge--free {
+  background:linear-gradient(90deg,#F6EEDC 0%,#C7DBE1 37%,#9CBECE 76%,#7295AA 100%);
+}
+#weddingIntro .intro-paper-spine {
+  background:linear-gradient(90deg,#7FA2B6,#C4DCE6 42%,#EBE4CE 70%,#7F9DAD);
+}
+/* The mobile watercolor is pale; navy-blue instructions have proper contrast. */
+@media (max-width:700px) {
+  #weddingIntro .intro-hint,
+  #weddingIntro .intro-hint .intro-hint-main,
+  #weddingIntro .intro-hint .intro-hint-th {
+    color:#314B5C;
+    text-shadow:0 1px 0 rgba(255,255,255,.83);
+    opacity:1;
+  }
+}
+
 </style>
 </head>
 <body>
