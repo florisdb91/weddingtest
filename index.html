@@ -1515,48 +1515,50 @@ body::before{
 }
 
 
-/* Avondgasten: behoud precies dezelfde gereserveerde hoogte van 28rem
-   als de daggasten, maar toon GEEN tijdlijn of getekende verticale lijn.
-   Uitsluitend het originele ronde receptie-icoon staat in het midden. */
+/* Avondgasten: behoud dezelfde ruime hoogte als de daggasten,
+   maar verwijder de verticale tijdlijn. Toon wel netjes één uitgelijnde
+   receptieregel met icoon links en tekst ernaast. */
 #p2 .timeline{
   min-height:28rem;
-  padding:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  padding-left:5.5rem;
+  display:block;
 }
 #p2 .timeline::before{display:none!important;content:none!important;}
 #p2 .timeline-item{
-  display:flex;
-  min-height:0;
-  width:auto;
-  padding:0;
-  margin:0;
-  gap:0;
-  align-items:center;
-  justify-content:center;
+  position:relative;
+  display:grid;
+  grid-template-columns:5rem 1fr;
+  gap:1.5rem;
+  min-height:7rem;
+  padding-bottom:0;
+  align-items:start;
 }
 #p2 .timeline-item .timeline-icon{
-  position:static;
-  inset:auto;
-  width:3.4rem;
-  height:3.4rem;
-  flex:0 0 3.4rem;
+  position:absolute;
+  left:-5.5rem;
+  top:0;
+  width:3rem;
+  height:3rem;
 }
-#p2 .timeline-item .timeline-icon svg{width:1.45rem;height:1.45rem;}
-/* Tijd en receptietitel blijven toegankelijk voor schermlezers; ze staan
-   visueel niet in het vlak. De gast ziet de tijd ook bij de locatie. */
+#p2 .timeline-item .timeline-icon svg{width:1.25rem;height:1.25rem;}
 #p2 .timeline-item .timeline-time,
 #p2 .timeline-item .timeline-content{
-  position:absolute!important;
-  width:1px!important;
-  height:1px!important;
+  position:static!important;
+  width:auto!important;
+  height:auto!important;
   padding:0!important;
-  margin:-1px!important;
-  overflow:hidden!important;
-  clip-path:inset(50%)!important;
-  white-space:nowrap!important;
+  margin:0!important;
+  overflow:visible!important;
+  clip-path:none!important;
+  white-space:normal!important;
   border:0!important;
+}
+#p2 .timeline-item .timeline-time{padding-top:.25rem;}
+#p2 .timeline-item .timeline-content h3{margin-bottom:0;}
+@media(max-width:600px){
+  #p2 .timeline{padding-left:4.5rem;min-height:26rem;}
+  #p2 .timeline-item{grid-template-columns:4.9rem 1fr;gap:.5rem;}
+  #p2 .timeline-item .timeline-icon{left:-4.5rem;}
 }
 
 </style>
