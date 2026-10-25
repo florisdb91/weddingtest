@@ -1453,6 +1453,67 @@ body::before{
   z-index:1;
   background:transparent;
 }
+
+/* v14 — uitsluitend de mobiele introductie: geen donkere 3D-streep;
+   leesbare tekst op de aquarelachtergrond. De vouwbeweging blijft intact. */
+@media (max-width:700px) {
+  /* De bovenste extra 3D-papierstrook was zichtbaar als een losse donkere lijn. */
+  #weddingIntro .intro-card-edge--top { display:none; }
+
+  /* Eén rustig tekstvlak met voldoende contrast op wisselende aquarelkleuren. */
+  #weddingIntro .intro-hint {
+    box-sizing:border-box;
+    width:max-content;
+    max-width:calc(100vw - 2rem);
+    padding:.58rem .85rem .66rem;
+    border:1px solid rgba(91,119,132,.22);
+    border-radius:14px;
+    background:rgba(253,252,248,.88);
+    -webkit-backdrop-filter:blur(6px);
+    backdrop-filter:blur(6px);
+    box-shadow:0 4px 15px rgba(50,74,85,.09);
+    color:#314B5A;
+    font-size:clamp(.89rem,3.7vw,1.02rem);
+    font-weight:500;
+    line-height:1.35;
+    text-shadow:none;
+    bottom:max(1rem, env(safe-area-inset-bottom,0px) + .7rem);
+    gap:.04rem;
+  }
+  #weddingIntro .intro-hint::before {
+    color:#648798;
+    text-shadow:none;
+    opacity:.8;
+    margin-bottom:.12rem;
+  }
+  #weddingIntro .intro-hint .intro-hint-main,
+  #weddingIntro .intro-hint .intro-hint-th {
+    color:#314B5A;
+    text-shadow:none;
+    opacity:1;
+  }
+  #weddingIntro .intro-hint .intro-hint-th {
+    font-size:.91em;
+    font-weight:400;
+    line-height:1.45;
+  }
+}
+@media (max-width:700px) and (orientation:landscape) {
+  #weddingIntro .intro-hint {
+    bottom:max(.4rem,env(safe-area-inset-bottom,0px) + .3rem);
+    padding:.3rem .7rem .36rem;
+    font-size:clamp(.75rem,1.7vw,.88rem);
+  }
+}
+
+
+@media (max-width:360px) and (max-height:630px) and (orientation:portrait) {
+  /* Op korte, smalle toestellen extra lucht tussen kaart en tekstvlak. */
+  #weddingIntro .intro-inside,
+  #weddingIntro .intro-perspective,
+  #weddingIntro .intro-stage-shadow {top:42%;}
+}
+
 </style>
 </head>
 <body>
