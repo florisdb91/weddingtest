@@ -1515,50 +1515,70 @@ body::before{
 }
 
 
-/* Avondgasten: behoud dezelfde ruime hoogte als de daggasten,
-   maar verwijder de verticale tijdlijn. Toon wel netjes één uitgelijnde
-   receptieregel met icoon links en tekst ernaast. */
+/* Avondgasten V18: programma-regel op de verticale middenlijn van
+   het oorspronkelijke grote tijdlijnvlak. De typografie en horizontale
+   icoon/tijd/tekst indeling zijn identiek aan de daggasten. */
 #p2 .timeline{
   min-height:28rem;
   padding-left:5.5rem;
-  display:block;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
 }
-#p2 .timeline::before{display:none!important;content:none!important;}
+#p2 .timeline::before{
+  display:none!important;
+  content:none!important;
+}
 #p2 .timeline-item{
   position:relative;
   display:grid;
-  grid-template-columns:5rem 1fr;
-  gap:1.5rem;
-  min-height:7rem;
-  padding-bottom:0;
-  align-items:start;
+  grid-template-columns:5rem minmax(0,1fr);
+  column-gap:1.5rem;
+  min-height:3rem;
+  width:100%;
+  padding:0;
+  margin:0;
+  align-items:center;
 }
 #p2 .timeline-item .timeline-icon{
   position:absolute;
   left:-5.5rem;
-  top:0;
+  top:50%;
+  transform:translateY(-50%);
   width:3rem;
   height:3rem;
 }
-#p2 .timeline-item .timeline-icon svg{width:1.25rem;height:1.25rem;}
 #p2 .timeline-item .timeline-time,
 #p2 .timeline-item .timeline-content{
   position:static!important;
   width:auto!important;
   height:auto!important;
-  padding:0!important;
   margin:0!important;
   overflow:visible!important;
   clip-path:none!important;
   white-space:normal!important;
   border:0!important;
 }
-#p2 .timeline-item .timeline-time{padding-top:.25rem;}
+#p2 .timeline-item .timeline-time{padding:.25rem 0 0!important;grid-column:1;grid-row:1;}
+#p2 .timeline-item .timeline-content{padding:0!important;grid-column:2;grid-row:1;min-width:0;}
 #p2 .timeline-item .timeline-content h3{margin-bottom:0;}
 @media(max-width:600px){
-  #p2 .timeline{padding-left:4.5rem;min-height:26rem;}
-  #p2 .timeline-item{grid-template-columns:4.9rem 1fr;gap:.5rem;}
+  #p2 .timeline{min-height:26rem;padding-left:4.5rem;}
+  #p2 .timeline-item{grid-template-columns:4.9rem minmax(0,1fr);column-gap:.5rem;}
   #p2 .timeline-item .timeline-icon{left:-4.5rem;}
+}
+@media(max-width:420px){
+  /* Tot 420px: icoon, tijd en titel houden hun originele lettergroottes. */
+  #p2 .timeline-item{grid-template-columns:4.9rem minmax(0,1fr);}
+  #p2 .timeline-item .timeline-time{grid-column:1;grid-row:1;}
+  #p2 .timeline-item .timeline-content{grid-column:2;grid-row:1;}
+}
+@media(max-width:350px){
+  /* Op zeer smalle telefoons past de volledige titel niet naast de tijd.
+     Stapel alleen tijd en titel, rechts van het icoon, zonder tekst te verkleinen. */
+  #p2 .timeline-item{grid-template-columns:minmax(0,1fr);row-gap:.15rem;}
+  #p2 .timeline-item .timeline-time{grid-column:1;grid-row:1;padding-top:0!important;}
+  #p2 .timeline-item .timeline-content{grid-column:1;grid-row:2;}
 }
 
 </style>
