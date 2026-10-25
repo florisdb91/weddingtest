@@ -914,8 +914,8 @@ html.wedding-intro-lock,html.wedding-intro-lock body{overflow:hidden}
 
 /* v12 — authentic embossed red-paper skin from the approved invitation artwork.
    The two independent leaves retain the real paper texture while they move. */
-.intro-panel-face{background-image:url('images/intro-gold-left.webp');background-repeat:no-repeat;background-size:100% 100%;background-position:center;box-shadow:inset -10px 0 19px rgba(20,0,6,.21),0 8px 17px rgba(27,5,10,.22)}
-.intro-panel--right .intro-panel-face{background-image:url('images/intro-gold-right.webp');box-shadow:inset 12px 0 20px rgba(20,0,6,.20),0 8px 17px rgba(27,5,10,.22)}
+.intro-panel-face{background-image:url('images/intro-gold-left.webp');background-repeat:no-repeat;background-size:calc(100% + 18px) calc(100% + 10px);background-position:center;box-shadow:inset -10px 0 19px rgba(20,0,6,.21),0 8px 17px rgba(27,5,10,.22)}
+.intro-panel--right .intro-panel-face{background-image:url('images/intro-gold-right.webp');background-size:calc(100% + 18px) calc(100% + 10px);background-position:center;box-shadow:inset 12px 0 20px rgba(20,0,6,.20),0 8px 17px rgba(27,5,10,.22)}
 .intro-panel-face::before,.intro-panel-face::after{display:none}
 /* Decorations and filigree are embossed directly into the artwork on desktop. */
 .intro-panel-face .intro-ornament{display:none}
@@ -1056,17 +1056,17 @@ html.wedding-intro-lock,html.wedding-intro-lock body{overflow:hidden}
   68%{transform:scale(1.23);opacity:0}
 }
 .lang{
-  border-color:rgba(125,15,26,.22);background:rgba(255,253,251,.97);
-  box-shadow:0 5px 17px rgba(74,28,36,.14),inset 0 1px rgba(255,255,255,.9);
+  border-color:rgba(111,140,155,.28);background:rgba(255,253,251,.97);
+  box-shadow:0 5px 17px rgba(62,90,105,.14),inset 0 1px rgba(255,255,255,.92);
 }
 .lang button{
   opacity:.82;font-weight:500;transition:background-color .18s ease,color .18s ease,opacity .18s ease;
 }
 .lang button[aria-pressed="true"]{
-  opacity:1;color:#fffdf9;background-color:var(--accent);
-  background-image:none;border-radius:1.5rem;
+  opacity:1;color:#fffdf9;background:linear-gradient(180deg,#8FA8B8 0%,#6F8A98 100%);
+  background-image:none;border-radius:1.5rem;box-shadow:inset 0 1px rgba(255,255,255,.22);
 }
-.lang button:hover:not([aria-pressed="true"]){opacity:1;background:rgba(125,15,26,.07);border-radius:1.5rem}
+.lang button:hover:not([aria-pressed="true"]){opacity:1;background:rgba(127,151,183,.12);border-radius:1.5rem}
 /* v21: taalkeuze wordt gedurende maximaal tien seconden subtiel benadrukt.
    De muziekhart-animatie (tot eerste Play) blijft ongewijzigd. */
 .lang.lang-attention{
@@ -1074,12 +1074,12 @@ html.wedding-intro-lock,html.wedding-intro-lock body{overflow:hidden}
 }
 @keyframes language-discovery-pulse{
   0%,100%{
-    box-shadow:0 5px 17px rgba(74,28,36,.14),inset 0 1px rgba(255,255,255,.9);
-    border-color:rgba(125,15,26,.22);
+    box-shadow:0 5px 17px rgba(62,90,105,.14),inset 0 1px rgba(255,255,255,.9);
+    border-color:rgba(111,140,155,.28);
   }
   45%{
-    box-shadow:0 5px 17px rgba(74,28,36,.17),0 0 0 4px rgba(125,15,26,.12),inset 0 1px rgba(255,255,255,.9);
-    border-color:rgba(125,15,26,.52);
+    box-shadow:0 5px 17px rgba(62,90,105,.18),0 0 0 4px rgba(127,151,183,.14),inset 0 1px rgba(255,255,255,.9);
+    border-color:rgba(111,140,155,.56);
   }
 }
 @media(prefers-reduced-motion:reduce){
@@ -1411,11 +1411,19 @@ body{background:#EAF3F1;color:var(--ink)}
 }
 @media(max-width:700px){
   .intro-panel-face{
-    background-image:linear-gradient(133deg,rgba(247,250,251,.07),transparent 36%,rgba(20,42,54,.20)),url('images/intro-red-leather.webp');
+    background-image:url('images/intro-gold-left.webp');
+    background-repeat:no-repeat;
+    background-size:calc(100% + 18px) calc(100% + 10px);
+    background-position:center;
   }
   .intro-panel--right .intro-panel-face{
-    background-image:linear-gradient(133deg,rgba(248,251,252,.07),transparent 42%,rgba(20,42,54,.24)),url('images/intro-red-leather.webp');
+    background-image:url('images/intro-gold-right.webp');
+    background-repeat:no-repeat;
+    background-size:calc(100% + 18px) calc(100% + 10px);
+    background-position:center;
   }
+  .intro-panel-face::after{display:none}
+  .intro-panel-face .intro-ornament{display:none}
   #p1,#p2,#p3{background-position:center center}
 }
 
