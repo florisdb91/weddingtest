@@ -1563,37 +1563,55 @@ body{background:transparent;}
 }
 
 
-/* v14.6 / v18.6: Android scroll/toolbar-jump fix.
-   De eerdere fixed/sticky/root-canvas-oplossingen kunnen alsnog opnieuw
-   gecomposeerd worden wanneer Chrome de adresbalk toont of verbergt.
-   Op touchscreens staat het landschap voortaan op het scrollende document.
-   Hierdoor is er GEEN fixed laag die tijdelijk meeveert en terugspringt.
-   100svh is stabiel tijdens tonen/verbergen van de mobiele browserbalk.
-   De aquarel herhaalt zich zacht achter de doorzichtige pagina's. */
+/* v14.7 / v18.7 — permanente aquarel, onafhankelijk van scrollen.
+   Op telefoons gebruikt geen enkel scrollend element meer een achtergrond.
+   Eén apart, direct body-kind met position:fixed tekent de aquarel op de
+   viewport. Hoogte en afbeeldingsschaal gebruiken 100lvh: de vaste grote
+   viewporthoogte verandert niet wanneer de mobiele adresbalk beweegt. */
+.site-fixed-watercolor{display:none;}
 @media (max-width:900px), (hover:none) and (pointer:coarse){
-  html {
-    background-color:#EAF3F1 !important;
+  html{
+    background:#EAF3F1 !important;
     background-image:none !important;
-    background-attachment:scroll !important;
     overscroll-behavior-y:none;
   }
-  body {
-    background-color:#EAF3F1 !important;
+  body{
+    background:transparent !important;
+    background-image:none !important;
+    overscroll-behavior-y:none;
+  }
+  .site-fixed-watercolor{
+    display:block;
+    position:fixed;
+    top:0;left:0;
+    width:100%;
+    height:100vh;  /* fallback */
+    height:100lvh; /* stabiel bij de bewegende browserbalk */
+    z-index:0;
+    pointer-events:none;
+    background-color:#EAF3F1;
     background-image:
       linear-gradient(rgba(255,255,255,.25),rgba(255,255,255,.48)),
-      url('images/watercolor-landscape.webp') !important;
-    background-position:center top,center top !important;
-    background-size:100% 100%,auto 100svh !important;
-    background-repeat:no-repeat,repeat-y !important;
-    background-attachment:scroll,scroll !important;
-    overscroll-behavior-y:none;
+      url('images/watercolor-landscape.webp');
+    background-repeat:no-repeat,no-repeat;
+    background-position:center top,center top;
+    background-size:100% 100%,auto 100lvh;
+    transform:translate3d(0,0,0);
+    backface-visibility:hidden;
+    contain:paint;
   }
-  #p1,#p2,#p3 {background:transparent !important;}
+  #p1,#p2,#p3{
+    position:relative;
+    z-index:1;
+    background:transparent !important;
+    background-image:none !important;
+  }
 }
 
 </style>
 </head>
 <body>
+<div class="site-fixed-watercolor" aria-hidden="true"></div>
 
 <div id="weddingIntro" class="wedding-intro" aria-label="Openvouwende trouwuitnodiging" aria-busy="true">
   <div class="intro-book-stage">
