@@ -1563,11 +1563,10 @@ body{background:transparent;}
 }
 
 
-/* v14.7 / v18.7 — permanente aquarel, onafhankelijk van scrollen.
-   Op telefoons gebruikt geen enkel scrollend element meer een achtergrond.
-   Eén apart, direct body-kind met position:fixed tekent de aquarel op de
-   viewport. Hoogte en afbeeldingsschaal gebruiken 100lvh: de vaste grote
-   viewporthoogte verandert niet wanneer de mobiele adresbalk beweegt. */
+/* v14.8 / v18.8 — aquarel blijft vast op mobiele schermen.
+   De JavaScript-initialisatie bevriest de achtergrondbreedte en -hoogte in
+   CSS-pixels vóór de intro wordt geopend. De browserbalk mag deze maten niet
+   aanpassen. Alleen draaien van het toestel actualiseert de maten. */
 .site-fixed-watercolor{display:none;}
 @media (max-width:900px), (hover:none) and (pointer:coarse){
   html{
@@ -1584,9 +1583,8 @@ body{background:transparent;}
     display:block;
     position:fixed;
     top:0;left:0;
-    width:100%;
-    height:100vh;  /* fallback */
-    height:100lvh; /* stabiel bij de bewegende browserbalk */
+    width:var(--wedding-bg-width, 100vw);
+    height:var(--wedding-bg-height, 100lvh);
     z-index:0;
     pointer-events:none;
     background-color:#EAF3F1;
@@ -1595,10 +1593,8 @@ body{background:transparent;}
       url('images/watercolor-landscape.webp');
     background-repeat:no-repeat,no-repeat;
     background-position:center top,center top;
-    background-size:100% 100%,auto 100lvh;
-    transform:translate3d(0,0,0);
-    backface-visibility:hidden;
-    contain:paint;
+    background-size:100% 100%,auto var(--wedding-bg-height, 100lvh);
+    /* Geen transform of will-change: voorkom een extra scroll-compositor-offset. */
   }
   #p1,#p2,#p3{
     position:relative;
@@ -1612,6 +1608,54 @@ body{background:transparent;}
 </head>
 <body>
 <div class="site-fixed-watercolor" aria-hidden="true"></div>
+<script>
+/* v14.8 / v18.8: bevries het aquareldoek in echte CSS-pixels.
+   Chrome / Samsung Internet wijzigen de zichtbare hoogte bij het tonen of
+   verbergen van de adresbalk. Daarop reageren we bewust NIET: geen resize-
+   handler die bij een gewone swipe de achtergrond opnieuw tekent of schaalt.
+   Alleen bij een echte oriëntatiewissel worden de maten opnieuw bepaald. */
+(() => {
+  const layer = document.querySelector('.site-fixed-watercolor');
+  if (!layer) return;
+
+  const orientation = () => {
+    if (screen.orientation && screen.orientation.type) return screen.orientation.type;
+    return matchMedia('(orientation: portrait)').matches ? 'portrait' : 'landscape';
+  };
+  let lastOrientation = orientation();
+
+  function freezeSize() {
+    /* 100lvh meet de maximale, stabiele mobiele viewport. We gebruiken de
+       GEMETEN pixelwaarde daarna letterlijk, dus niet als een CSS-vh-eenheid. */
+    const probe = document.createElement('div');
+    probe.style.cssText = 'position:absolute;visibility:hidden;pointer-events:none;width:100vw;height:100lvh;';
+    document.body.appendChild(probe);
+    const measured = probe.getBoundingClientRect();
+    probe.remove();
+
+    const width = Math.max(1, Math.round(window.innerWidth || document.documentElement.clientWidth));
+    const height = Math.max(1, Math.round(measured.height || window.innerHeight || screen.availHeight));
+    layer.style.setProperty('--wedding-bg-width', width + 'px');
+    layer.style.setProperty('--wedding-bg-height', height + 'px');
+  }
+  freezeSize();
+
+  let rotateJob;
+  const onActualRotate = () => {
+    const next = orientation();
+    if (next === lastOrientation) return; // browserbalk = géén herberekening
+    lastOrientation = next;
+    clearTimeout(rotateJob);
+    /* Wacht tot de landscape/portrait viewport na rotatie is bijgewerkt. */
+    rotateJob = setTimeout(freezeSize, 220);
+  };
+  window.addEventListener('resize', onActualRotate, {passive:true});
+  window.addEventListener('orientationchange', onActualRotate, {passive:true});
+  if (screen.orientation && screen.orientation.addEventListener) {
+    screen.orientation.addEventListener('change', onActualRotate);
+  }
+})();
+</script>
 
 <div id="weddingIntro" class="wedding-intro" aria-label="Openvouwende trouwuitnodiging" aria-busy="true">
   <div class="intro-book-stage">
