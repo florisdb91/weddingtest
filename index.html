@@ -1520,73 +1520,6 @@ body{background:transparent;}
 }
 
 
-/* Avondgasten V18: programma-regel op de verticale middenlijn van
-   het oorspronkelijke grote tijdlijnvlak. De typografie en horizontale
-   icoon/tijd/tekst indeling zijn identiek aan de daggasten. */
-#p2 .timeline{
-  min-height:28rem;
-  padding-left:5.5rem;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-}
-#p2 .timeline::before{
-  display:none!important;
-  content:none!important;
-}
-#p2 .timeline-item{
-  position:relative;
-  display:grid;
-  grid-template-columns:5rem minmax(0,1fr);
-  column-gap:1.5rem;
-  min-height:3rem;
-  width:100%;
-  padding:0;
-  margin:0;
-  align-items:center;
-}
-#p2 .timeline-item .timeline-icon{
-  position:absolute;
-  left:-5.5rem;
-  top:50%;
-  transform:translateY(-50%);
-  width:3rem;
-  height:3rem;
-}
-#p2 .timeline-item .timeline-time,
-#p2 .timeline-item .timeline-content{
-  position:static!important;
-  width:auto!important;
-  height:auto!important;
-  margin:0!important;
-  overflow:visible!important;
-  clip-path:none!important;
-  white-space:normal!important;
-  border:0!important;
-}
-#p2 .timeline-item .timeline-time{padding:.25rem 0 0!important;grid-column:1;grid-row:1;}
-#p2 .timeline-item .timeline-content{padding:0!important;grid-column:2;grid-row:1;min-width:0;}
-#p2 .timeline-item .timeline-content h3{margin-bottom:0;}
-@media(max-width:600px){
-  #p2 .timeline{min-height:26rem;padding-left:4.5rem;}
-  #p2 .timeline-item{grid-template-columns:4.9rem minmax(0,1fr);column-gap:.5rem;}
-  #p2 .timeline-item .timeline-icon{left:-4.5rem;}
-}
-@media(max-width:420px){
-  /* Tot 420px: icoon, tijd en titel houden hun originele lettergroottes. */
-  #p2 .timeline-item{grid-template-columns:4.9rem minmax(0,1fr);}
-  #p2 .timeline-item .timeline-time{grid-column:1;grid-row:1;}
-  #p2 .timeline-item .timeline-content{grid-column:2;grid-row:1;}
-}
-@media(max-width:350px){
-  /* Op zeer smalle telefoons past de volledige titel niet naast de tijd.
-     Stapel alleen tijd en titel, rechts van het icoon, zonder tekst te verkleinen. */
-  #p2 .timeline-item{grid-template-columns:minmax(0,1fr);row-gap:.15rem;}
-  #p2 .timeline-item .timeline-time{grid-column:1;grid-row:1;padding-top:0!important;}
-  #p2 .timeline-item .timeline-content{grid-column:1;grid-row:2;}
-}
-
-
 /* v14.2 / v18.2 — wacht uitsluitend op de drie afbeeldingen van de openingskaart.
    De rest van de website hoeft niet mee te laden. */
 #weddingIntro:not(.intro-cover-ready) .intro-book-stage,
@@ -1691,6 +1624,93 @@ body{background:transparent;}
   }
 }
 
+
+/* V14.12 / V18.12 — getrouwde namen op beide uitnodigingen.
+   De voornamen houden hun originele romantische lettertype;
+   de gezamenlijke achternaam komt subtiel, als tweede regel, eronder. */
+#p1 .hero-meta h1.couple-title,
+#p3 .wedding-signoff .signoff-names.couple-title{
+  display:flex;
+  flex-wrap:nowrap;
+  justify-content:center;
+  align-items:center;
+  gap:clamp(.10rem,1.25vw,.7rem);
+  white-space:nowrap;
+}
+.couple-title .couple-person{
+  display:inline-flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-width:0;
+  flex:0 1 auto;
+  line-height:1;
+}
+.couple-title .couple-person .couple-first,
+.couple-title .couple-person .couple-given{display:block;white-space:nowrap;line-height:1.08;}
+.couple-title .couple-person .couple-surname{
+  display:block;
+  margin-top:.15em;
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:.29em;
+  font-weight:400;
+  font-style:normal;
+  letter-spacing:.095em;
+  line-height:1.15;
+  white-space:nowrap;
+  color:var(--accent-deep);
+}
+#p1 .hero-meta h1 .couple-join,
+#p3 .signoff-names .couple-join{align-self:center;transform:translateY(-.19em);margin-top:0;flex:none;}
+@media (max-width:600px){
+  #p1 .hero-meta h1.couple-title{font-size:clamp(2.38rem,9.1vw,3.65rem);gap:clamp(.08rem,1.05vw,.42rem);}
+  #p3 .signoff-names.couple-title{font-size:clamp(2.04rem,7.5vw,3.25rem);gap:clamp(.07rem,.85vw,.4rem);}
+  #p1 .couple-title .couple-person .couple-surname{font-size:.32em;letter-spacing:.065em;}
+}
+html[lang="th"] .couple-title .couple-person .couple-first,
+html[lang="th"] .couple-title .couple-person .couple-given,
+html[lang="th"] .couple-title .couple-person .couple-surname{
+  font-family:'Noto Serif Thai',Tahoma,serif;
+  font-weight:300;
+  letter-spacing:0;
+}
+html[lang="th"] .couple-title .couple-person .couple-first,
+html[lang="th"] .couple-title .couple-person .couple-given{line-height:1.4;}
+html[lang="th"] .couple-title .couple-person .couple-surname{font-size:.55em;line-height:1.4;margin-top:0;}
+html[lang="th"] #p1 .hero-meta h1.couple-title{font-size:clamp(1.53rem,4.6vw,2.85rem);gap:clamp(.1rem,1.3vw,.75rem);}
+html[lang="th"] #p3 .signoff-names.couple-title{font-size:clamp(1.15rem,3.8vw,2.0rem);gap:clamp(.08rem,1vw,.65rem);}
+html[lang="th"] #p1 .hero-meta h1 .couple-join,
+html[lang="th"] #p3 .signoff-names .couple-join{transform:translateY(-.18em);}
+
+/* De mini-kaart behoudt zijn originele afmetingen en wordt niet opgeblazen. */
+.hero-art .mini-card-title{gap:0;justify-content:center;}
+.hero-art .mini-card-title .mini-name{display:flex;flex-direction:column;align-items:center;line-height:1;white-space:nowrap;}
+.hero-art .mini-card-title .mini-first,
+.hero-art .mini-card-title .mini-last{font-size:7.15cqw;line-height:.99;}
+.hero-art .mini-card-title .mini-join{font-size:3.3cqw;line-height:.95;margin:.06em 0;}
+.hero-art .mini-card-title .mini-surname{
+  display:block;margin-top:.04em;
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:2.9cqw;line-height:1.12;letter-spacing:.025em;
+  font-weight:400;
+}
+html[lang="th"] .hero-art .mini-card-title .mini-first,
+html[lang="th"] .hero-art .mini-card-title .mini-last,
+html[lang="th"] .hero-art .mini-card-title .mini-join,
+html[lang="th"] .hero-art .mini-card-title .mini-surname{font-family:'Noto Serif Thai',Tahoma,serif;letter-spacing:0;}
+html[lang="th"] .hero-art .mini-card-title .mini-first,
+html[lang="th"] .hero-art .mini-card-title .mini-last{font-size:4.45cqw;line-height:1.35;}
+html[lang="th"] .hero-art .mini-card-title .mini-join{font-size:3.15cqw;line-height:1.2;}
+html[lang="th"] .hero-art .mini-card-title .mini-surname{font-size:2.8cqw;line-height:1.25;}
+
+/* Namen aan de binnenzijde van de opengevouwen kaart. */
+.intro-inside .intro-couple{gap:clamp(.12rem,1vw,.65rem);align-items:center;}
+.intro-inside .intro-couple .intro-person{display:flex;flex-direction:column;align-items:center;line-height:1.05;white-space:nowrap;}
+.intro-inside .intro-couple .intro-surname{display:block;margin-top:.13em;font-size:.34em;letter-spacing:.07em;line-height:1.2;}
+.intro-inside .intro-couple .intro-amp{align-self:center;transform:translateY(-.2em);}
+html[lang="th"] .intro-inside .intro-couple{font-family:'Noto Serif Thai',Tahoma,serif;font-size:clamp(1.45rem,4.5vw,3.2rem);}
+html[lang="th"] .intro-inside .intro-couple .intro-surname{font-size:.54em;letter-spacing:0;}
+
 </style>
 </head>
 <body>
@@ -1746,7 +1766,7 @@ body{background:transparent;}
 
 <div id="weddingIntro" class="wedding-intro" aria-label="Openvouwende trouwuitnodiging" aria-busy="true">
   <div class="intro-book-stage">
-  <div class="intro-inside" aria-hidden="true"><div class="intro-small">Our Wedding Invitation</div><div class="intro-small-th" lang="th">บัตรเชิญงานแต่งงานของเรา</div><div class="intro-flourish">✧</div><div class="intro-couple"><span>Siriya</span><span class="intro-amp">&amp;</span><span>Floris</span></div><div class="intro-date">27 March 2027</div><span class="intro-paper-shadow intro-paper-shadow--left"></span><span class="intro-paper-shadow intro-paper-shadow--right"></span></div>
+  <div class="intro-inside" aria-hidden="true"><div class="intro-small">Our Wedding Invitation</div><div class="intro-small-th" lang="th">บัตรเชิญงานแต่งงานของเรา</div><div class="intro-flourish">✧</div><div class="intro-couple"><span class="intro-person"><span data-t="coupleFirst">Siriya</span><small class="intro-surname" data-t="coupleSurname">de Beer</small></span><span class="intro-amp" data-t="introJoin">&amp;</span><span class="intro-person"><span data-t="coupleLast">Floris</span><small class="intro-surname" data-t="coupleSurname">de Beer</small></span></div><div class="intro-date">27 March 2027</div><span class="intro-paper-shadow intro-paper-shadow--left"></span><span class="intro-paper-shadow intro-paper-shadow--right"></span></div>
   <div class="intro-stage-shadow" aria-hidden="true"></div>
   <div class="intro-perspective">
     <div class="intro-cast-shadow intro-cast-shadow--left" aria-hidden="true"></div>
@@ -1783,10 +1803,10 @@ body{background:transparent;}
       <div class="photo-slot" aria-label="Foto in polaroid">
         <img src="images/tekening.png" alt="Foto van Siriya en Floris" onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='images/tekening.webp';}else{this.onerror=null;this.src='images/foto-placeholder.svg';this.classList.add('placeholder');}">
       </div>
-      <div class="mini-card-title" aria-label="Siriya and Floris">
-        <span class="mini-first">Siriya</span>
-        <span class="mini-join">and</span>
-        <span class="mini-last">Floris</span>
+      <div class="mini-card-title" aria-label="Siriya de Beer and Floris de Beer">
+        <span class="mini-name"><span class="mini-first" data-t="coupleFirst">Siriya</span><span class="mini-surname" data-t="coupleSurname">de Beer</span></span>
+        <span class="mini-join" data-t="coupleJoin">and</span>
+        <span class="mini-name"><span class="mini-last" data-t="coupleLast">Floris</span><span class="mini-surname" data-t="coupleSurname">de Beer</span></span>
       </div>
       <div class="heart-live" role="text">
         <span class="heart-top">Save the</span>
@@ -1807,7 +1827,7 @@ body{background:transparent;}
           <span class="family-name" data-t="parentJannigje">Mrs. Jannigje in 't Veld</span>
         </div>
       </div>
-      <h1 class="couple-title" aria-label="Siriya and Floris"><span class="couple-first" data-t="coupleFirst">Siriya</span><span class="couple-join" data-t="coupleJoin">and</span><span data-t="coupleLast">Floris</span></h1>
+      <h1 class="couple-title" aria-label="Siriya de Beer and Floris de Beer"><span class="couple-person"><span class="couple-first" data-t="coupleFirst">Siriya</span><span class="couple-surname" data-t="coupleSurname">de Beer</span></span><span class="couple-join" data-t="coupleJoin">and</span><span class="couple-person"><span class="couple-given" data-t="coupleLast">Floris</span><span class="couple-surname" data-t="coupleSurname">de Beer</span></span></h1>
       <div class="sub" data-t="invite1">Request the pleasure of your company as we celebrate our marriage.</div>
     </div>
     <div class="hero-actions">
@@ -1837,6 +1857,21 @@ body{background:transparent;}
     <div>
       <div class="timeline">
         <article class="timeline-item">
+          <div class="timeline-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="13" r="4.6"/><circle cx="15.2" cy="13" r="4.6"/><path d="M7.7 7.7 9 5.5l1.3 2.2M13.9 7.7l1.3-2.2 1.3 2.2"/></svg></div>
+          <div class="timeline-time" data-t="tmEngagement">03:00 PM</div>
+          <div class="timeline-content"><h3 data-t="engagementTitle">Engagement Ceremony</h3></div>
+        </article>
+        <article class="timeline-item">
+          <div class="timeline-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 14c2 2.2 4.3 3.3 7 3.3s5-1.1 7-3.3"/><path d="M5 14h14M7.1 17.5h9.8M12 3.2s-3.5 4.1-3.5 6.7a3.5 3.5 0 0 0 7 0c0-2.6-3.5-6.7-3.5-6.7Z"/></svg></div>
+          <div class="timeline-time" data-t="tmBlessing">03:45 PM</div>
+          <div class="timeline-content"><h3 data-t="blessingTitle">Water Blessing Ceremony</h3></div>
+        </article>
+        <article class="timeline-item">
+          <div class="timeline-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20.2 4.5 12.5C.6 8.4 6.6 3.6 10.1 7.5L12 9.4l1.9-1.9c3.5-3.9 9.5.9 5.6 5L12 20.2Z"/></svg></div>
+          <div class="timeline-time" data-t="tmVows">05:00 PM</div>
+          <div class="timeline-content"><h3 data-t="vowsTitle">Vow Ceremony</h3></div>
+        </article>
+        <article class="timeline-item">
           <div class="timeline-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3.5 4.5h9l-.8 5.3c-.3 2.1-1.7 3.3-3.7 3.3s-3.4-1.2-3.7-3.3l-.8-5.3Z"/><path d="M8 13.1V20m-3 0h6"/><path d="M15.5 4.5v5.2a2.5 2.5 0 0 0 5 0V4.5M18 4.5V20"/></svg></div>
           <div class="timeline-time" data-t="tmReception">06:00 PM</div>
           <div class="timeline-content"><h3 data-t="receptionTitle">Wedding Reception</h3></div>
@@ -1853,7 +1888,7 @@ body{background:transparent;}
 111 Moo 9, Charoenrat Road
 Na An, Mueang Loei
 Loei 42000, Thailand</address><a class="map-link" href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x312147a75364f8b3:0xcbe444a94fc6d62e?sa=X&amp;ved=1t:8290&amp;ictx=111" target="_blank" rel="noopener" data-t="mapLink">Open in Google Maps</a></div></div>
-        <div class="location-row"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.2 2"/></svg><span data-t="dateTimeLine">27 March 2027 · 06:00 PM</span></div>
+        <div class="location-row"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.2 2"/></svg><span data-t="dateTimeLine">27 March 2027 · 03:00 PM</span></div>
       </div>
       <div class="cal">
         <details class="cal-picker" id="calPicker">
@@ -1882,7 +1917,7 @@ Loei 42000, Thailand</address><a class="map-link" href="https://www.google.com/m
   <p class="about-text" data-t="aboutText">We hope to see you at our wedding and apologize if we are not able to deliver this invitation personally.</p>
   <div class="wedding-signoff" aria-label="Wedding sign-off">
     <span class="signoff-lead" data-t="signoffLead">With love,</span>
-    <span class="signoff-names couple-title" aria-label="Siriya and Floris"><span class="couple-first" data-t="coupleFirst">Siriya</span><span class="couple-join" data-t="coupleJoin">and</span><span data-t="coupleLast">Floris</span></span>
+    <span class="signoff-names couple-title" aria-label="Siriya de Beer and Floris de Beer"><span class="couple-person"><span class="couple-first" data-t="coupleFirst">Siriya</span><span class="couple-surname" data-t="coupleSurname">de Beer</span></span><span class="couple-join" data-t="coupleJoin">and</span><span class="couple-person"><span class="couple-given" data-t="coupleLast">Floris</span><span class="couple-surname" data-t="coupleSurname">de Beer</span></span></span>
   </div>
 </div>
 </section>
@@ -1949,7 +1984,7 @@ Loei 42000, Thailand</address><a class="map-link" href="https://www.google.com/m
 const L = {
 
   en:{
-    coupleFirst:"Siriya", coupleJoin:"and", coupleLast:"Floris",
+    coupleFirst:"Siriya", coupleJoin:"and", coupleLast:"Floris", coupleSurname:"de Beer", introJoin:"&",
     parentSurasak:"Mr. Surasak Im-erb",
     parentNuanyai:"Mrs. Nuanyai Im-erb",
     parentNorbertus:"Mr. Norbertus de Beer",
@@ -1961,8 +1996,8 @@ const L = {
     invite1:"Request the pleasure of your company as we celebrate our marriage.",
     date:"27 March 2027",
     dow:"Sat", dnum:"27", mon:"Mar", yearLine:"Two thousand twenty seven", cityLine:"Loei, Thailand",
-    time:"Six o'clock in the Evening",
-    dateTimeLine:"27 March 2027 · 06:00 PM",
+    time:"Three o'clock in the Afternoon",
+    dateTimeLine:"27 March 2027 · 03:00 PM",
     tmEngagement:"03:00 PM", tmBlessing:"03:45 PM", tmVows:"05:00 PM", tmReception:"06:00 PM",
     sideText:"A day of love, family, celebration and togetherness.",
     detailsTitle:"The Day",
@@ -2001,7 +2036,7 @@ const L = {
     rsvpSubmit:"Send",
     rsvpSending:"Sending…",
     rsvpSuccess:"Thank you! Your RSVP has been received.",
-    signoffLead:'With love,', signoffNames:'Siriya & Floris',
+    signoffLead:'With love,', signoffNames:'Siriya de Beer & Floris de Beer',
     rsvpThanksTitle:'Thank you', rsvpThanksText:'We have received your reply. Thank you for letting us know.', rsvpThanksClose:'Close',
     rsvpError:"Sending failed. Please try again later.",
     rsvpSetup:"RSVP is not yet connected. Please try again later.",
@@ -2013,12 +2048,12 @@ const L = {
     aboutTitle:"About us",
     aboutText:"We hope to see you at our wedding and apologize if we are not able to deliver this invitation personally.",
     calBtn:"Add to calendar", calGoogle:"Google Calendar", calIcs:"Other calendar (.ics)",
-    calTitle:"Wedding of Siriya & Floris",
-    calDesc:"Guests are welcome from 6 PM, followed by the wedding reception and an evening together."
+    calTitle:"Wedding of Siriya de Beer & Floris de Beer",
+    calDesc:"Engagement ceremony at 3 PM, water blessing ceremony at 3:45 PM, vow ceremony at 5 PM, wedding reception at 6 PM."
   },
 
   nl:{
-    coupleFirst:"Siriya", coupleJoin:"en", coupleLast:"Floris",
+    coupleFirst:"Siriya", coupleJoin:"en", coupleLast:"Floris", coupleSurname:"de Beer", introJoin:"&",
     parentSurasak:"Mr. Surasak Im-erb",
     parentNuanyai:"Mrs. Nuanyai Im-erb",
     parentNorbertus:"Mr. Norbertus de Beer",
@@ -2030,8 +2065,8 @@ const L = {
     invite1:"Wij nodigen u van harte uit om samen ons huwelijk te vieren.",
     date:"27 maart 2027",
     dow:"Za", dnum:"27", mon:"Mrt", yearLine:"Tweeduizend zevenentwintig", cityLine:"Loei, Thailand",
-    time:"Zes uur 's avonds",
-    dateTimeLine:"27 maart 2027 · 18:00 uur",
+    time:"Drie uur 's middags",
+    dateTimeLine:"27 maart 2027 · 15:00 uur",
     tmEngagement:"15:00", tmBlessing:"15:45", tmVows:"17:00", tmReception:"18:00",
     sideText:"Een dag vol liefde, familie, geluk en samenzijn.",
     detailsTitle:"De dag",
@@ -2070,7 +2105,7 @@ const L = {
     rsvpSubmit:"Verstuur",
     rsvpSending:"Versturen…",
     rsvpSuccess:"Bedankt! Je RSVP is ontvangen.",
-    signoffLead:'Veel liefs,', signoffNames:'Siriya & Floris',
+    signoffLead:'Veel liefs,', signoffNames:'Siriya de Beer & Floris de Beer',
     rsvpThanksTitle:'Hartelijk dank', rsvpThanksText:'We hebben je reactie ontvangen. Bedankt dat je het ons laat weten.', rsvpThanksClose:'Sluiten',
     rsvpError:"Versturen is niet gelukt. Probeer het later opnieuw.",
     rsvpSetup:"RSVP is nog niet gekoppeld. Probeer het later opnieuw.",
@@ -2082,12 +2117,12 @@ const L = {
     aboutTitle:"Over ons",
     aboutText:"We hopen jullie te zien op onze bruiloft en bieden onze excuses aan als we deze uitnodiging niet persoonlijk kunnen overhandigen.",
     calBtn:"Toevoegen aan agenda", calGoogle:"Google Agenda", calIcs:"Andere agenda (.ics)",
-    calTitle:"Bruiloft van Siriya & Floris",
-    calDesc:"Gasten zijn welkom vanaf 18:00 uur, gevolgd door de bruiloftsreceptie en een gezellige avond samen."
+    calTitle:"Bruiloft van Siriya de Beer & Floris de Beer",
+    calDesc:"Verlovingsceremonie om 15:00, waterzegeningsceremonie om 15:45, ceremonie met huwelijksgeloften om 17:00 en bruiloftsreceptie om 18:00."
   },
 
   th:{
-    coupleFirst:"สิริยา", coupleJoin:"และ", coupleLast:"ฟลอริส",
+    coupleFirst:"สิริยา", coupleJoin:"และ", coupleLast:"ฟลอริส", coupleSurname:"เดอ เบียร์", introJoin:"และ",
     parentSurasak:"นาย สุรศักดิ์ อิ่มเอิบ",
     parentNuanyai:"นาง นวลใย อิ่มเอิบ",
     parentNorbertus:"นาย นอร์เบอร์ตัส เดอ เบียร์",
@@ -2099,8 +2134,8 @@ const L = {
     invite1:"ขอเรียนเชิญท่านมาร่วมเฉลิมฉลองงานมงคลสมรสของเรา",
     date:"27 มีนาคม 2570",
     dow:"เสาร์", dnum:"27", mon:"มี.ค.", yearLine:"พ.ศ. 2570 · ค.ศ. 2027", cityLine:"จังหวัดเลย ประเทศไทย",
-    time:"หกโมงเย็น",
-    dateTimeLine:"27 มีนาคม 2570 · 18.00 น.",
+    time:"บ่ายสามโมง",
+    dateTimeLine:"27 มีนาคม 2570 · 15.00 น.",
     tmEngagement:"15.00 น.", tmBlessing:"15.45 น.", tmVows:"17.00 น.", tmReception:"18.00 น.",
     sideText:"วันแห่งความรัก ครอบครัว ความสุข และการเฉลิมฉลองร่วมกัน",
     detailsTitle:"กำหนดการ",
@@ -2139,7 +2174,7 @@ const L = {
     rsvpSubmit:"ส่ง",
     rsvpSending:"กำลังส่ง…",
     rsvpSuccess:"ขอบคุณค่ะ/ครับ ได้รับคำตอบรับของท่านแล้ว",
-    signoffLead:'ด้วยรัก,', signoffNames:'สิริยา และ ฟลอริส',
+    signoffLead:'ด้วยรัก,', signoffNames:'สิริยา เดอ เบียร์ และ ฟลอริส เดอ เบียร์',
     rsvpThanksTitle:'ขอบคุณจากใจ', rsvpThanksText:'เราได้รับคำตอบรับของท่านแล้ว ขอบคุณที่แจ้งให้เราทราบ', rsvpThanksClose:'ปิด',
     rsvpError:"ส่งข้อมูลไม่สำเร็จ กรุณาลองใหม่ภายหลัง",
     rsvpSetup:"ระบบตอบรับยังไม่เปิดใช้งาน กรุณาลองใหม่ภายหลัง",
@@ -2151,8 +2186,8 @@ const L = {
     aboutTitle:"เกี่ยวกับเรา",
     aboutText:"เราหวังเป็นอย่างยิ่งว่าจะได้พบทุกท่านในงานแต่งงานของเรา และขออภัยหากไม่สามารถนำบัตรเชิญมามอบให้ด้วยตนเองได้",
     calBtn:"เพิ่มลงในปฏิทิน", calGoogle:"ปฏิทินกูเกิล", calIcs:"ปฏิทินอื่น (.ics)",
-    calTitle:"งานแต่งงานของ Siriya & Floris",
-    calDesc:"ยินดีต้อนรับแขกตั้งแต่เวลา 18.00 น. จากนั้นร่วมงานเลี้ยงฉลองมงคลสมรสและใช้เวลาร่วมกันในช่วงค่ำ"
+    calTitle:"งานแต่งงานของสิริยา เดอ เบียร์ และฟลอริส เดอ เบียร์",
+    calDesc:"พิธีหมั้น 15.00 น. พิธีรดน้ำสังข์ 15.45 น. พิธีกล่าวคำปฏิญาณรัก 17.00 น. และงานเลี้ยงฉลองมงคลสมรส 18.00 น."
   }
 };
 
@@ -2164,8 +2199,10 @@ function setLang(lang){
       el.textContent = L[lang][key];
     }
   });
-  document.querySelector(".couple-title").setAttribute("aria-label",
-    `${L[lang].coupleFirst} ${L[lang].coupleJoin} ${L[lang].coupleLast}`);
+  const coupleName = `${L[lang].coupleFirst} ${L[lang].coupleSurname} ${L[lang].coupleJoin} ${L[lang].coupleLast} ${L[lang].coupleSurname}`;
+  document.querySelectorAll('.couple-title, .mini-card-title').forEach(el=>{
+    el.setAttribute('aria-label', coupleName);
+  });
   document.querySelectorAll("[data-ph]").forEach(el=>{
     const key=el.dataset.ph;
     if(L[lang] && L[lang][key] !== undefined) el.placeholder=L[lang][key];
@@ -2210,8 +2247,8 @@ document.querySelectorAll(".lang button").forEach(b=>{
   b.addEventListener("click", ()=> setLang(b.dataset.l));
 });
 
-/* ===== countdown avondgasten (27 maart 2027, 18:00 Thaise tijd = UTC+7) ===== */
-const TARGET = new Date("2027-03-27T18:00:00+07:00").getTime();
+/* ===== countdown (27 maart 2027, 15:00 Thaise tijd = UTC+7) ===== */
+const TARGET = new Date("2027-03-27T15:00:00+07:00").getTime();
 const cd = {d:document.getElementById("nD"),h:document.getElementById("nH"),m:document.getElementById("nM"),s:document.getElementById("nS")};
 const pad = n => String(n).padStart(2,"0");
 function tick(){
@@ -2237,9 +2274,9 @@ const mapCover = document.getElementById("mapCover");
 if(mapBox && mapCover) mapCover.addEventListener("click", ()=> mapBox.classList.add("live"));
 
 /* ===== toevoegen aan agenda =====
-   Start: 27 maart 2027, 18:00 Thaise tijd (= 11:00 UTC). Einde: 21:00 Thaise tijd (= 14:00 UTC) — pas aan indien nodig. */
+   Start: 27 maart 2027, 15:00 Thaise tijd (= 08:00 UTC). Einde: 21:00 Thaise tijd (= 14:00 UTC) — pas aan indien nodig. */
 const EVENT = {
-  start:"20270327T110000Z",
+  start:"20270327T080000Z",
   end:"20270327T140000Z",
   location:"Baiboon Grand Hotel, 111 Moo 9, Charoenrat Road, Na An, Mueang Loei, Loei 42000, Thailand"
 };
