@@ -3063,45 +3063,39 @@ rsvpForm.addEventListener('submit',async (evt)=>{
   let player={x:PLAYER_X,y:175,vy:0,tilt:0};
   let obstacles=[];
   let backgroundCache=null;
-  let portraitReady=false;
-  const portrait=new Image();
-  portrait.decoding='async';
-  portrait.onload=()=>{portraitReady=true;render();};
-  portrait.src='images/tekening.png';
-  const crop={floris:[28,8,210,218],siriya:[205,68,206,219],dog:[96,226,286,260]};
-  const portraitFit={floris:{zoom:1.08,dx:-1,dy:0},siriya:{zoom:1.04,dx:1,dy:0},dog:{zoom:1.0,dx:0,dy:3}};
+  // Individual transparent cut-outs from the wedding illustration.
+  // Keeping the characters separate prevents the partner/background appearing inside a sticker.
+  const spriteFiles={floris:'images/flight-floris.png',siriya:'images/flight-siriya.png',dog:'images/flight-bas.png'};
+  const sprites={};
+  Object.keys(spriteFiles).forEach(who=>{
+    const sprite=new Image();sprite.decoding='async';
+    sprite.onload=()=>{render();};
+    sprite.src=spriteFiles[who];sprites[who]=sprite;
+  });
   const gapLevels=[.48,.51,.46,.52,.48];
   const lowPower=(navigator.deviceMemory&&navigator.deviceMemory<=2)||(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=2);
   const petalsCount=lowPower?9:17;
 
   function paintPortrait(x,y,r,who){
     if(!context)return;
-    const fit=portraitFit[who]||{zoom:1,dx:0,dy:0};
+    const sprite=sprites[who];
     context.save();
-    context.shadowColor='rgba(77,57,43,.24)';context.shadowBlur=10;context.shadowOffsetY=4;
-    const outer=context.createRadialGradient(x-r*.25,y-r*.38,r*.2,x,y,r*1.1);
-    outer.addColorStop(0,'#fffdf7');outer.addColorStop(1,'#f2e8d7');
-    context.fillStyle=outer;context.beginPath();context.arc(x,y,r+4,0,Math.PI*2);context.fill();
-    context.restore();
-    context.save();context.beginPath();context.arc(x,y,r,0,Math.PI*2);context.clip();
-    context.fillStyle='#fbf6ee';context.fillRect(x-r,y-r,r*2,r*2);
-    if(portraitReady){
-      const c=crop[who];
-      const scale=Math.max((r*2)/c[2],(r*2)/c[3])*(fit.zoom||1);
-      const dw=c[2]*scale,dh=c[3]*scale;
-      const dx=x-dw/2+(fit.dx||0),dy=y-dh/2+(fit.dy||0);
-      context.drawImage(portrait,c[0],c[1],c[2],c[3],dx,dy,dw,dh);
-      const gloss=context.createRadialGradient(x-r*.3,y-r*.45,r*.06,x,y,r*1.25);
-      gloss.addColorStop(0,'rgba(255,255,255,.28)');gloss.addColorStop(.42,'rgba(255,255,255,.08)');gloss.addColorStop(1,'rgba(255,255,255,0)');
-      context.fillStyle=gloss;context.beginPath();context.arc(x,y,r,0,Math.PI*2);context.fill();
+    if(sprite&&sprite.complete&&sprite.naturalWidth&&sprite.naturalHeight){
+      const scale=Math.min((2*r)/sprite.naturalWidth,(2*r)/sprite.naturalHeight);
+      const width=sprite.naturalWidth*scale,height=sprite.naturalHeight*scale;
+      context.shadowColor='rgba(73,55,46,.20)';
+      context.shadowBlur=6;context.shadowOffsetY=3;
+      context.drawImage(sprite,x-width/2,y-height/2,width,height);
     }else{
-      context.fillStyle='#876b63';context.font=`bold ${Math.round(r)}px Georgia`;
-      context.textAlign='center';context.textBaseline='middle';context.fillText(who==='floris'?'F':who==='siriya'?'S':'♡',x,y);
+      // Only while the small transparent game sprites load.
+      context.fillStyle='#f8f0e6';
+      context.beginPath();context.arc(x,y,r*.79,0,Math.PI*2);context.fill();
+      context.strokeStyle='#c3a06a';context.lineWidth=1.5;context.stroke();
+      context.fillStyle='#876b63';context.font=`bold ${Math.round(r*.8)}px Georgia`;
+      context.textAlign='center';context.textBaseline='middle';
+      context.fillText(who==='floris'?'F':who==='siriya'?'S':'♡',x,y);
     }
     context.restore();
-    context.lineWidth=2.4;context.strokeStyle='#c6a36d';context.beginPath();context.arc(x,y,r+1.8,0,Math.PI*2);context.stroke();
-    context.save();context.globalAlpha=.72;context.strokeStyle='rgba(255,255,255,.62)';context.lineWidth=1;
-    context.beginPath();context.arc(x-r*.12,y-r*.12,r*.72,Math.PI*.85,Math.PI*1.55);context.stroke();context.restore();
   }
   function heart(x,y,size,color='#a85f66'){
     context.save();context.translate(x,y);context.scale(size/17,size/17);
