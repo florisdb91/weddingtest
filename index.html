@@ -2991,7 +2991,7 @@ rsvpForm.addEventListener('submit',async (evt)=>{
     <div id="sfLoveGame" class="sf-love-game" hidden>
       <p class="sf-love-game-eyebrow" id="sfLoveGameEyebrow">A little extra secret</p>
       <h2 class="sf-love-game-title" id="sfLoveGameTitle" tabindex="-1">Love Flight</h2>
-      <p class="sf-love-game-intro" id="sfLoveGameIntro">Help Floris fly through the flower arches and bring his heart to Siriya. Our dog is cheering!</p>
+      <p class="sf-love-game-intro" id="sfLoveGameIntro">Help Floris fly through the flower arches and bring his heart to Siriya. Bas is cheering him on!</p>
       <div id="sfLoveGameBoard" class="sf-love-game-board" aria-label="Love Flight game" role="group">
         <canvas id="sfLoveFlightCanvas" class="sf-love-flight-canvas" width="600" height="370" tabindex="0" aria-label="Tap or press Space to flap and dodge the flowers"></canvas>
         <div class="sf-flight-hud" aria-hidden="true"><span id="sfLoveFlightRoute">FLORIS ♡ SIRIYA</span><span class="sf-flight-counter" id="sfLoveFlightCounter">0 / 5</span></div>
@@ -3042,20 +3042,20 @@ rsvpForm.addEventListener('submit',async (evt)=>{
   const N=5, WORLD_WIDTH=600, PLAYER_X=138;
   const translations={
     en:{eyebrow:'A secret just for you',title:'Love is in the air',message:'You found our little secret! We are so happy to share our special day with you.',names:'Siriya & Floris',date:'27 March 2027',close:'Close surprise',
-      play:'Play our little game',gameEyebrow:'A little extra secret',gameTitle:'Love Flight',gameIntro:'Help Floris fly through the flower arches and bring his heart to Siriya. Our dog is cheering!',
+      play:'Play our little game',gameEyebrow:'A little extra secret',gameTitle:'Love Flight',gameIntro:'Help Floris fly through the flower arches and bring his heart to Siriya. Bas is cheering him on!',
       gameHint:'Tap the game, or press Space, ↑ or W to flap.',win:'Achievement unlocked: Love at first sight! ♥',back:'← Back to surprise',restart:'Play again',
       board:'Love Flight. Tap or press Space to fly past the flowers and deliver a heart to Siriya.',route:'FLORIS ♡ SIRIYA',progress:'Flowers passed',
-      readyLabel:'A LITTLE LOVE ADVENTURE',ready:'Ready to deliver the heart?',start:'Start flying ♡',failLabel:'ONE MORE TRY',fail:'Our dog believes in you!',retry:'Try again ♡',pauseLabel:'TAKE YOUR TIME',pause:'Ready to keep flying?',resume:'Continue ♡',endLabel:'LOVE DELIVERED',end:'You made it to Siriya!',again:'Fly again ♡'},
+      readyLabel:'A LITTLE LOVE ADVENTURE',ready:'Ready to deliver the heart?',start:'Start flying ♡',failLabel:'ONE MORE TRY',fail:'Bas believes in you!',retry:'Try again ♡',pauseLabel:'TAKE YOUR TIME',pause:'Ready to keep flying?',resume:'Continue ♡',endLabel:'LOVE DELIVERED',end:'You made it to Siriya!',again:'Fly again ♡'},
     nl:{eyebrow:'Een geheimpje voor jou',title:'Liefde hangt in de lucht',message:'Je hebt ons kleine geheim ontdekt! Wat fijn dat we deze bijzondere dag met je mogen delen.',names:'Siriya & Floris',date:'27 maart 2027',close:'Sluit de verrassing',
-      play:'Speel ons geheime spelletje',gameEyebrow:'Nog een klein geheimpje',gameTitle:'Liefdesvlucht',gameIntro:'Help Floris langs de bloemen vliegen om zijn hartje bij Siriya te brengen. Onze hond moedigt hem aan!',
+      play:'Speel ons geheime spelletje',gameEyebrow:'Nog een klein geheimpje',gameTitle:'Liefdesvlucht',gameIntro:'Help Floris langs de bloemen vliegen om zijn hartje bij Siriya te brengen. Bas moedigt hem aan!',
       gameHint:'Tik op het spel of druk op Spatie, ↑ of W om te vliegen.',win:'Ontgrendeld: Liefde op het eerste gezicht! ♥',back:'← Terug naar verrassing',restart:'Opnieuw spelen',
       board:'Liefdesvlucht. Tik of druk op Spatie om langs bloemen te vliegen en het hartje aan Siriya te geven.',route:'FLORIS ♡ SIRIYA',progress:'Bloemen gepasseerd',
-      readyLabel:'EEN KLEIN LIEFDESAVONTUUR',ready:'Klaar om het hartje te brengen?',start:'Begin met vliegen ♡',failLabel:'NOG EEN KEER',fail:'Onze hond gelooft in je!',retry:'Probeer opnieuw ♡',pauseLabel:'ALLE TIJD',pause:'Klaar om verder te vliegen?',resume:'Ga verder ♡',endLabel:'HARTJE BEZORGD',end:'Je hebt Siriya bereikt!',again:'Vlieg nog een keer ♡'},
+      readyLabel:'EEN KLEIN LIEFDESAVONTUUR',ready:'Klaar om het hartje te brengen?',start:'Begin met vliegen ♡',failLabel:'NOG EEN KEER',fail:'Bas gelooft in je!',retry:'Probeer opnieuw ♡',pauseLabel:'ALLE TIJD',pause:'Klaar om verder te vliegen?',resume:'Ga verder ♡',endLabel:'HARTJE BEZORGD',end:'Je hebt Siriya bereikt!',again:'Vlieg nog een keer ♡'},
     th:{eyebrow:'ความลับเล็ก ๆ สำหรับคุณ',title:'ความรักอบอวลอยู่ในอากาศ',message:'คุณค้นพบความลับเล็ก ๆ ของเราแล้ว! เราดีใจที่ได้แบ่งปันวันพิเศษนี้กับคุณ',names:'สิริยา และ ฟลอริส',date:'27 มีนาคม พ.ศ. 2570',close:'ปิดข้อความพิเศษ',
-      play:'เล่นเกมลับของเรา',gameEyebrow:'ความลับพิเศษอีกอย่าง',gameTitle:'เที่ยวบินแห่งรัก',gameIntro:'ช่วยฟลอริสบินผ่านซุ้มดอกไม้เพื่อนำหัวใจไปให้สิริยา โดยมีน้องหมาคอยเชียร์',
+      play:'เล่นเกมลับของเรา',gameEyebrow:'ความลับพิเศษอีกอย่าง',gameTitle:'เที่ยวบินแห่งรัก',gameIntro:'ช่วยฟลอริสบินผ่านซุ้มดอกไม้เพื่อนำหัวใจไปให้สิริยา โดยมีบาสคอยเชียร์',
       gameHint:'แตะที่เกม หรือกด Space, ↑ หรือ W เพื่อบินขึ้น',win:'ปลดล็อกแล้ว: รักแรกพบ! ♥',back:'← กลับไปที่ข้อความ',restart:'เล่นอีกครั้ง',
       board:'เกมบินส่งหัวใจ แตะหน้าจอหรือกดปุ่ม Space เพื่อบินผ่านดอกไม้ไปหาสิริยา',route:'ฟลอริส ♡ สิริยา',progress:'ผ่านซุ้มดอกไม้',
-      readyLabel:'การผจญภัยแห่งความรัก',ready:'พร้อมส่งหัวใจหรือยัง?',start:'เริ่มบิน ♡',failLabel:'ลองอีกครั้ง',fail:'น้องหมาเป็นกำลังใจให้นะ!',retry:'ลองใหม่ ♡',pauseLabel:'พักสักครู่',pause:'พร้อมบินต่อหรือยัง?',resume:'บินต่อ ♡',endLabel:'ส่งหัวใจสำเร็จ',end:'คุณไปถึงสิริยาแล้ว!',again:'บินอีกครั้ง ♡'}
+      readyLabel:'การผจญภัยแห่งความรัก',ready:'พร้อมส่งหัวใจหรือยัง?',start:'เริ่มบิน ♡',failLabel:'ลองอีกครั้ง',fail:'บาสเป็นกำลังใจให้นะ!',retry:'ลองใหม่ ♡',pauseLabel:'พักสักครู่',pause:'พร้อมบินต่อหรือยัง?',resume:'บินต่อ ♡',endLabel:'ส่งหัวใจสำเร็จ',end:'คุณไปถึงสิริยาแล้ว!',again:'บินอีกครั้ง ♡'}
   };
   let current=translations.en,gameOpen=false;
   let phase='ready',score=0,elapsed=0,deliveryTime=0,worldHeight=370;
@@ -3068,28 +3068,40 @@ rsvpForm.addEventListener('submit',async (evt)=>{
   portrait.decoding='async';
   portrait.onload=()=>{portraitReady=true;render();};
   portrait.src='images/tekening.png';
-  const crop={floris:[78,18,192,226],siriya:[229,107,224,242],dog:[112,283,240,297]};
+  const crop={floris:[28,8,210,218],siriya:[205,68,206,219],dog:[96,226,286,260]};
+  const portraitFit={floris:{zoom:1.14,dx:-2,dy:1},siriya:{zoom:1.10,dx:2,dy:1},dog:{zoom:1.02,dx:0,dy:4}};
   const gapLevels=[.48,.51,.46,.52,.48];
   const lowPower=(navigator.deviceMemory&&navigator.deviceMemory<=2)||(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=2);
   const petalsCount=lowPower?9:17;
 
   function paintPortrait(x,y,r,who){
     if(!context)return;
+    const fit=portraitFit[who]||{zoom:1,dx:0,dy:0};
     context.save();
-    context.shadowColor='rgba(77,57,43,.23)';context.shadowBlur=6;context.shadowOffsetY=3;
-    context.fillStyle='#fdf6e9';context.beginPath();context.arc(x,y,r+3,0,Math.PI*2);context.fill();
+    context.shadowColor='rgba(77,57,43,.24)';context.shadowBlur=10;context.shadowOffsetY=4;
+    const outer=context.createRadialGradient(x-r*.25,y-r*.38,r*.2,x,y,r*1.1);
+    outer.addColorStop(0,'#fffdf7');outer.addColorStop(1,'#f2e8d7');
+    context.fillStyle=outer;context.beginPath();context.arc(x,y,r+4,0,Math.PI*2);context.fill();
     context.restore();
     context.save();context.beginPath();context.arc(x,y,r,0,Math.PI*2);context.clip();
-    context.fillStyle='#f9f5ee';context.fillRect(x-r,y-r,r*2,r*2);
+    context.fillStyle='#fbf6ee';context.fillRect(x-r,y-r,r*2,r*2);
     if(portraitReady){
       const c=crop[who];
-      context.drawImage(portrait,c[0],c[1],c[2],c[3],x-r,y-r,r*2,r*2);
+      const scale=Math.max((r*2)/c[2],(r*2)/c[3])*(fit.zoom||1);
+      const dw=c[2]*scale,dh=c[3]*scale;
+      const dx=x-dw/2+(fit.dx||0),dy=y-dh/2+(fit.dy||0);
+      context.drawImage(portrait,c[0],c[1],c[2],c[3],dx,dy,dw,dh);
+      const gloss=context.createRadialGradient(x-r*.3,y-r*.45,r*.06,x,y,r*1.25);
+      gloss.addColorStop(0,'rgba(255,255,255,.28)');gloss.addColorStop(.42,'rgba(255,255,255,.08)');gloss.addColorStop(1,'rgba(255,255,255,0)');
+      context.fillStyle=gloss;context.beginPath();context.arc(x,y,r,0,Math.PI*2);context.fill();
     }else{
       context.fillStyle='#876b63';context.font=`bold ${Math.round(r)}px Georgia`;
       context.textAlign='center';context.textBaseline='middle';context.fillText(who==='floris'?'F':who==='siriya'?'S':'♡',x,y);
     }
     context.restore();
-    context.lineWidth=2.5;context.strokeStyle='#c3a06a';context.beginPath();context.arc(x,y,r+1.5,0,Math.PI*2);context.stroke();
+    context.lineWidth=2.4;context.strokeStyle='#c6a36d';context.beginPath();context.arc(x,y,r+1.8,0,Math.PI*2);context.stroke();
+    context.save();context.globalAlpha=.72;context.strokeStyle='rgba(255,255,255,.62)';context.lineWidth=1;
+    context.beginPath();context.arc(x-r*.12,y-r*.12,r*.72,Math.PI*.85,Math.PI*1.55);context.stroke();context.restore();
   }
   function heart(x,y,size,color='#a85f66'){
     context.save();context.translate(x,y);context.scale(size/17,size/17);
@@ -3297,7 +3309,10 @@ rsvpForm.addEventListener('submit',async (evt)=>{
     const x=45,y=worldHeight-39+bob;
     ellipse(x,worldHeight-7,47,8,'rgba(102,141,101,.22)');
     paintPortrait(x,y,25,'dog');
-    // The familiar dog is an on-screen companion and celebrates each landing.
+    roundBox(x-15,y+21,31,14,7,'rgba(252,248,240,.96)');
+    context.strokeStyle='rgba(195,160,106,.72)';context.lineWidth=1;context.stroke();
+    context.fillStyle='#8c6f58';context.font='600 10px Georgia';context.textAlign='center';context.textBaseline='middle';
+    context.fillText('Bas',x+.5,y+28);
     if(phase==='won'){
       heart(x+31,y-29,13,'#b37273');
       flower(x-27,y-22,6,'#fff0e2');
@@ -3310,7 +3325,7 @@ rsvpForm.addEventListener('submit',async (evt)=>{
     const x=player.x,y=player.y;
     context.save();context.translate(x,y);context.rotate(player.tilt);
     drawWings(0,0,35);
-    paintPortrait(0,0,35,'floris');
+    paintPortrait(0,0,37,'floris');
     heart(32,27,19,'#a6515c');
     context.restore();
     if(phase==='delivery'){
@@ -3323,7 +3338,7 @@ rsvpForm.addEventListener('submit',async (evt)=>{
     const arrived=phase==='delivery'||phase==='won';
     const x=arrived?WORLD_WIDTH-106:WORLD_WIDTH-43,y=worldHeight*.46;
     if(arrived)ellipse(x,worldHeight-35,53,13,'rgba(105,139,106,.2)');
-    paintPortrait(x,y,arrived?41:24,'siriya');
+    paintPortrait(x,y,arrived?43:26,'siriya');
     if(phase==='won'){
       heart(x-54,y-24,20,'#b56769');heart(x+49,y-37,14,'#cca07b');
     }
