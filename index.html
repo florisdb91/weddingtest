@@ -1854,6 +1854,149 @@ html[lang="th"] .sf-love-date{font-family:'Noto Serif Thai',Tahoma,serif;letter-
   .sf-love-particle{animation:none!important;display:none!important}
 }
 
+
+/* Secret Love mini-game: self-contained, GPU-light; never changes the page layout. */
+.sf-love-letter[hidden],.sf-love-game[hidden],.sf-love-win[hidden]{display:none!important}
+.sf-love-play{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  min-height:43px;margin:23px auto 0;padding:11px 20px;
+  border:1px solid rgba(177,134,73,.66);border-radius:99px;
+  color:#79554d;background:linear-gradient(180deg,#fffdfa,#f5eade);
+  font:500 .80rem/1.25 Georgia,serif;letter-spacing:.05em;
+  box-shadow:0 3px 13px rgba(119,78,37,.09);cursor:pointer;
+  transition:transform .18s ease,box-shadow .18s ease,background .18s ease;
+  -webkit-tap-highlight-color:transparent;touch-action:manipulation;
+}
+.sf-love-play .sf-love-play-heart{font-size:1.06rem;color:#ad7a64}
+.sf-love-play .sf-love-play-arrow{font-size:1.22rem;color:#ab8756;line-height:0}
+.sf-love-play:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(119,78,37,.16)}
+.sf-love-play:focus-visible,.sf-love-game-controls button:focus-visible,
+.sf-love-game-actions button:focus-visible{outline:2px solid #a78153;outline-offset:3px}
+.sf-love-game{position:relative;text-align:center}
+.sf-love-game-eyebrow{
+  margin:3px 0 6px;color:#aa8b5e;font:400 .66rem/1.5 Georgia,serif;
+  letter-spacing:.19em;text-transform:uppercase;
+}
+.sf-love-game-title{
+  margin:0 0 4px;color:#783d46;
+  font:400 clamp(2.05rem,7vw,2.65rem)/1.12 'Cormorant Garamond',Georgia,serif;
+}
+.sf-love-game-title:focus{outline:none}
+.sf-love-game-intro{
+  max-width:330px;margin:0 auto 13px;color:#6c5961;
+  font:400 clamp(.97rem,2.8vw,1.08rem)/1.38 'Cormorant Garamond',Georgia,serif;
+}
+.sf-love-game-board{
+  position:relative;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));
+  grid-template-rows:repeat(5,minmax(0,1fr));
+  width:min(100%,306px);aspect-ratio:7/5;overflow:hidden;margin:0 auto;
+  background:#fcf8ee;border:1px solid rgba(190,153,100,.56);border-radius:6px;
+  box-shadow:0 5px 19px rgba(89,65,37,.09),inset 0 0 0 4px rgba(255,255,255,.24);
+  touch-action:none;user-select:none;-webkit-user-select:none;
+}
+.sf-love-game-cell{
+  display:grid;place-items:center;min-width:0;min-height:0;
+  border-right:1px solid rgba(204,175,129,.13);
+  border-bottom:1px solid rgba(204,175,129,.13);
+  background:rgba(255,255,255,.08);
+}
+.sf-love-game-cell:nth-child(2n){background:rgba(239,223,199,.17)}
+.sf-love-game-cell.sf-love-blocked{
+  color:#968665;
+  background:linear-gradient(145deg,rgba(191,206,172,.46),rgba(216,221,187,.64));
+  box-shadow:inset 0 0 0 1px rgba(161,164,120,.12);
+  font:400 clamp(17px,4vw,22px)/1 Georgia,serif;
+}
+.sf-love-game-goal{
+  display:grid;place-items:center;width:70%;height:70%;border-radius:50%;
+  color:#895c64;background:#f1e0dc;border:1px solid #bd9392;
+  font:500 clamp(15px,4vw,20px)/1 'Cormorant Garamond',Georgia,serif;
+  box-shadow:0 2px 6px rgba(133,81,81,.11);
+}
+.sf-love-game-player{
+  position:absolute;top:0;left:0;z-index:2;width:calc(100% / 7);height:calc(100% / 5);
+  display:grid;place-items:center;pointer-events:none;
+  transform:translate(0%,400%);transition:transform .18s cubic-bezier(.2,.7,.3,1);
+  will-change:transform;
+}
+.sf-love-game-player-marker{
+  display:grid;place-items:center;width:69%;height:69%;border-radius:50%;
+  background:linear-gradient(135deg,#bda16e,#947247);border:1px solid #fff5dc;
+  box-shadow:0 2px 6px rgba(102,74,40,.24);
+  color:#fff9ee;font:500 clamp(15px,4vw,20px)/1 'Cormorant Garamond',Georgia,serif;
+}
+.sf-love-game-player-heart{
+  position:absolute;top:-3px;right:0;color:#a94350;
+  font:400 16px/1 Georgia,serif;text-shadow:0 1px 1px #fff9ea;
+}
+.sf-love-game-board.sf-love-game-won .sf-love-game-goal{
+  background:#f3e0b6;color:#8a5261;border-color:#bf9b66;
+  box-shadow:0 0 0 4px rgba(222,178,104,.15);
+}
+.sf-love-game-hint{
+  margin:10px auto 8px;max-width:300px;color:#8c796d;
+  font:400 .72rem/1.5 Georgia,serif;
+}
+.sf-love-game-status{
+  min-height:1.35em;margin:0 0 9px;color:#86654b;
+  font:400 .78rem/1.3 Georgia,serif;
+}
+.sf-love-win{
+  margin:0 0 9px;color:#984c55;
+  font:500 1rem/1.4 'Cormorant Garamond',Georgia,serif;
+}
+.sf-love-game-controls{display:flex;align-items:center;justify-content:center;gap:9px;margin:0 auto 15px}
+.sf-love-game-controls button{
+  display:grid;place-items:center;min-width:48px;width:48px;height:43px;padding:0;
+  border:1px solid rgba(189,153,102,.56);border-radius:7px;
+  background:linear-gradient(180deg,#fffcf8,#f1e6d6);color:#8b7054;
+  font:400 22px/1 Georgia,serif;cursor:pointer;
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent;
+  box-shadow:0 2px 5px rgba(90,64,43,.08);
+}
+.sf-love-game-controls button:active{transform:translateY(1px);background:#ead8bd}
+.sf-love-game-controls button:disabled{opacity:.46;cursor:default}
+.sf-love-game-actions{display:flex;justify-content:center;align-items:center;gap:13px;flex-wrap:wrap}
+.sf-love-game-actions button{
+  border:0;border-bottom:1px solid rgba(170,130,81,.35);border-radius:0;
+  padding:5px 1px;background:transparent;color:#907351;
+  font:400 .74rem/1.3 Georgia,serif;cursor:pointer;
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent;
+}
+.sf-love-game-actions button:hover{color:#654a43;border-color:#a57f53}
+html[lang="th"] .sf-love-play,
+html[lang="th"] .sf-love-game-eyebrow,
+html[lang="th"] .sf-love-game-title,
+html[lang="th"] .sf-love-game-intro,
+html[lang="th"] .sf-love-game-hint,
+html[lang="th"] .sf-love-game-status,
+html[lang="th"] .sf-love-win,
+html[lang="th"] .sf-love-game-actions button{
+  font-family:'Noto Serif Thai',Tahoma,sans-serif;letter-spacing:0;
+}
+html[lang="th"] .sf-love-game-title{font-size:clamp(1.35rem,4.8vw,1.75rem);line-height:1.5}
+html[lang="th"] .sf-love-game-intro{font-size:.87rem;line-height:1.6}
+html[lang="th"] .sf-love-game-eyebrow{font-size:.77rem}
+html[lang="th"] .sf-love-win{font-size:.88rem}
+@media(max-width:360px){
+  .sf-love-play{margin-top:16px;padding:10px 13px;font-size:.74rem}
+  .sf-love-game-board{width:min(100%,262px)}
+  .sf-love-game-controls button{width:45px;min-width:45px;height:41px}
+  .sf-love-game-intro{margin-bottom:10px}
+  .sf-love-game-controls{margin-bottom:10px}
+}
+@media(max-height:610px){
+  .sf-love-game-eyebrow{margin:0 0 4px}
+  .sf-love-game-intro{margin-bottom:8px}
+  .sf-love-game-board{width:min(100%,255px)}
+  .sf-love-game-hint{margin:7px auto 5px}
+  .sf-love-game-status{margin-bottom:6px}
+  .sf-love-game-controls{margin-bottom:9px}
+}
+@media(prefers-reduced-motion:reduce){
+  .sf-love-game-player,.sf-love-play{transition:none!important}
+}
+
 </style>
 </head>
 <body>
@@ -2837,54 +2980,207 @@ rsvpForm.addEventListener('submit',async (evt)=>{
 })();
 </script>
 
-<!-- Secret Love Mode: completely separate from music, translation, RSVP and invitation animation. -->
+<!-- Secret Love Mode: separate from music, language selector, RSVP and invitation. -->
 <div id="sfLoveOverlay" class="sf-love-overlay" hidden>
   <div class="sf-love-scrim" aria-hidden="true"></div>
   <div class="sf-love-particles" aria-hidden="true"></div>
   <section class="sf-love-card" role="dialog" aria-modal="true" aria-labelledby="sfLoveTitle" aria-describedby="sfLoveMessage" tabindex="-1">
     <button id="sfLoveClose" class="sf-love-close" type="button" aria-label="Close surprise"><span aria-hidden="true">&times;</span></button>
-    <div class="sf-love-ornament" aria-hidden="true"><span>♡</span></div>
-    <p class="sf-love-eyebrow" id="sfLoveEyebrow">A secret just for you</p>
-    <h2 class="sf-love-title" id="sfLoveTitle">Love is in the air</h2>
-    <p class="sf-love-message" id="sfLoveMessage">You found our little secret! We are so happy to share our special day with you.</p>
-    <div class="sf-love-rule" aria-hidden="true">✦</div>
-    <p class="sf-love-names" id="sfLoveNames">Siriya &amp; Floris</p>
-    <p class="sf-love-date" id="sfLoveDate">27 March 2027</p>
-    <p class="sf-love-hashtag">#SPLoveAtFirstSight</p>
+    <div id="sfLoveLetter" class="sf-love-letter">
+      <div class="sf-love-ornament" aria-hidden="true"><span>♡</span></div>
+      <p class="sf-love-eyebrow" id="sfLoveEyebrow">A secret just for you</p>
+      <h2 class="sf-love-title" id="sfLoveTitle">Love is in the air</h2>
+      <p class="sf-love-message" id="sfLoveMessage">You found our little secret! We are so happy to share our special day with you.</p>
+      <div class="sf-love-rule" aria-hidden="true">✦</div>
+      <p class="sf-love-names" id="sfLoveNames">Siriya &amp; Floris</p>
+      <p class="sf-love-date" id="sfLoveDate">27 March 2027</p>
+      <p class="sf-love-hashtag">#SPLoveAtFirstSight</p>
+      <button class="sf-love-play" id="sfLovePlay" type="button">
+        <span class="sf-love-play-heart" aria-hidden="true">♥</span>
+        <span id="sfLovePlayText">Play our little game</span>
+        <span class="sf-love-play-arrow" aria-hidden="true">›</span>
+      </button>
+    </div>
+    <div id="sfLoveGame" class="sf-love-game" hidden>
+      <p class="sf-love-game-eyebrow" id="sfLoveGameEyebrow">A little extra secret</p>
+      <h2 class="sf-love-game-title" id="sfLoveGameTitle" tabindex="-1">A little love quest</h2>
+      <p class="sf-love-game-intro" id="sfLoveGameIntro">Help Floris carry a heart through the garden to Siriya.</p>
+      <div id="sfLoveGameBoard" class="sf-love-game-board" role="img" aria-label="Garden maze: F is Floris, S is Siriya"></div>
+      <p class="sf-love-game-hint" id="sfLoveGameHint">Use arrow keys, WASD, the buttons or swipe on the garden.</p>
+      <p class="sf-love-game-status" id="sfLoveGameStatus" role="status" aria-live="polite">Steps: 0</p>
+      <p class="sf-love-win" id="sfLoveWin" hidden>Achievement unlocked: Love at first sight! ♥</p>
+      <div class="sf-love-game-controls" id="sfLoveGameControls" role="group" aria-label="Move Floris">
+        <button type="button" data-sf-move="left" aria-label="Move left">←</button>
+        <button type="button" data-sf-move="up" aria-label="Move up">↑</button>
+        <button type="button" data-sf-move="down" aria-label="Move down">↓</button>
+        <button type="button" data-sf-move="right" aria-label="Move right">→</button>
+      </div>
+      <div class="sf-love-game-actions">
+        <button id="sfLoveGameBack" type="button">← Back to surprise</button>
+        <button id="sfLoveGameRestart" type="button">Play again</button>
+      </div>
+    </div>
   </section>
 </div>
 <script>
-/* Isolated, opt-in easter egg. The existing audio, translations, RSVP and intro are untouched. */
+/* Secret Love Mode + optional mini-game. One isolated closure; no external assets or sound. */
 (()=>{
   'use strict';
   const overlay=document.getElementById('sfLoveOverlay');
-  const closeButton=document.getElementById('sfLoveClose');
   const dialog=overlay?.querySelector('.sf-love-card');
+  const closeButton=document.getElementById('sfLoveClose');
   const particles=overlay?.querySelector('.sf-love-particles');
-  const title=document.getElementById('sfLoveTitle');
-  const message=document.getElementById('sfLoveMessage');
-  const eyebrow=document.getElementById('sfLoveEyebrow');
-  const names=document.getElementById('sfLoveNames');
-  const date=document.getElementById('sfLoveDate');
-  if(!overlay||!dialog||!particles||!closeButton)return;
+  const letter=document.getElementById('sfLoveLetter');
+  const game=document.getElementById('sfLoveGame');
+  const playButton=document.getElementById('sfLovePlay');
+  const gameBack=document.getElementById('sfLoveGameBack');
+  const gameRestart=document.getElementById('sfLoveGameRestart');
+  const gameTitle=document.getElementById('sfLoveGameTitle');
+  const gameBoard=document.getElementById('sfLoveGameBoard');
+  const gameStatus=document.getElementById('sfLoveGameStatus');
+  const gameWin=document.getElementById('sfLoveWin');
+  const gameControls=document.getElementById('sfLoveGameControls');
+  if(!overlay||!dialog||!closeButton||!particles||!letter||!game||!playButton||!gameBoard)return;
 
   const texts={
-    en:{eyebrow:'A secret just for you',title:'Love is in the air',message:'You found our little secret! We are so happy to share our special day with you.',names:'Siriya & Floris',date:'27 March 2027',close:'Close surprise'},
-    nl:{eyebrow:'Een geheimpje voor jou',title:'Liefde hangt in de lucht',message:'Je hebt ons kleine geheim ontdekt! Wat fijn dat we deze bijzondere dag met je mogen delen.',names:'Siriya & Floris',date:'27 maart 2027',close:'Sluit de verrassing'},
-    th:{eyebrow:'ความลับเล็ก ๆ สำหรับคุณ',title:'ความรักอบอวลอยู่ในอากาศ',message:'คุณค้นพบความลับเล็ก ๆ ของเราแล้ว! เราดีใจที่ได้แบ่งปันวันพิเศษนี้กับคุณ',names:'สิริยา และ ฟลอริส',date:'27 มีนาคม 2027',close:'ปิดข้อความพิเศษ'}
+    en:{eyebrow:'A secret just for you',title:'Love is in the air',message:'You found our little secret! We are so happy to share our special day with you.',names:'Siriya & Floris',date:'27 March 2027',close:'Close surprise',
+      play:'Play our little game',gameEyebrow:'A little extra secret',gameTitle:'A little love quest',gameIntro:'Help Floris carry a heart through the garden to Siriya.',gameHint:'Use arrow keys, WASD, the buttons or swipe on the garden.',steps:'Steps',win:'Achievement unlocked: Love at first sight! ♥',back:'← Back to surprise',restart:'Play again',board:'Garden maze: F is Floris and S is Siriya',controls:'Move Floris',dirs:{left:'Move left',up:'Move up',down:'Move down',right:'Move right'}},
+    nl:{eyebrow:'Een geheimpje voor jou',title:'Liefde hangt in de lucht',message:'Je hebt ons kleine geheim ontdekt! Wat fijn dat we deze bijzondere dag met je mogen delen.',names:'Siriya & Floris',date:'27 maart 2027',close:'Sluit de verrassing',
+      play:'Speel ons geheime spelletje',gameEyebrow:'Nog een klein geheimpje',gameTitle:'Een kleine liefdesmissie',gameIntro:'Help Floris het hartje door de tuin naar Siriya te brengen.',gameHint:'Gebruik de pijltjestoetsen, WASD, knoppen of veeg over de tuin.',steps:'Stappen',win:'Ontgrendeld: Liefde op het eerste gezicht! ♥',back:'← Terug naar verrassing',restart:'Opnieuw spelen',board:'Tuinlabyrint: F is Floris en S is Siriya',controls:'Beweeg Floris',dirs:{left:'Naar links',up:'Omhoog',down:'Omlaag',right:'Naar rechts'}},
+    th:{eyebrow:'ความลับเล็ก ๆ สำหรับคุณ',title:'ความรักอบอวลอยู่ในอากาศ',message:'คุณค้นพบความลับเล็ก ๆ ของเราแล้ว! เราดีใจที่ได้แบ่งปันวันพิเศษนี้กับคุณ',names:'สิริยา และ ฟลอริส',date:'27 มีนาคม พ.ศ. 2570',close:'ปิดข้อความพิเศษ',
+      play:'เล่นเกมลับของเรา',gameEyebrow:'ความลับพิเศษอีกอย่าง',gameTitle:'ภารกิจส่งหัวใจ',gameIntro:'ช่วยฟลอริสพาหัวใจผ่านสวนไปหาสิริยา',gameHint:'ใช้ปุ่มลูกศร WASD ปุ่มบนจอ หรือปัดในสวน',steps:'จำนวนก้าว',win:'ปลดล็อกแล้ว: รักแรกพบ! ♥',back:'← กลับไปที่ข้อความ',restart:'เล่นอีกครั้ง',board:'เขาวงกตในสวน: F คือฟลอริส และ S คือสิริยา',controls:'ควบคุมฟลอริส',dirs:{left:'ไปทางซ้าย',up:'ขึ้น',down:'ลง',right:'ไปทางขวา'}}
   };
+  let current=texts.en;
+  let gameOpen=false,won=false,moves=0;
+  const layout=['...#..S','. #...#.','...#...','.#.....','F..#...'].map(r=>r.replace(/ /g,''));
+  const walls=new Set();
+  for(let y=0;y<5;y++)for(let x=0;x<7;x++)if(layout[y][x]==='#')walls.add(x+','+y);
+  const player={x:0,y:4};
+  let playerMarker;
+  const dirVectors={left:[-1,0],up:[0,-1],down:[0,1],right:[1,0]};
+  const byId=id=>document.getElementById(id);
+
+  function initBoard(){
+    const frag=document.createDocumentFragment();
+    for(let y=0;y<5;y++)for(let x=0;x<7;x++){
+      const cell=document.createElement('div');
+      cell.className='sf-love-game-cell';
+      if(walls.has(x+','+y)){
+        cell.classList.add('sf-love-blocked');
+        cell.textContent='✿';
+      }
+      if(layout[y][x]==='S'){
+        const goal=document.createElement('span');
+        goal.className='sf-love-game-goal';
+        goal.setAttribute('aria-hidden','true');
+        goal.textContent='S';
+        cell.appendChild(goal);
+      }
+      frag.appendChild(cell);
+    }
+    playerMarker=document.createElement('div');
+    playerMarker.className='sf-love-game-player';
+    playerMarker.setAttribute('aria-hidden','true');
+    const marker=document.createElement('span');
+    marker.className='sf-love-game-player-marker';
+    marker.textContent='F';
+    const heart=document.createElement('span');
+    heart.className='sf-love-game-player-heart';
+    heart.textContent='♥';
+    playerMarker.append(marker,heart);
+    frag.appendChild(playerMarker);
+    gameBoard.replaceChildren(frag);
+  }
+  initBoard();
+
   function updateLanguage(){
     const language=document.documentElement.lang;
-    const t=texts[language]||texts.en;
-    eyebrow.textContent=t.eyebrow;
-    title.textContent=t.title;
-    message.textContent=t.message;
-    names.textContent=t.names;
-    date.textContent=t.date;
+    current=texts[language]||texts.en;
+    const t=current;
+    byId('sfLoveEyebrow').textContent=t.eyebrow;
+    byId('sfLoveTitle').textContent=t.title;
+    byId('sfLoveMessage').textContent=t.message;
+    byId('sfLoveNames').textContent=t.names;
+    byId('sfLoveDate').textContent=t.date;
     closeButton.setAttribute('aria-label',t.close);
+    byId('sfLovePlayText').textContent=t.play;
+    byId('sfLoveGameEyebrow').textContent=t.gameEyebrow;
+    gameTitle.textContent=t.gameTitle;
+    byId('sfLoveGameIntro').textContent=t.gameIntro;
+    byId('sfLoveGameHint').textContent=t.gameHint;
+    gameWin.textContent=t.win;
+    gameBack.textContent=t.back;
+    gameRestart.textContent=t.restart;
+    gameBoard.setAttribute('aria-label',t.board);
+    gameControls.setAttribute('aria-label',t.controls);
+    gameControls.querySelectorAll('[data-sf-move]').forEach(button=>{
+      button.setAttribute('aria-label',t.dirs[button.dataset.sfMove]);
+    });
+    gameStatus.textContent=won?t.win:`${t.steps}: ${moves}`;
     dialog.lang=language in texts?language:'en';
   }
   new MutationObserver(updateLanguage).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+  updateLanguage();
+
+  function resetGame(){
+    moves=0;won=false;player.x=0;player.y=4;
+    playerMarker.style.transform='translate(0%,400%)';
+    gameBoard.classList.remove('sf-love-game-won');
+    gameWin.hidden=true;
+    gameControls.querySelectorAll('button').forEach(button=>button.disabled=false);
+    gameStatus.textContent=`${current.steps}: 0`;
+  }
+  function startGame(){
+    if(overlay.hidden)return;
+    resetGame();
+    gameOpen=true;letter.hidden=true;game.hidden=false;
+    dialog.setAttribute('aria-labelledby','sfLoveGameTitle');
+    dialog.setAttribute('aria-describedby','sfLoveGameIntro');
+    gameTitle.focus({preventScroll:true});
+  }
+  function backToLetter(focus=true){
+    gameOpen=false;game.hidden=true;letter.hidden=false;
+    dialog.setAttribute('aria-labelledby','sfLoveTitle');
+    dialog.setAttribute('aria-describedby','sfLoveMessage');
+    if(focus)playButton.focus({preventScroll:true});
+  }
+  function move(direction){
+    if(!gameOpen||won)return;
+    const vector=dirVectors[direction];
+    if(!vector)return;
+    const x=player.x+vector[0],y=player.y+vector[1];
+    if(x<0||x>=7||y<0||y>=5||walls.has(x+','+y))return;
+    player.x=x;player.y=y;moves++;
+    playerMarker.style.transform=`translate(${x*100}%,${y*100}%)`;
+    if(x===6&&y===0){
+      won=true;
+      gameBoard.classList.add('sf-love-game-won');
+      gameWin.hidden=false;
+      gameStatus.textContent=current.win;
+      gameControls.querySelectorAll('button').forEach(button=>button.disabled=true);
+    }else{
+      gameStatus.textContent=`${current.steps}: ${moves}`;
+    }
+  }
+  playButton.addEventListener('click',startGame);
+  gameBack.addEventListener('click',()=>backToLetter());
+  gameRestart.addEventListener('click',()=>{resetGame();gameTitle.focus({preventScroll:true});});
+  gameControls.querySelectorAll('[data-sf-move]').forEach(button=>{
+    button.addEventListener('click',()=>move(button.dataset.sfMove));
+  });
+  let swipeStart=null;
+  gameBoard.addEventListener('pointerdown',event=>{
+    if(!gameOpen||event.pointerType==='mouse')return;
+    swipeStart={x:event.clientX,y:event.clientY,id:event.pointerId};
+  });
+  gameBoard.addEventListener('pointerup',event=>{
+    if(!swipeStart||swipeStart.id!==event.pointerId)return;
+    const dx=event.clientX-swipeStart.x,dy=event.clientY-swipeStart.y;
+    swipeStart=null;
+    if(Math.max(Math.abs(dx),Math.abs(dy))<20)return;
+    move(Math.abs(dx)>Math.abs(dy)?dx<0?'left':'right':dy<0?'up':'down');
+  });
+  gameBoard.addEventListener('pointercancel',()=>{swipeStart=null;});
 
   const mediaReduce=window.matchMedia('(prefers-reduced-motion: reduce)');
   const initialPositions=[
@@ -2914,17 +3210,16 @@ rsvpForm.addEventListener('submit',async (evt)=>{
     }
     particles.appendChild(frag);
   }
-  let previousFocus=null;
-  let closeTimer=null;
+  let previousFocus=null,closeTimer=null;
   function openSecret(){
     if(!overlay.hidden||document.getElementById('weddingIntro')||
        !document.getElementById('rsvpModal')?.hidden)return;
     clearTimeout(closeTimer);
     previousFocus=document.activeElement;
+    backToLetter(false);
     updateLanguage();
     createParticles();
     overlay.hidden=false;
-    // Two frames guarantee the first paint is the transition's starting state.
     requestAnimationFrame(()=>requestAnimationFrame(()=>{
       if(!overlay.hidden)overlay.classList.add('sf-love-visible');
     }));
@@ -2940,27 +3235,43 @@ rsvpForm.addEventListener('submit',async (evt)=>{
     closeTimer=window.setTimeout(()=>{
       if(overlay.classList.contains('sf-love-visible'))return;
       overlay.hidden=true;
+      backToLetter(false);
       particles.replaceChildren();
     },mediaReduce.matches?0:340);
   }
   closeButton.addEventListener('click',closeSecret);
-  overlay.addEventListener('click',e=>{if(e.target===overlay||e.target.classList.contains('sf-love-scrim'))closeSecret();});
+  overlay.addEventListener('click',event=>{
+    if(event.target===overlay||event.target.classList.contains('sf-love-scrim'))closeSecret();
+  });
 
-  // Keyboard: ↑ ↑ ↓ ↓ ← → ← → B A. Ignore text inputs and browser shortcuts.
+  // Existing Konami code; game keys are processed only while its panel is visible.
   const code=['arrowup','arrowup','arrowdown','arrowdown','arrowleft','arrowright','arrowleft','arrowright','b','a'];
+  const gameKeys={arrowleft:'left',arrowup:'up',arrowdown:'down',arrowright:'right',a:'left',w:'up',s:'down',d:'right'};
   let progress=0,lastKey=0;
   document.addEventListener('keydown',event=>{
     if(!overlay.hidden){
-      if(event.key==='Escape'){event.preventDefault();closeSecret();return;}
+      if(event.key==='Escape'){
+        event.preventDefault();
+        if(gameOpen)backToLetter();else closeSecret();
+        return;
+      }
       if(event.key==='Tab'){
-        // The hidden surprise behaves like a proper modal, without modifying the main page.
-        event.preventDefault();closeButton.focus({preventScroll:true});
+        const focusables=[...dialog.querySelectorAll('button:not(:disabled)')].filter(button=>button.getClientRects().length&&button.closest('[hidden]')===null);
+        if(!focusables.length)return;
+        const first=focusables[0],last=focusables[focusables.length-1];
+        if(event.shiftKey&&(document.activeElement===first||!dialog.contains(document.activeElement))){event.preventDefault();last.focus();}
+        else if(!event.shiftKey&&(document.activeElement===last||!dialog.contains(document.activeElement))){event.preventDefault();first.focus();}
+        return;
+      }
+      if(gameOpen&&!event.repeat&&!event.ctrlKey&&!event.altKey&&!event.metaKey){
+        const direction=gameKeys[event.key.toLowerCase()];
+        if(direction){event.preventDefault();move(direction);}
       }
       return;
     }
     if(document.getElementById('weddingIntro')||!document.getElementById('rsvpModal')?.hidden)return;
     if(event.repeat||event.isComposing||event.ctrlKey||event.altKey||event.metaKey||
-       (event.target instanceof Element && event.target.closest('input,textarea,select,[contenteditable="true"]')))return;
+       (event.target instanceof Element&&event.target.closest('input,textarea,select,[contenteditable="true"]')))return;
     const key=event.key.toLowerCase();
     const now=performance.now();
     if(now-lastKey>3500)progress=0;
@@ -2969,7 +3280,7 @@ rsvpForm.addEventListener('submit',async (evt)=>{
     else progress=key===code[0]?1:0;
     if(progress===code.length){progress=0;openSecret();}
   });
-  // Mobile alternative: tap the couple's big names five times in succession.
+  // Mobile discovery mechanism is unchanged: five taps on the big names.
   const namesTrigger=document.querySelector('#p1 .hero-meta h1.couple-title');
   let taps=0,lastTap=0;
   if(namesTrigger){
@@ -2986,6 +3297,7 @@ rsvpForm.addEventListener('submit',async (evt)=>{
   }
 })();
 </script>
+
 
 </body>
 </html>
