@@ -3069,7 +3069,7 @@ rsvpForm.addEventListener('submit',async (evt)=>{
   portrait.onload=()=>{portraitReady=true;render();};
   portrait.src='images/tekening.png';
   const crop={floris:[28,8,210,218],siriya:[205,68,206,219],dog:[96,226,286,260]};
-  const portraitFit={floris:{zoom:1.14,dx:-2,dy:1},siriya:{zoom:1.10,dx:2,dy:1},dog:{zoom:1.02,dx:0,dy:4}};
+  const portraitFit={floris:{zoom:1.08,dx:-1,dy:0},siriya:{zoom:1.04,dx:1,dy:0},dog:{zoom:1.0,dx:0,dy:3}};
   const gapLevels=[.48,.51,.46,.52,.48];
   const lowPower=(navigator.deviceMemory&&navigator.deviceMemory<=2)||(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=2);
   const petalsCount=lowPower?9:17;
@@ -3304,6 +3304,39 @@ rsvpForm.addEventListener('submit',async (evt)=>{
     context.bezierCurveTo(-43,-43,-43,-7,-13,16);context.closePath();context.fill();context.stroke();
     context.restore();
   }
+  function sparkle(x,y,size=4,color='rgba(255,250,232,.9)'){
+    context.save();context.translate(x,y);context.strokeStyle=color;context.lineWidth=1.2;
+    context.beginPath();context.moveTo(-size,0);context.lineTo(size,0);context.moveTo(0,-size);context.lineTo(0,size);context.stroke();
+    context.restore();
+  }
+  function drawAltar(x,y,scale=1,showBride=false){
+    context.save();context.translate(x,y);
+    const s=scale;
+    ellipse(0,58*s,58*s,11*s,'rgba(113,142,112,.18)');
+    roundBox(-50*s,37*s,100*s,16*s,6*s,'#efe4d5');
+    context.save();context.strokeStyle='rgba(188,160,119,.55)';context.lineWidth=1.2;
+    context.strokeRect(-47*s,39*s,94*s,12*s);context.restore();
+    roundBox(-40*s,-6*s,12*s,49*s,6*s,'#f8f1e7');
+    roundBox(28*s,-6*s,12*s,49*s,6*s,'#f8f1e7');
+    roundBox(-47*s,-18*s,94*s,13*s,7*s,'#fbf4eb');
+    context.save();context.strokeStyle='rgba(195,160,106,.65)';context.lineWidth=1.15;
+    context.beginPath();context.moveTo(-35*s,-7*s);context.quadraticCurveTo(0,-56*s,35*s,-7*s);context.stroke();context.restore();
+    for(const side of [-1,1]){
+      const px=side*31*s;
+      leaf(px,-11*s,side<0?2.8:.4,11*s,'#97b1a5');
+      leaf(px+side*10*s,-19*s,side<0?2.65:.5,10*s,'#afc5b5');
+      flower(px+side*4*s,-14*s,7*s,side<0?'#f4dccd':'#fff2e8');
+      flower(px+side*14*s,-10*s,5.5*s,side<0?'#fff3e7':'#eac8c2');
+    }
+    flower(0,-25*s,6.5*s,'#fff3e8');
+    sparkle(-16*s,-30*s,3.6*s,'rgba(255,248,235,.72)');
+    sparkle(16*s,-26*s,2.9*s,'rgba(255,248,235,.58)');
+    if(showBride){
+      paintPortrait(0,13*s,31*s,'siriya');
+      heart(36*s,-4*s,12*s,'#cca07b');
+    }
+    context.restore();
+  }
   function drawDog(){
     const bob=(phase==='playing'&&!mediaReduce.matches)?Math.sin(elapsed*6)*1.8:0;
     const x=45,y=worldHeight-39+bob;
@@ -3336,11 +3369,16 @@ rsvpForm.addEventListener('submit',async (evt)=>{
   }
   function drawGoal(){
     const arrived=phase==='delivery'||phase==='won';
-    const x=arrived?WORLD_WIDTH-106:WORLD_WIDTH-43,y=worldHeight*.46;
-    if(arrived)ellipse(x,worldHeight-35,53,13,'rgba(105,139,106,.2)');
-    paintPortrait(x,y,arrived?43:26,'siriya');
-    if(phase==='won'){
-      heart(x-54,y-24,20,'#b56769');heart(x+49,y-37,14,'#cca07b');
+    const x=arrived?WORLD_WIDTH-100:WORLD_WIDTH-54,y=worldHeight*.47;
+    if(arrived){
+      drawAltar(x,y+18,1.04,true);
+      if(phase==='won'){
+        heart(x-60,y-18,20,'#b56769');heart(x+54,y-31,14,'#cca07b');
+        sparkle(x-20,y-42,4.2,'rgba(255,248,235,.8)');
+        sparkle(x+24,y-46,3.5,'rgba(255,248,235,.7)');
+      }
+    }else{
+      context.save();context.globalAlpha=.82;drawAltar(x,y+18,.72,false);context.restore();
     }
   }
   function drawForeground(){
