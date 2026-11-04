@@ -1855,8 +1855,8 @@ html[lang="th"] .sf-love-date{font-family:'Noto Serif Thai',Tahoma,serif;letter-
 }
 
 
-/* Secret Love mini-game: self-contained, GPU-light; never changes the page layout. */
-.sf-love-letter[hidden],.sf-love-game[hidden],.sf-love-win[hidden]{display:none!important}
+/* Love Flight — isolated responsive canvas game. The invitation itself is unchanged. */
+.sf-love-letter[hidden],.sf-love-game[hidden],.sf-love-win[hidden],.sf-flight-screen[hidden]{display:none!important}
 .sf-love-play{
   display:inline-flex;align-items:center;justify-content:center;gap:10px;
   min-height:43px;margin:23px auto 0;padding:11px 20px;
@@ -1870,132 +1870,119 @@ html[lang="th"] .sf-love-date{font-family:'Noto Serif Thai',Tahoma,serif;letter-
 .sf-love-play .sf-love-play-heart{font-size:1.06rem;color:#ad7a64}
 .sf-love-play .sf-love-play-arrow{font-size:1.22rem;color:#ab8756;line-height:0}
 .sf-love-play:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(119,78,37,.16)}
-.sf-love-play:focus-visible,.sf-love-game-controls button:focus-visible,
-.sf-love-game-actions button:focus-visible{outline:2px solid #a78153;outline-offset:3px}
+.sf-love-play:focus-visible,.sf-love-game-actions button:focus-visible,
+.sf-flight-screen button:focus-visible{outline:2px solid #a78153;outline-offset:3px}
+.sf-love-card.sf-love-game-mode{
+  width:min(100%,565px);
+  padding:clamp(24px,3vw,34px) clamp(13px,4vw,32px) clamp(19px,3vw,27px);
+}
 .sf-love-game{position:relative;text-align:center}
 .sf-love-game-eyebrow{
-  margin:3px 0 6px;color:#aa8b5e;font:400 .66rem/1.5 Georgia,serif;
+  margin:2px 0 3px;color:#aa8b5e;font:400 .66rem/1.5 Georgia,serif;
   letter-spacing:.19em;text-transform:uppercase;
 }
 .sf-love-game-title{
-  margin:0 0 4px;color:#783d46;
-  font:400 clamp(2.05rem,7vw,2.65rem)/1.12 'Cormorant Garamond',Georgia,serif;
+  margin:0 0 3px;color:#783d46;
+  font:400 clamp(2.05rem,6.8vw,2.6rem)/1.12 'Cormorant Garamond',Georgia,serif;
 }
 .sf-love-game-title:focus{outline:none}
 .sf-love-game-intro{
-  max-width:330px;margin:0 auto 13px;color:#6c5961;
-  font:400 clamp(.97rem,2.8vw,1.08rem)/1.38 'Cormorant Garamond',Georgia,serif;
+  max-width:420px;margin:0 auto 12px;color:#6c5961;
+  font:400 clamp(.98rem,2.7vw,1.10rem)/1.38 'Cormorant Garamond',Georgia,serif;
 }
 .sf-love-game-board{
-  position:relative;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));
-  grid-template-rows:repeat(5,minmax(0,1fr));
-  width:min(100%,306px);aspect-ratio:7/5;overflow:hidden;margin:0 auto;
-  background:#fcf8ee;border:1px solid rgba(190,153,100,.56);border-radius:6px;
-  box-shadow:0 5px 19px rgba(89,65,37,.09),inset 0 0 0 4px rgba(255,255,255,.24);
-  touch-action:none;user-select:none;-webkit-user-select:none;
+  position:relative;width:100%;max-width:510px;aspect-ratio:1.69;
+  overflow:hidden;margin:0 auto;border:1px solid rgba(174,143,100,.69);
+  border-radius:10px;background:#e8f0f0;
+  box-shadow:0 6px 18px rgba(78,63,57,.14),inset 0 0 0 3px rgba(255,255,255,.28);
+  isolation:isolate;user-select:none;-webkit-user-select:none;touch-action:none;
 }
-.sf-love-game-cell{
-  display:grid;place-items:center;min-width:0;min-height:0;
-  border-right:1px solid rgba(204,175,129,.13);
-  border-bottom:1px solid rgba(204,175,129,.13);
-  background:rgba(255,255,255,.08);
+.sf-love-flight-canvas{display:block;width:100%;height:100%;touch-action:none}
+.sf-flight-hud{
+  position:absolute;inset:9px 10px auto;display:flex;align-items:center;
+  justify-content:space-between;gap:8px;pointer-events:none;z-index:2;
+  color:#607780;text-shadow:0 1px 2px rgba(255,255,255,.95);
+  font:600 .65rem/1.3 Georgia,serif;letter-spacing:.055em;
 }
-.sf-love-game-cell:nth-child(2n){background:rgba(239,223,199,.17)}
-.sf-love-game-cell.sf-love-blocked{
-  color:#968665;
-  background:linear-gradient(145deg,rgba(191,206,172,.46),rgba(216,221,187,.64));
-  box-shadow:inset 0 0 0 1px rgba(161,164,120,.12);
-  font:400 clamp(17px,4vw,22px)/1 Georgia,serif;
+.sf-flight-counter{white-space:nowrap;background:rgba(255,253,245,.8);border:1px solid rgba(185,160,122,.4);border-radius:30px;padding:4px 8px}
+.sf-flight-screen{
+  position:absolute;inset:0;z-index:3;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:15px 21px;
+  background:linear-gradient(180deg,rgba(244,249,247,.63),rgba(252,245,232,.91));
+  backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);
+  color:#654f54;text-align:center;
 }
-.sf-love-game-goal{
-  display:grid;place-items:center;width:70%;height:70%;border-radius:50%;
-  color:#895c64;background:#f1e0dc;border:1px solid #bd9392;
-  font:500 clamp(15px,4vw,20px)/1 'Cormorant Garamond',Georgia,serif;
-  box-shadow:0 2px 6px rgba(133,81,81,.11);
+.sf-flight-screen-label{font:500 .68rem/1.4 Georgia,serif;letter-spacing:.16em;color:#99754d;text-transform:uppercase;margin:0 0 8px}
+.sf-flight-screen-title{
+  font:400 clamp(1.6rem,5vw,2.4rem)/1.1 'Cormorant Garamond',Georgia,serif;
+  color:#77434a;margin:0 0 13px;
 }
-.sf-love-game-player{
-  position:absolute;top:0;left:0;z-index:2;width:calc(100% / 7);height:calc(100% / 5);
-  display:grid;place-items:center;pointer-events:none;
-  transform:translate(0%,400%);transition:transform .18s cubic-bezier(.2,.7,.3,1);
-  will-change:transform;
+.sf-flight-screen button{
+  min-height:40px;border-radius:25px;border:1px solid rgba(168,125,76,.75);
+  background:linear-gradient(#fffdf7,#f8eddd);color:#755347;
+  padding:8px 23px;box-shadow:0 3px 10px rgba(80,60,50,.12);
+  cursor:pointer;font:500 .78rem/1.4 Georgia,serif;
+  -webkit-tap-highlight-color:transparent;touch-action:manipulation;
 }
-.sf-love-game-player-marker{
-  display:grid;place-items:center;width:69%;height:69%;border-radius:50%;
-  background:linear-gradient(135deg,#bda16e,#947247);border:1px solid #fff5dc;
-  box-shadow:0 2px 6px rgba(102,74,40,.24);
-  color:#fff9ee;font:500 clamp(15px,4vw,20px)/1 'Cormorant Garamond',Georgia,serif;
+.sf-flight-screen button:hover{background:#fff9ec}
+.sf-flight-screen.sf-flight-finished{
+  justify-content:flex-end;padding-bottom:15px;
+  background:linear-gradient(180deg,rgba(250,248,241,0) 5%,rgba(250,248,241,.06) 40%,rgba(250,246,238,.91) 74%,rgba(250,246,238,.98));
+  backdrop-filter:none;-webkit-backdrop-filter:none;
 }
-.sf-love-game-player-heart{
-  position:absolute;top:-3px;right:0;color:#a94350;
-  font:400 16px/1 Georgia,serif;text-shadow:0 1px 1px #fff9ea;
-}
-.sf-love-game-board.sf-love-game-won .sf-love-game-goal{
-  background:#f3e0b6;color:#8a5261;border-color:#bf9b66;
-  box-shadow:0 0 0 4px rgba(222,178,104,.15);
-}
-.sf-love-game-hint{
-  margin:10px auto 8px;max-width:300px;color:#8c796d;
-  font:400 .72rem/1.5 Georgia,serif;
-}
-.sf-love-game-status{
-  min-height:1.35em;margin:0 0 9px;color:#86654b;
-  font:400 .78rem/1.3 Georgia,serif;
-}
-.sf-love-win{
-  margin:0 0 9px;color:#984c55;
-  font:500 1rem/1.4 'Cormorant Garamond',Georgia,serif;
-}
-.sf-love-game-controls{display:flex;align-items:center;justify-content:center;gap:9px;margin:0 auto 15px}
-.sf-love-game-controls button{
-  display:grid;place-items:center;min-width:48px;width:48px;height:43px;padding:0;
-  border:1px solid rgba(189,153,102,.56);border-radius:7px;
-  background:linear-gradient(180deg,#fffcf8,#f1e6d6);color:#8b7054;
-  font:400 22px/1 Georgia,serif;cursor:pointer;
-  touch-action:manipulation;-webkit-tap-highlight-color:transparent;
-  box-shadow:0 2px 5px rgba(90,64,43,.08);
-}
-.sf-love-game-controls button:active{transform:translateY(1px);background:#ead8bd}
-.sf-love-game-controls button:disabled{opacity:.46;cursor:default}
-.sf-love-game-actions{display:flex;justify-content:center;align-items:center;gap:13px;flex-wrap:wrap}
+.sf-flight-screen.sf-flight-finished .sf-flight-screen-label{margin-bottom:3px}
+.sf-flight-screen.sf-flight-finished .sf-flight-screen-title{margin-bottom:6px}
+.sf-flight-screen.sf-flight-finished button{min-height:33px;padding:5px 17px}
+.sf-love-game-hint{margin:9px auto 4px;max-width:450px;color:#8a7769;font:400 .75rem/1.45 Georgia,serif}
+.sf-love-game-status{min-height:1.2em;margin:0 0 7px;color:#86654b;font:400 .74rem/1.4 Georgia,serif}
+.sf-love-win{margin:2px 0 8px;color:#984c55;font:500 1rem/1.35 'Cormorant Garamond',Georgia,serif}
+.sf-love-game-actions{display:flex;justify-content:center;align-items:center;gap:16px;flex-wrap:wrap}
 .sf-love-game-actions button{
   border:0;border-bottom:1px solid rgba(170,130,81,.35);border-radius:0;
   padding:5px 1px;background:transparent;color:#907351;
-  font:400 .74rem/1.3 Georgia,serif;cursor:pointer;
+  font:400 .75rem/1.3 Georgia,serif;cursor:pointer;
   touch-action:manipulation;-webkit-tap-highlight-color:transparent;
 }
 .sf-love-game-actions button:hover{color:#654a43;border-color:#a57f53}
-html[lang="th"] .sf-love-play,
-html[lang="th"] .sf-love-game-eyebrow,
-html[lang="th"] .sf-love-game-title,
-html[lang="th"] .sf-love-game-intro,
-html[lang="th"] .sf-love-game-hint,
-html[lang="th"] .sf-love-game-status,
-html[lang="th"] .sf-love-win,
-html[lang="th"] .sf-love-game-actions button{
+html[lang="th"] .sf-love-play,html[lang="th"] .sf-love-game-eyebrow,
+html[lang="th"] .sf-love-game-title,html[lang="th"] .sf-love-game-intro,
+html[lang="th"] .sf-love-game-hint,html[lang="th"] .sf-love-game-status,
+html[lang="th"] .sf-love-win,html[lang="th"] .sf-love-game-actions button,
+html[lang="th"] .sf-flight-hud,html[lang="th"] .sf-flight-screen-label,
+html[lang="th"] .sf-flight-screen-title,html[lang="th"] .sf-flight-screen button{
   font-family:'Noto Serif Thai',Tahoma,sans-serif;letter-spacing:0;
 }
-html[lang="th"] .sf-love-game-title{font-size:clamp(1.35rem,4.8vw,1.75rem);line-height:1.5}
-html[lang="th"] .sf-love-game-intro{font-size:.87rem;line-height:1.6}
-html[lang="th"] .sf-love-game-eyebrow{font-size:.77rem}
-html[lang="th"] .sf-love-win{font-size:.88rem}
+html[lang="th"] .sf-love-game-title{font-size:clamp(1.45rem,5vw,1.92rem);line-height:1.35}
+html[lang="th"] .sf-love-game-intro{font-size:.86rem;line-height:1.55}
+html[lang="th"] .sf-flight-screen-title{font-size:clamp(1.2rem,5vw,1.7rem);line-height:1.4}
+html[lang="th"] .sf-love-game-hint{font-size:.69rem}
+@media(max-width:600px){
+  .sf-love-card.sf-love-game-mode{padding:23px 12px 19px}
+  .sf-love-game-board{aspect-ratio:1.27}
+  .sf-love-game-intro{margin-bottom:9px}
+  .sf-love-game-hint{margin-top:7px}
+  .sf-love-game-eyebrow{font-size:.61rem}
+  .sf-flight-hud{font-size:.59rem;inset:8px 8px auto}
+}
 @media(max-width:360px){
   .sf-love-play{margin-top:16px;padding:10px 13px;font-size:.74rem}
-  .sf-love-game-board{width:min(100%,262px)}
-  .sf-love-game-controls button{width:45px;min-width:45px;height:41px}
-  .sf-love-game-intro{margin-bottom:10px}
-  .sf-love-game-controls{margin-bottom:10px}
+  .sf-love-game-title{font-size:1.93rem}
+  .sf-love-game-intro{font-size:.93rem}
+  .sf-flight-screen-title{font-size:1.6rem}
 }
-@media(max-height:610px){
-  .sf-love-game-eyebrow{margin:0 0 4px}
-  .sf-love-game-intro{margin-bottom:8px}
-  .sf-love-game-board{width:min(100%,255px)}
-  .sf-love-game-hint{margin:7px auto 5px}
-  .sf-love-game-status{margin-bottom:6px}
-  .sf-love-game-controls{margin-bottom:9px}
+@media(max-height:600px){
+  .sf-love-card.sf-love-game-mode{padding-top:17px;padding-bottom:15px}
+  .sf-love-game-eyebrow{margin:0 0 2px}
+  .sf-love-game-intro{margin-bottom:5px}
+  .sf-love-game-hint{margin:5px auto 3px}
+  .sf-love-game-status{margin-bottom:3px}
+  .sf-love-game-board{max-height:43dvh}
 }
-@media(prefers-reduced-motion:reduce){
-  .sf-love-game-player,.sf-love-play{transition:none!important}
+@media(max-height:600px) and (min-width:601px){
+  .sf-love-game-board{max-width:min(100%,78dvh);aspect-ratio:1.69}
 }
+@media(prefers-reduced-motion:reduce){.sf-love-play{transition:none!important}}
 
 </style>
 </head>
@@ -3003,18 +2990,20 @@ rsvpForm.addEventListener('submit',async (evt)=>{
     </div>
     <div id="sfLoveGame" class="sf-love-game" hidden>
       <p class="sf-love-game-eyebrow" id="sfLoveGameEyebrow">A little extra secret</p>
-      <h2 class="sf-love-game-title" id="sfLoveGameTitle" tabindex="-1">A little love quest</h2>
-      <p class="sf-love-game-intro" id="sfLoveGameIntro">Help Floris carry a heart through the garden to Siriya.</p>
-      <div id="sfLoveGameBoard" class="sf-love-game-board" role="img" aria-label="Garden maze: F is Floris, S is Siriya"></div>
-      <p class="sf-love-game-hint" id="sfLoveGameHint">Use arrow keys, WASD, the buttons or swipe on the garden.</p>
-      <p class="sf-love-game-status" id="sfLoveGameStatus" role="status" aria-live="polite">Steps: 0</p>
-      <p class="sf-love-win" id="sfLoveWin" hidden>Achievement unlocked: Love at first sight! ♥</p>
-      <div class="sf-love-game-controls" id="sfLoveGameControls" role="group" aria-label="Move Floris">
-        <button type="button" data-sf-move="left" aria-label="Move left">←</button>
-        <button type="button" data-sf-move="up" aria-label="Move up">↑</button>
-        <button type="button" data-sf-move="down" aria-label="Move down">↓</button>
-        <button type="button" data-sf-move="right" aria-label="Move right">→</button>
+      <h2 class="sf-love-game-title" id="sfLoveGameTitle" tabindex="-1">Love Flight</h2>
+      <p class="sf-love-game-intro" id="sfLoveGameIntro">Help Floris fly through the flower arches and bring his heart to Siriya. Our dog is cheering!</p>
+      <div id="sfLoveGameBoard" class="sf-love-game-board" aria-label="Love Flight game" role="group">
+        <canvas id="sfLoveFlightCanvas" class="sf-love-flight-canvas" width="600" height="370" tabindex="0" aria-label="Tap or press Space to flap and dodge the flowers"></canvas>
+        <div class="sf-flight-hud" aria-hidden="true"><span id="sfLoveFlightRoute">FLORIS ♡ SIRIYA</span><span class="sf-flight-counter" id="sfLoveFlightCounter">0 / 5</span></div>
+        <div class="sf-flight-screen" id="sfLoveFlightScreen">
+          <p class="sf-flight-screen-label" id="sfLoveFlightLabel">A LITTLE LOVE ADVENTURE</p>
+          <p class="sf-flight-screen-title" id="sfLoveFlightHeadline">Ready to deliver the heart?</p>
+          <button id="sfLoveFlightLaunch" type="button">Start flying ♡</button>
+        </div>
       </div>
+      <p class="sf-love-game-hint" id="sfLoveGameHint">Tap the game, or press Space, ↑ or W to flap.</p>
+      <p class="sf-love-game-status" id="sfLoveGameStatus" role="status" aria-live="polite">Flowers passed: 0 / 5</p>
+      <p class="sf-love-win" id="sfLoveWin" hidden>Achievement unlocked: Love at first sight! ♥</p>
       <div class="sf-love-game-actions">
         <button id="sfLoveGameBack" type="button">← Back to surprise</button>
         <button id="sfLoveGameRestart" type="button">Play again</button>
@@ -3023,79 +3012,368 @@ rsvpForm.addEventListener('submit',async (evt)=>{
   </section>
 </div>
 <script>
-/* Secret Love Mode + optional mini-game. One isolated closure; no external assets or sound. */
+/* Secret Love Mode + Love Flight. Isolated overlay; no audio, no RSVP or language-system hooks. */
 (()=>{
   'use strict';
-  const overlay=document.getElementById('sfLoveOverlay');
-  const dialog=overlay?.querySelector('.sf-love-card');
-  const closeButton=document.getElementById('sfLoveClose');
-  const particles=overlay?.querySelector('.sf-love-particles');
-  const letter=document.getElementById('sfLoveLetter');
-  const game=document.getElementById('sfLoveGame');
-  const playButton=document.getElementById('sfLovePlay');
-  const gameBack=document.getElementById('sfLoveGameBack');
-  const gameRestart=document.getElementById('sfLoveGameRestart');
-  const gameTitle=document.getElementById('sfLoveGameTitle');
-  const gameBoard=document.getElementById('sfLoveGameBoard');
-  const gameStatus=document.getElementById('sfLoveGameStatus');
-  const gameWin=document.getElementById('sfLoveWin');
-  const gameControls=document.getElementById('sfLoveGameControls');
-  if(!overlay||!dialog||!closeButton||!particles||!letter||!game||!playButton||!gameBoard)return;
-
-  const texts={
-    en:{eyebrow:'A secret just for you',title:'Love is in the air',message:'You found our little secret! We are so happy to share our special day with you.',names:'Siriya & Floris',date:'27 March 2027',close:'Close surprise',
-      play:'Play our little game',gameEyebrow:'A little extra secret',gameTitle:'A little love quest',gameIntro:'Help Floris carry a heart through the garden to Siriya.',gameHint:'Use arrow keys, WASD, the buttons or swipe on the garden.',steps:'Steps',win:'Achievement unlocked: Love at first sight! ♥',back:'← Back to surprise',restart:'Play again',board:'Garden maze: F is Floris and S is Siriya',controls:'Move Floris',dirs:{left:'Move left',up:'Move up',down:'Move down',right:'Move right'}},
-    nl:{eyebrow:'Een geheimpje voor jou',title:'Liefde hangt in de lucht',message:'Je hebt ons kleine geheim ontdekt! Wat fijn dat we deze bijzondere dag met je mogen delen.',names:'Siriya & Floris',date:'27 maart 2027',close:'Sluit de verrassing',
-      play:'Speel ons geheime spelletje',gameEyebrow:'Nog een klein geheimpje',gameTitle:'Een kleine liefdesmissie',gameIntro:'Help Floris het hartje door de tuin naar Siriya te brengen.',gameHint:'Gebruik de pijltjestoetsen, WASD, knoppen of veeg over de tuin.',steps:'Stappen',win:'Ontgrendeld: Liefde op het eerste gezicht! ♥',back:'← Terug naar verrassing',restart:'Opnieuw spelen',board:'Tuinlabyrint: F is Floris en S is Siriya',controls:'Beweeg Floris',dirs:{left:'Naar links',up:'Omhoog',down:'Omlaag',right:'Naar rechts'}},
-    th:{eyebrow:'ความลับเล็ก ๆ สำหรับคุณ',title:'ความรักอบอวลอยู่ในอากาศ',message:'คุณค้นพบความลับเล็ก ๆ ของเราแล้ว! เราดีใจที่ได้แบ่งปันวันพิเศษนี้กับคุณ',names:'สิริยา และ ฟลอริส',date:'27 มีนาคม พ.ศ. 2570',close:'ปิดข้อความพิเศษ',
-      play:'เล่นเกมลับของเรา',gameEyebrow:'ความลับพิเศษอีกอย่าง',gameTitle:'ภารกิจส่งหัวใจ',gameIntro:'ช่วยฟลอริสพาหัวใจผ่านสวนไปหาสิริยา',gameHint:'ใช้ปุ่มลูกศร WASD ปุ่มบนจอ หรือปัดในสวน',steps:'จำนวนก้าว',win:'ปลดล็อกแล้ว: รักแรกพบ! ♥',back:'← กลับไปที่ข้อความ',restart:'เล่นอีกครั้ง',board:'เขาวงกตในสวน: F คือฟลอริส และ S คือสิริยา',controls:'ควบคุมฟลอริส',dirs:{left:'ไปทางซ้าย',up:'ขึ้น',down:'ลง',right:'ไปทางขวา'}}
-  };
-  let current=texts.en;
-  let gameOpen=false,won=false,moves=0;
-  const layout=['...#..S','. #...#.','...#...','.#.....','F..#...'].map(r=>r.replace(/ /g,''));
-  const walls=new Set();
-  for(let y=0;y<5;y++)for(let x=0;x<7;x++)if(layout[y][x]==='#')walls.add(x+','+y);
-  const player={x:0,y:4};
-  let playerMarker;
-  const dirVectors={left:[-1,0],up:[0,-1],down:[0,1],right:[1,0]};
   const byId=id=>document.getElementById(id);
+  const overlay=byId('sfLoveOverlay');
+  const dialog=overlay?.querySelector('.sf-love-card');
+  const closeButton=byId('sfLoveClose');
+  const particles=overlay?.querySelector('.sf-love-particles');
+  const letter=byId('sfLoveLetter');
+  const game=byId('sfLoveGame');
+  const playButton=byId('sfLovePlay');
+  const backButton=byId('sfLoveGameBack');
+  const restartButton=byId('sfLoveGameRestart');
+  const title=byId('sfLoveGameTitle');
+  const board=byId('sfLoveGameBoard');
+  const canvas=byId('sfLoveFlightCanvas');
+  const status=byId('sfLoveGameStatus');
+  const winText=byId('sfLoveWin');
+  const flightScreen=byId('sfLoveFlightScreen');
+  const flightLabel=byId('sfLoveFlightLabel');
+  const flightHeadline=byId('sfLoveFlightHeadline');
+  const flightLaunch=byId('sfLoveFlightLaunch');
+  const flightCounter=byId('sfLoveFlightCounter');
+  const flightRoute=byId('sfLoveFlightRoute');
+  if(!overlay||!dialog||!canvas||!playButton||!closeButton||!board)return;
+  const context=canvas.getContext('2d',{alpha:false,desynchronized:true});
+  const mediaReduce=window.matchMedia('(prefers-reduced-motion: reduce)');
+  const N=5, WORLD_WIDTH=600, PLAYER_X=138;
+  const translations={
+    en:{eyebrow:'A secret just for you',title:'Love is in the air',message:'You found our little secret! We are so happy to share our special day with you.',names:'Siriya & Floris',date:'27 March 2027',close:'Close surprise',
+      play:'Play our little game',gameEyebrow:'A little extra secret',gameTitle:'Love Flight',gameIntro:'Help Floris fly through the flower arches and bring his heart to Siriya. Our dog is cheering!',
+      gameHint:'Tap the game, or press Space, ↑ or W to flap.',win:'Achievement unlocked: Love at first sight! ♥',back:'← Back to surprise',restart:'Play again',
+      board:'Love Flight. Tap or press Space to fly past the flowers and deliver a heart to Siriya.',route:'FLORIS ♡ SIRIYA',progress:'Flowers passed',
+      readyLabel:'A LITTLE LOVE ADVENTURE',ready:'Ready to deliver the heart?',start:'Start flying ♡',failLabel:'ONE MORE TRY',fail:'Our dog believes in you!',retry:'Try again ♡',pauseLabel:'TAKE YOUR TIME',pause:'Ready to keep flying?',resume:'Continue ♡',endLabel:'LOVE DELIVERED',end:'You made it to Siriya!',again:'Fly again ♡'},
+    nl:{eyebrow:'Een geheimpje voor jou',title:'Liefde hangt in de lucht',message:'Je hebt ons kleine geheim ontdekt! Wat fijn dat we deze bijzondere dag met je mogen delen.',names:'Siriya & Floris',date:'27 maart 2027',close:'Sluit de verrassing',
+      play:'Speel ons geheime spelletje',gameEyebrow:'Nog een klein geheimpje',gameTitle:'Liefdesvlucht',gameIntro:'Help Floris langs de bloemen vliegen om zijn hartje bij Siriya te brengen. Onze hond moedigt hem aan!',
+      gameHint:'Tik op het spel of druk op Spatie, ↑ of W om te vliegen.',win:'Ontgrendeld: Liefde op het eerste gezicht! ♥',back:'← Terug naar verrassing',restart:'Opnieuw spelen',
+      board:'Liefdesvlucht. Tik of druk op Spatie om langs bloemen te vliegen en het hartje aan Siriya te geven.',route:'FLORIS ♡ SIRIYA',progress:'Bloemen gepasseerd',
+      readyLabel:'EEN KLEIN LIEFDESAVONTUUR',ready:'Klaar om het hartje te brengen?',start:'Begin met vliegen ♡',failLabel:'NOG EEN KEER',fail:'Onze hond gelooft in je!',retry:'Probeer opnieuw ♡',pauseLabel:'ALLE TIJD',pause:'Klaar om verder te vliegen?',resume:'Ga verder ♡',endLabel:'HARTJE BEZORGD',end:'Je hebt Siriya bereikt!',again:'Vlieg nog een keer ♡'},
+    th:{eyebrow:'ความลับเล็ก ๆ สำหรับคุณ',title:'ความรักอบอวลอยู่ในอากาศ',message:'คุณค้นพบความลับเล็ก ๆ ของเราแล้ว! เราดีใจที่ได้แบ่งปันวันพิเศษนี้กับคุณ',names:'สิริยา และ ฟลอริส',date:'27 มีนาคม พ.ศ. 2570',close:'ปิดข้อความพิเศษ',
+      play:'เล่นเกมลับของเรา',gameEyebrow:'ความลับพิเศษอีกอย่าง',gameTitle:'เที่ยวบินแห่งรัก',gameIntro:'ช่วยฟลอริสบินผ่านซุ้มดอกไม้เพื่อนำหัวใจไปให้สิริยา โดยมีน้องหมาคอยเชียร์',
+      gameHint:'แตะที่เกม หรือกด Space, ↑ หรือ W เพื่อบินขึ้น',win:'ปลดล็อกแล้ว: รักแรกพบ! ♥',back:'← กลับไปที่ข้อความ',restart:'เล่นอีกครั้ง',
+      board:'เกมบินส่งหัวใจ แตะหน้าจอหรือกดปุ่ม Space เพื่อบินผ่านดอกไม้ไปหาสิริยา',route:'ฟลอริส ♡ สิริยา',progress:'ผ่านซุ้มดอกไม้',
+      readyLabel:'การผจญภัยแห่งความรัก',ready:'พร้อมส่งหัวใจหรือยัง?',start:'เริ่มบิน ♡',failLabel:'ลองอีกครั้ง',fail:'น้องหมาเป็นกำลังใจให้นะ!',retry:'ลองใหม่ ♡',pauseLabel:'พักสักครู่',pause:'พร้อมบินต่อหรือยัง?',resume:'บินต่อ ♡',endLabel:'ส่งหัวใจสำเร็จ',end:'คุณไปถึงสิริยาแล้ว!',again:'บินอีกครั้ง ♡'}
+  };
+  let current=translations.en,gameOpen=false;
+  let phase='ready',score=0,elapsed=0,deliveryTime=0,worldHeight=370;
+  let lastFrame=0,frame=0,closeTimer=null,previousFocus=null;
+  let player={x:PLAYER_X,y:175,vy:0,tilt:0};
+  let obstacles=[];
+  let backgroundCache=null;
+  let portraitReady=false;
+  const portrait=new Image();
+  portrait.decoding='async';
+  portrait.onload=()=>{portraitReady=true;render();};
+  portrait.src='images/tekening.png';
+  const crop={floris:[78,18,192,226],siriya:[229,107,224,242],dog:[112,283,240,297]};
+  const gapLevels=[.48,.51,.46,.52,.48];
+  const lowPower=(navigator.deviceMemory&&navigator.deviceMemory<=2)||(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=2);
+  const petalsCount=lowPower?9:17;
 
-  function initBoard(){
-    const frag=document.createDocumentFragment();
-    for(let y=0;y<5;y++)for(let x=0;x<7;x++){
-      const cell=document.createElement('div');
-      cell.className='sf-love-game-cell';
-      if(walls.has(x+','+y)){
-        cell.classList.add('sf-love-blocked');
-        cell.textContent='✿';
-      }
-      if(layout[y][x]==='S'){
-        const goal=document.createElement('span');
-        goal.className='sf-love-game-goal';
-        goal.setAttribute('aria-hidden','true');
-        goal.textContent='S';
-        cell.appendChild(goal);
-      }
-      frag.appendChild(cell);
+  function paintPortrait(x,y,r,who){
+    if(!context)return;
+    context.save();
+    context.shadowColor='rgba(77,57,43,.23)';context.shadowBlur=6;context.shadowOffsetY=3;
+    context.fillStyle='#fdf6e9';context.beginPath();context.arc(x,y,r+3,0,Math.PI*2);context.fill();
+    context.restore();
+    context.save();context.beginPath();context.arc(x,y,r,0,Math.PI*2);context.clip();
+    context.fillStyle='#f9f5ee';context.fillRect(x-r,y-r,r*2,r*2);
+    if(portraitReady){
+      const c=crop[who];
+      context.drawImage(portrait,c[0],c[1],c[2],c[3],x-r,y-r,r*2,r*2);
+    }else{
+      context.fillStyle='#876b63';context.font=`bold ${Math.round(r)}px Georgia`;
+      context.textAlign='center';context.textBaseline='middle';context.fillText(who==='floris'?'F':who==='siriya'?'S':'♡',x,y);
     }
-    playerMarker=document.createElement('div');
-    playerMarker.className='sf-love-game-player';
-    playerMarker.setAttribute('aria-hidden','true');
-    const marker=document.createElement('span');
-    marker.className='sf-love-game-player-marker';
-    marker.textContent='F';
-    const heart=document.createElement('span');
-    heart.className='sf-love-game-player-heart';
-    heart.textContent='♥';
-    playerMarker.append(marker,heart);
-    frag.appendChild(playerMarker);
-    gameBoard.replaceChildren(frag);
+    context.restore();
+    context.lineWidth=2.5;context.strokeStyle='#c3a06a';context.beginPath();context.arc(x,y,r+1.5,0,Math.PI*2);context.stroke();
   }
-  initBoard();
-
+  function heart(x,y,size,color='#a85f66'){
+    context.save();context.translate(x,y);context.scale(size/17,size/17);
+    context.beginPath();context.moveTo(0,11);
+    context.bezierCurveTo(-12,4,-13,-5,-6,-7);
+    context.bezierCurveTo(-2,-9,0,-6,0,-3);
+    context.bezierCurveTo(0,-6,3,-9,7,-7);
+    context.bezierCurveTo(14,-3,12,4,0,11);
+    context.fillStyle=color;context.fill();context.restore();
+  }
+  function roundBox(x,y,w,h,r,fill){
+    const radius=Math.max(0,Math.min(r,w/2,h/2));
+    context.beginPath();context.moveTo(x+radius,y);
+    context.lineTo(x+w-radius,y);context.quadraticCurveTo(x+w,y,x+w,y+radius);
+    context.lineTo(x+w,y+h-radius);context.quadraticCurveTo(x+w,y+h,x+w-radius,y+h);
+    context.lineTo(x+radius,y+h);context.quadraticCurveTo(x,y+h,x,y+h-radius);
+    context.lineTo(x,y+radius);context.quadraticCurveTo(x,y,x+radius,y);
+    context.closePath();context.fillStyle=fill;context.fill();
+  }
+  function ellipse(x,y,rx,ry,fill){
+    context.beginPath();context.ellipse(x,y,rx,ry,0,0,2*Math.PI);context.fillStyle=fill;context.fill();
+  }
+  function leaf(x,y,angle,size,color){
+    context.save();context.translate(x,y);context.rotate(angle);
+    context.fillStyle=color;context.beginPath();context.moveTo(0,0);
+    context.quadraticCurveTo(size*.52,-size*.55,size,0);
+    context.quadraticCurveTo(size*.5,size*.5,0,0);context.fill();context.restore();
+  }
+  function flower(x,y,r,flowerColor='#f8f1e4'){
+    context.save();context.translate(x,y);
+    for(let i=0;i<5;i++){
+      const a=i*2*Math.PI/5;
+      ellipse(Math.cos(a)*r*.6,Math.sin(a)*r*.6,r*.6,r*.48,flowerColor);
+    }
+    ellipse(0,0,r*.39,r*.39,'#d3b579');context.restore();
+  }
+  function createBackground(){
+    const cache=document.createElement('canvas');cache.width=600;cache.height=Math.max(1,Math.round(worldHeight));
+    const c=cache.getContext('2d');const h=cache.height;
+    let g=c.createLinearGradient(0,0,0,h);
+    g.addColorStop(0,'#dfeaf0');g.addColorStop(.59,'#f3f3e9');g.addColorStop(1,'#dbe8d7');
+    c.fillStyle=g;c.fillRect(0,0,600,h);
+    c.globalAlpha=.5;c.fillStyle='#fffdf4';
+    [[90,h*.21,95,21],[420,h*.16,125,27],[335,h*.35,65,14]].forEach(a=>{c.beginPath();c.ellipse(...a,0,0,Math.PI*2);c.fill();});
+    c.globalAlpha=.78;c.fillStyle='#c6d7cb';c.beginPath();c.moveTo(0,h*.82);
+    c.bezierCurveTo(105,h*.63,176,h*.83,283,h*.75);
+    c.bezierCurveTo(385,h*.65,477,h*.74,600,h*.62);c.lineTo(600,h);c.lineTo(0,h);c.fill();
+    c.fillStyle='#dfe5cf';c.beginPath();c.moveTo(0,h*.9);
+    c.bezierCurveTo(162,h*.71,289,h*.96,422,h*.80);
+    c.bezierCurveTo(501,h*.77,558,h*.85,600,h*.79);c.lineTo(600,h);c.lineTo(0,h);c.fill();
+    c.globalAlpha=.13;
+    let seed=13;const rand=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296;};
+    for(let i=0;i<285;i++){
+      c.fillStyle=i%4===0?'#648694':'#ffffff';
+      const x=rand()*600,y=rand()*h,r=rand()*.95+.28;
+      c.fillRect(x,y,r*2,r*2);
+    }
+    c.globalAlpha=1;
+    backgroundCache=cache;
+  }
+  function resize(){
+    if(!context||board.hidden||!gameOpen)return;
+    const rect=canvas.getBoundingClientRect();
+    if(!rect.width||!rect.height)return;
+    const nextHeight=Math.min(520,Math.max(190,WORLD_WIDTH*rect.height/rect.width));
+    const dpr=Math.min(2,Math.max(1,window.devicePixelRatio||1));
+    const cw=Math.round(rect.width*dpr),ch=Math.round(rect.height*dpr);
+    if(canvas.width===cw&&canvas.height===ch&&Math.abs(worldHeight-nextHeight)<.1&&backgroundCache)return;
+    const oldHeight=worldHeight;
+    worldHeight=nextHeight;
+    if(phase!=='ready'&&oldHeight)player.y*=worldHeight/oldHeight;
+    if(canvas.width!==cw||canvas.height!==ch){canvas.width=cw;canvas.height=ch;}
+    context.setTransform(canvas.width/WORLD_WIDTH,0,0,canvas.height/worldHeight,0,0);
+    createBackground();
+    if(phase==='ready')player.y=worldHeight*.48;
+    render();
+  }
+  function makeObstacles(){
+    obstacles=gapLevels.map((factor,i)=>({x:WORLD_WIDTH+55+i*220,width:73,center:factor,passed:false}));
+  }
+  function setScreen(){
+    const visible=phase!=='playing'&&phase!=='delivery';
+    flightScreen.hidden=!visible;
+    flightScreen.classList.toggle('sf-flight-finished',phase==='won');
+    if(!visible)return;
+    const key=phase==='lost'?'fail':phase==='won'?'end':phase==='paused'?'pause':'ready';
+    flightLabel.textContent=current[key+'Label'];
+    flightHeadline.textContent=current[key];
+    flightLaunch.textContent=current[phase==='ready'?'start':phase==='lost'?'retry':phase==='won'?'again':'resume'];
+  }
+  function updateStatus(){
+    flightCounter.textContent=`${score} / ${N}`;
+    status.textContent=`${current.progress}: ${score} / ${N}`;
+    winText.hidden=phase!=='won';
+  }
+  function resetGame(){
+    phase='ready';score=0;elapsed=0;deliveryTime=0;
+    player={x:PLAYER_X,y:worldHeight*.48,vy:0,tilt:0};
+    makeObstacles();updateStatus();setScreen();render();
+  }
+  function stopFrames(){if(frame){cancelAnimationFrame(frame);frame=0;}lastFrame=0;}
+  function ensureFrames(){if(!frame&&gameOpen&&!document.hidden&&context)frame=requestAnimationFrame(loop);}
+  function startGame(){
+    if(overlay.hidden)return;
+    gameOpen=true;game.hidden=false;letter.hidden=true;
+    dialog.classList.add('sf-love-game-mode');
+    dialog.setAttribute('aria-labelledby','sfLoveGameTitle');
+    dialog.setAttribute('aria-describedby','sfLoveGameIntro');
+    resize();resetGame();title.focus({preventScroll:true});
+  }
+  function backToLetter(focus=true){
+    gameOpen=false;stopFrames();game.hidden=true;letter.hidden=false;
+    dialog.classList.remove('sf-love-game-mode');
+    dialog.setAttribute('aria-labelledby','sfLoveTitle');
+    dialog.setAttribute('aria-describedby','sfLoveMessage');
+    if(focus)playButton.focus({preventScroll:true});
+  }
+  function flap(){
+    if(!gameOpen||!context)return;
+    if(phase==='won'||phase==='lost'||phase==='ready'){
+      resetGame();phase='playing';flightScreen.hidden=true;
+    }else if(phase==='paused'){phase='playing';flightScreen.hidden=true;}
+    else if(phase!=='playing')return;
+    player.vy=-263;player.tilt=-.20;
+    ensureFrames();
+  }
+  function launch(){
+    flap();canvas.focus({preventScroll:true});
+  }
+  function pause(){
+    if(phase!=='playing')return;
+    phase='paused';stopFrames();setScreen();render();
+  }
+  function collide(obstacle,top,bottom,r){
+    const withinX=player.x+r*.78>obstacle.x && player.x-r*.78<obstacle.x+obstacle.width;
+    return withinX&&(player.y-r*.75<top||player.y+r*.75>bottom);
+  }
+  function update(dt){
+    elapsed+=dt;
+    if(phase==='playing'){
+      player.vy=Math.min(380,player.vy+610*dt);
+      player.y+=player.vy*dt;
+      player.tilt=Math.max(-.24,Math.min(.24,player.vy/950));
+      if(player.y<29||player.y>worldHeight-30){phase='lost';setScreen();updateStatus();return;}
+      for(const ob of obstacles){
+        ob.x-=157*dt;
+        const gap=Math.min(257,Math.max(184,worldHeight*.56));
+        const center=worldHeight*ob.center;
+        const top=center-gap/2,bottom=center+gap/2;
+        if(collide(ob,top,bottom,39)){phase='lost';setScreen();updateStatus();return;}
+        if(!ob.passed&&ob.x+ob.width<player.x-32){
+          ob.passed=true;score++;updateStatus();
+        }
+      }
+      if(score===N){phase='delivery';deliveryTime=0;player.vy=0;}
+    }else if(phase==='delivery'){
+      deliveryTime+=dt;
+      const t=Math.min(1,deliveryTime/1.3),e=t*t*(3-2*t);
+      player.x=PLAYER_X+(WORLD_WIDTH-205-PLAYER_X)*e;
+      player.y=player.y+(worldHeight*.46-player.y)*Math.min(1,dt*2.8);
+      player.tilt=0;
+      if(t>=1){phase='won';setScreen();updateStatus();}
+    }
+  }
+  function drawObstacles(){
+    const h=worldHeight;
+    for(const ob of obstacles){
+      if(ob.x>630||ob.x+ob.width < -10)continue;
+      const gap=Math.min(257,Math.max(184,h*.56));
+      const center=h*ob.center,top=center-gap/2,bottom=center+gap/2;
+      for(const part of [{start:0,end:top,edge:top,upper:true},{start:bottom,end:h,edge:bottom,upper:false}]){
+        const ph=part.end-part.start;
+        if(ph<1)continue;
+        context.save();context.shadowColor='rgba(91,108,96,.17)';context.shadowBlur=7;context.shadowOffsetX=2;
+        roundBox(ob.x+9,part.start,ob.width-18,ph,15,'#b4c7bb');context.restore();
+        roundBox(ob.x+15,part.start,ob.width-30,ph,12,'#dce6ce');
+        context.strokeStyle='rgba(119,147,123,.47)';context.lineWidth=1.7;
+        for(let k=0;k<3;k++){
+          const cx=ob.x+23+k*12;
+          context.beginPath();context.moveTo(cx,part.start);context.lineTo(cx,part.end);context.stroke();
+          for(let j=0;j<Math.min(5,Math.floor(ph/36));j++){
+            const vy=part.start+20+j*38;
+            leaf(cx,vy,(j%2?2.4:.7),10,'#a8c1a4');
+          }
+        }
+        roundBox(ob.x-2,part.upper?top-22:bottom,ob.width+4,22,7,'#9db6a5');
+        roundBox(ob.x+3,part.upper?top-19:bottom+3,ob.width-6,16,5,'#d5e3d1');
+        for(let k=0;k<3;k++){
+          const fx=ob.x+11+k*25,fy=part.upper?top-10:bottom+12;
+          flower(fx,fy,6,k===1?'#e9c3ba':'#fff4e9');
+        }
+      }
+    }
+  }
+  function drawWings(x,y,r){
+    const swing=mediaReduce.matches?0:Math.sin(elapsed*16)*.12;
+    context.save();context.translate(x-25,y+3);context.rotate(-.28+swing);
+    context.fillStyle='rgba(250,247,232,.93)';context.strokeStyle='#bca57e';context.lineWidth=1.5;
+    context.beginPath();context.moveTo(10,7);context.bezierCurveTo(-25,-13,-49,-42,-21,-28);
+    context.bezierCurveTo(-43,-43,-43,-7,-13,16);context.closePath();context.fill();context.stroke();
+    context.restore();
+  }
+  function drawDog(){
+    const bob=(phase==='playing'&&!mediaReduce.matches)?Math.sin(elapsed*6)*1.8:0;
+    const x=45,y=worldHeight-39+bob;
+    ellipse(x,worldHeight-7,47,8,'rgba(102,141,101,.22)');
+    paintPortrait(x,y,25,'dog');
+    // The familiar dog is an on-screen companion and celebrates each landing.
+    if(phase==='won'){
+      heart(x+31,y-29,13,'#b37273');
+      flower(x-27,y-22,6,'#fff0e2');
+    }else{
+      context.fillStyle='#a0805f';context.font='14px Georgia';context.textAlign='center';
+      context.fillText('♡',x+28,y-21);
+    }
+  }
+  function drawPlayer(){
+    const x=player.x,y=player.y;
+    context.save();context.translate(x,y);context.rotate(player.tilt);
+    drawWings(0,0,35);
+    paintPortrait(0,0,35,'floris');
+    heart(32,27,19,'#a6515c');
+    context.restore();
+    if(phase==='delivery'){
+      for(let i=0;i<4;i++){
+        heart(x+55+i*16,y+4-Math.sin(elapsed*4+i)*10,7+i%2*3,'#c8947c');
+      }
+    }
+  }
+  function drawGoal(){
+    const arrived=phase==='delivery'||phase==='won';
+    const x=arrived?WORLD_WIDTH-106:WORLD_WIDTH-43,y=worldHeight*.46;
+    if(arrived)ellipse(x,worldHeight-35,53,13,'rgba(105,139,106,.2)');
+    paintPortrait(x,y,arrived?41:24,'siriya');
+    if(phase==='won'){
+      heart(x-54,y-24,20,'#b56769');heart(x+49,y-37,14,'#cca07b');
+    }
+  }
+  function drawForeground(){
+    const h=worldHeight;
+    context.save();context.strokeStyle='rgba(102,143,116,.27)';context.lineWidth=1.6;
+    for(let i=0;i<18;i++){
+      const x=i*40+9;
+      context.beginPath();context.moveTo(x,h);context.quadraticCurveTo(x-5,h-13,x,h-23);context.stroke();
+      leaf(x,h-20,-.8,7,'rgba(145,181,138,.55)');
+    }
+    context.restore();
+  }
+  function render(){
+    if(!context||!backgroundCache||!gameOpen)return;
+    const h=worldHeight;
+    context.clearRect(0,0,WORLD_WIDTH,h);
+    context.drawImage(backgroundCache,0,0,WORLD_WIDTH,h);
+    if(!mediaReduce.matches&&!lowPower){
+      for(let i=0;i<petalsCount;i++){
+        const x=((i*137+elapsed*11)%660)-30;
+        const y=(i*79+elapsed*(7+i%3))%(h+25);
+        context.globalAlpha=.24;
+        ellipse(x,y,2.5,1.4,i%2?'#b5787e':'#fff3db');
+      }
+      context.globalAlpha=1;
+    }
+    drawObstacles();drawForeground();drawDog();drawGoal();drawPlayer();
+    if(phase==='won'){
+      context.save();context.globalAlpha=.8;
+      for(let i=0;i<9;i++){
+        const a=(i/9)*Math.PI*2;
+        heart(WORLD_WIDTH*.55+Math.cos(a)*95,h*.38+Math.sin(a)*82,9,'#c99091');
+      }
+      context.restore();
+    }
+  }
+  function loop(timestamp){
+    frame=0;
+    if(!gameOpen||document.hidden)return;
+    const dt=lastFrame?Math.min(.033,(timestamp-lastFrame)/1000):0;
+    lastFrame=timestamp;
+    if(phase==='playing'||phase==='delivery')update(dt);
+    if(phase!=='paused')render();
+    if(phase==='playing'||phase==='delivery')ensureFrames();
+  }
   function updateLanguage(){
     const language=document.documentElement.lang;
-    current=texts[language]||texts.en;
+    current=translations[language]||translations.en;
     const t=current;
     byId('sfLoveEyebrow').textContent=t.eyebrow;
     byId('sfLoveTitle').textContent=t.title;
@@ -3105,84 +3383,39 @@ rsvpForm.addEventListener('submit',async (evt)=>{
     closeButton.setAttribute('aria-label',t.close);
     byId('sfLovePlayText').textContent=t.play;
     byId('sfLoveGameEyebrow').textContent=t.gameEyebrow;
-    gameTitle.textContent=t.gameTitle;
+    title.textContent=t.gameTitle;
     byId('sfLoveGameIntro').textContent=t.gameIntro;
     byId('sfLoveGameHint').textContent=t.gameHint;
-    gameWin.textContent=t.win;
-    gameBack.textContent=t.back;
-    gameRestart.textContent=t.restart;
-    gameBoard.setAttribute('aria-label',t.board);
-    gameControls.setAttribute('aria-label',t.controls);
-    gameControls.querySelectorAll('[data-sf-move]').forEach(button=>{
-      button.setAttribute('aria-label',t.dirs[button.dataset.sfMove]);
-    });
-    gameStatus.textContent=won?t.win:`${t.steps}: ${moves}`;
-    dialog.lang=language in texts?language:'en';
+    backButton.textContent=t.back;
+    restartButton.textContent=t.restart;
+    winText.textContent=t.win;
+    canvas.setAttribute('aria-label',t.board);
+    board.setAttribute('aria-label',t.board);
+    flightRoute.textContent=t.route;
+    setScreen();updateStatus();
+    dialog.lang=language in translations?language:'en';
   }
   new MutationObserver(updateLanguage).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
   updateLanguage();
 
-  function resetGame(){
-    moves=0;won=false;player.x=0;player.y=4;
-    playerMarker.style.transform='translate(0%,400%)';
-    gameBoard.classList.remove('sf-love-game-won');
-    gameWin.hidden=true;
-    gameControls.querySelectorAll('button').forEach(button=>button.disabled=false);
-    gameStatus.textContent=`${current.steps}: 0`;
-  }
-  function startGame(){
-    if(overlay.hidden)return;
-    resetGame();
-    gameOpen=true;letter.hidden=true;game.hidden=false;
-    dialog.setAttribute('aria-labelledby','sfLoveGameTitle');
-    dialog.setAttribute('aria-describedby','sfLoveGameIntro');
-    gameTitle.focus({preventScroll:true});
-  }
-  function backToLetter(focus=true){
-    gameOpen=false;game.hidden=true;letter.hidden=false;
-    dialog.setAttribute('aria-labelledby','sfLoveTitle');
-    dialog.setAttribute('aria-describedby','sfLoveMessage');
-    if(focus)playButton.focus({preventScroll:true});
-  }
-  function move(direction){
-    if(!gameOpen||won)return;
-    const vector=dirVectors[direction];
-    if(!vector)return;
-    const x=player.x+vector[0],y=player.y+vector[1];
-    if(x<0||x>=7||y<0||y>=5||walls.has(x+','+y))return;
-    player.x=x;player.y=y;moves++;
-    playerMarker.style.transform=`translate(${x*100}%,${y*100}%)`;
-    if(x===6&&y===0){
-      won=true;
-      gameBoard.classList.add('sf-love-game-won');
-      gameWin.hidden=false;
-      gameStatus.textContent=current.win;
-      gameControls.querySelectorAll('button').forEach(button=>button.disabled=true);
-    }else{
-      gameStatus.textContent=`${current.steps}: ${moves}`;
-    }
-  }
   playButton.addEventListener('click',startGame);
-  gameBack.addEventListener('click',()=>backToLetter());
-  gameRestart.addEventListener('click',()=>{resetGame();gameTitle.focus({preventScroll:true});});
-  gameControls.querySelectorAll('[data-sf-move]').forEach(button=>{
-    button.addEventListener('click',()=>move(button.dataset.sfMove));
+  backButton.addEventListener('click',()=>backToLetter());
+  restartButton.addEventListener('click',()=>{resetGame();canvas.focus({preventScroll:true});});
+  flightLaunch.addEventListener('click',launch);
+  canvas.addEventListener('pointerdown',event=>{
+    if(!gameOpen||!event.isPrimary)return;
+    event.preventDefault();flap();
+  },{passive:false});
+  window.addEventListener('resize',()=>{if(gameOpen)resize();},{passive:true});
+  if(window.ResizeObserver){
+    const observer=new ResizeObserver(()=>{if(gameOpen)resize();});
+    observer.observe(board);
+  }
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden){pause();stopFrames();}
+    else if(gameOpen){lastFrame=0;render();if(phase==='playing'||phase==='delivery')ensureFrames();}
   });
-  let swipeStart=null;
-  gameBoard.addEventListener('pointerdown',event=>{
-    if(!gameOpen||event.pointerType==='mouse')return;
-    swipeStart={x:event.clientX,y:event.clientY,id:event.pointerId};
-  });
-  gameBoard.addEventListener('pointerup',event=>{
-    if(!swipeStart||swipeStart.id!==event.pointerId)return;
-    const dx=event.clientX-swipeStart.x,dy=event.clientY-swipeStart.y;
-    swipeStart=null;
-    if(Math.max(Math.abs(dx),Math.abs(dy))<20)return;
-    move(Math.abs(dx)>Math.abs(dy)?dx<0?'left':'right':dy<0?'up':'down');
-  });
-  gameBoard.addEventListener('pointercancel',()=>{swipeStart=null;});
-
-  const mediaReduce=window.matchMedia('(prefers-reduced-motion: reduce)');
+  window.addEventListener('blur',()=>{if(gameOpen&&phase==='playing')pause();});
   const initialPositions=[
     [10,81,16,1],[19,58,13,0],[9,31,11,0],[22,15,14,1],
     [36,89,13,0],[81,85,15,1],[90,66,13,0],[82,34,16,0],
@@ -3192,33 +3425,25 @@ rsvpForm.addEventListener('submit',async (evt)=>{
   function createParticles(){
     particles.replaceChildren();
     if(mediaReduce.matches)return;
-    const lowMemory=(navigator.deviceMemory&&navigator.deviceMemory<=2)||(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=2);
-    const count=lowMemory?6:window.matchMedia('(max-width:600px)').matches?9:initialPositions.length;
+    const count=lowPower?6:window.matchMedia('(max-width:600px)').matches?9:initialPositions.length;
     const frag=document.createDocumentFragment();
     for(let i=0;i<count;i++){
       const [x,y,size,star]=initialPositions[i];
       const item=document.createElement('span');
       item.className='sf-love-particle'+(star?' sf-love-twinkle':'');
       item.textContent=star?'✦':'♥';
-      item.style.setProperty('--sx',x+'%');
-      item.style.setProperty('--sy',y+'%');
-      item.style.setProperty('--fs',size+'px');
-      item.style.setProperty('--delay',(i%5*.11).toFixed(2)+'s');
+      item.style.setProperty('--sx',x+'%');item.style.setProperty('--sy',y+'%');
+      item.style.setProperty('--fs',size+'px');item.style.setProperty('--delay',(i%5*.11).toFixed(2)+'s');
       item.style.setProperty('--dur',(3.1+(i%4)*.32).toFixed(2)+'s');
       item.style.setProperty('--drift',((i%2?1:-1)*(18+i%4*9))+'px');
       frag.appendChild(item);
     }
     particles.appendChild(frag);
   }
-  let previousFocus=null,closeTimer=null;
   function openSecret(){
-    if(!overlay.hidden||document.getElementById('weddingIntro')||
-       !document.getElementById('rsvpModal')?.hidden)return;
-    clearTimeout(closeTimer);
-    previousFocus=document.activeElement;
-    backToLetter(false);
-    updateLanguage();
-    createParticles();
+    if(!overlay.hidden||byId('weddingIntro')||!byId('rsvpModal')?.hidden)return;
+    clearTimeout(closeTimer);previousFocus=document.activeElement;
+    backToLetter(false);updateLanguage();createParticles();
     overlay.hidden=false;
     requestAnimationFrame(()=>requestAnimationFrame(()=>{
       if(!overlay.hidden)overlay.classList.add('sf-love-visible');
@@ -3227,6 +3452,7 @@ rsvpForm.addEventListener('submit',async (evt)=>{
   }
   function closeSecret(){
     if(overlay.hidden)return;
+    backToLetter(false);
     overlay.classList.remove('sf-love-visible');
     const focus=previousFocus;
     if(focus&&focus.isConnected&&typeof focus.focus==='function')focus.focus({preventScroll:true});
@@ -3234,63 +3460,55 @@ rsvpForm.addEventListener('submit',async (evt)=>{
     clearTimeout(closeTimer);
     closeTimer=window.setTimeout(()=>{
       if(overlay.classList.contains('sf-love-visible'))return;
-      overlay.hidden=true;
-      backToLetter(false);
-      particles.replaceChildren();
+      overlay.hidden=true;particles.replaceChildren();
     },mediaReduce.matches?0:340);
   }
   closeButton.addEventListener('click',closeSecret);
   overlay.addEventListener('click',event=>{
     if(event.target===overlay||event.target.classList.contains('sf-love-scrim'))closeSecret();
   });
-
-  // Existing Konami code; game keys are processed only while its panel is visible.
+  // Konami is still available on desktop. The game takes keys only when visible.
   const code=['arrowup','arrowup','arrowdown','arrowdown','arrowleft','arrowright','arrowleft','arrowright','b','a'];
-  const gameKeys={arrowleft:'left',arrowup:'up',arrowdown:'down',arrowright:'right',a:'left',w:'up',s:'down',d:'right'};
   let progress=0,lastKey=0;
   document.addEventListener('keydown',event=>{
     if(!overlay.hidden){
       if(event.key==='Escape'){
-        event.preventDefault();
-        if(gameOpen)backToLetter();else closeSecret();
-        return;
+        event.preventDefault();if(gameOpen)backToLetter();else closeSecret();return;
       }
       if(event.key==='Tab'){
-        const focusables=[...dialog.querySelectorAll('button:not(:disabled)')].filter(button=>button.getClientRects().length&&button.closest('[hidden]')===null);
+        const focusables=[...dialog.querySelectorAll('button:not(:disabled),canvas[tabindex]')]
+          .filter(item=>item.getClientRects().length&&item.closest('[hidden]')===null);
         if(!focusables.length)return;
         const first=focusables[0],last=focusables[focusables.length-1];
         if(event.shiftKey&&(document.activeElement===first||!dialog.contains(document.activeElement))){event.preventDefault();last.focus();}
         else if(!event.shiftKey&&(document.activeElement===last||!dialog.contains(document.activeElement))){event.preventDefault();first.focus();}
         return;
       }
-      if(gameOpen&&!event.repeat&&!event.ctrlKey&&!event.altKey&&!event.metaKey){
-        const direction=gameKeys[event.key.toLowerCase()];
-        if(direction){event.preventDefault();move(direction);}
+      const key=event.key.toLowerCase();
+      const isFlap=event.code==='Space'||key==='arrowup'||key==='w';
+      if(gameOpen&&isFlap&&!event.repeat&&!event.ctrlKey&&!event.altKey&&!event.metaKey){
+        // Preserve native Space activation when a game button has keyboard focus.
+        if(event.code==='Space'&&event.target instanceof Element&&event.target.closest('button'))return;
+        event.preventDefault();flap();
       }
       return;
     }
-    if(document.getElementById('weddingIntro')||!document.getElementById('rsvpModal')?.hidden)return;
+    if(byId('weddingIntro')||!byId('rsvpModal')?.hidden)return;
     if(event.repeat||event.isComposing||event.ctrlKey||event.altKey||event.metaKey||
        (event.target instanceof Element&&event.target.closest('input,textarea,select,[contenteditable="true"]')))return;
-    const key=event.key.toLowerCase();
-    const now=performance.now();
+    const key=event.key.toLowerCase(),now=performance.now();
     if(now-lastKey>3500)progress=0;
-    lastKey=now;
-    if(key===code[progress])progress++;
-    else progress=key===code[0]?1:0;
+    lastKey=now;progress=key===code[progress]?progress+1:key===code[0]?1:0;
     if(progress===code.length){progress=0;openSecret();}
   });
-  // Mobile discovery mechanism is unchanged: five taps on the big names.
+  // Five taps on the large names: mobile easter egg entry, unchanged.
   const namesTrigger=document.querySelector('#p1 .hero-meta h1.couple-title');
   let taps=0,lastTap=0;
   if(namesTrigger){
     const onTap=event=>{
-      if(document.getElementById('weddingIntro')||!overlay.hidden||
-         !document.getElementById('rsvpModal')?.hidden)return;
+      if(byId('weddingIntro')||!overlay.hidden||!byId('rsvpModal')?.hidden)return;
       if(event.type==='pointerup'&&event.button!==0)return;
-      const now=performance.now();
-      taps=now-lastTap<1700?taps+1:1;
-      lastTap=now;
+      const now=performance.now();taps=now-lastTap<1700?taps+1:1;lastTap=now;
       if(taps>=5){taps=0;openSecret();}
     };
     namesTrigger.addEventListener(window.PointerEvent?'pointerup':'click',onTap);
