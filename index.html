@@ -1855,6 +1855,41 @@ html[lang="th"] .sf-love-date{font-family:'Noto Serif Thai',Tahoma,serif;letter-
 }
 
 
+
+/* Secret Guestbook — separate from RSVP, music, and Love Flight. */
+.sf-love-book[hidden],.sf-love-book-form[hidden]{display:none!important}
+.sf-love-book-open{display:inline-flex;align-items:center;justify-content:center;gap:8px;margin:13px auto 0;padding:8px 14px;border:0;border-bottom:1px solid rgba(177,134,73,.45);background:transparent;color:#8b6859;cursor:pointer;font:400 .79rem/1.4 Georgia,serif;touch-action:manipulation}
+.sf-love-book-open:hover,.sf-love-book-open:focus-visible{color:#633f48;border-color:#ab7d5e}
+.sf-love-card.sf-love-book-mode{padding:clamp(24px,4vw,34px) clamp(19px,5vw,37px) clamp(21px,4vw,29px)}
+.sf-love-book{color:#69555a;text-align:center}
+.sf-love-book-kicker{margin:2px 0 5px;font:400 .65rem/1.5 Georgia,serif;letter-spacing:.18em;color:#a1845a;text-transform:uppercase}
+.sf-love-book h2{margin:0;color:#7c424c;font:400 clamp(2rem,7vw,2.7rem)/1.18 'Cormorant Garamond',Georgia,serif}
+.sf-love-book-intro{margin:6px auto 17px;max-width:360px;font:400 1rem/1.35 'Cormorant Garamond',Georgia,serif;color:#766669}
+.sf-love-book-list{margin:0 auto 14px;max-height:min(27dvh,210px);overflow:auto;overscroll-behavior:contain;text-align:left;border-top:1px solid #e7d8c5;border-bottom:1px solid #e7d8c5;padding:7px 0}
+.sf-love-book-entry{padding:10px 4px 12px;border-bottom:1px solid rgba(213,187,158,.36)}
+.sf-love-book-entry:last-child{border-bottom:0}
+.sf-love-book-entry-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.sf-love-book-entry-name{font:600 .86rem/1.4 Georgia,serif;color:#7d5053;overflow-wrap:anywhere}
+.sf-love-book-entry-date{font:400 .67rem/1.4 Georgia,serif;color:#a28e7e;white-space:nowrap}
+.sf-love-book-entry-message{font:400 .87rem/1.5 Georgia,serif;color:#6d6262;margin:5px 0 0;overflow-wrap:anywhere;white-space:pre-wrap}
+.sf-love-book-state{font:400 .82rem/1.6 Georgia,serif;color:#907b73;padding:13px 4px;text-align:center}
+.sf-love-book-form{display:grid;gap:9px;text-align:left;margin:0 auto;max-width:350px}
+.sf-love-book-label{display:grid;gap:4px;font:400 .76rem/1.4 Georgia,serif;color:#876c63}
+.sf-love-book-form input:not([type=checkbox]),.sf-love-book-form textarea{display:block;width:100%;box-sizing:border-box;border:1px solid #dac5ab;border-radius:4px;background:rgba(255,255,255,.76);padding:9px 11px;color:#5d4a50;font:400 .88rem/1.4 Georgia,serif;outline-offset:2px}
+.sf-love-book-form textarea{resize:vertical;min-height:56px;max-height:120px}
+.sf-love-book-consent{display:flex;gap:8px;align-items:start;font:400 .69rem/1.45 Georgia,serif;color:#85726c}
+.sf-love-book-consent input{margin-top:2px;accent-color:#937256;flex:none}
+.sf-love-book-submit{width:100%;min-height:41px;background:linear-gradient(#fffdf7,#f6eadb);border:1px solid #b99463;color:#785649;border-radius:22px;font:400 .80rem/1.3 Georgia,serif;cursor:pointer}
+.sf-love-book-submit:disabled{opacity:.55;cursor:default}
+.sf-love-book-feedback{min-height:1.2em;text-align:center;font:400 .75rem/1.4 Georgia,serif;color:#8c5a5c}
+.sf-love-book-back{display:inline-block;margin-top:9px;border:0;background:transparent;color:#97704f;border-bottom:1px solid #dcc6a7;cursor:pointer;padding:5px 0;font:400 .78rem Georgia,serif}
+.sf-love-book-turnstile{display:flex;justify-content:center;max-width:100%;min-height:0;overflow:hidden}
+.sf-love-book-form :focus-visible,.sf-love-book-back:focus-visible,.sf-love-book-open:focus-visible{outline:2px solid #b59263;outline-offset:3px}
+html[lang=th] .sf-love-book,html[lang=th] .sf-love-book-form input,html[lang=th] .sf-love-book-form textarea,html[lang=th] .sf-love-book-open{font-family:'Noto Serif Thai',Tahoma,sans-serif}
+html[lang=th] .sf-love-book h2{font-family:'Noto Serif Thai',Tahoma,sans-serif;font-size:1.7rem}
+@media(max-width:360px){.sf-love-book-list{max-height:21dvh}.sf-love-book-form{gap:7px}}
+@media(max-height:620px){.sf-love-book-list{max-height:17dvh}.sf-love-book-form textarea{min-height:43px}}
+
 /* Love Flight — isolated responsive canvas game. The invitation itself is unchanged. */
 .sf-love-letter[hidden],.sf-love-game[hidden],.sf-love-win[hidden],.sf-flight-screen[hidden]{display:none!important}
 .sf-love-play{
@@ -2987,6 +3022,8 @@ rsvpForm.addEventListener('submit',async (evt)=>{
         <span id="sfLovePlayText">Play our little game</span>
         <span class="sf-love-play-arrow" aria-hidden="true">›</span>
       </button>
+
+      <button id="sfLoveBookOpen" class="sf-love-book-open" type="button">✦ <span id="sfLoveBookOpenText">Secret guestbook</span></button>
     </div>
     <div id="sfLoveGame" class="sf-love-game" hidden>
       <p class="sf-love-game-eyebrow" id="sfLoveGameEyebrow">A little extra secret</p>
@@ -3008,6 +3045,22 @@ rsvpForm.addEventListener('submit',async (evt)=>{
         <button id="sfLoveGameBack" type="button">← Back to surprise</button>
         <button id="sfLoveGameRestart" type="button">Play again</button>
       </div>
+    </div>
+
+    <div id="sfLoveBook" class="sf-love-book" hidden>
+      <p id="sfLoveBookKicker" class="sf-love-book-kicker">A shared little secret</p>
+      <h2 id="sfLoveBookTitle" tabindex="-1">The secret guestbook</h2>
+      <p id="sfLoveBookIntro" class="sf-love-book-intro">See who found our hidden surprise and leave your mark.</p>
+      <div id="sfLoveBookEntries" class="sf-love-book-list" role="region" aria-label="Guestbook messages"><p class="sf-love-book-state">Loading…</p></div>
+      <form id="sfLoveBookForm" class="sf-love-book-form" novalidate>
+        <label class="sf-love-book-label"><span id="sfLoveBookNameLabel">Your name or nickname</span><input id="sfLoveBookName" maxlength="40" minlength="2" autocomplete="nickname" required></label>
+        <label class="sf-love-book-label"><span id="sfLoveBookMessageLabel">A little message (optional)</span><textarea id="sfLoveBookMessage" maxlength="180" rows="2"></textarea></label>
+        <label class="sf-love-book-consent"><input id="sfLoveBookConsent" type="checkbox" required><span id="sfLoveBookConsentText">I agree that my name and message will be visible to other visitors.</span></label>
+        <div id="sfLoveBookTurnstile" class="sf-love-book-turnstile"></div>
+        <button id="sfLoveBookSubmit" class="sf-love-book-submit" type="submit">Sign the guestbook ♡</button>
+        <p id="sfLoveBookFeedback" class="sf-love-book-feedback" aria-live="polite" role="status"></p>
+      </form>
+      <button id="sfLoveBookBack" class="sf-love-book-back" type="button">← Back to surprise</button>
     </div>
   </section>
 </div>
@@ -3564,5 +3617,102 @@ rsvpForm.addEventListener('submit',async (evt)=>{
 </script>
 
 
+<script>
+/* Guestbook frontend: the endpoint must be configured after deploying the separate Worker.
+   Do not reuse the RSVP endpoint: RSVP data must never become public. */
+(()=>{
+  'use strict';
+  const GUESTBOOK_ENDPOINT = 'https://siriya-floris-secret-guestbook.siriyafloris.workers.dev'; // SET to your own shared Cloudflare Worker URL, e.g. https://your-guestbook.example.workers.dev
+  const TURNSTILE_SITE_KEY = '0x4AAAAAAFRmZqb1j6uG7O01';
+  const $=id=>document.getElementById(id);
+  const panel=$('sfLoveBook'),letter=$('sfLoveLetter'),card=document.querySelector('#sfLoveOverlay .sf-love-card');
+  if(!panel||!card||!letter)return;
+  const open=$('sfLoveBookOpen'),back=$('sfLoveBookBack'),form=$('sfLoveBookForm'),entries=$('sfLoveBookEntries'),feedback=$('sfLoveBookFeedback'),submit=$('sfLoveBookSubmit');
+  const dict={
+    en:{open:'Secret guestbook',kicker:'A shared little secret',title:'The secret guestbook',intro:'See who found our hidden surprise and leave your mark.',name:'Your name or nickname',message:'A little message (optional)',consent:'I agree that my name and message will be visible to other visitors.',submit:'Sign the guestbook ♡',back:'← Back to surprise',loading:'Opening the guestbook…',empty:'Be the first to find our secret!',unavailable:'The shared guestbook is not connected yet.',error:'Could not load the guestbook. Please try again later.',success:'Your signature has been added! ♡',invalid:'Please enter a name and accept public display.',challenge:'Please complete the security check.',fail:'Your message could not be saved. Please try again.',count:'guests found this secret'},
+    nl:{open:'Geheim gastenboek',kicker:'Een gedeeld geheimpje',title:'Het geheime gastenboek',intro:'Ontdek wie ons geheimpje al heeft gevonden en laat iets achter.',name:'Je naam of bijnaam',message:'Een berichtje (optioneel)',consent:'Ik ga ermee akkoord dat mijn naam en bericht zichtbaar zijn voor andere bezoekers.',submit:'Schrijf in het gastenboek ♡',back:'← Terug naar de verrassing',loading:'Gastenboek wordt geladen…',empty:'Wees de eerste die ons geheimpje vindt!',unavailable:'Het gedeelde gastenboek is nog niet gekoppeld.',error:'Het gastenboek kan niet worden geladen. Probeer het later opnieuw.',success:'Je naam staat in het gastenboek! ♡',invalid:'Vul je naam in en geef toestemming voor openbare weergave.',challenge:'Voltooi eerst de beveiligingscontrole.',fail:'Opslaan is niet gelukt. Probeer het opnieuw.',count:'gasten vonden het geheim'},
+    th:{open:'สมุดเยี่ยมลับ',kicker:'ความลับที่แบ่งปันกัน',title:'สมุดเยี่ยมลับ',intro:'ดูว่าใครค้นพบความลับของเราแล้ว และฝากข้อความไว้',name:'ชื่อหรือชื่อเล่น',message:'ข้อความสั้น ๆ (ไม่บังคับ)',consent:'ฉันยินยอมให้ชื่อและข้อความของฉันแสดงต่อผู้เข้าชมคนอื่น',submit:'ลงชื่อในสมุดเยี่ยม ♡',back:'← กลับไปที่ข้อความ',loading:'กำลังเปิดสมุดเยี่ยม…',empty:'มาเป็นคนแรกที่ค้นพบความลับของเรา!',unavailable:'สมุดเยี่ยมยังไม่ได้เชื่อมต่อ',error:'โหลดสมุดเยี่ยมไม่สำเร็จ โปรดลองอีกครั้ง',success:'เพิ่มชื่อของคุณแล้ว! ♡',invalid:'กรุณากรอกชื่อและยินยอมให้แสดงต่อผู้เข้าชม',challenge:'กรุณาผ่านการตรวจสอบความปลอดภัย',fail:'บันทึกข้อความไม่สำเร็จ โปรดลองอีกครั้ง',count:'คนค้นพบความลับนี้แล้ว'}
+  };
+  const lang=()=>dict[document.documentElement.lang]||dict.en;
+  const endpoint=GUESTBOOK_ENDPOINT.replace(/\/+$/,'');
+  let widgetId=null,isOpen=false,requestId=0;
+  function localize(){
+    const t=lang();
+    for(const [id,value] of Object.entries({sfLoveBookOpenText:t.open,sfLoveBookKicker:t.kicker,sfLoveBookTitle:t.title,sfLoveBookIntro:t.intro,sfLoveBookNameLabel:t.name,sfLoveBookMessageLabel:t.message,sfLoveBookConsentText:t.consent,sfLoveBookSubmit:t.submit,sfLoveBookBack:t.back}))$(id).textContent=value;
+  }
+  function renderList(list){
+    entries.replaceChildren();
+    if(!list.length){const p=document.createElement('p');p.className='sf-love-book-state';p.textContent=lang().empty;entries.append(p);return;}
+    const fragment=document.createDocumentFragment();
+    for(const item of list.slice(0,40)){
+      const a=document.createElement('article');a.className='sf-love-book-entry';
+      const head=document.createElement('div');head.className='sf-love-book-entry-head';
+      const n=document.createElement('strong');n.className='sf-love-book-entry-name';n.textContent=String(item.name||'').slice(0,40);
+      const date=document.createElement('time');date.className='sf-love-book-entry-date';
+      const d=new Date(item.created_at);date.textContent=Number.isNaN(d.getTime())?'':new Intl.DateTimeFormat(document.documentElement.lang||'en',{month:'short',day:'numeric',year:'numeric'}).format(d);
+      head.append(n,date);a.append(head);
+      if(item.message){const m=document.createElement('p');m.className='sf-love-book-entry-message';m.textContent=String(item.message).slice(0,180);a.append(m);}
+      fragment.append(a);
+    }
+    entries.append(fragment);
+  }
+  function displayState(s){entries.replaceChildren();const p=document.createElement('p');p.className='sf-love-book-state';p.textContent=s;entries.append(p);}
+  async function load(){
+    const id=++requestId;displayState(lang().loading);
+    if(!endpoint){displayState(lang().unavailable);form.hidden=true;return;}
+    try{
+      const r=await fetch(endpoint+'/entries',{headers:{'Accept':'application/json'},cache:'no-store'});
+      if(!r.ok)throw Error('read');const data=await r.json();
+      if(id!==requestId||!isOpen)return;
+      renderList(Array.isArray(data.entries)?data.entries:[]);
+    }catch(e){if(id===requestId&&isOpen)displayState(lang().error);}
+  }
+  function startChallenge(){
+    if(!endpoint)return;
+    if(window.turnstile){
+      if(widgetId!==null)return;
+      try{widgetId=window.turnstile.render('#sfLoveBookTurnstile',{sitekey:TURNSTILE_SITE_KEY,theme:'light',size:'flexible'});}catch(e){feedback.textContent=lang().challenge;}
+      return;
+    }
+    if(document.querySelector('script[data-sf-guestbook-turnstile]'))return;
+    const script=document.createElement('script');script.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';script.async=true;script.defer=true;script.dataset.sfGuestbookTurnstile='1';script.onload=startChallenge;document.head.append(script);
+  }
+  function show(){
+    if(!$('sfLoveOverlay')||$('sfLoveOverlay').hidden)return;
+    isOpen=true;letter.hidden=true;panel.hidden=false;
+    card.classList.add('sf-love-book-mode');card.setAttribute('aria-labelledby','sfLoveBookTitle');card.setAttribute('aria-describedby','sfLoveBookIntro');
+    localize();form.hidden=false;feedback.textContent='';
+    load();startChallenge();$('sfLoveBookTitle').focus({preventScroll:true});
+  }
+  function hide(restore=true){
+    if(!isOpen)return;
+    isOpen=false;requestId++;panel.hidden=true;letter.hidden=false;card.classList.remove('sf-love-book-mode');
+    card.setAttribute('aria-labelledby','sfLoveTitle');card.setAttribute('aria-describedby','sfLoveMessage');
+    if(restore)open.focus({preventScroll:true});
+  }
+  open.addEventListener('click',show);back.addEventListener('click',()=>hide());
+  $('sfLoveClose').addEventListener('click',()=>hide(false));
+  // Existing Esc / scrim handlers close the whole overlay; reset on the next opening.
+  new MutationObserver(()=>{if($('sfLoveOverlay').hidden||!$('sfLoveOverlay').classList.contains('sf-love-visible'))hide(false);}).observe($('sfLoveOverlay'),{attributes:true,attributeFilter:['hidden','class']});
+  form.addEventListener('submit',async e=>{
+    e.preventDefault();if(!endpoint)return;
+    const name=$('sfLoveBookName').value.trim(),message=$('sfLoveBookMessage').value.trim();
+    if(name.length<2||name.length>40||message.length>180||!$('sfLoveBookConsent').checked){feedback.textContent=lang().invalid;return;}
+    const token=widgetId!==null&&window.turnstile?.getResponse(widgetId);
+    if(!token){feedback.textContent=lang().challenge;return;}
+    submit.disabled=true;feedback.textContent='';
+    try{
+      const r=await fetch(endpoint+'/entries',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,message,consent:true,turnstileToken:token})});
+      if(!r.ok)throw Error('write');
+      form.reset();feedback.textContent=lang().success;
+      if(widgetId!==null)window.turnstile.reset(widgetId);
+      await load();
+    }catch(err){feedback.textContent=lang().fail;if(widgetId!==null)window.turnstile.reset(widgetId);}
+    finally{submit.disabled=false;}
+  });
+  new MutationObserver(()=>{localize();if(isOpen)load();}).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+  localize();
+})();
+</script>
 </body>
 </html>
