@@ -3111,6 +3111,7 @@ rsvpForm.addEventListener('submit',async (evt)=>{
       readyLabel:'การผจญภัยแห่งความรัก',ready:'พร้อมส่งหัวใจหรือยัง?',start:'เริ่มบิน ♡',failLabel:'ลองอีกครั้ง',fail:'บาสเป็นกำลังใจให้นะ!',retry:'ลองใหม่ ♡',pauseLabel:'พักสักครู่',pause:'พร้อมบินต่อหรือยัง?',resume:'บินต่อ ♡',endLabel:'ส่งหัวใจสำเร็จ',end:'คุณไปถึงสิริยาแล้ว!',again:'บินอีกครั้ง ♡'}
   };
   let current=translations.en,gameOpen=false;
+  let secretOpenedAt=-Infinity; // Guard against the fifth mobile tap activating an overlay button.
   let phase='ready',score=0,elapsed=0,deliveryTime=0,worldHeight=370;
   let lastFrame=0,frame=0,closeTimer=null,previousFocus=null;
   let player={x:PLAYER_X,y:175,vy:0,tilt:0};
@@ -3498,7 +3499,12 @@ rsvpForm.addEventListener('submit',async (evt)=>{
   new MutationObserver(updateLanguage).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
   updateLanguage();
 
-  playButton.addEventListener('click',startGame);
+  playButton.addEventListener('click',event=>{
+    // A touch ending on the names may emit its final click after this popup appears.
+    // Never treat that inherited click as an intentional request to open the game.
+    if(performance.now()-secretOpenedAt<650){event.preventDefault();return;}
+    startGame();
+  });
   backButton.addEventListener('click',()=>backToLetter());
   restartButton.addEventListener('click',()=>{resetGame();canvas.focus({preventScroll:true});});
   flightLaunch.addEventListener('click',launch);
@@ -3544,6 +3550,7 @@ rsvpForm.addEventListener('submit',async (evt)=>{
     if(!overlay.hidden||byId('weddingIntro')||!byId('rsvpModal')?.hidden)return;
     clearTimeout(closeTimer);previousFocus=document.activeElement;
     backToLetter(false);updateLanguage();createParticles();
+    secretOpenedAt=performance.now();
     overlay.hidden=false;
     requestAnimationFrame(()=>requestAnimationFrame(()=>{
       if(!overlay.hidden)overlay.classList.add('sf-love-visible');
@@ -3563,6 +3570,12 @@ rsvpForm.addEventListener('submit',async (evt)=>{
       overlay.hidden=true;particles.replaceChildren();
     },mediaReduce.matches?0:340);
   }
+  // Discard any delayed/synthetic click left over from the five-tap gesture.
+  letter.addEventListener('click',event=>{
+    if(performance.now()-secretOpenedAt<650){
+      event.preventDefault();event.stopImmediatePropagation();
+    }
+  },true);
   closeButton.addEventListener('click',closeSecret);
   overlay.addEventListener('click',event=>{
     if(event.target===overlay||event.target.classList.contains('sf-love-scrim'))closeSecret();
@@ -3609,7 +3622,12 @@ rsvpForm.addEventListener('submit',async (evt)=>{
       if(byId('weddingIntro')||!overlay.hidden||!byId('rsvpModal')?.hidden)return;
       if(event.type==='pointerup'&&event.button!==0)return;
       const now=performance.now();taps=now-lastTap<1700?taps+1:1;lastTap=now;
-      if(taps>=5){taps=0;openSecret();}
+      if(taps>=5){
+        taps=0;
+        // Wait until the initiating touch/click has finished before mounting the overlay.
+        // Otherwise mobile browsers can retarget the same tap to the game button.
+        window.setTimeout(openSecret,0);
+      }
     };
     namesTrigger.addEventListener(window.PointerEvent?'pointerup':'click',onTap);
   }
